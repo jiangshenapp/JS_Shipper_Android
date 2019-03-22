@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xlgcx.http" >
+
+    <application android:allowBackup="true">
+        <meta-data
+            android:name="com.xlgcx.http.HttpApp"
+            android:value="IModuleConfig" />
+    </application>
+</manifest>
+

@@ -1,0 +1,30 @@
+ext {
+    
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 23,
+            versionCode      : 23,
+            versionName      : '2.9.0',
+    ]
+
+
+    dependencies = [
+            butterknife : 'com.jakewharton:butterknife:10.1.0',
+            butterknife_annotation :'com.jakewharton:butterknife-compiler:10.1.0',
+            appcompat:'androidx.appcompat:appcompat:1.0.0-beta01',
+            dagger:'com.google.dagger:dagger:2.21',
+            dagger_annotation:'com.google.dagger:dagger-compiler:2.21',
+            constraintlayout:'androidx.constraintlayout:constraintlayout:1.1.2',
+            arouter:'com.alibaba:arouter-api:1.4.1',
+            arouter_annotation:'com.alibaba:arouter-compiler:1.2.2'
+
+
+    ]
+
+
+
+
+
+}

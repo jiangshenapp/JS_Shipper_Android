@@ -1,0 +1,7 @@
+/build
+.apk
+.gradle
+/debug
+/release
+.json
+/debug/output.json
