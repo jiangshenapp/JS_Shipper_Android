@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:minHeight="160dp"
+    android:background="@color/white">
+    
+    
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        >
+
+        <TextView
+            android:id="@+id/item_order_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单编号：HZ-0001"
+            android:textColor="#FFB4B4B4"
+            android:textSize="12sp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/item_order_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="零担"
+            android:textColor="#FF7ED321"
+            android:textSize="12sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_order_no"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1分钟前发布"
+            android:textColor="@color/_B4B4B4"
+            android:textSize="12sp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    
+
+
+    
+
+</LinearLayout>
