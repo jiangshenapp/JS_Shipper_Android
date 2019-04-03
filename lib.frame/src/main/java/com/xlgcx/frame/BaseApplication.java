@@ -8,6 +8,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.xlgcx.frame.global.Const;
 
 import androidx.multidex.MultiDexApplication;
 
@@ -46,16 +47,6 @@ public class BaseApplication extends MultiDexApplication {
         mApplicationDelegate.onCreate(this);
         instance = this;
         initCrash();
-        initARouter();
-    }
-
-
-    private void initARouter() {
-        if (BuildConfig.DEBUG){
-            ARouter.openDebug();
-            ARouter.openLog();
-        }
-        ARouter.init(this);
     }
 
 
@@ -70,9 +61,9 @@ public class BaseApplication extends MultiDexApplication {
 
     private void initCrash() {
         if (BuildConfig.DEBUG) {
-            CrashReport.initCrashReport(getApplicationContext(), "0d8355b05d", true);
+            CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, true);
         } else {
-            CrashReport.initCrashReport(getApplicationContext(), "0d8355b05d", false);
+            CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, false);
         }
     }
 
