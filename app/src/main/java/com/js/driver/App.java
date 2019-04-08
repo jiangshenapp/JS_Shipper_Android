@@ -1,6 +1,7 @@
 package com.js.driver;
 
 import com.js.driver.di.componet.AppComponent;
+import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
 import com.xlgcx.frame.BaseApplication;
 

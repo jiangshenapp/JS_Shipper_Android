@@ -1,6 +1,7 @@
 package com.js.driver.ui.main.fragment;
 
 import com.js.driver.App;
+import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.CommunityPresenter;
 import com.js.driver.ui.main.presenter.contract.CommunityContract;
@@ -20,7 +21,7 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter> implemen
     protected void initInject() {
         DaggerFragmentComponent.builder()
                 .fragmentModule(new FragmentModule(this))
-                .appComponent(App.getInstance())
+                .appComponent(App.getInstance().getAppComponent())
                 .build()
                 .inject(this);
     }
