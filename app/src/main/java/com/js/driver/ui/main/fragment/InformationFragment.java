@@ -1,5 +1,9 @@
 package com.js.driver.ui.main.fragment;
 
+import com.js.driver.App;
+import com.js.driver.R;
+import com.js.driver.di.componet.DaggerFragmentComponent;
+import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.InformationPresenter;
 import com.js.driver.ui.main.presenter.contract.InformationContract;
 import com.xlgcx.frame.view.BaseFragment;
@@ -16,12 +20,16 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     @Override
     protected void initInject() {
-
+        DaggerFragmentComponent.builder()
+                .fragmentModule(new FragmentModule(this))
+                .appComponent(App.getInstance().getAppComponent())
+                .build()
+                .inject(this);
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.fragment_service;
     }
 
     @Override

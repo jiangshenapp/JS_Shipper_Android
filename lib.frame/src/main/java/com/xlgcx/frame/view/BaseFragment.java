@@ -105,6 +105,7 @@ public abstract class BaseFragment<T extends IPresenter> extends RxFragment impl
     }
 
 
+
     @Subscribe
     public void onEvent(Object object) {
 

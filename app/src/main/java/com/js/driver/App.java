@@ -1,8 +1,11 @@
 package com.js.driver;
 
+import android.text.TextUtils;
+
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
+import com.js.driver.manager.SpManager;
 import com.xlgcx.frame.BaseApplication;
 
 /**
@@ -12,6 +15,7 @@ public class App extends BaseApplication {
 
     private AppComponent mAppComponent;
     private static App mApp;
+    public String token;
 
 
     @Override
@@ -19,6 +23,15 @@ public class App extends BaseApplication {
         super.onCreate();
         mApp = this;
         initDaggerComponent();
+        initToken("");
+    }
+
+    public void initToken(String token) {
+        if (TextUtils.isEmpty(token)) {
+            this.token = SpManager.getInstance(this).getSP("token");
+        } else {
+            this.token = token;
+        }
     }
 
     /**
@@ -44,5 +57,6 @@ public class App extends BaseApplication {
     public static App getInstance() {
         return mApp;
     }
+
 
 }

@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.ui.main.activity.MainActivity;
+
 import dagger.Component;
 
 /**
@@ -16,4 +18,8 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
+
+    void inject(MainActivity mainActivity);
+
 }
+

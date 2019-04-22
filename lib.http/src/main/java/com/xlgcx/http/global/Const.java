@@ -6,6 +6,5 @@ package com.xlgcx.http.global;
  */
 public class Const {
 
-    public static final String API_URL = "";
-
+    public static String API_URL = "http://47.96.122.74:9999/logistic-biz/";
 }

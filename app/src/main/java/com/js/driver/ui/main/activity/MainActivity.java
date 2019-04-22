@@ -1,18 +1,170 @@
 package com.js.driver.ui.main.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.view.MenuItem;
+import android.view.View;
 
-import android.os.Bundle;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.js.driver.App;
 import com.js.driver.R;
+import com.js.driver.di.componet.DaggerActivityComponent;
+import com.js.driver.di.module.ActivityModule;
+import com.js.driver.ui.main.fragment.CommunityFragment;
+import com.js.driver.ui.main.fragment.FindOrderFragment;
+import com.js.driver.ui.main.fragment.InformationFragment;
+import com.js.driver.ui.main.fragment.MineFragment;
+import com.js.driver.ui.main.fragment.ServiceFragment;
+import com.js.driver.ui.main.presenter.MainPresenter;
+import com.js.driver.ui.main.presenter.contract.MainContract;
+import com.js.driver.ui.user.activity.LoginActivity;
+import com.js.driver.util.UIUtil;
+import com.xlgcx.frame.view.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
+
+
+    @BindView(R.id.viewpager)
+    ViewPager mViewpager;
+    @BindView(R.id.navigation)
+    BottomNavigationView mNavigation;
+
+    private FindOrderFragment mFindOrderFragment;
+    private ServiceFragment mServiceFragment;
+    private InformationFragment mInformationFragment;
+    private CommunityFragment mCommunityFragment;
+    private MineFragment mMineFragment;
+    private List<Fragment> mFragments;
+
+    public static void action(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void init() {
+        initView();
+    }
+
+    private void initView() {
+        initFragment();
+        initViewPager();
+        initNV();
+
+    }
+
+    private void initNV() {
+        mNavigation.setItemIconTintList(null);
+        int[][] states = new int[][]{
+                new int[]{-android.R.attr.state_checked},
+                new int[]{android.R.attr.state_checked}
+        };
+
+        int[] colors = new int[]{getResources().getColor(R.color._787878),
+                getResources().getColor(R.color._ECA73F)
+        };
+        ColorStateList csl = new ColorStateList(states, colors);
+        mNavigation.setItemTextColor(csl);
+        mNavigation.setItemIconTintList(csl);
+        mNavigation.setOnNavigationItemSelectedListener(this);
+    }
+
+    private void initFragment() {
+        mFragments = new ArrayList<>();
+        mFindOrderFragment = FindOrderFragment.newInstance();
+        mServiceFragment = ServiceFragment.newInstance();
+        mInformationFragment = InformationFragment.newInstance();
+        mCommunityFragment = CommunityFragment.newInstance();
+        mMineFragment = MineFragment.newInstance();
+        mFragments.add(mFindOrderFragment);
+        mFragments.add(mServiceFragment);
+        mFragments.add(mInformationFragment);
+        mFragments.add(mCommunityFragment);
+        mFragments.add(mMineFragment);
     }
 
 
+    private void initViewPager() {
+        mViewpager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return mFragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return mFragments.size();
+            }
+        });
+        mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mNavigation.getMenu().getItem(position).setCheckable(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void initInject() {
+        DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .appComponent(App.getInstance().getAppComponent())
+                .build()
+                .inject(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+
+    @Override
+    public void setActionBar() {
+        mToolbar.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_find:
+                mViewpager.setCurrentItem(0);
+                break;
+            case R.id.navigation_service:
+                mViewpager.setCurrentItem(1);
+                break;
+            case R.id.navigation_information:
+                mViewpager.setCurrentItem(2);
+                break;
+            case R.id.navigation_community:
+                mViewpager.setCurrentItem(3);
+                break;
+            case R.id.navigation_mine:
+                mViewpager.setCurrentItem(4);
+                LoginActivity.action(mContext);
+                break;
+        }
+        return true;
+    }
 }

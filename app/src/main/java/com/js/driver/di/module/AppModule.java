@@ -1,5 +1,6 @@
 package com.js.driver.di.module;
 
+import com.js.driver.ui.main.activity.MainActivity;
 import com.xlgcx.http.ApiFactory;
 
 import javax.inject.Singleton;
@@ -19,5 +20,7 @@ public class AppModule {
     ApiFactory provideApiFactory() {
         return new ApiFactory();
     }
+
+
 
 }

@@ -15,4 +15,5 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
     public MinePresenter(){
 
 
-    }}
+    }
+}

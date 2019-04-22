@@ -104,6 +104,11 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
 
     }
 
+    @Override
+    public void toast(String message) {
+
+    }
+
     protected abstract void init();
 
     protected abstract void initInject();

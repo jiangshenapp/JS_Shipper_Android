@@ -3,7 +3,7 @@ package com.xlgcx.http.rx;
 
 import android.text.TextUtils;
 
-import com.xlgcx.http.HttpResult;
+import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
@@ -14,20 +14,20 @@ import io.reactivex.ObservableTransformer;
 
 public class RxResult {
 
-    public static <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
+    public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult() {
         return upstream -> {
             return upstream.flatMap(result -> {
-                        if (result.getResultCode() == 0) {
-                            return createData(result.getResultValue());
-                        } else if (result.getResultCode() == -1) {
+
+                        if (result.isSuccess()) {
+                            return createData(result.getData());
+                        } else if (result.getCode() == -1) {
                             return Observable.error(new Exception("请您重新登录!"));
                         } else {
-                            if (TextUtils.isEmpty(result.getResultMsg())) {
+                            if (TextUtils.isEmpty(result.getMsg())) {
                                 return Observable.error(new Exception("请稍后重试"));
                             } else {
-                                return Observable.error(new Exception(result.getResultMsg()));
+                                return Observable.error(new Exception(result.getMsg()));
                             }
-
                         }
                     }
 

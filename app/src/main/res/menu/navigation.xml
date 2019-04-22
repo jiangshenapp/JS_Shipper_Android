@@ -2,23 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:title="找货" />
+        android:id="@+id/navigation_find"
+        android:title="找货"
+        android:icon="@mipmap/ic_menubar_goods_black"
+        />
 
     <item
-        android:id="@+id/navigation_invest"
-        android:title="服务" />
+        android:id="@+id/navigation_service"
+        android:title="服务"
+        android:icon="@mipmap/ic_menubar_community_black"
+        />
 
     <item
-        android:id="@+id/navigation_discover"
-        android:title="消息" />
+        android:id="@+id/navigation_information"
+        android:title="消息"
+        android:icon="@mipmap/ic_menubar_community_black"
+        />
 
     <item
-        android:id="@+id/navigation_user"
-        android:title="社区" />
+        android:id="@+id/navigation_community"
+        android:title="社区"
+        android:icon="@mipmap/ic_menubar_community_black"
+        />
 
-    <!--<item-->
-        <!--android:id="@+id/navigation_user"-->
-        <!--android:title="我的" />-->
+    <item
+        android:id="@+id/navigation_mine"
+        android:title="我的"
+        android:icon="@mipmap/ic_menubar_mine_black"
+        />
 
 </menu>
