@@ -4,6 +4,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.model.bean.OrderBean;
 import com.js.driver.ui.main.adapter.FindOrderAdapter;
 import com.js.driver.ui.main.presenter.FindOrderPresenter;
 import com.js.driver.ui.main.presenter.contract.FindOrderContract;
@@ -11,6 +12,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xlgcx.frame.view.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
 
 
     private FindOrderAdapter mAdapter;
+    private List<OrderBean> orders;
 
     public static FindOrderFragment newInstance() {
         return new FindOrderFragment();
@@ -51,6 +54,13 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     @Override
     protected void init() {
         initView();
+        initData();
+    }
+
+    private void initData() {
+        orders = new ArrayList<>();
+        orders.add(new OrderBean());
+        mAdapter.setNewData(orders);
     }
 
     private void initView() {
@@ -59,9 +69,10 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     }
 
     private void initRecycler() {
-        mAdapter = new FindOrderAdapter(R.layout.item_home_order,new ArrayList<>());
+        mAdapter = new FindOrderAdapter(R.layout.item_home_order,orders);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+
     }
 
     private void initRefresh() {

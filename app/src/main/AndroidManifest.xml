@@ -20,10 +20,33 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.user.activity.LoginActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name=".ui.user.activity.LoginActivity"
+            android:launchMode="singleTask" />
 
+        <activity
+            android:name=".ui.user.activity.UserCenterActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.wallet.activity.WalletActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.wallet.activity.BailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.wallet.activity.RechargeActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.wallet.activity.WithdrawActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.user.activity.UserVerifiedActivity"
+            android:launchMode="singleTop"
+            />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import com.js.driver.ui.main.fragment.MineFragment;
 import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.user.fragment.CodeLoginFragment;
 import com.js.driver.ui.user.fragment.PwdLoginFragment;
+import com.js.driver.ui.wallet.fragment.BillFragment;
 
 import dagger.Component;
 
@@ -38,6 +39,8 @@ public interface FragmentComponent {
     void inject(ServiceFragment serviceFragment);
 
     void inject(MineFragment mineFragment);
+
+    void inject(BillFragment billFragment);
 
 
 }

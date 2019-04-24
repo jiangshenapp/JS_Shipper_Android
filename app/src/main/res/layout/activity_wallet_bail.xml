@@ -27,6 +27,7 @@
             />
 
         <TextView
+            android:id="@+id/bail_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="58,3784.10"
@@ -50,6 +51,7 @@
             >
 
             <TextView
+                android:id="@+id/bail_withdraw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -63,6 +65,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/bail_recharge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_wallet_info_control"
@@ -75,14 +78,12 @@
                 android:textColor="@color/_ECA73F"
                 android:textSize="14sp" />
 
-
-
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/bail_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -95,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="保证金"
+            android:text="保证金明细"
             android:textColor="#FF000000"
             android:textSize="14sp"
             android:layout_gravity="center_vertical"
@@ -120,6 +121,7 @@
 
 
     <LinearLayout
+        android:id="@+id/statement_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -131,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="账单明细"
+            android:text="违约说明"
             android:textColor="#FF000000"
             android:textSize="14sp"
             android:layout_gravity="center_vertical"

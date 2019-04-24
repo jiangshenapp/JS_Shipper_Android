@@ -24,6 +24,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/wallet_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -41,6 +42,7 @@
 
 
             <TextView
+                android:id="@+id/wallet_withdraw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -54,6 +56,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/wallet_recharge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
@@ -71,91 +74,84 @@
 
 
     </LinearLayout>
-    
-    
-    
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="vertical"
-        android:background="@drawable/shape_app_block"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="10dp"
-        >
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_app_block"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/wallet_bail_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
             android:layout_marginStart="10dp"
-            >
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:text="保证金"
                 android:textColor="#FF000000"
-                android:textSize="14sp"
-                android:layout_gravity="center_vertical"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/wallet_bail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="6dp"
                 android:text="5000"
                 android:textColor="#FFECA73F"
-                android:textSize="14sp"
-                android:layout_marginEnd="6dp"
-                android:layout_gravity="center_vertical"
-                />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_list_arrow_black"
-                android:layout_marginEnd="10dp"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/ic_list_arrow_black" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/_F0F0F0"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            />
+            android:background="@color/_F0F0F0" />
 
 
         <LinearLayout
+            android:id="@+id/bill_detail_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
             android:layout_marginStart="10dp"
-            >
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:text="账单明细"
                 android:textColor="#FF000000"
-                android:textSize="14sp"
-                android:layout_gravity="center_vertical"
-                />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_list_arrow_black"
-                android:layout_marginEnd="10dp"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/ic_list_arrow_black" />
 
         </LinearLayout>
 

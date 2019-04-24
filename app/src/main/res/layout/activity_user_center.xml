@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,9 +17,10 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/center_avatar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -40,9 +42,10 @@
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/center_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -75,9 +78,10 @@
 
 
             <FrameLayout
+                android:id="@+id/center_verified_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -100,9 +104,10 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/center_campus_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -125,9 +130,10 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/center_feedback_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -151,9 +157,10 @@
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/center_version_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -180,9 +187,10 @@
             </LinearLayout>
 
             <FrameLayout
+                android:id="@+id/center_about_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -206,9 +214,10 @@
 
 
             <LinearLayout
+                android:id="@+id/center_cache_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -242,19 +251,19 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="28dp"
-        android:text="安全退出"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_btn_eca73f"
         android:gravity="center"
+        android:text="安全退出"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:background="@drawable/shape_btn_eca73f"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@
 
 
     <LinearLayout
+        android:id="@+id/driver_verified_layout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
@@ -56,6 +57,7 @@
             />
 
         <TextView
+            android:id="@+id/driver_verified_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未提交"
@@ -77,6 +79,7 @@
 
 
     <LinearLayout
+        android:id="@+id/park_verified_layout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
@@ -106,6 +109,7 @@
             />
 
         <TextView
+            android:id="@+id/park_verified_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未提交"
