@@ -17,7 +17,6 @@ public class RxResult {
     public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult() {
         return upstream -> {
             return upstream.flatMap(result -> {
-
                         if (result.isSuccess()) {
                             return createData(result.getData());
                         } else if (result.getCode() == -1) {

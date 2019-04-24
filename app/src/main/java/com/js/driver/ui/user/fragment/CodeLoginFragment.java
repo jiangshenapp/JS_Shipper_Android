@@ -10,6 +10,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.CodeLoginPresenter;
@@ -32,6 +33,7 @@ import io.reactivex.functions.Consumer;
  * Created by huyg on 2019/4/21.
  */
 public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implements CodeLoginContract.View {
+
     @BindView(R.id.edit_phone)
     EditText mPhone;
     @BindView(R.id.edit_code)
@@ -41,11 +43,9 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     @BindView(R.id.tv_get_code)
     TextView mGetCode;
 
-
     private String phone;
     private String code;
     private Disposable mDisposable;
-
 
     public static CodeLoginFragment newInstance() {
         return new CodeLoginFragment();
@@ -115,7 +115,6 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                         if (isVisible()) {
                             mGetCode.setText(String.format("%d秒", 60 - aLong));
                         }
-
                     }
                 })
                 .doOnComplete(new Action() {
@@ -132,6 +131,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     @Override
     public void onLogin(String token) {
 
+        SpManager.getInstance(getActivity()).putSP("token",token);
         MainActivity.action(mContext);
     }
 }

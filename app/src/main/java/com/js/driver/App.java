@@ -17,7 +17,6 @@ public class App extends BaseApplication {
     private static App mApp;
     public String token;
 
-
     @Override
     public void onCreate() {
         super.onCreate();

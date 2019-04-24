@@ -11,6 +11,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.manager.UserManager;
 import com.js.driver.ui.main.fragment.CommunityFragment;
 import com.js.driver.ui.main.fragment.FindOrderFragment;
 import com.js.driver.ui.main.fragment.InformationFragment;
@@ -162,7 +163,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 break;
             case R.id.navigation_mine:
                 mViewpager.setCurrentItem(4);
-                LoginActivity.action(mContext);
+                UserManager.getUserManager().isLogin(true);
                 break;
         }
         return true;

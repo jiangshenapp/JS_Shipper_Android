@@ -24,6 +24,17 @@ public interface UserApi {
     Observable<BaseHttpResponse> bindMobile(@Field("code") String code,
                                             @Field("mobile") String mobile);
 
+    /**
+     * 短信验证码登录
+     * @param code
+     * @param mobile
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/subscriber/smsLogin")
+    Observable<HttpResponse<String>> smsLogin(@Field("code") String code,
+                                              @Field("mobile") String mobile);
+
 
     /**
      * 密码登录
@@ -33,7 +44,7 @@ public interface UserApi {
      */
     @FormUrlEncoded
     @POST("app/subscriber/login")
-    Observable<BaseHttpResponse> login(@Field("mobile") String mobile,
+    Observable<HttpResponse<String>> login(@Field("mobile") String mobile,
                                        @Field("password") String password);
 
 
@@ -45,8 +56,6 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("app/subscriber/logout")
     Observable<BaseHttpResponse> logout(@Field("token") String token);
-
-
 
 
     /**
@@ -117,18 +126,6 @@ public interface UserApi {
 
 
     /**
-     * 短信验证码登录
-     * @param code
-     * @param mobile
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("app/subscriber/smsLogin")
-    Observable<BaseHttpResponse> smsLogin(@Field("code") String code,
-                                          @Field("mobile") String mobile);
-
-
-    /**
      * 个人司机认证
      * @param driverVerifiedInfo
      * @return
@@ -146,7 +143,6 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("app/subscriber/verify/getDriverVerifiedInfo")
     Observable<BaseHttpResponse> getDriverVerifiedInfo(@Field("token") String token);
-
 
 
 }

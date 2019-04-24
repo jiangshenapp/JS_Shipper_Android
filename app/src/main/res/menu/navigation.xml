@@ -4,19 +4,19 @@
     <item
         android:id="@+id/navigation_find"
         android:title="找货"
-        android:icon="@mipmap/ic_menubar_goods_black"
+        android:icon="@mipmap/ic_menubar_cargoods_black"
         />
 
     <item
         android:id="@+id/navigation_service"
         android:title="服务"
-        android:icon="@mipmap/ic_menubar_community_black"
+        android:icon="@mipmap/ic_menubar_service_black"
         />
 
     <item
         android:id="@+id/navigation_information"
         android:title="消息"
-        android:icon="@mipmap/ic_menubar_community_black"
+        android:icon="@mipmap/ic_menubar_news_black"
         />
 
     <item

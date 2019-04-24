@@ -6,6 +6,7 @@ import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.rx.RxException;
+import com.xlgcx.http.rx.RxResult;
 import com.xlgcx.http.rx.RxSchedulers;
 
 import javax.inject.Inject;
@@ -31,17 +32,18 @@ public class PwdLoginPresenter extends RxPresenter<PwdLoginContract.View> implem
         Disposable disposable = mApiFactory.getApi(UserApi.class)
                 .login(phone, pwd)
                 .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         mView.showProgress();
                     }
                 })
-                .subscribe(new Consumer<BaseHttpResponse>() {
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
+                    public void accept(String s) throws Exception {
                         mView.closeProgress();
-                        mView.onLogin();
+                        mView.onLogin(s);
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
