@@ -13,7 +13,6 @@ public interface CodeLoginContract {
         void onSmsCode();
 
         void onLogin(String token);
-
     }
 
     interface Presenter extends IPresenter<View> {

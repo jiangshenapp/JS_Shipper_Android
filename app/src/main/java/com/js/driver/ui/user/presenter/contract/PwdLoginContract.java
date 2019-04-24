@@ -8,14 +8,11 @@ import com.xlgcx.frame.mvp.IPresenter;
  */
 public interface PwdLoginContract {
 
-
     interface View extends IBaseView {
-        void onLogin();
+        void onLogin(String token);
     }
 
     interface Presenter extends IPresenter<View> {
         void login(String phone, String pwd);
     }
-
-
 }

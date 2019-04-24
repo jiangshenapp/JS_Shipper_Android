@@ -9,6 +9,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.PwdLoginPresenter;
@@ -25,7 +26,6 @@ import butterknife.OnClick;
  */
 public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements PwdLoginContract.View {
 
-
     @BindView(R.id.tv_register)
     TextView mRegister;
     @BindView(R.id.edit_phone)
@@ -35,7 +35,6 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     private String phone;
     private String pwd;
-
 
     public static PwdLoginFragment newInstance() {
         return new PwdLoginFragment();
@@ -89,7 +88,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     }
 
     @Override
-    public void onLogin() {
+    public void onLogin(String token) {
+        SpManager.getInstance(getActivity()).putSP("token",token);
         MainActivity.action(mContext);
     }
 }

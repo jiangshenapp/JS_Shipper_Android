@@ -25,10 +25,8 @@ import butterknife.BindView;
  */
 public class LoginActivity extends SimpleActivity {
 
-
     @BindView(R.id.login_frame)
     FrameLayout mFrame;
-
 
     private CodeLoginFragment mCodeLoginFragment;
     private PwdLoginFragment mPwdLoginFragment;
