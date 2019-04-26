@@ -44,8 +44,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @BindView(R.id.edit_phone)
     EditText mPhone;
-    @BindView(R.id.edit_psw)
-    EditText mPsw;
+    @BindView(R.id.edit_pwd)
+    EditText mpwd;
     @BindView(R.id.edit_code)
     EditText mCode;
     @BindView(R.id.tv_get_code)
@@ -58,7 +58,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     TextView mProtocal;
 
     private String phone;
-    private String psw;
+    private String pwd;
     private String code;
     private Disposable mDisposable;
 
@@ -107,13 +107,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 break;
             case R.id.btn_register:
                 phone = mPhone.getText().toString().trim();
-                psw = mPsw.getText().toString().trim();
+                pwd = mpwd.getText().toString().trim();
                 code = mCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
                     toast("请输入手机号");
                     return;
                 }
-                if (psw.length()<6 || psw.length()>16) {
+                if (pwd.length()<6 || pwd.length()>16) {
                     toast("请设置6-16位密码（字母、数字）");
                     return;
                 }
@@ -125,7 +125,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     toast("请勾选用户协议");
                     return;
                 }
-                mPresenter.register(phone, psw, code);
+                mPresenter.register(phone, pwd, code);
                 break;
             case R.id.tv_protocal:
                 break;

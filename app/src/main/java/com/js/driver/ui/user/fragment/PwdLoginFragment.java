@@ -31,7 +31,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     TextView mRegister;
     @BindView(R.id.edit_phone)
     EditText mPhone;
-    @BindView(R.id.edit_psw)
+    @BindView(R.id.edit_pwd)
     EditText mPwd;
 
     private String phone;
@@ -60,13 +60,13 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     }
 
-    @OnClick({R.id.tv_register, R.id.tv_forget_psw, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_phonecode})
+    @OnClick({R.id.tv_register, R.id.tv_forget_pwd, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_phonecode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_register:
                 RegisterActivity.action(getActivity());
                 break;
-            case R.id.tv_forget_psw:
+            case R.id.tv_forget_pwd:
                 break;
             case R.id.tv_protocal:
                 break;

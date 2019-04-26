@@ -36,7 +36,7 @@
         android:background="@drawable/shape_line" />
 
     <EditText
-        android:id="@+id/edit_psw"
+        android:id="@+id/edit_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -57,7 +57,7 @@
         android:id="@+id/frame_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_psw">
+        android:layout_below="@id/edit_pwd">
 
         <EditText
             android:id="@+id/edit_code"

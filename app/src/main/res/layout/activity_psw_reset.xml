@@ -23,7 +23,7 @@
         android:textColor="@color/_B4B4B4" />
 
     <EditText
-        android:id="@+id/edit_new_psw"
+        android:id="@+id/edit_new_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -41,7 +41,7 @@
         android:background="@drawable/shape_line" />
 
     <EditText
-        android:id="@+id/edit_new_psw_again"
+        android:id="@+id/edit_new_pwd_again"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
