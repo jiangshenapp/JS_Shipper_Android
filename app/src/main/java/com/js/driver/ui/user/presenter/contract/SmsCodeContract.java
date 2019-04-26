@@ -4,17 +4,19 @@ import com.xlgcx.frame.mvp.IBaseView;
 import com.xlgcx.frame.mvp.IPresenter;
 
 /**
- * Created by huyg on 2019/4/21.
+ * author : hzb
+ * e-mail : hanzhanbing@evcoming.com
+ * time   : 2019/04/25
+ * desc   :
+ * version: 3.0.0
  */
-public interface CodeLoginContract {
+public interface SmsCodeContract {
 
     interface View extends IBaseView {
-
-        void onLogin(String token);
+        void onSmsCode();
     }
 
     interface Presenter extends IPresenter<View> {
-
-        void login(String phone, String code);
+        void sendSmsCode(String phone);
     }
 }

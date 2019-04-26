@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.wallet.activity.BailActivity;
 import com.js.driver.ui.wallet.activity.RechargeActivity;
@@ -35,6 +36,8 @@ public interface ActivityComponent {
     void inject(RechargeActivity rechargeActivity);
 
     void inject(WithdrawActivity withdrawActivity);
+
+    void inject(RegisterActivity registerActivity);
 
 }
 

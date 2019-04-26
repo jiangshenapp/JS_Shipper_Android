@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +17,6 @@
 
         <include layout="@layout/include_mine_social"/>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
@@ -27,6 +25,5 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
-
 
 </androidx.core.widget.NestedScrollView>

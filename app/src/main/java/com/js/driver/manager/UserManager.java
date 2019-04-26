@@ -32,13 +32,17 @@ public class UserManager {
         return instance;
     }
 
+
     /**
-     * 判断登录状态
+     * 判断是否登录
+     * @param isJumpLogin 是否跳转登录页面
+     * @param isBackHome 登录页面返回的时候是否返回到首页 还是上一个页面
+     * @return
      */
-    public boolean isLogin(boolean isJump) {
-        if (TextUtils.isEmpty(App.getInstance().token)) {
-            if (isJump) {
-                LoginActivity.action(App.getInstance());
+    public boolean isLogin(boolean isJumpLogin, boolean isBackHome) {
+        if (TextUtils.isEmpty(SpManager.getInstance(App.getInstance()).getSP("token"))) {
+            if (isJumpLogin) {
+                LoginActivity.action(App.getInstance(), isBackHome);
             }
             return false;
         }

@@ -6,15 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.activity.MainActivity"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-
-
-
-    <include layout="@layout/include_toolbar"/>
-
-
+    <!--<include layout="@layout/include_toolbar"/>-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
@@ -23,8 +17,6 @@
         android:layout_weight="1">
 
     </androidx.viewpager.widget.ViewPager>
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
@@ -35,8 +27,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/_FFFFFF"
         app:menu="@menu/navigation"
-        app:labelVisibilityMode="labeled"
-        >
+        app:labelVisibilityMode="labeled">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

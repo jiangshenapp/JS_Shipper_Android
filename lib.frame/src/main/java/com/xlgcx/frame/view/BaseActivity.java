@@ -2,6 +2,7 @@ package com.xlgcx.frame.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.xlgcx.frame.mvp.IBaseView;
 import com.xlgcx.frame.mvp.IPresenter;
@@ -106,7 +107,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
 
     @Override
     public void toast(String message) {
-
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
     protected abstract void init();

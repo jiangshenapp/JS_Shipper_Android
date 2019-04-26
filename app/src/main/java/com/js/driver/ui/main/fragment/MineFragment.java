@@ -21,7 +21,6 @@ import butterknife.OnClick;
  */
 public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View {
 
-
     @BindView(R.id.user_img)
     ImageView mUserImg;
     @BindView(R.id.user_name)

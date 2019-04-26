@@ -8,6 +8,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.manager.SpManager;
 import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
 import com.xlgcx.frame.view.BaseActivity;
@@ -70,6 +71,8 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
             case R.id.center_cache_layout://清除缓存
                 break;
             case R.id.logout://登出
+                SpManager.getInstance(this).removeSP("token");
+                LoginActivity.action(this,true);
                 break;
         }
     }

@@ -12,22 +12,17 @@
         android:layout_height="?android:actionBarSize"
         android:background="@color/white"
         app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        >
-
+        app:contentInsetStart="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/toolbar_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_navigationbar_close_black"
+                android:src="@mipmap/ic_navigationbar_back_black"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

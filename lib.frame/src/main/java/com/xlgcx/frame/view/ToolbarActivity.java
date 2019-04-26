@@ -71,13 +71,21 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
             mBackImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish();
+                    backAction();
                 }
             });
             setActionBar();
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        backAction();
+    }
+
+    public void backAction() {
+        finish();
+    }
 
     @Override
     protected void onStart() {
@@ -95,12 +103,10 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
         }
     }
 
-
     @Subscribe
     public void onEvent(Object event) {
 
     }
-
 
     public abstract void setActionBar();
 

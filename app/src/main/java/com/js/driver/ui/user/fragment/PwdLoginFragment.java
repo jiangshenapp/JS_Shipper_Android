@@ -12,6 +12,7 @@ import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.presenter.PwdLoginPresenter;
 import com.js.driver.ui.user.presenter.contract.PwdLoginContract;
 import com.xlgcx.frame.view.BaseFragment;
@@ -63,6 +64,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_register:
+                RegisterActivity.action(getActivity());
                 break;
             case R.id.tv_forget_psw:
                 break;

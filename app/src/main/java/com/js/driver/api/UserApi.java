@@ -15,25 +15,23 @@ public interface UserApi {
 
     /**
      * 绑定手机号
-     * @param code
      * @param mobile
+     * @param code
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/bindMobile")
-    Observable<BaseHttpResponse> bindMobile(@Field("code") String code,
-                                            @Field("mobile") String mobile);
+    Observable<BaseHttpResponse> bindMobile(@Field("mobile") String mobile, @Field("code") String code);
 
     /**
      * 短信验证码登录
-     * @param code
      * @param mobile
+     * @param code
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/smsLogin")
-    Observable<HttpResponse<String>> smsLogin(@Field("code") String code,
-                                              @Field("mobile") String mobile);
+    Observable<HttpResponse<String>> smsLogin(@Field("mobile") String mobile, @Field("code") String code);
 
 
     /**
@@ -69,40 +67,38 @@ public interface UserApi {
 
     /**
      * 会员注册
-     * @param code
      * @param mobile
      * @param password
+     * @param code
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/registry")
-    Observable<BaseHttpResponse> registry(@Field("code") String code,
-                                          @Field("mobile") String mobile,
-                                          @Field("password") String password);
+    Observable<BaseHttpResponse> registry(@Field("mobile") String mobile,
+                                          @Field("password") String password,
+                                          @Field("code") String code);
 
 
     /**
      * 重置密码步骤1
-     * @param code
      * @param mobile
+     * @param code
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/resetPwdStep1")
-    Observable<BaseHttpResponse> resetPwdStep1(@Field("code") String code,
-                                               @Field("mobile") String mobile);
+    Observable<BaseHttpResponse> resetPwdStep1(@Field("mobile") String mobile, @Field("code") String code);
 
 
     /**
      * 重置密码步骤2
-     * @param password
      * @param mobile
+     * @param password
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/resetPwdStep2")
-    Observable<BaseHttpResponse> resetPwdStep2(@Field("password") String password,
-                                               @Field("mobile") String mobile);
+    Observable<BaseHttpResponse> resetPwdStep2(@Field("mobile") String mobile, @Field("password") String password);
 
 
     /**

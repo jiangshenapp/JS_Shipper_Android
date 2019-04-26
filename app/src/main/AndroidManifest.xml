@@ -25,6 +25,10 @@
             android:launchMode="singleTask" />
 
         <activity
+            android:name=".ui.user.activity.RegisterActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name=".ui.user.activity.UserCenterActivity"
             android:launchMode="singleTop" />
 

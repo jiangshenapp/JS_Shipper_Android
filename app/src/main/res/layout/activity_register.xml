@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:paddingLeft="28dp"
     android:paddingRight="28dp">
 
@@ -100,12 +101,13 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_agree"
+        <CheckBox
+            android:id="@+id/cb_agree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_agreement_selected" />
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/selector_checkbox_agreement" />
 
         <TextView
             android:layout_width="wrap_content"
