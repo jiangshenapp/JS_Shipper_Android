@@ -30,3 +30,6 @@
 -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
      <init>(...);
 }
+
+
+-dontwarn com.squareup.picasso.**

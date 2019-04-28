@@ -49,10 +49,10 @@ public class UserVerifiedActivity extends SimpleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.driver_verified_layout://司机认证
-
+                DriverVerifiedActivity.action(mContext);
                 break;
             case R.id.park_verified_layout://园区认证
-
+                ParkUserVerifiedActivity.action(mContext);
                 break;
         }
     }
