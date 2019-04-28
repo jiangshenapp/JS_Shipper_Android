@@ -1,5 +1,11 @@
 package com.js.driver.ui.user.activity;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.js.driver.App;
+import com.js.driver.di.componet.DaggerActivityComponent;
+import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.ParkUserVerifiedContract;
 import com.xlgcx.frame.view.BaseActivity;
@@ -10,6 +16,10 @@ import com.xlgcx.frame.view.BaseActivity;
 public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPresenter> implements ParkUserVerifiedContract.View {
 
 
+    public static void action(Context context){
+        context.startActivity(new Intent(context,ParkUserVerifiedActivity.class));
+    }
+
     @Override
     protected void init() {
 
@@ -17,7 +27,11 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
 
     @Override
     protected void initInject() {
-
+        DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .appComponent(App.getInstance().getAppComponent())
+                .build()
+                .inject(this);
     }
 
     @Override

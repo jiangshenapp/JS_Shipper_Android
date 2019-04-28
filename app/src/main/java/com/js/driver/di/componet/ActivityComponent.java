@@ -5,6 +5,8 @@ import android.app.Activity;
 import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.user.activity.DriverVerifiedActivity;
+import com.js.driver.ui.user.activity.ParkUserVerifiedActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.wallet.activity.BailActivity;
@@ -38,6 +40,10 @@ public interface ActivityComponent {
     void inject(WithdrawActivity withdrawActivity);
 
     void inject(RegisterActivity registerActivity);
+
+    void inject(DriverVerifiedActivity driverVerifiedActivity);
+
+    void inject(ParkUserVerifiedActivity parkUserVerifiedActivity);
 
 }
 
