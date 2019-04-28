@@ -2,6 +2,7 @@ package com.js.driver;
 
 import android.text.TextUtils;
 
+import com.facebook.stetho.Stetho;
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
@@ -21,6 +22,7 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mApp = this;
+        Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         initToken("");
     }

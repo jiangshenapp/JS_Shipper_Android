@@ -143,4 +143,12 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         SpManager.getInstance(getActivity()).putSP("token",token);
         MainActivity.action(mContext);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+    }
 }
