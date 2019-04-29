@@ -34,10 +34,6 @@ public class ParamsInterceptor implements Interceptor {
                         bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
                     }
                 }
-
-                bodyBuilder
-                        .addEncoded("timestamp", String.valueOf(System.currentTimeMillis()))
-                        .addEncoded("token", "");
                 formBody = bodyBuilder.build();
                 request = request.newBuilder().post(formBody).build();
             }

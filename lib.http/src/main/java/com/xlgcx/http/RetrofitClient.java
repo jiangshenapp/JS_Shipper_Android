@@ -5,6 +5,7 @@ import android.content.Context;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.xlgcx.http.converter.StringConverterFactory;
 import com.xlgcx.http.global.Const;
+import com.xlgcx.http.interceptor.AuthInterceptor;
 import com.xlgcx.http.interceptor.ParamsInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -45,7 +46,8 @@ public class RetrofitClient {
                 .addNetworkInterceptor(new StethoInterceptor())
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)
-                .addInterceptor(new ParamsInterceptor())
+                .addInterceptor(new AuthInterceptor())
+//                .addInterceptor(new ParamsInterceptor())
                 ;
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

@@ -1,5 +1,8 @@
 package com.js.driver.ui.main.fragment;
 
+import android.view.View;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
@@ -21,7 +24,7 @@ import butterknife.BindView;
 /**
  * Created by huyg on 2019/4/1.
  */
-public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implements FindOrderContract.View {
+public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implements FindOrderContract.View, BaseQuickAdapter.OnItemClickListener {
 
 
     @BindView(R.id.recycler)
@@ -72,7 +75,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         mAdapter = new FindOrderAdapter(R.layout.item_home_order,orders);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-
+        mAdapter.setOnItemClickListener(this);
     }
 
     private void initRefresh() {
@@ -80,5 +83,8 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     }
 
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+    }
 }

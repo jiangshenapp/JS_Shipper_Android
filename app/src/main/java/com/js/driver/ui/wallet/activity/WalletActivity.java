@@ -33,10 +33,10 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.wallet_withdraw://提现
-
+                WithdrawActivity.action(mContext);
                 break;
             case R.id.wallet_recharge://充值
-
+                RechargeActivity.action(mContext);
                 break;
             case R.id.wallet_bail_layout://保证金
                 BailActivity.action(mContext);

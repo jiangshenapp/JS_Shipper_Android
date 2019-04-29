@@ -63,7 +63,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:text="李玉林"
                     android:textColor="@color/_B4B4B4"
                     android:textSize="14sp" />
 

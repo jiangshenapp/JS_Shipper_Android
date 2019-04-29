@@ -2,7 +2,6 @@ package com.js.driver.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -24,14 +23,15 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
+import com.js.driver.model.request.DriverAuth;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
+import com.js.driver.ui.center.adapter.DriversAdapter;
 import com.js.driver.ui.user.presenter.DriverVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.DriverVerifiedContract;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.io.File;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -53,14 +53,14 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     ImageView mAuthBody;
     @BindView(R.id.auth_driver_card)
     ImageView mAuthDriverCard;
-    @BindView(R.id.auth_name)
-    TextView mAuthName;
-    @BindView(R.id.auth_card_number)
-    TextView mAuthCardNumber;
-    @BindView(R.id.auth_address)
-    TextView mAuthAddress;
-    @BindView(R.id.auth_driver_type)
-    TextView mAuthDriverType;
+//    @BindView(R.id.auth_name)
+//    EditText mAuthName;
+//    @BindView(R.id.auth_card_number)
+//    EditText mAuthCardNumber;
+//    @BindView(R.id.auth_address)
+//    EditText mAuthAddress;
+//    @BindView(R.id.auth_driver_type)
+//    EditText mAuthDriverType;
     @BindView(R.id.auth_submit)
     TextView mAuthSubmit;
 
@@ -71,6 +71,8 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
+    private DriverAuth mDriverAuth;
+
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, DriverVerifiedActivity.class));
@@ -79,6 +81,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     @Override
     protected void init() {
         mFilePresenter.attachView(this);
+        mDriverAuth = new DriverAuth();
     }
 
     @Override
@@ -124,13 +127,16 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         Log.d(getClass().getSimpleName(), data);
         switch (choseCode) {
             case Const.AUTH_CARD:
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL+data,  mAuthCard);
+                mDriverAuth.setIdImage(data);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthCard);
                 break;
             case Const.AUTH_BODY:
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL+data,  mAuthBody);
+                mDriverAuth.setIdHandImage(data);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthBody);
                 break;
             case Const.AUTH_DRIVER_CARD:
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL+data,  mAuthDriverCard);
+                mDriverAuth.setDriverImage(data);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverCard);
                 break;
         }
     }

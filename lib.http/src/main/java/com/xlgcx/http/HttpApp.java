@@ -11,9 +11,15 @@ import com.xlgcx.frame.module.IAppLife;
 public class HttpApp implements IAppLife {
 
     private static Application mHttpApp;
+    public String token;
+    private static HttpApp mApp;
 
     public static Application getInstance() {
         return mHttpApp;
+    }
+
+    public static HttpApp getApp() {
+        return mApp;
     }
 
     @Override
@@ -24,6 +30,7 @@ public class HttpApp implements IAppLife {
     @Override
     public void onCreate(Application application) {
         mHttpApp = application;
+        mApp = this;
     }
 
     @Override

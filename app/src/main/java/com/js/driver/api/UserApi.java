@@ -1,12 +1,15 @@
 package com.js.driver.api;
 
+import com.js.driver.model.bean.UserInfo;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by huyg on 2019/4/21.
@@ -60,9 +63,8 @@ public interface UserApi {
      * 获取当前登录人信息
      * @return
      */
-    @FormUrlEncoded
-    @POST("/app/subscriber/profile")
-    Observable<BaseHttpResponse> profile(@Field("token") String token);
+    @GET("app/subscriber/profile")
+    Observable<HttpResponse<UserInfo>> profile();
 
 
     /**

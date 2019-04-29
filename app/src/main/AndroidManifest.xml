@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.js.driver">
 
 
@@ -15,7 +16,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,12 +58,38 @@
             android:name=".ui.user.activity.UserVerifiedActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".ui.user.activity.ParkUserVerifiedActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".ui.user.activity.ParkUserVerifiedActivity"
+            android:launchMode="singleTop" />
 
-        <activity android:name=".ui.user.activity.DriverVerifiedActivity"
+        <activity
+            android:name=".ui.user.activity.DriverVerifiedActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.wallet.activity.BillActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.order.activity.OrdersActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.order.activity.OrderDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.center.activity.DriversActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.center.activity.CarsActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.center.activity.AddCarActivity"
             android:launchMode="singleTop"
             />
+
     </application>
 
 </manifest>

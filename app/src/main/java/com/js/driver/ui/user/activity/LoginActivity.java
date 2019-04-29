@@ -85,7 +85,7 @@ public class LoginActivity extends SimpleActivity {
     @Override
     public void setActionBar() {
         mTitle.setText("");
-        mBackImg.setImageDrawable(getResources().getDrawable(R.mipmap.ic_navigationbar_close_black));
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.ic_navigationbar_close_black));
     }
 
     @Subscribe

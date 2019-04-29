@@ -28,9 +28,6 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
     private FrameLayout containerLayout = null;
     protected Toolbar mToolbar;
     protected TextView mTitle;
-    protected TextView mRight;
-    protected ImageView mTitleImg;
-    protected ImageView mBackImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +38,6 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
         mToolbar.setSubtitle("");
 
         mTitle = findViewById(R.id.toolbar_title);
-        mRight = findViewById(R.id.id_tv_right);
-        mTitleImg = findViewById(R.id.toolbar_img);
-        mBackImg = findViewById(R.id.toolbar_back);
         // set status bar text color black
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -68,7 +62,8 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
         } else {
             View contentView = LayoutInflater.from(this).inflate(layoutResID, null);
             containerLayout.addView(contentView);
-            mBackImg.setOnClickListener(new View.OnClickListener() {
+            mToolbar.setNavigationIcon(R.drawable.ic_user_info_back);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     backAction();

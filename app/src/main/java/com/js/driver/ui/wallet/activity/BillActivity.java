@@ -36,7 +36,7 @@ public class BillActivity extends SimpleActivity {
 
 
     public static void action(Context context, int type) {
-        Intent intent = new Intent(context, BailActivity.class);
+        Intent intent = new Intent(context, BillActivity.class);
         intent.putExtra("type", type);
         context.startActivity(intent);
     }

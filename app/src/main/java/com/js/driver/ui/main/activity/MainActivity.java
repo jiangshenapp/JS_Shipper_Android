@@ -140,9 +140,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void setActionBar() {
 
-//        mToolbar.setVisibility(View.GONE);
-
-        mBackImg.setVisibility(View.GONE);
         mTitle.setText("找货");
     }
 

@@ -59,7 +59,7 @@ public class BillFragment extends BaseFragment<BillPresenter> implements BillCon
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_bill_detail;
+        return R.layout.fragment_order_detail;
     }
 
     @Override

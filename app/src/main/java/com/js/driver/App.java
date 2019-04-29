@@ -8,6 +8,7 @@ import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
 import com.js.driver.manager.SpManager;
 import com.xlgcx.frame.BaseApplication;
+import com.xlgcx.http.HttpApp;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -25,6 +26,7 @@ public class App extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         initToken("");
+        HttpApp.getApp().token = token;
     }
 
     public void initToken(String token) {

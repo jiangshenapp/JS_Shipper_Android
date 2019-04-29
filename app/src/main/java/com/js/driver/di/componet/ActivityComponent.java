@@ -4,7 +4,11 @@ import android.app.Activity;
 
 import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.ui.center.activity.AddCarActivity;
+import com.js.driver.ui.center.activity.CarsActivity;
+import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
 import com.js.driver.ui.user.activity.ParkUserVerifiedActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
@@ -44,6 +48,14 @@ public interface ActivityComponent {
     void inject(DriverVerifiedActivity driverVerifiedActivity);
 
     void inject(ParkUserVerifiedActivity parkUserVerifiedActivity);
+
+    void inject(OrderDetailActivity orderDetailActivity);
+
+    void inject(DriversActivity driversActivity);
+
+    void inject(CarsActivity carsActivity);
+
+    void inject(AddCarActivity addCarActivity);
 
 }
 

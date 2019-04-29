@@ -37,7 +37,6 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="李玉林"
                 android:textColor="@color/_000000"
                 android:textSize="20sp"
                 />
@@ -56,7 +55,6 @@
             android:id="@+id/user_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="188 2843 2843"
             android:textColor="@color/_969696"
             android:textSize="14sp"
             android:layout_marginTop="6dp"
