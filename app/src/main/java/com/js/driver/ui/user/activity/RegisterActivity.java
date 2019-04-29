@@ -156,4 +156,12 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     public void onRegister() {
         LoginActivity.action(this,false);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+    }
 }
