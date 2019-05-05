@@ -18,7 +18,9 @@ import com.js.shipper.ui.main.fragment.CommunityFragment;
 import com.js.shipper.ui.main.fragment.FindOrderFragment;
 import com.js.shipper.ui.main.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;
+import com.js.shipper.ui.main.fragment.ParkFragment;
 import com.js.shipper.ui.main.fragment.ServiceFragment;
+import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.main.presenter.MainPresenter;
 import com.js.shipper.ui.main.presenter.contract.MainContract;
 import com.js.frame.view.BaseActivity;
@@ -39,8 +41,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
 
-    private FindOrderFragment mFindOrderFragment;
-    private ServiceFragment mServiceFragment;
+    private ParkFragment mParkFragment;
+    private ShipFragment mShipFragment;
     private InformationFragment mInformationFragment;
     private CommunityFragment mCommunityFragment;
     private MineFragment mMineFragment;
@@ -79,13 +81,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFindOrderFragment = FindOrderFragment.newInstance();
-        mServiceFragment = ServiceFragment.newInstance();
+        mParkFragment = ParkFragment.newInstance();
+        mShipFragment = ShipFragment.newInstance();
         mInformationFragment = InformationFragment.newInstance();
         mCommunityFragment = CommunityFragment.newInstance();
         mMineFragment = MineFragment.newInstance();
-        mFragments.add(mFindOrderFragment);
-        mFragments.add(mServiceFragment);
+        mFragments.add(mParkFragment);
+        mFragments.add(mShipFragment);
         mFragments.add(mInformationFragment);
         mFragments.add(mCommunityFragment);
         mFragments.add(mMineFragment);
@@ -144,15 +146,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.navigation_find:
+            case R.id.navigation_park:
                 mViewpager.setCurrentItem(0);
-                mToolbar.setVisibility(View.VISIBLE);
-                mTitle.setText("找货");
+                mToolbar.setVisibility(View.GONE);
                 break;
-            case R.id.navigation_service:
+            case R.id.navigation_ship:
                 mViewpager.setCurrentItem(1);
-                mToolbar.setVisibility(View.VISIBLE);
-                mTitle.setText("服务");
+                mToolbar.setVisibility(View.GONE);
                 break;
             case R.id.navigation_information:
                 mViewpager.setCurrentItem(2);

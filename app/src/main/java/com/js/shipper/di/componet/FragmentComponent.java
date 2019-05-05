@@ -4,11 +4,15 @@ import android.app.Activity;
 
 import com.js.shipper.di.FragmentScope;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.ui.main.fragment.BoutiqueFragment;
+import com.js.shipper.ui.main.fragment.CarSourceFragment;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
+import com.js.shipper.ui.main.fragment.DeliveryFragment;
 import com.js.shipper.ui.main.fragment.FindOrderFragment;
 import com.js.shipper.ui.main.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;
 import com.js.shipper.ui.main.fragment.ServiceFragment;
+import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.order.fragment.OrderFragment;
 import com.js.shipper.ui.user.fragment.CodeLoginFragment;
 import com.js.shipper.ui.user.fragment.PwdLoginFragment;
@@ -44,6 +48,14 @@ public interface FragmentComponent {
     void inject(BillFragment billFragment);
 
     void inject(OrderFragment orderFragment);
+
+    void inject(ShipFragment shipFragment);
+
+    void inject(DeliveryFragment deliveryFragment);
+
+    void inject(CarSourceFragment carSourceFragment);
+
+    void inject(BoutiqueFragment boutiqueFragment);
 
 
 }

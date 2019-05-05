@@ -58,9 +58,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private String[] titles = {"我的车辆", "我的司机", "我的路线", "我的客服", "我的发票", "推广达人"};
-    private int[] resources = {R.mipmap.ic_center_cars, R.mipmap.ic_center_driver, R.mipmap.ic_center_route,
-            R.mipmap.ic_center_service, R.mipmap.ic_center_invoice, R.mipmap.ic_center_collection};
+    private String[] titles = {"我的园区", "我的服务", "我的发票", "推广达人", "我的客服"};
+    private int[] resources = {R.mipmap.ic_center_park, R.mipmap.ic_center_server, R.mipmap.ic_center_invoice,
+            R.mipmap.ic_center_collection, R.mipmap.ic_center_service};
 
     public static MineFragment newInstance() {
         return new MineFragment();
@@ -194,17 +194,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position) {
-            case 0://我的车辆
+            case 0://我的园区
                 break;
-            case 1://我的司机
+            case 1://我的服务
                 break;
-            case 2://我的路线
+            case 2://我的发票
                 break;
-            case 3://我的客服
+            case 3://推广达人
                 break;
-            case 4://我的发票
-                break;
-            case 5://推广达人
+            case 4://我的客服
                 break;
         }
     }
