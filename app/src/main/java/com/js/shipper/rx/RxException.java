@@ -1,4 +1,4 @@
-package com.js.http.rx;
+package com.js.shipper.rx;
 
 
 import com.js.http.exception.NoNetworkException;

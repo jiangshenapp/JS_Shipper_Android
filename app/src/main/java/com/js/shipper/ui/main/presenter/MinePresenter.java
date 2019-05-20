@@ -5,9 +5,9 @@ import com.js.shipper.model.bean.UserInfo;
 import com.js.shipper.ui.main.presenter.contract.MineContract;
 import com.js.frame.mvp.RxPresenter;
 import com.js.http.ApiFactory;
-import com.js.http.rx.RxException;
-import com.js.http.rx.RxResult;
-import com.js.http.rx.RxSchedulers;
+import com.js.shipper.rx.RxException;
+import com.js.shipper.rx.RxResult;
+import com.js.shipper.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

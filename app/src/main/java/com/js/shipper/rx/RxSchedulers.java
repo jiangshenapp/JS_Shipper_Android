@@ -1,4 +1,4 @@
-package com.js.http.rx;
+package com.js.shipper.rx;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
