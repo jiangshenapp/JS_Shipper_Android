@@ -7,6 +7,6 @@ public class Const {
 
     public static final String WX_APP_ID = "wxa1c709302475402e";
 
-    public static final String BUGLY_APP_ID = "52a73eed58";
+    public static final String BUGLY_APP_ID = "3503d19ff3";
 
 }

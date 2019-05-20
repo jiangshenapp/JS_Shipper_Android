@@ -11,6 +11,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="发货"
+                android:textColor="@color/_000000"
+                android:textSize="17sp"
+                android:fontFamily="sans-serif-medium"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的运单"
+                android:textColor="@color/_000000"
+                android:textSize="14sp"
+                android:layout_marginEnd="12dp"
+                android:layout_gravity="right|center_vertical"
+                />
+
+
+        </FrameLayout>
+
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
@@ -22,20 +50,23 @@
             app:indicator_drawable_selected="@drawable/shape_banner_selected"
             app:indicator_drawable_unselected="@drawable/shape_banner_un_selected"
             app:indicator_height="10dp"
-            app:indicator_width="10dp" />
+            app:indicator_width="10dp"
+            android:layout_marginBottom="12dp"
+            />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+
             android:layout_marginEnd="8dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ship_start_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -50,6 +81,7 @@
                     android:src="@mipmap/ic_waybill_start" />
 
                 <TextView
+                    android:id="@+id/ship_start_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -57,7 +89,7 @@
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="宁波市 海曙区 白云街道14号"
+                    android:hint="请选择发货地址"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
@@ -69,6 +101,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/ship_end_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -80,9 +113,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:src="@mipmap/ic_waybill_start" />
+                    android:src="@mipmap/ic_waybill_end" />
 
                 <TextView
+                    android:id="@+id/ship_end_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -90,7 +124,7 @@
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="宁波市 海曙区 白云街道14号"
+                    android:hint="请选择收货地址"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
@@ -102,12 +136,13 @@
                 android:background="@color/_F0F0F0" />
 
             <TextView
+                android:id="@+id/ship_mileage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
-                android:text="总里程：1001.90公里"
+                android:text="总里程：0公里"
                 android:textColor="@color/_B4B4B4"
                 android:textSize="14sp" />
 
@@ -125,6 +160,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ship_car_extent_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -142,12 +178,13 @@
 
 
                 <TextView
+                    android:id="@+id/ship_car_extent"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="4.2米/5米"
+                    android:hint="请选择车长"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
 
@@ -165,6 +202,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/ship_car_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -176,18 +214,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:text="车长"
+                    android:text="车型"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
 
                 <TextView
+                    android:id="@+id/ship_car_type"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="4.2米/5米"
+                    android:text="不限"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
 
@@ -203,6 +242,7 @@
 
 
         <TextView
+            android:id="@+id/ship_submit"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:text="发货"

@@ -62,7 +62,7 @@ public class BaseApplication extends MultiDexApplication {
         if (BuildConfig.DEBUG) {
             CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, true);
         } else {
-            CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, false);
+            CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, true);
         }
     }
 

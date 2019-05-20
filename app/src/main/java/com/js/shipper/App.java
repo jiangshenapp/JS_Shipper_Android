@@ -3,6 +3,7 @@ package com.js.shipper;
 import android.text.TextUtils;
 
 import com.facebook.stetho.Stetho;
+import com.google.gson.Gson;
 import com.js.shipper.di.componet.AppComponent;
 import com.js.shipper.di.componet.DaggerAppComponent;
 import com.js.shipper.di.module.AppModule;
@@ -18,6 +19,7 @@ public class App extends BaseApplication {
     private AppComponent mAppComponent;
     private static App mApp;
     public String token;
+    public Gson mGson = new Gson();
 
     @Override
     public void onCreate() {
@@ -61,5 +63,9 @@ public class App extends BaseApplication {
         return mApp;
     }
 
+
+    public String gsonFormat(Object clazz) {
+        return mGson.toJson(clazz);
+    }
 
 }

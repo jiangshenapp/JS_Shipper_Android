@@ -13,6 +13,7 @@ import com.js.shipper.ui.main.presenter.CarSourcePresenter;
 import com.js.shipper.ui.main.presenter.contract.CarSourceContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,10 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
 
     private CarSourceAdapter mAdapter;
     private List<Object> mList;
+
+    public static CarSourceFragment newInstance(){
+        return new CarSourceFragment();
+    }
 
     @Override
     protected void initInject() {
@@ -55,6 +60,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     }
 
     private void initData() {
+        mList = new ArrayList<>();
         mList.add(new Object());
         mAdapter.setNewData(mList);
     }
@@ -68,7 +74,6 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-
     }
 
     @Override

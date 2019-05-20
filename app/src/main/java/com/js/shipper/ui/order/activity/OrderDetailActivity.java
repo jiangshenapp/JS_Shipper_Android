@@ -2,6 +2,7 @@ package com.js.shipper.ui.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -10,6 +11,8 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.frame.view.BaseActivity;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by huyg on 2019/4/29.

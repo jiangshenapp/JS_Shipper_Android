@@ -35,6 +35,7 @@ public class DriverAuth {
     private String ts;
     private int valid;
 
+
     public String getAddress() {
         return address;
     }

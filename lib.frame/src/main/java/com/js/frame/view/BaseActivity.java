@@ -29,6 +29,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     protected Unbinder mUnbinder;
     private static final String TAG = "BaseActivity";
     protected CircleProgressDialog mDialog;
+    protected Bundle savedInstanceState;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,11 +37,11 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
         setContentView(getLayoutId());
         mUnbinder = ButterKnife.bind(this);
         mContext = this;
+        this.savedInstanceState = savedInstanceState;
         initInject();
         if (mPresenter != null) {
             mPresenter.attachView(this);
         }
-        initSavedInstance(savedInstanceState);
         init();
     }
 
@@ -60,10 +61,6 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     }
 
 
-    public void initSavedInstance(Bundle savedInstanceState) {
-
-    }
-
     @Override
     public void showProgress() {
         if (mDialog == null) {
@@ -80,7 +77,6 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
             mDialog.dismiss();
         }
     }
-
 
 
     @Override
@@ -109,6 +105,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     public void toast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
+
 
     protected abstract void init();
 

@@ -139,8 +139,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void setActionBar() {
-
-        mTitle.setText("找货");
+        mToolbar.setVisibility(View.GONE);
     }
 
     @Override
@@ -148,25 +147,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         switch (menuItem.getItemId()) {
             case R.id.navigation_park:
                 mViewpager.setCurrentItem(0);
-                mToolbar.setVisibility(View.GONE);
                 break;
             case R.id.navigation_ship:
                 mViewpager.setCurrentItem(1);
-                mToolbar.setVisibility(View.GONE);
                 break;
             case R.id.navigation_information:
                 mViewpager.setCurrentItem(2);
-                mToolbar.setVisibility(View.VISIBLE);
-                mTitle.setText("消息");
                 break;
             case R.id.navigation_community:
                 mViewpager.setCurrentItem(3);
-                mToolbar.setVisibility(View.VISIBLE);
-                mTitle.setText("社区");
                 break;
             case R.id.navigation_mine:
                 mViewpager.setCurrentItem(4);
-                mToolbar.setVisibility(View.GONE);
                 UserManager.getUserManager().isLogin(true, true);
                 break;
         }
