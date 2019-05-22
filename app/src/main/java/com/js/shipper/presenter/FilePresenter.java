@@ -1,6 +1,8 @@
 package com.js.shipper.presenter;
 
+import com.js.shipper.App;
 import com.js.shipper.api.FileApi;
+import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.presenter.contract.FileContract;
 import com.js.frame.mvp.RxPresenter;
 import com.js.http.ApiFactory;

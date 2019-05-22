@@ -8,16 +8,23 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.LineBean;
+import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.CarSourcePresenter;
 import com.js.shipper.ui.main.presenter.contract.CarSourceContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 
 /**
@@ -33,9 +40,10 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     SmartRefreshLayout mRefresh;
 
     private CarSourceAdapter mAdapter;
-    private List<Object> mList;
+    private List<LineBean> mList;
+    private int type;
 
-    public static CarSourceFragment newInstance(){
+    public static CarSourceFragment newInstance() {
         return new CarSourceFragment();
     }
 
@@ -56,17 +64,30 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     @Override
     protected void init() {
         initView();
-        initData();
     }
 
-    private void initData() {
-        mList = new ArrayList<>();
-        mList.add(new Object());
-        mAdapter.setNewData(mList);
-    }
 
     private void initView() {
+        initRefresh();
         initRecycler();
+    }
+
+    private void initRefresh() {
+        mRefresh.autoRefresh();
+        mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                type = Const.MORE;
+                int num = (int) Math.ceil((mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                mPresenter.getCarSource(num, "", "", Const.PAGE_SIZE);
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                type = Const.REFRESH;
+                mPresenter.getCarSource(Const.PAGE_NUM, "", "", Const.PAGE_SIZE);
+            }
+        });
     }
 
     private void initRecycler() {
@@ -79,5 +100,23 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+    }
+
+    @Override
+    public void onCarSource(ListResponse<LineBean> mLineBeans) {
+        switch (type) {
+            case Const.REFRESH:
+                mAdapter.setNewData(mLineBeans.getRecords());
+                break;
+            case Const.MORE:
+                mAdapter.addData(mLineBeans.getRecords());
+                break;
+        }
+    }
+
+    @Override
+    public void finishRefreshAndLoadMore() {
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
     }
 }

@@ -6,6 +6,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.js.http.converter.StringConverterFactory;
 import com.js.http.global.Const;
 import com.js.http.interceptor.AuthInterceptor;
+import com.js.http.interceptor.HeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

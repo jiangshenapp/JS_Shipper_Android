@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.js.http.HttpApp;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -92,6 +93,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     @Override
     public void onLogin(String token) {
         SpManager.getInstance(getActivity()).putSP("token",token);
+        HttpApp.getApp().token = token;
         MainActivity.action(mContext);
     }
 }
