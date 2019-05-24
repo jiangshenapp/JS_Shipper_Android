@@ -4,6 +4,7 @@ package com.js.shipper.rx;
 import android.text.TextUtils;
 
 import com.js.http.HttpResponse;
+import com.js.shipper.manager.UserManager;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
@@ -19,7 +20,8 @@ public class RxResult {
             return upstream.flatMap(result -> {
                         if (result.isSuccess()) {
                             return createData(result.getData());
-                        } else if (result.getCode() == -1) {
+                        } else if (result.getCode() == 401) {
+                            UserManager.getUserManager().logout();
                             return Observable.error(new Exception("请您重新登录!"));
                         } else {
                             if (TextUtils.isEmpty(result.getMsg())) {

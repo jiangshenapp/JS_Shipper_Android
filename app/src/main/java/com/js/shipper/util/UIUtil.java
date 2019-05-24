@@ -13,9 +13,7 @@ import com.js.shipper.App;
 
 public class UIUtil {
 
-
     public static Toast toast;
-
 
     /**
      * 将dip或dp值转换为px值，保证尺寸大小不变
@@ -36,7 +34,6 @@ public class UIUtil {
         }
     }
 
-
     /**
      * 屏幕宽度（像素）
      *
@@ -46,7 +43,6 @@ public class UIUtil {
         DisplayMetrics metric = Resources.getSystem().getDisplayMetrics();
         return metric.widthPixels;
     }
-
 
     public static int getScreenHeight() {
         DisplayMetrics metric = Resources.getSystem().getDisplayMetrics();

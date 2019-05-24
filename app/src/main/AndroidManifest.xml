@@ -115,6 +115,14 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".ui.center.activity.AboutActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.center.activity.FeedBackActivity"
+            android:launchMode="singleTop"
+            />
+
     </application>
 
 </manifest>

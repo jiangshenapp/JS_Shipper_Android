@@ -7,6 +7,7 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.center.activity.AddCarActivity;
 import com.js.shipper.ui.center.activity.CarsActivity;
 import com.js.shipper.ui.center.activity.DriversActivity;
+import com.js.shipper.ui.center.activity.FeedBackActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -66,5 +67,6 @@ public interface ActivityComponent {
 
     void inject(ReceiverInfoActivity receiverInfoActivity);
 
+    void inject(FeedBackActivity feedBackActivity);
 }
 

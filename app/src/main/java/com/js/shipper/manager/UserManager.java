@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.text.TextUtils;
 
 import com.js.shipper.App;
+import com.js.shipper.model.event.UserStatusChangeEvent;
 import com.js.shipper.ui.user.activity.LoginActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * author : hzb
@@ -29,7 +32,6 @@ public class UserManager {
         return instance;
     }
 
-
     /**
      * 判断是否登录
      * @param isJumpLogin 是否跳转登录页面
@@ -44,6 +46,15 @@ public class UserManager {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 退出登录
+     */
+    public void logout() {
+        App.getInstance().clearUserInfo();
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGOUT_SUCCESS));
+        LoginActivity.action(App.getInstance(),true);
     }
 
     /**
