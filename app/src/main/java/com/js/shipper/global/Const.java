@@ -7,7 +7,7 @@ public class Const {
 
     public static final int AUTH_CARD = 1;
     public static final int AUTH_BODY = 2;
-    public static final int AUTH_DRIVER_CARD = 3;
+    public static final int AUTH_BEHIND_CARD = 3;
     public static final int AUTH_BUSINESS_LICENSE = 4;
     public static final int UPLOAD_HEADIMG = 5;
 

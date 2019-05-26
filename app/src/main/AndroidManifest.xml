@@ -29,11 +29,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c4c4a4f436489de383f7a832452239f6"/>
-
 
         <activity android:name="com.js.shipper.ui.main.activity.MainActivity">
             <intent-filter>
@@ -72,18 +70,6 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.js.shipper.ui.user.activity.UserVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.user.activity.ParkUserVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.user.activity.DriverVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
             android:name="com.js.shipper.ui.wallet.activity.BillActivity"
             android:launchMode="singleTop" />
 
@@ -108,20 +94,19 @@
             android:launchMode="singleTop" />
 
         <activity android:name=".ui.ship.activity.SelectAddressActivity"
-            android:launchMode="singleTop"
-            />
+            android:launchMode="singleTop" />
 
         <activity android:name=".ui.order.activity.OrderSubmitActivity"
-            android:launchMode="singleTop"
-            />
+            android:launchMode="singleTop" />
 
         <activity android:name=".ui.center.activity.AboutActivity"
-            android:launchMode="singleTop"
-            />
+            android:launchMode="singleTop" />
 
         <activity android:name=".ui.center.activity.FeedBackActivity"
-            android:launchMode="singleTop"
-            />
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.user.activity.VerifiedActivity"
+            android:launchMode="singleTop" />
 
     </application>
 

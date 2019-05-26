@@ -13,8 +13,6 @@ import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.ship.activity.ReceiverInfoActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
-import com.js.shipper.ui.user.activity.DriverVerifiedActivity;
-import com.js.shipper.ui.user.activity.ParkUserVerifiedActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.wallet.activity.BailActivity;
@@ -34,7 +32,6 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
-
     void inject(MainActivity mainActivity);
 
     void inject(UserCenterActivity userCenterActivity);
@@ -48,10 +45,6 @@ public interface ActivityComponent {
     void inject(WithdrawActivity withdrawActivity);
 
     void inject(RegisterActivity registerActivity);
-
-    void inject(DriverVerifiedActivity driverVerifiedActivity);
-
-    void inject(ParkUserVerifiedActivity parkUserVerifiedActivity);
 
     void inject(OrderDetailActivity orderDetailActivity);
 

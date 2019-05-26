@@ -162,7 +162,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 changeNickname();
                 break;
             case R.id.center_verified_layout://认证管理
-                UserVerifiedActivity.action(mContext);
+                VerifiedActivity.action(mContext);
                 break;
             case R.id.center_feedback_layout://意见反馈
                 FeedBackActivity.action(this);

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.js.shipper.R;
-import com.js.shipper.ui.user.activity.UserVerifiedActivity;
-import com.js.frame.view.BaseActivity;
 import com.js.frame.view.SimpleActivity;
 
 /**
