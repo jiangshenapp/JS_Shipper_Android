@@ -1,10 +1,14 @@
 package com.js.shipper.api;
 
+import com.js.shipper.model.bean.AuthInfo;
 import com.js.shipper.model.bean.UserInfo;
 import com.js.http.BaseHttpResponse;
 import com.js.http.HttpResponse;
+import com.js.shipper.model.request.CompanyVerifiedRequest;
+import com.js.shipper.model.request.PersonVerifiedRequest;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -123,23 +127,56 @@ public interface UserApi {
 
 
     /**
-     * 个人司机认证
-     * @param driverVerifiedInfo
+     * 修改头像
+     * @param avatar
      * @return
      */
     @FormUrlEncoded
-    @POST("app/subscriber/verify/driverVerified")
-    Observable<BaseHttpResponse> driverVerified(@Field("driverVerifiedInfo") String driverVerifiedInfo);
+    @POST("app/subscriber/changeAvatar")
+    Observable<BaseHttpResponse> changeAvatar(@Field("avatar") String avatar);
 
 
     /**
-     * 获取司机认证信息
-     * @param token
+     * 修改昵称
+     * @param nickname
      * @return
      */
     @FormUrlEncoded
-    @POST("app/subscriber/verify/getDriverVerifiedInfo")
-    Observable<BaseHttpResponse> getDriverVerifiedInfo(@Field("token") String token);
+    @POST("app/subscriber/changeNickname")
+    Observable<BaseHttpResponse> changeNickname(@Field("nickname") String nickname);
 
+
+    /**
+     * 个人货主认证
+     * @param data
+     * @return
+     */
+    @POST("app/subscriber/verify/personConsignorVerified")
+    Observable<BaseHttpResponse> personVerified(@Body PersonVerifiedRequest data);
+
+
+    /**
+     * 获取个人货主认证信息
+     * @return
+     */
+    @POST("app/subscriber/verify/getPersonConsignorVerifiedInfo")
+    Observable<HttpResponse<AuthInfo>> getPersonVerifiedInfo();
+
+
+    /**
+     * 企业货主认证
+     * @param data
+     * @return
+     */
+    @POST("app/subscriber/verify/companyConsignorVerified")
+    Observable<BaseHttpResponse> companyVerified(@Body CompanyVerifiedRequest data);
+
+
+    /**
+     * 获取企业货主认证信息
+     * @return
+     */
+    @POST("app/subscriber/verify/getCompanyConsignorVerifiedInfo")
+    Observable<HttpResponse<AuthInfo>> getCompanyVerifiedInfo();
 
 }

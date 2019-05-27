@@ -3,9 +3,12 @@ package com.js.shipper.ui.user.presenter;
 import com.js.http.ApiFactory;
 import com.js.http.BaseHttpResponse;
 import com.js.shipper.api.UserApi;
+import com.js.shipper.model.bean.AuthInfo;
+import com.js.shipper.model.request.PersonVerifiedRequest;
 import com.js.shipper.rx.RxException;
+import com.js.shipper.rx.RxResult;
 import com.js.shipper.rx.RxSchedulers;
-import com.js.shipper.ui.user.presenter.contract.UserCenterContract;
+import com.js.shipper.ui.user.presenter.contract.PersonVerifiedContract;
 import com.js.frame.mvp.RxPresenter;
 
 import javax.inject.Inject;
@@ -16,48 +19,36 @@ import io.reactivex.functions.Consumer;
 /**
  * Created by huyg on 2019/4/24.
  */
-public class UserCenterPresenter extends RxPresenter<UserCenterContract.View>  implements UserCenterContract.Presenter{
+public class PersonVerifiedPresenter extends RxPresenter<PersonVerifiedContract.View>  implements PersonVerifiedContract.Presenter{
 
     private ApiFactory mApiFactory;
 
     @Inject
-    public UserCenterPresenter(ApiFactory apiFactory) {
+    public PersonVerifiedPresenter(ApiFactory apiFactory) {
         this.mApiFactory = apiFactory;
     }
 
-
     @Override
-    public void changeAvatar(String avatar) {
+    public void getPersonVerifiedInfo() {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .changeAvatar(avatar)
+                .getPersonVerifiedInfo()
                 .compose(RxSchedulers.io_main())
-                .doOnSubscribe(new Consumer<Disposable>() {
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<AuthInfo>() {
                     @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mView.showProgress();
-                    }
-                })
-                .subscribe(new Consumer<BaseHttpResponse>() {
-                    @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
-                        mView.closeProgress();
-                        if (response.isSuccess()){
-                            mView.onChangeAvatar();
-                        } else {
-                            mView.toast(response.getMsg());
-                        }
+                    public void accept(AuthInfo authInfo) throws Exception {
+                        mView.onPersonVerifiedInfo(authInfo);
                     }
                 }, new RxException<>(e -> {
-                    mView.closeProgress();
                     mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }
 
     @Override
-    public void changeNickname(String nickname) {
+    public void submitPersonVerified(String idImage, String idBackImage, String idHandImage, String personName, String idCode, String address) {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .changeNickname(nickname)
+                .personVerified(new PersonVerifiedRequest(idImage, idBackImage, idHandImage, personName, idCode, address))
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -70,7 +61,7 @@ public class UserCenterPresenter extends RxPresenter<UserCenterContract.View>  i
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
                         if (response.isSuccess()){
-                            mView.onChangeNickname();
+                            mView.onSubmitPersonVerified();
                         } else {
                             mView.toast(response.getMsg());
                         }

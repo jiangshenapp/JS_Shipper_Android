@@ -12,6 +12,7 @@ import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.manager.SpManager;
 import com.js.shipper.model.event.LoginChangeEvent;
+import com.js.shipper.model.event.UserStatusChangeEvent;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.presenter.PwdLoginPresenter;
@@ -92,8 +93,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onLogin(String token) {
-        SpManager.getInstance(getActivity()).putSP("token",token);
-        HttpApp.getApp().token = token;
+        App.getInstance().putToken(token);
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         MainActivity.action(mContext);
     }
 }

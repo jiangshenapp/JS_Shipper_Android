@@ -36,7 +36,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="A74igKB8DlMQ8ieml7WwRl6pcEVZsCqi" />
@@ -84,18 +83,6 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.js.shipper.ui.user.activity.UserVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.user.activity.ParkUserVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.user.activity.DriverVerifiedActivity"
-            android:launchMode="singleTop" />
-
-        <activity
             android:name="com.js.shipper.ui.wallet.activity.BillActivity"
             android:launchMode="singleTop" />
 
@@ -132,6 +119,15 @@
             android:enabled="true"
             android:process=":remote"/>
 
+
+        <activity android:name=".ui.center.activity.AboutActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.center.activity.FeedBackActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.user.activity.VerifiedActivity"
+            android:launchMode="singleTop" />
 
     </application>
 

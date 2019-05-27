@@ -87,4 +87,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     implementation files('libs/BaiduLBS_Android.jar')
+
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
 }

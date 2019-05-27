@@ -5,6 +5,7 @@ package com.js.shipper.model.event;
  */
 public class LoginChangeEvent {
 
+    // 0：密码登录 1：验证码登录
     public int index;
 
     public LoginChangeEvent(int index) {

@@ -15,6 +15,8 @@ import com.js.shipper.ui.main.fragment.ServiceFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.order.fragment.OrderFragment;
 import com.js.shipper.ui.user.fragment.CodeLoginFragment;
+import com.js.shipper.ui.user.fragment.CompanyVerifiedFragment;
+import com.js.shipper.ui.user.fragment.PersonVerifiedFragment;
 import com.js.shipper.ui.user.fragment.PwdLoginFragment;
 import com.js.shipper.ui.wallet.fragment.BillFragment;
 
@@ -57,5 +59,7 @@ public interface FragmentComponent {
 
     void inject(BoutiqueFragment boutiqueFragment);
 
+    void inject(CompanyVerifiedFragment companyVerifiedFragment);
 
+    void inject(PersonVerifiedFragment personVerifiedFragment);
 }

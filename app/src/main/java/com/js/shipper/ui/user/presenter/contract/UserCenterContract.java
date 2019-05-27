@@ -9,10 +9,12 @@ import com.js.frame.mvp.IPresenter;
 public interface UserCenterContract {
 
     interface View extends IBaseView{
-
+        void onChangeAvatar();
+        void onChangeNickname();
     }
 
     interface Presenter extends IPresenter<View>{
-
+        void changeAvatar(String avatar);
+        void changeNickname(String nickname);
     }
 }

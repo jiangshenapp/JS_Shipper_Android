@@ -1,9 +1,12 @@
 package com.js.shipper;
 
+<<<<<<< HEAD
 import android.text.TextUtils;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.SDKInitializer;
+=======
+>>>>>>> 02a0dc1c60415921e4de6b22a307078ca3246c66
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.shipper.di.componet.AppComponent;
@@ -12,6 +15,7 @@ import com.js.shipper.di.module.AppModule;
 import com.js.shipper.manager.SpManager;
 import com.js.frame.BaseApplication;
 import com.js.http.HttpApp;
+import com.js.shipper.model.bean.UserInfo;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -22,7 +26,17 @@ public class App extends BaseApplication {
     private static App mApp;
     public String token;
     public Gson mGson = new Gson();
+<<<<<<< HEAD
     public BDLocation mLocation;
+=======
+    public String avatar;
+    public String mobile;
+    public String nickName;
+    public int driverVerified;
+    public int parkVerified;
+    public int companyConsignorVerified;
+    public int personConsignorVerified;
+>>>>>>> 02a0dc1c60415921e4de6b22a307078ca3246c66
 
     @Override
     public void onCreate() {
@@ -31,16 +45,55 @@ public class App extends BaseApplication {
         SDKInitializer.initialize(this);
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
-        initToken("");
-        HttpApp.getApp().token = token;
+        getUserInfo();
     }
 
-    public void initToken(String token) {
-        if (TextUtils.isEmpty(token)) {
-            this.token = SpManager.getInstance(this).getSP("token");
-        } else {
-            this.token = token;
-        }
+    /**
+     * 获取用户信息
+     */
+    public void getUserInfo() {
+        this.token = SpManager.getInstance(this).getSP("token");
+        this.avatar = SpManager.getInstance(this).getSP("avatar");
+        this.mobile = SpManager.getInstance(this).getSP("mobile");
+        this.nickName = SpManager.getInstance(this).getSP("nickName");
+        this.driverVerified = SpManager.getInstance(this).getIntSP("driverVerified");
+        this.parkVerified = SpManager.getInstance(this).getIntSP("parkVerified");
+        this.companyConsignorVerified = SpManager.getInstance(this).getIntSP("companyConsignorVerified");
+        this.personConsignorVerified = SpManager.getInstance(this).getIntSP("personConsignorVerified");
+
+        HttpApp.getApp().token = this.token;
+    }
+
+    /**
+     * 存储用户信息
+     */
+    public void putUserInfo(UserInfo userInfo) {
+        SpManager.getInstance(this).putSP("avatar",userInfo.getAvatar());
+        SpManager.getInstance(this).putSP("mobile",userInfo.getMobile());
+        SpManager.getInstance(this).putSP("nickName",userInfo.getNickName());
+        SpManager.getInstance(this).putIntSP("driverVerified",userInfo.getDriverVerified());
+        SpManager.getInstance(this).putIntSP("parkVerified",userInfo.getParkVerified());
+        SpManager.getInstance(this).putIntSP("companyConsignorVerified",userInfo.getCompanyConsignorVerified());
+        SpManager.getInstance(this).putIntSP("personConsignorVerified",userInfo.getPersonConsignorVerified());
+
+        getUserInfo();
+    }
+
+    /**
+     * 存储token
+     */
+    public void putToken(String token) {
+        HttpApp.getApp().token = token;
+        SpManager.getInstance(this).putSP("token",token);
+        this.token = token;
+    }
+
+    /**
+     * 清空用户信息
+     */
+    public void clearUserInfo() {
+        SpManager.getInstance(App.getInstance()).clear();
+        getUserInfo();
     }
 
     /**
@@ -51,7 +104,6 @@ public class App extends BaseApplication {
     public AppComponent getAppComponent() {
         return mAppComponent;
     }
-
 
     /**
      * 初始化Dagger所使用的连接器
@@ -66,7 +118,6 @@ public class App extends BaseApplication {
     public static App getInstance() {
         return mApp;
     }
-
 
     public String gsonFormat(Object clazz) {
         return mGson.toJson(clazz);
