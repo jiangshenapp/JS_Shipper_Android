@@ -31,6 +31,10 @@ public class AddStepOne {
     private String sendName;//发货人姓名
     private String sendPosition;//发货地坐标
 
+
+    public AddStepOne(){
+
+    }
     public AddStepOne(String carLength, String carModel, String receiveAddress, String receiveAddressCode, String receiveMobile, String receivePosition, String sendAddress, String sendAddressCode, String sendMobile, String sendName, String sendPosition) {
         this.carLength = carLength;
         this.carModel = carModel;

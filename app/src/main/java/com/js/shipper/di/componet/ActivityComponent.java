@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.js.shipper.di.ActivityScope;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.ui.SplashActivity;
 import com.js.shipper.ui.center.activity.AddCarActivity;
 import com.js.shipper.ui.center.activity.CarsActivity;
 import com.js.shipper.ui.center.activity.DriversActivity;
@@ -65,6 +66,8 @@ public interface ActivityComponent {
     void inject(SelectAddressActivity selectAddressActivity);
 
     void inject(ReceiverInfoActivity receiverInfoActivity);
+
+    void inject(SplashActivity splashActivity);
 
 }
 

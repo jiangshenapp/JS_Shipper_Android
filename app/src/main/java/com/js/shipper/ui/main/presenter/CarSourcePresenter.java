@@ -43,6 +43,7 @@ public class CarSourcePresenter extends RxPresenter<CarSourceContract.View> impl
                 .subscribe(new Consumer<ListResponse<LineBean>>() {
                     @Override
                     public void accept(ListResponse<LineBean> response) throws Exception {
+
                         mView.finishRefreshAndLoadMore();
                         mView.onCarSource(response);
                     }

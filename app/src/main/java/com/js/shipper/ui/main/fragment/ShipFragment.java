@@ -9,6 +9,7 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.ui.main.presenter.ShipPresenter;
 import com.js.shipper.ui.main.presenter.contract.ShipContract;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -86,7 +87,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
             case R.id.ship_car_type_layout://车型
                 break;
             case R.id.ship_submit://发货
-                OrderSubmitActivity.action(mContext);
+
                 if (TextUtils.isEmpty(startAddress)){
                     toast("请输入发货地址");
                     return;
@@ -96,9 +97,15 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                     toast("请输入收货地址");
                     return;
                 }
-
+                AddStepOne addStepOne = new AddStepOne();
+                mPresenter.addStepOne(addStepOne);
 
                 break;
         }
+    }
+
+    @Override
+    public void onStepOne() {
+        OrderSubmitActivity.action(mContext);
     }
 }

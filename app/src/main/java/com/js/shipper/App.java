@@ -2,6 +2,8 @@ package com.js.shipper;
 
 import android.text.TextUtils;
 
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.shipper.di.componet.AppComponent;
@@ -20,11 +22,13 @@ public class App extends BaseApplication {
     private static App mApp;
     public String token;
     public Gson mGson = new Gson();
+    public BDLocation mLocation;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mApp = this;
+        SDKInitializer.initialize(this);
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         initToken("");

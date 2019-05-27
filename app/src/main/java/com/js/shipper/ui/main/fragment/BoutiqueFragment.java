@@ -8,15 +8,21 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.LineBean;
+import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
 import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.BoutiquePresenter;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -35,7 +41,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
 
 
     private BoutiqueAdapter mAdapter;
-    private List<Object> mList;
+    private List<LineBean> mList;
+    private int type;
 
     public static BoutiqueFragment newInstance() {
         return new BoutiqueFragment();
@@ -58,16 +65,11 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     @Override
     protected void init() {
         initView();
-        initData();
     }
 
-    private void initData() {
-        mList = new ArrayList<>();
-        mList.add(new Object());
-        mAdapter.setNewData(mList);
-    }
 
     private void initView() {
+        initRefresh();
         initRecycler();
     }
 
@@ -78,8 +80,45 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         mAdapter.setOnItemClickListener(this);
     }
 
+    private void initRefresh() {
+        mRefresh.autoRefresh();
+        mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                type = Const.MORE;
+                int num = (int) Math.ceil((mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                mPresenter.getClassicLine(num, "", "", Const.PAGE_SIZE);
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                type = Const.REFRESH;
+                mPresenter.getClassicLine(Const.PAGE_NUM, "", "", Const.PAGE_SIZE);
+            }
+        });
+    }
+
+
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+    }
+
+    @Override
+    public void onClassicLine(ListResponse<LineBean> response) {
+        switch (type) {
+            case Const.REFRESH:
+                mAdapter.setNewData(response.getRecords());
+                break;
+            case Const.MORE:
+                mAdapter.addData(response.getRecords());
+                break;
+        }
+    }
+
+    @Override
+    public void finishRefreshAndLoadMore() {
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
     }
 }

@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.MyLocationStyle;
+import androidx.annotation.Nullable;
+
+import com.baidu.mapapi.map.BaiduMapOptions;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.UiSettings;
 import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -17,9 +20,7 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.ship.presenter.SelectAddressPresenter;
 import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
-import com.js.shipper.util.UIUtil;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -30,7 +31,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
 
 
     @BindView(R.id.map)
-    MapView mMap;
+    MapView mMapView;
     @BindView(R.id.ship_address_name)
     TextView mAddressName;
     @BindView(R.id.ship_address)
@@ -39,7 +40,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     ImageView mLocation;
 
 
-    private AMap aMap;
     private int type;
 
     public static void action(Context context, int type) {
@@ -84,21 +84,22 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     }
 
     private void initLocation() {
-        MyLocationStyle myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
-        aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
-        aMap.getUiSettings().setMyLocationButtonEnabled(false);//设置默认定位按钮是否显示，非必需设置。
-        aMap.getUiSettings().setZoomControlsEnabled(false);
-        aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);//定位一次，且将视角移动到地图中心点
+        mMapView.getMap().setMyLocationEnabled(true);
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(App.getInstance().mLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(App.getInstance().mLocation.getDirection()).latitude(App.getInstance().mLocation.getLatitude())
+                .longitude(App.getInstance().mLocation.getLongitude()).build();
+        mMapView.getMap().setMyLocationData(locData);
     }
 
     private void initMap() {
-        mMap.onCreate(savedInstanceState);
-        if (aMap == null) {
-            aMap = mMap.getMap();
-        }
-        aMap.setPointToCenter(UIUtil.getScreenWidth() / 2, UIUtil.getScreenHeight() / 2);
-        aMap.getUiSettings().setGestureScaleByMapCenter(true);
+        BaiduMapOptions options = new BaiduMapOptions();
+        options.scaleControlEnabled(false);
+        //实例化UiSettings类对象
+        UiSettings mUiSettings = mMapView.getMap().getUiSettings();
+        //通过设置enable为true或false 选择是否显示指南针
+        mUiSettings.setCompassEnabled(false);
     }
 
     @Override
@@ -109,24 +110,24 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     @Override
     protected void onResume() {
         super.onResume();
-        mMap.onResume();
+        mMapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mMap.onPause();
+        mMapView.onPause();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mMap.onSaveInstanceState(outState);
+        mMapView.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onDestroy() {
-        mMap.onDestroy();
+        mMapView.onDestroy();
         super.onDestroy();
 
     }

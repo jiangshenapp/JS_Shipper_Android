@@ -42,11 +42,10 @@ public interface LineApi {
      * @param size
      * @return
      */
-    @FormUrlEncoded
     @POST("app/line/classic")
-    Observable<HttpResponse<ListResponse<LineBean>>> getClassicLine(@Field("current") int current,
-                                                                @Field("lineAppFindListDTO") String data,
-                                                                @Field("size") int size);
+    Observable<HttpResponse<ListResponse<LineBean>>> getClassicLine(@Query("current") int current,
+                                                                    @Body LineClassic data,
+                                                                    @Query("size") int size);
 
 
 

@@ -2,6 +2,7 @@ package com.js.shipper.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Parcelable;
 
 /**
  * Created by huyg on 2019/4/21.
@@ -29,8 +30,18 @@ public class SpManager {
     }
 
     // 存入数据
-    public void putSP(String key, String value) {
-        mEditor.putString(key, value);
+    public void putSP(String key, Object value) {
+        if (value instanceof String) {
+            mEditor.putString(key, (String) value);
+        } else if (value instanceof Integer) {
+            mEditor.putInt(key, (Integer) value);
+        } else if (value instanceof Boolean){
+            mEditor.putBoolean(key,(Boolean) value);
+        } else if (value instanceof Float){
+            mEditor.putFloat(key,(Float) value);
+        } else if (value instanceof Long){
+            mEditor.putLong(key,(Long) value);
+        }
         mEditor.commit();
     }
 
