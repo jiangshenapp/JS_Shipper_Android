@@ -88,16 +88,27 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 break;
             case R.id.ship_submit://发货
 
-                if (TextUtils.isEmpty(startAddress)){
-                    toast("请输入发货地址");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(endAddress)){
-                    toast("请输入收货地址");
-                    return;
-                }
+//                if (TextUtils.isEmpty(startAddress)){
+//                    toast("请输入发货地址");
+//                    return;
+//                }
+//
+//                if (TextUtils.isEmpty(endAddress)){
+//                    toast("请输入收货地址");
+//                    return;
+//                }
                 AddStepOne addStepOne = new AddStepOne();
+                addStepOne.setCarLength("10");
+                addStepOne.setCarModel("11");
+                addStepOne.setReceiveAddress("浙江省");
+                addStepOne.setReceiveAddressCode("10011");
+                addStepOne.setReceiveMobile("13429323525");
+                addStepOne.setReceivePosition("");
+                addStepOne.setSendAddress("浙江省");
+                addStepOne.setSendMobile("15130112124");
+                addStepOne.setSendAddressCode("10001");
+                addStepOne.setSendName("zfd");
+                addStepOne.setSendPosition("");
                 mPresenter.addStepOne(addStepOne);
 
                 break;

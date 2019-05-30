@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
-                mNavigation.getMenu().getItem(position).setCheckable(true);
+                mNavigation.getMenu().getItem(position).setChecked(true);
             }
 
             @Override

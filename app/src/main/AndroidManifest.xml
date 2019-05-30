@@ -38,7 +38,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="A74igKB8DlMQ8ieml7WwRl6pcEVZsCqi" />
+            android:value="rIWXARf1cQO4OzFbrj6HIPIN68BG1Qr8" />
 
 
         <activity android:name="com.js.shipper.ui.SplashActivity">
@@ -128,6 +128,11 @@
 
         <activity android:name=".ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
+
+
+        <service
+            android:name=".service.LocationService"
+            android:enabled="true" />
 
     </application>
 

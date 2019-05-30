@@ -47,7 +47,6 @@ public class LocationService extends Service {
         option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
         option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
         option.setOpenAutoNotifyMode();
-        option.setScanSpan(1000 * 60);
         locationClient.setLocOption(option);
     }
 

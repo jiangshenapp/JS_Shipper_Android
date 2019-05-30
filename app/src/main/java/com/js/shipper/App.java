@@ -1,12 +1,8 @@
 package com.js.shipper;
 
-<<<<<<< HEAD
-import android.text.TextUtils;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.SDKInitializer;
-=======
->>>>>>> 02a0dc1c60415921e4de6b22a307078ca3246c66
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.shipper.di.componet.AppComponent;
@@ -26,9 +22,7 @@ public class App extends BaseApplication {
     private static App mApp;
     public String token;
     public Gson mGson = new Gson();
-<<<<<<< HEAD
     public BDLocation mLocation;
-=======
     public String avatar;
     public String mobile;
     public String nickName;
@@ -36,7 +30,6 @@ public class App extends BaseApplication {
     public int parkVerified;
     public int companyConsignorVerified;
     public int personConsignorVerified;
->>>>>>> 02a0dc1c60415921e4de6b22a307078ca3246c66
 
     @Override
     public void onCreate() {
