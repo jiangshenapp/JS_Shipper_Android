@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.FrameLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.js.shipper.R;
 import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.ui.main.activity.MainActivity;
@@ -23,6 +24,7 @@ import butterknife.BindView;
 /**
  * Created by huyg on 2019/4/21.
  */
+@Route(path = "/user/login")
 public class LoginActivity extends SimpleActivity {
 
     @BindView(R.id.login_frame)

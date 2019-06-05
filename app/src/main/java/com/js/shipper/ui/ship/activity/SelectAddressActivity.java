@@ -250,7 +250,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             //详细地址
             ReverseGeoCodeResult.AddressComponent address = reverseGeoCodeResult.getAddressDetail();
             List<PoiInfo> poiInfos = reverseGeoCodeResult.getPoiList();
-            if (address != null) {
+            if (poiInfos != null) {
 
             }
             //行政区号

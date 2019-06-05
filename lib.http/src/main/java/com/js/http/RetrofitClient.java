@@ -6,7 +6,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.js.http.converter.StringConverterFactory;
 import com.js.http.global.Const;
 import com.js.http.interceptor.AuthInterceptor;
-import com.js.http.interceptor.HeaderInterceptor;
+import com.js.http.interceptor.TokenInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +47,6 @@ public class RetrofitClient {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .addInterceptor(new AuthInterceptor())
-//                .addInterceptor(new ParamsInterceptor())
                 ;
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

@@ -14,8 +14,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         multiDexEnabled true
-        ndk { abiFilters "armeabi", "armeabi-v7a", "x86" }
-
+        ndk { abiFilters "armeabi", "armeabi-v7a","arm64-v8a", "x86" }
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -62,6 +61,8 @@ android {
     }
 
 
+
+
 }
 
 dependencies {
@@ -89,4 +90,9 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
 
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    implementation 'com.github.mcxtzhang:SuspensionIndexBar:V1.0.0'
+
+    //ARouter
+    implementation 'com.alibaba:arouter-api:1.4.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

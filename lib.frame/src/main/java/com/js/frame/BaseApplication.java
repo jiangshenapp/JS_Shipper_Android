@@ -2,6 +2,7 @@ package com.js.frame;
 
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -46,6 +47,15 @@ public class BaseApplication extends MultiDexApplication {
         mApplicationDelegate.onCreate(this);
         instance = this;
         initCrash();
+        initARouter();
+    }
+
+    private void initARouter() {
+        if (BuildConfig.DEBUG){
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+        ARouter.init(this);
     }
 
 
