@@ -51,11 +51,17 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     TextView mAddress;
     @BindView(R.id.select_location)
     ImageView mLocation;
+    @BindView(R.id.city)
+    TextView mCity;
+    @BindView(R.id.receiver_info)
+    TextView receiverInfo;
 
 
     private int type;
     private BaiduMap mBaiduMap;
     private GeoCoder mCoder;
+    private static final int REQ_CODE = 999;
+    private String city;
 
     public static void action(Context context, int type) {
         Intent intent = new Intent(context, SelectAddressActivity.class);
@@ -153,13 +159,19 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
 
     }
 
-    @OnClick({R.id.receiver_info, R.id.confirm})
+    @OnClick({R.id.receiver_info, R.id.confirm, R.id.city})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
 
                 break;
             case R.id.confirm:
+
+                break;
+            case R.id.city:
+                Intent intent = new Intent();
+                intent.setClass(mContext, SelectCityActivity.class);
+                startActivityForResult(intent, REQ_CODE);
                 break;
         }
     }
@@ -259,4 +271,16 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQ_CODE:
+                if (data!=null){
+                    city = data.getStringExtra("city");
+                    mCity.setText(city);
+                }
+                break;
+        }
+    }
 }

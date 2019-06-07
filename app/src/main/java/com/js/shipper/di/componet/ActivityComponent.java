@@ -14,6 +14,7 @@ import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.ship.activity.ReceiverInfoActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
+import com.js.shipper.ui.ship.activity.SelectCityActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.wallet.activity.BailActivity;
@@ -64,5 +65,7 @@ public interface ActivityComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(FeedBackActivity feedBackActivity);
+
+    void inject(SelectCityActivity selectCityActivity);
 }
 

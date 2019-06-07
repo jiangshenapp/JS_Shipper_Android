@@ -129,6 +129,9 @@
         <activity android:name=".ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
 
+        <activity android:name=".ui.ship.activity.SelectCityActivity"
+            android:launchMode="singleTop"
+            />
 
         <service
             android:name=".service.LocationService"

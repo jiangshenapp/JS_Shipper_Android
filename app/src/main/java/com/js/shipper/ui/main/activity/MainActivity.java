@@ -8,30 +8,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.manager.UserManager;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
-import com.js.shipper.ui.main.fragment.FindOrderFragment;
 import com.js.shipper.ui.main.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;
 import com.js.shipper.ui.main.fragment.ParkFragment;
-import com.js.shipper.ui.main.fragment.ServiceFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.main.presenter.MainPresenter;
 import com.js.shipper.ui.main.presenter.contract.MainContract;
-import com.js.frame.view.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
