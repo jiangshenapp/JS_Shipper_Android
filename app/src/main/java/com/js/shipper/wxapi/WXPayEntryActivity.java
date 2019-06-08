@@ -9,15 +9,15 @@ import com.google.gson.Gson;
 import com.js.shipper.R;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.WxPayBean;
-import com.tencent.mm.sdk.constants.Build;
-import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.opensdk.constants.Build;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.js.frame.view.SimpleActivity;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
  * Created by huyg on 2019-05-31.
