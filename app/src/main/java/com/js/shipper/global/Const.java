@@ -5,6 +5,15 @@ package com.js.shipper.global;
  */
 public class Const {
 
+    public static final String APP_ID = "wxbba5c5b208ed8f31";
+    public static final int BUSINESS_ID = 1;//业务id
+    public static final int MERCHANT_ID = 1;//商户编号
+
+    //channel type
+    public static final int CHANNEL_ALI_PAY = 1;//支付宝app支付
+    public static final int CHANNEL_WX_PAY = 2;//微信app支付
+    public static final int CHANNEL_UNION_PAY = 3;//银联app支付
+
     public static final int AUTH_CARD = 1;
     public static final int AUTH_BODY = 2;
     public static final int AUTH_BEHIND_CARD = 3;
