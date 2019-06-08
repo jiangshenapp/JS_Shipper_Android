@@ -185,7 +185,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         //定义地图状态
         MapStatus mMapStatus = new MapStatus.Builder()
                 .target(latLng)
-                .zoom(13)
+                .zoom(18)
                 .build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(mMapStatusUpdate);
@@ -262,8 +262,10 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             //详细地址
             ReverseGeoCodeResult.AddressComponent address = reverseGeoCodeResult.getAddressDetail();
             List<PoiInfo> poiInfos = reverseGeoCodeResult.getPoiList();
-            if (poiInfos != null) {
-
+            if (poiInfos != null && poiInfos.size() > 0) {
+                PoiInfo poiInfo = poiInfos.get(0);
+                mAddressName.setText(poiInfo.name);
+                mAddress.setText(poiInfo.address);
             }
             //行政区号
             int adCode = reverseGeoCodeResult.getCityCode();
@@ -276,7 +278,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQ_CODE:
-                if (data!=null){
+                if (data != null) {
                     city = data.getStringExtra("city");
                     mCity.setText(city);
                 }
