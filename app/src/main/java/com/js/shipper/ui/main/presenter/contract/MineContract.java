@@ -1,5 +1,6 @@
 package com.js.shipper.ui.main.presenter.contract;
 
+import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.UserInfo;
 import com.js.frame.mvp.IBaseView;
 import com.js.frame.mvp.IPresenter;
@@ -11,12 +12,12 @@ public interface MineContract {
 
     interface View extends IBaseView {
         void onUserInfo(UserInfo userInfo);
-
-
+        void onAccountInfo(AccountInfo accountInfo);
         void finishRefresh();
     }
 
     interface Presenter extends IPresenter<View> {
         void getUserInfo();
+        void getAccountInfo();
     }
 }

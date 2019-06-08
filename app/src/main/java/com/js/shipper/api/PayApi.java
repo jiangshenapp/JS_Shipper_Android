@@ -1,5 +1,7 @@
 package com.js.shipper.api;
 
+import com.js.shipper.model.bean.AccountInfo;
+import com.js.shipper.model.bean.BillBean;
 import com.js.shipper.model.bean.PayInfo;
 import com.js.shipper.model.bean.PayRouter;
 import com.js.http.BaseHttpResponse;
@@ -10,6 +12,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -18,7 +21,36 @@ import retrofit2.http.Query;
  */
 public interface PayApi {
 
+    /**
+     * 账单明细
+     */
+    @GET("app/account/getTradeRecord")
+    Observable<HttpResponse<List<BillBean>>> getTradeRecord();
 
+
+    /**
+     * 账户详情
+     */
+    @GET("app/account/getBySubscriber")
+    Observable<HttpResponse<AccountInfo>> getBySubscriber();
+
+
+    /**
+     * 提现申请
+     */
+    @FormUrlEncoded
+    @POST("app/account/balanceWithdraw")
+    Observable<BaseHttpResponse> balanceWithdraw(@Field("withdrawType") int withdrawType,
+                                                 @Field("withdrawChannel") int withdrawChannel,
+                                                 @Field("bankCard") String bankCard,
+                                                 @Field("khh") String khh,
+                                                 @Field("zh") String zh,
+                                                 @Field("zfbzh") String zfbzh,
+                                                 @Field("zfbzhxm") String zfbzhxm);
+
+    /**
+     * 账户充值
+     */
     @FormUrlEncoded
     @POST("app/account/recharge")
     Observable<HttpResponse<PayInfo>> recharge(@Field("businessId") int businessId,
@@ -27,8 +59,9 @@ public interface PayApi {
                                                @Field("routeId") int routeId);
 
 
-
-
+    /**
+     * 获取支付路由
+     */
     @POST("/pigx-pay-biz/pay/getRoute")
     Observable<HttpResponse<List<PayRouter>>> getPayRouter(@Query("business") int businessId,
                                                            @Query("merchantId") int merchantId);

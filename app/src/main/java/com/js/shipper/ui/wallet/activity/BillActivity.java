@@ -29,7 +29,7 @@ public class BillActivity extends SimpleActivity {
     ViewPager mViewpager;
 
     private List<Fragment> mFragments;
-    private String[] titles = {"全部", "余额", "保证金"};
+    private String[] titles = {"全部", "余额"};
     private int type;//0:全部,1余额,2保证金
 
 
@@ -64,7 +64,6 @@ public class BillActivity extends SimpleActivity {
         mFragments = new ArrayList<>();
         mFragments.add(BillFragment.newInstance(0));
         mFragments.add(BillFragment.newInstance(1));
-        mFragments.add(BillFragment.newInstance(2));
     }
 
     private void initViewPager() {

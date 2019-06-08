@@ -18,6 +18,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.manager.CommonGlideImageLoader;
+import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.MineMenu;
 import com.js.shipper.model.bean.UserInfo;
 import com.js.shipper.model.event.UserStatusChangeEvent;
@@ -104,6 +105,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     private void initData() {
         if (!TextUtils.isEmpty(App.getInstance().token)) { //判断token是否为空
             mPresenter.getUserInfo();
+            mPresenter.getAccountInfo();
         }
     }
 
@@ -217,6 +219,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             authState.setText("未提交");
             return;
         }
+    }
+
+    @Override
+    public void onAccountInfo(AccountInfo accountInfo) {
+        mMoney.setText(String.valueOf(accountInfo.getBalance()));
     }
 
     @Subscribe
