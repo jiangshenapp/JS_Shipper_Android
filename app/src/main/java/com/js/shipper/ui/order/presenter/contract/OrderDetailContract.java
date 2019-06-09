@@ -2,6 +2,7 @@ package com.js.shipper.ui.order.presenter.contract;
 
 import com.js.frame.mvp.IBaseView;
 import com.js.frame.mvp.IPresenter;
+import com.js.shipper.model.bean.OrderBean;
 
 /**
  * Created by huyg on 2019/4/29.
@@ -9,10 +10,10 @@ import com.js.frame.mvp.IPresenter;
 public interface OrderDetailContract {
 
     interface View extends IBaseView{
-
+        void onOrderDetail(OrderBean orderBean);
     }
 
     interface Presenter extends IPresenter<View>{
-
+        void getOrderDetail(long id);
     }
 }

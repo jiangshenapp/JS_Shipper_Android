@@ -8,6 +8,7 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.frame.view.BaseActivity;
@@ -19,17 +20,28 @@ import androidx.annotation.Nullable;
  */
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View {
 
-    public static void action(Context context,String orderId){
-        Intent intent = new Intent(context,OrderDetailActivity.class);
-        intent.putExtra("orderId",orderId);
+
+    private long orderId;
+
+    public static void action(Context context, long orderId) {
+        Intent intent = new Intent(context, OrderDetailActivity.class);
+        intent.putExtra("orderId", orderId);
         context.startActivity(intent);
     }
 
 
-
     @Override
     protected void init() {
+        initIntent();
+        initData();
+    }
 
+    private void initData() {
+        mPresenter.getOrderDetail(orderId);
+    }
+
+    private void initIntent() {
+        orderId = getIntent().getLongExtra("orderId", 0);
     }
 
     @Override
@@ -49,5 +61,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void setActionBar() {
         mTitle.setText("订单详情");
+    }
+
+    @Override
+    public void onOrderDetail(OrderBean orderBean) {
+
     }
 }

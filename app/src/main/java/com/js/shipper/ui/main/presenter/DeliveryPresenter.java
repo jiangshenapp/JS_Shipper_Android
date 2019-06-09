@@ -3,6 +3,9 @@ package com.js.shipper.ui.main.presenter;
 import com.js.frame.mvp.RxPresenter;
 import com.js.shipper.ui.main.presenter.contract.DeliveryContract;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import javax.inject.Inject;
 
 /**
@@ -11,8 +14,10 @@ import javax.inject.Inject;
 public class DeliveryPresenter extends RxPresenter<DeliveryContract.View> implements DeliveryContract.Presenter {
 
 
+
+
     @Inject
     public DeliveryPresenter(){
-
     }
+
 }

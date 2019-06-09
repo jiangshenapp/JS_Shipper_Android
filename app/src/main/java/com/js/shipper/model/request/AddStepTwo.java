@@ -21,12 +21,12 @@ public class AddStepTwo {
      * useCarType : string
      */
 
-    private int fee;//运费
+    private long fee;//运费
     private int feeType;//运费类型，1自己出价，2电议
     private String goodsType;//货物类型,字典表，多个
     private int goodsVolume;//货物体积，单位立方米
     private int goodsWeight;//货物重量、吨
-    private int id;//订单号
+    private long id;//订单号
     private String image1;//图片1
     private String image2;//图片2
     private String loadingTime;//装货时间
@@ -34,6 +34,10 @@ public class AddStepTwo {
     private int payWay;//支付方式，1线上支付，2线下支付
     private String remark;//备注
     private String useCarType;//用车类型，字典
+
+    public AddStepTwo(){
+
+    }
 
     public AddStepTwo(int fee, int feeType, String goodsType, int goodsVolume, int goodsWeight, int id, String image1, String image2, String loadingTime, int payType, int payWay, String remark, String useCarType) {
         this.fee = fee;
@@ -51,7 +55,7 @@ public class AddStepTwo {
         this.useCarType = useCarType;
     }
 
-    public int getFee() {
+    public long getFee() {
         return fee;
     }
 
@@ -91,11 +95,11 @@ public class AddStepTwo {
         this.goodsWeight = goodsWeight;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

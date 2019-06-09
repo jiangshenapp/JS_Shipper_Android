@@ -11,7 +11,7 @@ import com.js.shipper.model.request.AddStepTwo;
 public interface ShipContract {
 
     interface View extends IBaseView {
-        void onStepOne();
+        void onStepOne(long orderId);
     }
 
     interface Presenter extends IPresenter<View> {

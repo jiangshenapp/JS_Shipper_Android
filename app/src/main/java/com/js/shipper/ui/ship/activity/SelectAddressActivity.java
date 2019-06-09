@@ -1,8 +1,10 @@
 package com.js.shipper.ui.ship.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,11 +26,15 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.google.gson.Gson;
 import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.LatLngBean;
+import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.ui.ship.presenter.SelectAddressPresenter;
 import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
 
@@ -55,19 +61,16 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     TextView mCity;
     @BindView(R.id.receiver_info)
     TextView receiverInfo;
+    @BindView(R.id.confirm)
+    TextView mConfirm;
 
 
-    private int type;
+    private int type;//0。发货；1.收货
     private BaiduMap mBaiduMap;
     private GeoCoder mCoder;
-    private static final int REQ_CODE = 999;
     private String city;
+    private ShipBean mShip = new ShipBean();
 
-    public static void action(Context context, int type) {
-        Intent intent = new Intent(context, SelectAddressActivity.class);
-        intent.putExtra("type", type);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void initInject() {
@@ -97,11 +100,23 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
 
     private void initIntent() {
         type = getIntent().getIntExtra("type", 0);
+        mShip.setType(type);
     }
 
     private void initView() {
         initMap();
         initLocation();
+        switch (type) {
+            case 0:
+                receiverInfo.setText("发货人信息");
+                mConfirm.setText("确认发货地址");
+                break;
+            case 1:
+                receiverInfo.setText("收货人信息");
+                mConfirm.setText("确认收货地址");
+                break;
+        }
+
     }
 
     private void initLocation() {
@@ -163,15 +178,31 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
-
+                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString());
                 break;
             case R.id.confirm:
+                if (TextUtils.isEmpty(mShip.getName())) {
+                    switch (type) {
+                        case 0:
+                            toast("请填写发货人信息");
+                            break;
+                        case 1:
+                            toast("请填写收货人信息");
+                            break;
+                    }
+                    return;
 
+                }
+
+                Intent shipIntent = new Intent();
+                shipIntent.putExtra("ship", mShip);
+                setResult(888, shipIntent);
+                finish();
                 break;
             case R.id.city:
                 Intent intent = new Intent();
                 intent.setClass(mContext, SelectCityActivity.class);
-                startActivityForResult(intent, REQ_CODE);
+                startActivityForResult(intent, Const.CODE_REQ);
                 break;
         }
     }
@@ -189,6 +220,10 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 .build();
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(mMapStatusUpdate);
+        mCoder.reverseGeoCode(new ReverseGeoCodeOption()
+                .location(latLng)
+                // POI召回半径，允许设置区间为0-1000米，超过1000米按1000米召回。默认值为1000
+                .radius(500));
     }
 
 
@@ -266,10 +301,11 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 PoiInfo poiInfo = poiInfos.get(0);
                 mAddressName.setText(poiInfo.name);
                 mAddress.setText(poiInfo.address);
+                mShip.setAddress(poiInfo.address);
+                mShip.setAddressName(poiInfo.name);
+                mShip.setPosition(new Gson().toJson(new LatLngBean(poiInfo.location.latitude, poiInfo.location.longitude)));
             }
-            //行政区号
-            int adCode = reverseGeoCodeResult.getCityCode();
-            Log.d(getClass().getSimpleName(), String.valueOf(adCode));
+            mShip.setAddressCode(address.adcode);
         }
     };
 
@@ -277,10 +313,18 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case REQ_CODE:
+            case Const.CODE_REQ:
                 if (data != null) {
                     city = data.getStringExtra("city");
                     mCity.setText(city);
+                }
+                break;
+            case 888:
+                if (data != null) {
+                    ShipBean shipBean = data.getParcelableExtra("ship");
+                    mShip.setAddressDetail(shipBean.getAddressDetail());
+                    mShip.setName(shipBean.getName());
+                    mShip.setPhone(shipBean.getPhone());
                 }
                 break;
         }

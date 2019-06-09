@@ -133,6 +133,10 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".ui.ship.activity.ShipUserInfoActivity"
+            android:launchMode="singleTop"
+            />
+
         <service
             android:name=".service.LocationService"
             android:enabled="true" />

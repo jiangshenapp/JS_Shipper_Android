@@ -26,6 +26,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 
 /**
@@ -88,13 +89,13 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
                 int num = (int) Math.ceil((mOrderAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
-                mPresenter.getOrderList(type,num, Const.PAGE_SIZE);
+                mPresenter.getOrderList(type, num, Const.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 type = Const.REFRESH;
-                mPresenter.getOrderList(type,Const.PAGE_NUM, Const.PAGE_SIZE);
+                mPresenter.getOrderList(type, Const.PAGE_NUM, Const.PAGE_SIZE);
             }
         });
     }
@@ -109,7 +110,9 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        OrderDetailActivity.action(mContext,"");
+        List<OrderBean> orderBeans = adapter.getData();
+        OrderBean orderBean = orderBeans.get(position);
+        OrderDetailActivity.action(mContext, orderBean.getId());
     }
 
     @Override

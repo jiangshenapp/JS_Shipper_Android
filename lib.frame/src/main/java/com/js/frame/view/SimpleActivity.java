@@ -2,6 +2,7 @@ package com.js.frame.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -78,6 +79,10 @@ public abstract class SimpleActivity extends ToolbarActivity {
         if (mDialog != null && mDialog.isShowing()&&!this.isFinishing()) {
             mDialog.dismiss();
         }
+    }
+
+    public void toast(String text){
+        Toast.makeText(mContext,text,Toast.LENGTH_SHORT).show();
     }
 
 }

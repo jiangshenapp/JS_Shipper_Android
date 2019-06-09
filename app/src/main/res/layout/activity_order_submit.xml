@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -37,6 +36,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/good_weight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -72,6 +72,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/good_volume"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -100,6 +101,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/good_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
@@ -113,7 +115,8 @@
                     android:textSize="14sp" />
 
 
-                <EditText
+                <TextView
+                    android:id="@+id/good_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -140,6 +143,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/ship_time_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
@@ -153,7 +157,8 @@
                     android:textSize="14sp" />
 
 
-                <EditText
+                <TextView
+                    android:id="@+id/ship_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -180,6 +185,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/car_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
@@ -193,7 +199,8 @@
                     android:textSize="14sp" />
 
 
-                <EditText
+                <TextView
+                    android:id="@+id/car_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -240,6 +247,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/image_1"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
                     android:background="@drawable/shape_block_fafafa_border"
@@ -263,6 +271,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/image_2"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
                     android:layout_marginStart="50dp"
@@ -291,31 +300,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="12dp"
-            >
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <CheckBox
                 android:layout_width="110dp"
                 android:layout_height="50dp"
+                android:button="@drawable/selector_border_eca73f_c8c8c8"
                 android:checked="true"
-                android:text="需要搬货"
                 android:gravity="center"
+                android:text="需要搬货"
                 android:textColor="@color/_ECA73F"
-                android:textSize="14sp"
-                android:button="@drawable/selector_border_eca73f_c8c8c8"
-                />
+                android:textSize="14sp" />
 
             <CheckBox
                 android:layout_width="110dp"
                 android:layout_height="50dp"
-                android:text="需要卸货"
-                android:gravity="center"
-                android:textColor="@color/_B4B4B4"
-                android:textSize="14sp"
                 android:button="@drawable/selector_border_eca73f_c8c8c8"
-                />
+                android:gravity="center"
+                android:text="需要卸货"
+                android:textColor="@color/_B4B4B4"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -334,11 +340,12 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
             android:background="@color/white">
 
             <EditText
+                android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
@@ -377,6 +384,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/fee_mine_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:orientation="horizontal">
@@ -392,6 +400,7 @@
 
 
                 <EditText
+                    android:id="@+id/fee"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -403,6 +412,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/fee_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -420,6 +430,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/power_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:orientation="horizontal">
@@ -435,6 +446,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/power_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -449,9 +461,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical"
                 android:background="@color/white"
-                >
+                android:orientation="vertical">
 
 
                 <TextView
@@ -473,35 +484,101 @@
                     android:background="@color/_F0F0F0" />
 
                 <RadioGroup
+                    android:id="@+id/pay_way"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:orientation="horizontal"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/pay_way_online"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
                         android:button="@drawable/selector_checkbox"
-                        android:text="到付"
                         android:paddingStart="10dp"
+                        android:text="在线支付"
                         android:textColor="@color/_000000"
                         android:textSize="14sp"
-                        android:layout_marginStart="12dp"
+                        android:checked="true"
                         />
 
 
                     <RadioButton
+                        android:id="@+id/pay_way_offline"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="64dp"
                         android:button="@drawable/selector_checkbox"
+                        android:paddingStart="10dp"
+                        android:text="线下支付"
+                        android:textColor="@color/_000000"
+                        android:textSize="14sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="支付方式"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@color/_F0F0F0" />
+
+                <RadioGroup
+                    android:id="@+id/pay_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/pay_type_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:button="@drawable/selector_checkbox"
+                        android:paddingStart="10dp"
+                        android:text="到付"
+                        android:textColor="@color/_000000"
+                        android:textSize="14sp"
+                        android:checked="true"
+                        />
+
+
+                    <RadioButton
+                        android:id="@+id/pay_type_cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="64dp"
+                        android:button="@drawable/selector_checkbox"
+                        android:paddingStart="10dp"
                         android:text="现付"
                         android:textColor="@color/_000000"
-                        android:textSize="14sp"
-                        android:paddingStart="10dp"
-                        android:layout_marginStart="64dp"
-                        />
+                        android:textSize="14sp" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -512,31 +589,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            >
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/specified_release"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="指定发布"
-                android:textColor="@color/_000000"
-                android:textSize="17sp"
+                android:layout_weight="1"
                 android:background="@color/white"
                 android:gravity="center"
-                />
+                android:text="指定发布"
+                android:textColor="@color/_000000"
+                android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/release"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/_ECA73F"
                 android:gravity="center"
                 android:text="下单"
                 android:textColor="@color/white"
-                android:textSize="17sp"
-                android:background="@color/_ECA73F"
-                />
+                android:textSize="17sp" />
 
 
         </LinearLayout>

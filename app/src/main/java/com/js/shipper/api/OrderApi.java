@@ -28,7 +28,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/order/addStepOne")
-    Observable<BaseHttpResponse> addStepOne(@Body AddStepOne data);
+    Observable<HttpResponse<Long>> addStepOne(@Body AddStepOne data);
 
 
     /**
@@ -63,7 +63,7 @@ public interface OrderApi {
      * @param id
      * @return
      */
-    @GET("app/order/get/{id}")
+    @POST("app/order/get/{id}")
     Observable<HttpResponse<OrderBean>> getOrderDetail(@Path("id") long id);
 
 

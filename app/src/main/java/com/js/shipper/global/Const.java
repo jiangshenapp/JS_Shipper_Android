@@ -27,4 +27,8 @@ public class Const {
 
     public static final String AuthStateStr[] = {"未提交", "认证中", "已认证", "认证失败"};
     public static final String AuthStateColor[] = {"#B4B4B4", "#0091FF", "#ECA73F", "#E02020"};
+
+
+    public static final int CODE_REQ = 999;
+    public static final int CODE_RESULT = 888;
 }

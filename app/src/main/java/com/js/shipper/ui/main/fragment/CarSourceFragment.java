@@ -104,13 +104,13 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
                 int num = (int) Math.ceil((mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
-                mPresenter.getCarSource(num, "", "", Const.PAGE_SIZE);
+                getCarSource(num);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 type = Const.REFRESH;
-                mPresenter.getCarSource(Const.PAGE_NUM, "", "", Const.PAGE_SIZE);
+                getCarSource(Const.PAGE_NUM);
             }
         });
     }
@@ -175,8 +175,18 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
 
                 break;
             case 1:
-                mEndAddress.setText(event.areaBean.getName());
+                if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
+                    mEndAddress.setText(event.areaBean.getAlias());
+                } else {
+                    mEndAddress.setText(event.areaBean.getName());
+                }
                 break;
         }
+
+        getCarSource(Const.PAGE_NUM);
+    }
+
+    private void getCarSource(int num){
+        mPresenter.getCarSource(num, mEndAddress.getText().toString(), mSendAddress.getText().toString(), Const.PAGE_SIZE);
     }
 }

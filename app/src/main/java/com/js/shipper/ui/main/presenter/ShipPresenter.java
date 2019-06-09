@@ -32,14 +32,11 @@ public class ShipPresenter extends RxPresenter<ShipContract.View> implements Shi
     public void addStepOne(AddStepOne addStepOne) {
         Disposable disposable = mApiFactory.getApi(OrderApi.class).addStepOne(addStepOne)
                 .compose(RxSchedulers.io_main())
-                .subscribe(new Consumer<BaseHttpResponse>() {
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
-                        if (response.isSuccess()) {
-                            mView.onStepOne();
-                        } else {
-                            mView.toast(response.getMsg());
-                        }
+                    public void accept(Long aLong) throws Exception {
+                        mView.onStepOne(aLong);
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();

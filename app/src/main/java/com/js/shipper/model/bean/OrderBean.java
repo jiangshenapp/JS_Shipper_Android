@@ -56,7 +56,7 @@ public class OrderBean {
     private String goodsType;//货物类型,字典表，多个
     private int goodsVolume;//货物体积，单位立方米
     private int goodsWeight;//货物重量、吨
-    private int id;//主键
+    private long id;//主键
     private String image1;//图片1
     private String image2;//图片2
     private String jdSubscriberId;//接单会员Id
@@ -170,11 +170,11 @@ public class OrderBean {
         this.goodsWeight = goodsWeight;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
