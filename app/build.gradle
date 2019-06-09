@@ -27,14 +27,14 @@ android {
         releaseConfigs {
             storeFile file("key")
             keyAlias "key"
-            storePassword "android"
-            keyPassword "android"
+            storePassword "jsshipper"
+            keyPassword "jsshipper"
         }
         debugConfigs {
             storeFile file("key")
             keyAlias "key"
-            storePassword "android"
-            keyPassword "android"
+            storePassword "jsshipper"
+            keyPassword "jsshipper"
         }
     }
 
