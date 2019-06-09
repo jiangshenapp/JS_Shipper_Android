@@ -43,11 +43,12 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
     private OrderAdapter mOrderAdapter;
     private List<OrderBean> mData;
     private int type;
+    private int status;
 
-    public static OrderFragment newInstance(int type) {
+    public static OrderFragment newInstance(int status) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("type", type);
+        bundle.putInt("status", status);
         orderFragment.setArguments(bundle);
         return orderFragment;
     }
@@ -69,8 +70,14 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
 
     @Override
     protected void init() {
+        initIntent();
         initView();
         initData();
+    }
+
+    private void initIntent() {
+        Bundle bundle = getArguments();
+        status = bundle.getInt("status",0);
     }
 
     private void initData() {
@@ -89,13 +96,13 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
                 int num = (int) Math.ceil((mOrderAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
-                mPresenter.getOrderList(type, num, Const.PAGE_SIZE);
+                mPresenter.getOrderList(status, num, Const.PAGE_SIZE);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 type = Const.REFRESH;
-                mPresenter.getOrderList(type, Const.PAGE_NUM, Const.PAGE_SIZE);
+                mPresenter.getOrderList(status, Const.PAGE_NUM, Const.PAGE_SIZE);
             }
         });
     }

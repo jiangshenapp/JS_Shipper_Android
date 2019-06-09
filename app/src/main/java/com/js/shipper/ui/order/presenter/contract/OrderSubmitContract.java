@@ -11,7 +11,7 @@ public interface OrderSubmitContract {
 
 
     interface View extends IBaseView{
-        void onSubmit();
+        void onSubmit(boolean data);
     }
 
     interface Presenter extends IPresenter<View>{

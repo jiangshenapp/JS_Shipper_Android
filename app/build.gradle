@@ -93,4 +93,5 @@ dependencies {
 
     implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
+
 }

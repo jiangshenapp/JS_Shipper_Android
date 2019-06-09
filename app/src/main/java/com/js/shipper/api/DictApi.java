@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -15,7 +16,7 @@ import retrofit2.http.Query;
 public interface DictApi {
 
 
-    @GET("app/dict/getDictByType")
+    @POST("app/dict/getDictByType")
     Observable<HttpResponse<List<DictBean>>> getDictList(@Query("type") String type);
 
 }

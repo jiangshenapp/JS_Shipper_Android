@@ -15,6 +15,7 @@
         >
 
         <TextView
+            android:id="@+id/waybill_order_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单编号：HZ-291820398484-0001"
@@ -27,6 +28,7 @@
 
 
         <TextView
+            android:id="@+id/waybill_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="待接单"
@@ -72,6 +74,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/send_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="宁波市 海曙区 白云街道14号"
@@ -97,6 +100,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/end_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="宁波市 海曙区 白云街道14号"
@@ -107,6 +111,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/waybill_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="普货 高栏货车4.2米/1.3方/1.0吨"
@@ -124,7 +129,6 @@
             android:id="@+id/item_waybill_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥8888.00"
             android:textColor="#FFD0021B"
             android:textSize="17sp"
             android:layout_marginEnd="12dp"
@@ -133,16 +137,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="距离您35km"
-            android:textColor="#FFB4B4B4"
-            android:textSize="12sp"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/item_waybill_money"
-            />
 
 
 

@@ -3,6 +3,7 @@ package com.js.shipper.ui.main.fragment;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.model.LatLng;
@@ -14,15 +15,25 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.ShipBean;
+import com.js.shipper.model.event.DictSelectEvent;
 import com.js.shipper.model.request.AddStepOne;
+import com.js.shipper.presenter.DictPresenter;
+import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.ui.main.presenter.ShipPresenter;
 import com.js.shipper.ui.main.presenter.contract.ShipContract;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
+import com.js.shipper.widget.window.ItemWindow;
 import com.youth.banner.Banner;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.text.DecimalFormat;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,9 +42,11 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/30.
  * 发货
  */
-public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipContract.View {
+public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipContract.View, DictContract.View {
 
 
+    @BindView(R.id.title_layout)
+    FrameLayout mTitleLayout;
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.ship_start_address)
@@ -56,6 +69,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     private ShipBean mEndShip;
     private Gson mGson = new Gson();
     private DecimalFormat df = new DecimalFormat("#####0.0");
+    private ItemWindow mTypeWindow;
+    private ItemWindow mLengthWindow;
+
+    @Inject
+    DictPresenter mDictPresenter;
 
     public static ShipFragment newInstance() {
         return new ShipFragment();
@@ -79,7 +97,19 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @Override
     protected void init() {
+        mDictPresenter.attachView(this);
+        initView();
+        initData();
+    }
 
+    private void initData() {
+        mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
+        mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+    }
+
+    private void initView() {
+        mTypeWindow = new ItemWindow(mContext, Const.DICT_CAR_TYPE);
+        mLengthWindow = new ItemWindow(mContext, Const.DICT_LENGTH);
     }
 
     @OnClick({R.id.ship_start_layout, R.id.ship_end_layout,
@@ -98,10 +128,10 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 startActivityForResult(endIntent, Const.CODE_REQ);
                 break;
             case R.id.ship_car_extent_layout://车长
-
+                mLengthWindow.showAsDropDown(mTitleLayout, 0, 0);
                 break;
             case R.id.ship_car_type_layout://车型
-
+                mTypeWindow.showAsDropDown(mTitleLayout, 0, 0);
                 break;
             case R.id.ship_submit://发货
 
@@ -114,9 +144,19 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                     toast("请输入收货地址");
                     return;
                 }
+
+                if (TextUtils.isEmpty(mCarExtent.getText().toString())) {
+                    toast("请选择车长");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mCarType.getText().toString())) {
+                    toast("请选择车型");
+                    return;
+                }
                 AddStepOne addStepOne = new AddStepOne();
-                addStepOne.setCarLength("1.5米");
-                addStepOne.setCarModel("卡车");
+                addStepOne.setCarLength(mCarExtent.getText().toString());
+                addStepOne.setCarModel(mCarType.getText().toString());
                 addStepOne.setReceiveAddress(mEndShip.getAddress());
                 addStepOne.setReceiveAddressCode(String.valueOf(mEndShip.getAddressCode()));
                 addStepOne.setReceiveMobile(mEndShip.getPhone());
@@ -134,7 +174,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @Override
     public void onStepOne(long orderId) {
-        OrderSubmitActivity.action(mContext,orderId);
+        OrderSubmitActivity.action(mContext, orderId);
     }
 
     @Override
@@ -159,6 +199,48 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 mMileage.setText("总里程" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
             }
 
+        }
+    }
+
+    @Subscribe
+    public void onEvent(DictSelectEvent event) {
+        StringBuilder builder = new StringBuilder();
+        List<DictBean> dictBeans = event.mDicts;
+        for (DictBean dictBean : dictBeans) {
+            builder.append(dictBean.getLabel());
+            builder.append(",");
+        }
+        if (builder.length() > 0) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        switch (event.type) {
+            case Const.DICT_LENGTH:
+                mCarExtent.setText(builder.toString());
+                break;
+            case Const.DICT_CAR_TYPE:
+                mCarType.setText(builder.toString());
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mDictPresenter != null) {
+            mDictPresenter.detachView();
+        }
+    }
+
+
+    @Override
+    public void onDictByType(String type, List<DictBean> dictBeans) {
+        switch (type) {
+            case Const.DICT_CAR_TYPE_NAME:
+                mTypeWindow.setData(dictBeans);
+                break;
+            case Const.DICT_LENGTH_NAME:
+                mLengthWindow.setData(dictBeans);
+                break;
         }
     }
 }

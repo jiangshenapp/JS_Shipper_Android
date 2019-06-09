@@ -37,7 +37,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/order/addStepTwo")
-    Observable<BaseHttpResponse> addStepTwo(@Body AddStepTwo data);
+    Observable<HttpResponse<Boolean>> addStepTwo(@Body AddStepTwo data);
 
 
     /**

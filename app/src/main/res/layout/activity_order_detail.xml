@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -71,6 +70,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/order_number"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:layout_marginTop="5dp"
@@ -101,48 +101,15 @@
                         android:layout_marginStart="12dp"
                         android:src="@mipmap/ic_waybill_start" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="行政服务中心"
-                            android:textColor="@color/_000000"
-                            android:textSize="15sp" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="北京市 朝阳区"
-                            android:textColor="@color/_B4B4B4"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
-                        android:text="距离：35km"
-                        android:textColor="@color/_B4B4B4"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="12dp"
-                        android:src="@mipmap/ic_waybill_rise_navigation" />
-
+                        android:layout_marginStart="8dp"
+                        android:text="行政服务中心"
+                        android:textColor="@color/_000000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -165,47 +132,16 @@
                         android:layout_marginStart="12dp"
                         android:src="@mipmap/ic_waybill_end" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="行政服务中心"
-                            android:textColor="@color/_000000"
-                            android:textSize="15sp" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="北京市 朝阳区"
-                            android:textColor="@color/_B4B4B4"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="行政服务中心"
+                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
-                        android:text="距离：35km"
-                        android:textColor="@color/_B4B4B4"
-                        android:textSize="12sp" />
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/_000000"
+                        android:textSize="15sp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="12dp"
-                        android:src="@mipmap/ic_waybill_end_navigation" />
 
 
                 </LinearLayout>
@@ -538,143 +474,129 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingTop="5dp"
-                >
-                
+                android:paddingEnd="12dp">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
                     android:layout_marginStart="26dp"
                     android:layout_marginEnd="26dp"
-                    >
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
-                
-                
-                
+
+
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="拒绝接单"
-            android:textColor="@color/_000000"
-            android:textSize="14sp"
             android:background="@color/white"
             android:gravity="center"
-            />
+            android:text="拒绝接单"
+            android:textColor="@color/_000000"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:text="立即接单"
-            android:textColor="@color/white"
-            android:textSize="14sp"
             android:background="@color/_ECA73F"
             android:gravity="center"
-            />
+            android:text="立即接单"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
     </LinearLayout>
 
-   
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/_ECA73F"
+        android:gravity="center"
         android:text="我已送达"
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:gravity="center"
-        android:background="@color/_ECA73F"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-
-
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

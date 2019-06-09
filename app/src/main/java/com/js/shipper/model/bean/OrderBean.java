@@ -50,7 +50,7 @@ public class OrderBean {
     private int createBy;//发布人
     private String createTime;//发布时间
     private int driverId;//司机id
-    private int fee;//运费
+    private double fee;//运费
     private int feeType;//运费类型，1自己出价，2电议
     private String finishTime;//订单完成时间
     private String goodsType;//货物类型,字典表，多个
@@ -78,9 +78,44 @@ public class OrderBean {
     private String sendMobile;//发货人手机号
     private String sendName;//发货人姓名
     private String sendPosition;//发货地坐标
-    private String state;//需求状态，1发布中，2待接单，3待确认，4待支付，5代配送, 6待送达，7待收货，8已取消，9已完成
+    private int state;
     private String transferTime;//配送时间
     private String useCarType;//用车类型，字典
+    /**
+     * id : 57
+     * receiveName : null
+     * jdSubscriberId : null
+     * driverId : null
+     * payTime : null
+     * transferTime : null
+     * finishTime : null
+     * matchState : null
+     * matchSubscriberId : null
+     * commentImage1 : null
+     * commentImage2 : null
+     * commentImage3 : null
+     * stateName : 待接单
+     * stateNameDriver : 待接单
+     * stateNameConsignor : 待司机接单
+     * useCarTypeName :
+     * goodsTypeName :
+     * carLengthName :
+     * carModelName :
+     * receiveAddressCodeName : 浙江省宁波市鄞州区
+     * sendAddressCodeName : 浙江省宁波市鄞州区
+     */
+    private Object commentImage1;
+    private Object commentImage2;
+    private Object commentImage3;
+    private String stateName;
+    private String stateNameDriver;
+    private String stateNameConsignor;
+    private String useCarTypeName;
+    private String goodsTypeName;
+    private String carLengthName;
+    private String carModelName;
+    private String receiveAddressCodeName;
+    private String sendAddressCodeName;
 
     public String getCarLength() {
         return carLength;
@@ -122,11 +157,11 @@ public class OrderBean {
         this.driverId = driverId;
     }
 
-    public int getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 
@@ -346,11 +381,11 @@ public class OrderBean {
         this.sendPosition = sendPosition;
     }
 
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
     }
 
@@ -368,5 +403,100 @@ public class OrderBean {
 
     public void setUseCarType(String useCarType) {
         this.useCarType = useCarType;
+    }
+    public Object getCommentImage1() {
+        return commentImage1;
+    }
+
+    public void setCommentImage1(Object commentImage1) {
+        this.commentImage1 = commentImage1;
+    }
+
+    public Object getCommentImage2() {
+        return commentImage2;
+    }
+
+    public void setCommentImage2(Object commentImage2) {
+        this.commentImage2 = commentImage2;
+    }
+
+    public Object getCommentImage3() {
+        return commentImage3;
+    }
+
+    public void setCommentImage3(Object commentImage3) {
+        this.commentImage3 = commentImage3;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getStateNameDriver() {
+        return stateNameDriver;
+    }
+
+    public void setStateNameDriver(String stateNameDriver) {
+        this.stateNameDriver = stateNameDriver;
+    }
+
+    public String getStateNameConsignor() {
+        return stateNameConsignor;
+    }
+
+    public void setStateNameConsignor(String stateNameConsignor) {
+        this.stateNameConsignor = stateNameConsignor;
+    }
+
+    public String getUseCarTypeName() {
+        return useCarTypeName;
+    }
+
+    public void setUseCarTypeName(String useCarTypeName) {
+        this.useCarTypeName = useCarTypeName;
+    }
+
+    public String getGoodsTypeName() {
+        return goodsTypeName;
+    }
+
+    public void setGoodsTypeName(String goodsTypeName) {
+        this.goodsTypeName = goodsTypeName;
+    }
+
+    public String getCarLengthName() {
+        return carLengthName;
+    }
+
+    public void setCarLengthName(String carLengthName) {
+        this.carLengthName = carLengthName;
+    }
+
+    public String getCarModelName() {
+        return carModelName;
+    }
+
+    public void setCarModelName(String carModelName) {
+        this.carModelName = carModelName;
+    }
+
+    public String getReceiveAddressCodeName() {
+        return receiveAddressCodeName;
+    }
+
+    public void setReceiveAddressCodeName(String receiveAddressCodeName) {
+        this.receiveAddressCodeName = receiveAddressCodeName;
+    }
+
+    public String getSendAddressCodeName() {
+        return sendAddressCodeName;
+    }
+
+    public void setSendAddressCodeName(String sendAddressCodeName) {
+        this.sendAddressCodeName = sendAddressCodeName;
     }
 }

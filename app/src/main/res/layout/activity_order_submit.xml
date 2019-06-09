@@ -43,6 +43,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="输入货物重量"
+                        android:inputType="number"
                         android:textColorHint="@color/_B4B4B4"
                         android:textSize="14sp" />
 
@@ -80,6 +81,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="输入货物体积"
+                        android:inputType="number"
                         android:textColorHint="@color/_B4B4B4"
                         android:textSize="14sp" />
 
@@ -101,7 +103,6 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
-                android:id="@+id/good_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
@@ -115,7 +116,7 @@
                     android:textSize="14sp" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/good_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -123,15 +124,9 @@
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请选择货物类型"
+                    android:hint="请输入货物类型"
                     android:textColorHint="@color/_B8B8B8"
                     android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_list_arrow_black" />
 
 
             </LinearLayout>
@@ -246,31 +241,43 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <FrameLayout
                     android:id="@+id/image_1"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
                     android:background="@drawable/shape_block_fafafa_border"
-                    android:gravity="center"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_waybill_upload_photo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:text="上传"
+                            android:textColor="@color/_B4B4B4"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo" />
+                        android:id="@+id/img1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="上传"
-                        android:textColor="@color/_B4B4B4"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+                </FrameLayout>
 
 
-                <LinearLayout
+                <FrameLayout
                     android:id="@+id/image_2"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
@@ -279,20 +286,33 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_waybill_upload_photo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:text="上传"
+                            android:textColor="@color/_B4B4B4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo" />
+                        android:id="@+id/img2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="上传"
-                        android:textColor="@color/_B4B4B4"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -302,7 +322,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
 
             <CheckBox
                 android:layout_width="110dp"
@@ -351,6 +373,7 @@
                 android:layout_margin="6dp"
                 android:background="@color/_FAFAFA"
                 android:hint="请输入备注信息"
+                android:gravity="left|top"
                 android:padding="10dp"
                 android:textColor="@color/_000000"
                 android:textSize="14sp" />
@@ -407,8 +430,9 @@
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:text="输入价格"
+                    android:hint="输入价格"
                     android:textColor="@color/_B8B8B8"
+                    android:inputType="number"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -451,7 +475,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="12dp"
-                    android:src="@mipmap/ic_checkbox_selected" />
+                    android:src="@mipmap/ic_checkbox_default" />
 
 
             </LinearLayout>
@@ -497,12 +521,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:button="@drawable/selector_checkbox"
+                        android:checked="true"
                         android:paddingStart="10dp"
                         android:text="在线支付"
                         android:textColor="@color/_000000"
-                        android:textSize="14sp"
-                        android:checked="true"
-                        />
+                        android:textSize="14sp" />
 
 
                     <RadioButton
@@ -518,7 +541,6 @@
 
                 </RadioGroup>
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -561,12 +583,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:button="@drawable/selector_checkbox"
+                        android:checked="true"
                         android:paddingStart="10dp"
                         android:text="到付"
                         android:textColor="@color/_000000"
-                        android:textSize="14sp"
-                        android:checked="true"
-                        />
+                        android:textSize="14sp" />
 
 
                     <RadioButton

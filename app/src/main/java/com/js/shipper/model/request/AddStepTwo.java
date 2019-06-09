@@ -21,7 +21,7 @@ public class AddStepTwo {
      * useCarType : string
      */
 
-    private long fee;//运费
+    private double fee;//运费
     private int feeType;//运费类型，1自己出价，2电议
     private String goodsType;//货物类型,字典表，多个
     private int goodsVolume;//货物体积，单位立方米
@@ -55,11 +55,11 @@ public class AddStepTwo {
         this.useCarType = useCarType;
     }
 
-    public long getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 

@@ -31,4 +31,11 @@ public class Const {
 
     public static final int CODE_REQ = 999;
     public static final int CODE_RESULT = 888;
+
+
+    public static final int DICT_LENGTH = 1;
+    public static final String DICT_LENGTH_NAME = "carLength";
+    public static final int DICT_CAR_TYPE = 2;
+    public static final String DICT_CAR_TYPE_NAME ="carModel";
+
 }

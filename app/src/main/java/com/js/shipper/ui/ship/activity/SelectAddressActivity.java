@@ -305,7 +305,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mShip.setAddressName(poiInfo.name);
                 mShip.setPosition(new Gson().toJson(new LatLngBean(poiInfo.location.latitude, poiInfo.location.longitude)));
             }
-            mShip.setAddressCode(address.adcode);
+            if (address!=null) {
+                mShip.setAddressCode(address.adcode);
+            }
         }
     };
 

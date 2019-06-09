@@ -65,6 +65,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     @Override
     public void onOrderDetail(OrderBean orderBean) {
+        //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
+        switch (orderBean.getState()){
+            case 2:
 
+                break;
+
+        }
     }
 }

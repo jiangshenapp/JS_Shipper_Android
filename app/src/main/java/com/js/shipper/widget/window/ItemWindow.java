@@ -18,14 +18,18 @@ import com.js.shipper.R;
 import com.js.shipper.model.bean.AreaBean;
 import com.js.shipper.model.bean.ChinaArea;
 import com.js.shipper.model.bean.CityInfo;
+import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.event.CitySelectEvent;
+import com.js.shipper.model.event.DictSelectEvent;
 import com.js.shipper.widget.window.adapter.CityAdapter;
+import com.js.shipper.widget.window.adapter.DictAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,20 +41,34 @@ import butterknife.OnClick;
  */
 public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemClickListener {
 
-    @BindView(R.id.window_city)
-    TextView mCity;
-    @BindView(R.id.window_upper)
-    TextView mUpper;
+    @BindView(R.id.window_title)
+    TextView mTitle;
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
 
 
+    @OnClick({R.id.cancel, R.id.submit})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.cancel:
+                break;
+            case R.id.submit:
+                List<DictBean> selectDict = new ArrayList<>();
+                List<DictBean> dictBeans = mAdapter.getData();
+                for (DictBean dictBean : dictBeans) {
+                    if (dictBean.isChecked()) {
+                        selectDict.add(dictBean);
+                    }
+                }
+                EventBus.getDefault().post(new DictSelectEvent(selectDict, type));
+                break;
+        }
+        dismiss();
+    }
+
     private Context mContext;
-    private CityAdapter mAdapter;
-    private List<AreaBean> mList;
-    private CityInfo cityInfo = new CityInfo();
-    private int level = 1;
-    private String selectCode;
+    private DictAdapter mAdapter;
+    private List<DictBean> mDictBeans;
     private int type;
 
     public ItemWindow(Context context, int type) {
@@ -61,7 +79,7 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
     }
 
     private void init() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_window_city, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_window_item, null);
         setContentView(view);
         ButterKnife.bind(this, view);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -71,17 +89,6 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
         setClippingEnabled(false);
         setBackgroundDrawable(null);
         initView();
-        initData();
-    }
-
-    private void initData() {
-        String cityStr = getJson(mContext, "area.json");
-        ChinaArea chinaArea = new Gson().fromJson(cityStr, ChinaArea.class);
-        AreaBean areaBean = chinaArea.getChina();
-        AreaBean china = new AreaBean("全国", "0000", true, "全国");
-        areaBean.getChild().add(0, china);
-        cityInfo.setProvince(areaBean.getChild());
-        mAdapter.setNewData(areaBean.getChild());
     }
 
     private void initView() {
@@ -90,113 +97,27 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
 
     private void initRecycler() {
         mRecycler.setLayoutManager(new GridLayoutManager(mContext, 4));
-        mAdapter = new CityAdapter(R.layout.item_window_city, mList);
+        mAdapter = new DictAdapter(R.layout.item_window_dict, mDictBeans);
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
     }
 
-    @OnClick({R.id.window_upper, R.id.blank})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.window_upper:
-                switch (level) {
-                    case 2:
-                        level = 1;
-                        mAdapter.setNewData(cityInfo.getProvince());
-                        mUpper.setVisibility(View.GONE);
-                        break;
-                    case 3:
-                        level = 2;
-                        mAdapter.setNewData(cityInfo.getCity());
-                        mUpper.setVisibility(View.VISIBLE);
-                        break;
-                }
-                break;
-            case R.id.blank:
-                dismiss();
-                break;
-        }
-    }
-
-
-    public String getJson(Context context, String fileName) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            AssetManager assetManager = context.getAssets();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(
-                    assetManager.open(fileName)));
-            String line;
-            while ((line = bf.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
-    }
-
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        List<AreaBean> areaBeans = mAdapter.getData();
-        AreaBean selectArea = areaBeans.get(position);
-        for (int i = 0; i < areaBeans.size(); i++) {
-            if (i == position) {
-                areaBeans.get(i).setChecked(true);
-            } else {
-                areaBeans.get(i).setChecked(false);
-            }
-        }
-        mAdapter.setNewData(areaBeans);
-        if (!TextUtils.isEmpty(selectArea.getAlias())) {
-            selectCode = selectArea.getCode();
-            mUpper.setVisibility(View.VISIBLE);
-            mCity.setText("选择:" + selectArea.getName());
-            dismiss();
-            EventBus.getDefault().post(new CitySelectEvent(type, selectArea));
-            return;
+        List<DictBean> dictBeans = mAdapter.getData();
+        DictBean dictBean = dictBeans.get(position);
+        dictBean.setChecked(!dictBean.isChecked());
+        mAdapter.setNewData(dictBeans);
+    }
+
+
+    public void setData(List<DictBean> data) {
+        this.mDictBeans = data;
+        if (mDictBeans != null && mDictBeans.size() > 0) {
+            mDictBeans.get(0).setChecked(true);
+            mAdapter.setNewData(mDictBeans);
         }
 
-        //
-        AreaBean areaBean = new AreaBean();
-        try {
-            areaBean = (AreaBean) selectArea.clone();
-            areaBean.setChild(null);
-            switch (level) {
-                case 1:
-                    areaBean.setAlias(areaBean.getName());
-                    areaBean.setName("全省");
-                    break;
-                case 2:
-                    areaBean.setAlias(areaBean.getName());
-                    areaBean.setName("全市");
-                    break;
-            }
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        if (selectArea.getChild() != null && selectArea.getChild().size() > 0) {
-            if (TextUtils.isEmpty(selectArea.getChild().get(0).getAlias())) {
-                selectArea.getChild().add(0, areaBean);
-            }
-            mAdapter.setNewData(selectArea.getChild());
-        } else {
-            EventBus.getDefault().post(new CitySelectEvent(type, selectArea));
-            dismiss();
-        }
-        switch (level) {
-            case 1:
-                level = 2;
-                cityInfo.setCity(selectArea.getChild());
-                break;
-            case 2:
-                level = 3;
-                cityInfo.setDistrict(selectArea.getChild());
-                break;
-        }
-        selectCode = selectArea.getCode();
-        mUpper.setVisibility(View.VISIBLE);
-        mCity.setText("选择:" + selectArea.getName());
     }
 }

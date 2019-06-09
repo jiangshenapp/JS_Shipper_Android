@@ -31,19 +31,18 @@ public class OrderSubmitPresenter extends RxPresenter<OrderSubmitContract.View> 
     public void submit(AddStepTwo addStepTwo) {
         Disposable disposable = mApiFactory.getApi(OrderApi.class).addStepTwo(addStepTwo)
                 .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         mView.showProgress();
                     }
                 })
-                .subscribe(new Consumer<BaseHttpResponse>() {
+                .subscribe(new Consumer<Boolean>() {
                     @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
+                    public void accept(Boolean aBoolean) throws Exception {
                         mView.closeProgress();
-                        if (response.isSuccess()) {
-                            mView.onSubmit();
-                        }
+                        mView.onSubmit(aBoolean);
                     }
                 }, new RxException<>(e -> {
                     mView.toast(e.getMessage());

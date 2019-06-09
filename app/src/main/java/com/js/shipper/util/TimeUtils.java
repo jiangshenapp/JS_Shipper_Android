@@ -22,6 +22,10 @@ public class TimeUtils {
     private static final String ONE_YEAR_AGO = "年前";
 
 
+    public static String formatYYMMDDHHMMSS(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
     public static String format(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {

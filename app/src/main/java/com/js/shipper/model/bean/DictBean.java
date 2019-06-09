@@ -28,6 +28,7 @@ public class DictBean {
     private String updateTime;
     private String remarks;
     private String delFlag;
+    private boolean checked;
 
     public int getId() {
         return id;
@@ -107,5 +108,13 @@ public class DictBean {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
