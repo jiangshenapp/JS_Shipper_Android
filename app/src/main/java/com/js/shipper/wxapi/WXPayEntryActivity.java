@@ -76,7 +76,7 @@ public class WXPayEntryActivity extends SimpleActivity implements IWXAPIEventHan
 
     @Override
     public void onResp(BaseResp resp) {
-        Log.d(getClass().getSimpleName(), "微信支付errCode = " + resp.errCode);
+        Log.d(getClass().getSimpleName(), "微信支付errCode = " + resp.errCode + resp.errStr);
 
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (resp.errCode == 0) {
