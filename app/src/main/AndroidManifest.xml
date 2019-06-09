@@ -136,6 +136,11 @@
         <activity android:name=".ui.ship.activity.ShipUserInfoActivity"
             android:launchMode="singleTop"
             />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+        </activity>
 
         <service
             android:name=".service.LocationService"

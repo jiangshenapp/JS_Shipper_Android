@@ -4,15 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alipay.sdk.app.PayTask;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -64,6 +67,7 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
     }
 
     private void initView() {
+        mMoney.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         initAdapter();
     }
 
@@ -121,14 +125,14 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         Runnable payRunnable = new Runnable() {
             @Override
             public void run() {
-//                PayTask alipay = new PayTask(mContext);
-//                Map<String, String> result = alipay.payV2(orderInfo, true);
-//                Log.i("msp", result.toString());
-//
-//                Message msg = new Message();
-//                msg.what = SDK_PAY_FLAG;
-//                msg.obj = result;
-//                mHandler.sendMessage(msg);
+                PayTask alipay = new PayTask(mContext);
+                Map<String, String> result = alipay.payV2(orderInfo, true);
+                Log.i("msp", result.toString());
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
             }
         };
 
@@ -149,9 +153,10 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
                     String resultStatus = payResult.getResultStatus();
 
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG);
+                        Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG).show();
+                        finish();
                     } else {
-                        Toast.makeText(mContext, "支付失败", Toast.LENGTH_LONG);
+                        Toast.makeText(mContext, "支付失败", Toast.LENGTH_LONG).show();
                     }
                     break;
                 default:
@@ -182,6 +187,14 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         Intent intent = new Intent(mContext, WXPayEntryActivity.class);
         intent.putExtra("orderInfo",orderInfo);
         startActivityForResult(intent,100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 888) { //微信支付成功
+            finish();
+        }
     }
 
     @Override

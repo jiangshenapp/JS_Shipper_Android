@@ -5,8 +5,8 @@ package com.js.shipper.global;
  */
 public class Const {
 
-    public static final String APP_ID = "wxbba5c5b208ed8f31";
-    public static final int BUSINESS_ID = 1;//业务id
+    public static final String APP_ID = "wxc681f388f78e07c9";
+    public static final int BUSINESS_ID = 2;//业务id
     public static final int MERCHANT_ID = 1;//商户编号
 
     //channel type
