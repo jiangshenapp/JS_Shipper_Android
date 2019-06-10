@@ -46,7 +46,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/order/again/{id}")
-    Observable<BaseHttpResponse> againOrder(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> againOrder(@Path("id") long id);
 
 
     /**
@@ -55,7 +55,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/order/cancel/{id}")
-    Observable<BaseHttpResponse> cancelOrder(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> cancelOrder(@Path("id") long id);
 
 
     /**

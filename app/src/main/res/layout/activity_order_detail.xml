@@ -14,13 +14,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
 
             <LinearLayout
+                android:id="@+id/driver_info_layout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -102,11 +105,12 @@
                         android:src="@mipmap/ic_waybill_start" />
 
                     <TextView
+                        android:id="@+id/send_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
+                        android:layout_weight="1"
                         android:text="行政服务中心"
                         android:textColor="@color/_000000"
                         android:textSize="15sp" />
@@ -133,15 +137,15 @@
                         android:src="@mipmap/ic_waybill_end" />
 
                     <TextView
+                        android:id="@+id/end_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="行政服务中心"
-                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="行政服务中心"
                         android:textColor="@color/_000000"
                         android:textSize="15sp" />
-
 
 
                 </LinearLayout>
@@ -163,6 +167,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -171,6 +176,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/time"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -198,6 +204,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/car_info"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -231,6 +238,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/good_type"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="8dp"
@@ -265,6 +273,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/use_car_type"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="12dp"
@@ -300,6 +309,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/pay_way"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="8dp"
@@ -334,6 +344,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/fee"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="12dp"
@@ -362,6 +373,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/pay_type"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -377,6 +389,7 @@
 
 
             <TextView
+                android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
@@ -416,6 +429,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/receiver_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -446,6 +460,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/receiver_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -458,125 +473,31 @@
 
             </LinearLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                android:text="回执"
-                android:textColor="@color/_B4B4B4"
-                android:textSize="12sp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="12dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="12dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_waybill_upload_photo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="上传照片"
-                        android:textColor="@color/_000000"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginEnd="26dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_waybill_upload_photo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="上传照片"
-                        android:textColor="@color/_000000"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_waybill_upload_photo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="上传照片"
-                        android:textColor="@color/_000000"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </ScrollView>
 
 
     <LinearLayout
+        android:id="@+id/control_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:id="@+id/control_navigate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@color/white"
             android:gravity="center"
-            android:text="拒绝接单"
+            android:text="取消发布"
             android:textColor="@color/_000000"
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/control_positive"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -584,19 +505,11 @@
             android:gravity="center"
             android:text="立即接单"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/_ECA73F"
-        android:gravity="center"
-        android:text="我已送达"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

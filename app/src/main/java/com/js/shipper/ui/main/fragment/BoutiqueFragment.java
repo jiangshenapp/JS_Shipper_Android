@@ -86,7 +86,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil((mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 mPresenter.getClassicLine(num, "", "", Const.PAGE_SIZE);
             }
 

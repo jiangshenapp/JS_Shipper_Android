@@ -50,4 +50,52 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                 }));
         addDispose(disposable);
     }
+
+    @Override
+    public void cancelOrder(long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class)
+                .cancelOrder(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCancelOrder(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void againOrder(long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class)
+                .againOrder(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onAgainOrder(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
 }

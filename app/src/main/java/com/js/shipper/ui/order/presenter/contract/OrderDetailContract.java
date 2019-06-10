@@ -9,11 +9,20 @@ import com.js.shipper.model.bean.OrderBean;
  */
 public interface OrderDetailContract {
 
-    interface View extends IBaseView{
+    interface View extends IBaseView {
         void onOrderDetail(OrderBean orderBean);
+
+        void onCancelOrder(boolean isOk);
+
+        void onAgainOrder(boolean isOk);
+
     }
 
-    interface Presenter extends IPresenter<View>{
+    interface Presenter extends IPresenter<View> {
         void getOrderDetail(long id);
+
+        void cancelOrder(long id);
+
+        void againOrder(long id);
     }
 }
