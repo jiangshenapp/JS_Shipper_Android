@@ -31,7 +31,7 @@ public class BillPresenter extends RxPresenter<BillContract.View> implements Bil
     @Override
     public void getBillList(int status) {
         Disposable disposable = mApiFactory.getApi(PayApi.class)
-                .getTradeRecord()
+                .getTradeRecord(status)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .subscribe(new Consumer<List<BillBean>>() {
