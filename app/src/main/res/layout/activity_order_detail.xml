@@ -95,7 +95,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -127,7 +129,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -190,6 +194,13 @@
                 </LinearLayout>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -216,6 +227,12 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
 
 
                 <LinearLayout
@@ -289,6 +306,13 @@
                 </LinearLayout>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -359,6 +383,14 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
+
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -392,11 +424,13 @@
                 android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="5dp"
-                android:text="简介说明"
+                android:layout_marginTop="6dp"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
                 android:textColor="#FF666666"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:background="@color/white"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -492,7 +526,6 @@
             android:layout_weight="2"
             android:background="@color/white"
             android:gravity="center"
-            android:text="取消发布"
             android:textColor="@color/_000000"
             android:textSize="14sp" />
 
@@ -503,7 +536,6 @@
             android:layout_weight="3"
             android:background="@color/_ECA73F"
             android:gravity="center"
-            android:text="立即接单"
             android:textColor="@color/white"
             android:textSize="14sp"
             />

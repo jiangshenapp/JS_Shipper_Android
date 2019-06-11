@@ -25,6 +25,7 @@ public class AddStepOne {
     private String receiveAddressCode;//收货地区域代码
     private String receiveMobile;//收货人手机号
     private String receivePosition;//收货地坐标
+    private String receiveName;
     private String sendAddress;//发货地地址
     private String sendAddressCode;//发货地区域代码
     private String sendMobile;//发货人手机号
@@ -35,21 +36,15 @@ public class AddStepOne {
     public AddStepOne(){
 
     }
-    public AddStepOne(String carLength, String carModel, String receiveAddress, String receiveAddressCode, String receiveMobile, String receivePosition, String sendAddress, String sendAddressCode, String sendMobile, String sendName, String sendPosition) {
-        this.carLength = carLength;
-        this.carModel = carModel;
-        this.receiveAddress = receiveAddress;
-        this.receiveAddressCode = receiveAddressCode;
-        this.receiveMobile = receiveMobile;
-        this.receivePosition = receivePosition;
-        this.sendAddress = sendAddress;
-        this.sendAddressCode = sendAddressCode;
-        this.sendMobile = sendMobile;
-        this.sendName = sendName;
-        this.sendPosition = sendPosition;
+
+
+    public String getReceiveName() {
+        return receiveName;
     }
 
-
+    public void setReceiveName(String receiveName) {
+        this.receiveName = receiveName;
+    }
 
     public String getCarLength() {
         return carLength;

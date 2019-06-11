@@ -85,8 +85,7 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setFocusable(true);//内容可点击
-        setOutsideTouchable(false); //点击外部popupWindow消失
-        setClippingEnabled(false);
+        setOutsideTouchable(true); //点击外部popupWindow消失
         setBackgroundDrawable(null);
         initView();
     }

@@ -71,6 +71,8 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     private DecimalFormat df = new DecimalFormat("#####0.0");
     private ItemWindow mTypeWindow;
     private ItemWindow mLengthWindow;
+    private String typeStr;
+    private String lengthStr;
 
     @Inject
     DictPresenter mDictPresenter;
@@ -145,22 +147,23 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                     return;
                 }
 
-                if (TextUtils.isEmpty(mCarExtent.getText().toString())) {
+                if (TextUtils.isEmpty(lengthStr)) {
                     toast("请选择车长");
                     return;
                 }
 
-                if (TextUtils.isEmpty(mCarType.getText().toString())) {
+                if (TextUtils.isEmpty(typeStr)) {
                     toast("请选择车型");
                     return;
                 }
                 AddStepOne addStepOne = new AddStepOne();
-                addStepOne.setCarLength(mCarExtent.getText().toString());
-                addStepOne.setCarModel(mCarType.getText().toString());
+                addStepOne.setCarLength(lengthStr);
+                addStepOne.setCarModel(typeStr);
                 addStepOne.setReceiveAddress(mEndShip.getAddress());
                 addStepOne.setReceiveAddressCode(String.valueOf(mEndShip.getAddressCode()));
                 addStepOne.setReceiveMobile(mEndShip.getPhone());
                 addStepOne.setReceivePosition(mEndShip.getPosition());
+                addStepOne.setReceiveName(mEndShip.getName());
                 addStepOne.setSendAddress(mSendShip.getAddress());
                 addStepOne.setSendMobile(mSendShip.getPhone());
                 addStepOne.setSendAddressCode(String.valueOf(mSendShip.getAddressCode()));
@@ -205,20 +208,28 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     @Subscribe
     public void onEvent(DictSelectEvent event) {
         StringBuilder builder = new StringBuilder();
+        StringBuilder builder1 = new StringBuilder();
         List<DictBean> dictBeans = event.mDicts;
         for (DictBean dictBean : dictBeans) {
             builder.append(dictBean.getLabel());
             builder.append(",");
+            builder1.append(dictBean.getValue());
+            builder1.append(",");
         }
         if (builder.length() > 0) {
             builder.deleteCharAt(builder.length() - 1);
         }
+        if (builder1.length() > 0) {
+            builder1.deleteCharAt(builder1.length() - 1);
+        }
         switch (event.type) {
             case Const.DICT_LENGTH:
                 mCarExtent.setText(builder.toString());
+                lengthStr = builder1.toString();
                 break;
             case Const.DICT_CAR_TYPE:
                 mCarType.setText(builder.toString());
+                typeStr = builder1.toString();
                 break;
         }
     }

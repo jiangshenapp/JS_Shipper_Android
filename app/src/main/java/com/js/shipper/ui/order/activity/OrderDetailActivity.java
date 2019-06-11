@@ -3,6 +3,7 @@ package com.js.shipper.ui.order.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -140,14 +141,28 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 mFee.setText("电议");
                 break;
         }
-        mRemark.setText(orderBean.getRemark());
+        if (!TextUtils.isEmpty(orderBean.getRemark())) {
+            mRemark.setVisibility(View.VISIBLE);
+            mRemark.setText(orderBean.getRemark());
+        } else {
+            mRemark.setVisibility(View.GONE);
+        }
         mReceiverName.setText(orderBean.getReceiveName());
         mReceiverPhone.setText(orderBean.getReceiveMobile());
+        controlLayout.setVisibility(View.VISIBLE);
         switch (orderBean.getState()) {
             case 2:
                 mPositive.setText("再发一次");
                 mNavigate.setText("取消发布");
                 break;
+            case 4:
+                mPositive.setText("立即支付");
+                mNavigate.setText("取消发布");
+                break;
+            case 9:
+                controlLayout.setVisibility(View.GONE);
+                break;
+
 
         }
     }
@@ -180,6 +195,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 2://取消发布
                         mPresenter.cancelOrder(orderId);
                         break;
+                    case 4:
+                        mPresenter.cancelOrder(orderId);
+                        break;
 
                 }
                 break;
@@ -187,6 +205,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 switch (status) {
                     case 2://再发一次
                         mPresenter.againOrder(orderId);
+                        break;
+                    case 4://支付
+
                         break;
 
                 }
