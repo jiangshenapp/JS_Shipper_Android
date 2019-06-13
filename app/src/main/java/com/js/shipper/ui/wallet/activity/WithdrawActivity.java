@@ -50,23 +50,30 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     @BindView(R.id.item_bank_layout)
     LinearLayout itemBankLayout;
 
-    public static int mWithdrawType; //1、运力端保证金，2、账户余额
-    public static double moneyMax; //最大提现金额
-    public static int mWithdrawChannel; //1、支付宝 2、银行卡
+    private int mWithdrawType; //1、运力端保证金，2、账户余额
+    private double moneyMax; //最大提现金额
+    private int mWithdrawChannel; //1、支付宝 2、银行卡
 
     public static void action(Context context, int withdrawType, double money) {
-        context.startActivity(new Intent(context, WithdrawActivity.class));
-        mWithdrawType = withdrawType;
-        moneyMax = money;
+        Intent intent = new Intent(context, WithdrawActivity.class);
+        intent.putExtra("withdrawType", withdrawType);
+        intent.putExtra("money", money);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         mWithdrawChannel = 1;
         mMoney.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         mMoney.setEnabled(false);
         mMoney.setText(String.valueOf(moneyMax));
         mMoneyMax.setText("当前最大提现金额："+ moneyMax +"元");
+    }
+
+    private void initIntent() {
+        mWithdrawType = getIntent().getIntExtra("withdrawType", 0);
+        moneyMax = getIntent().getIntExtra("money", 0);
     }
 
     @Override

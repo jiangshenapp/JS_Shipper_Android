@@ -242,7 +242,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
         }
     }
 
-
     @Override
     public void onDictByType(String type, List<DictBean> dictBeans) {
         switch (type) {
