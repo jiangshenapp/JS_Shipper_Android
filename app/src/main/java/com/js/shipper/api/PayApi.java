@@ -56,7 +56,8 @@ public interface PayApi {
     Observable<HttpResponse<PayInfo>> recharge(@Field("tradeType") int tradeType,
                                                @Field("channelType") int channelType,
                                                @Field("money") double money,
-                                               @Field("routeId") int routeId);
+                                               @Field("routeId") int routeId,
+                                               @Field("orderNo") String orderNo);
 
 
     /**

@@ -1,5 +1,6 @@
 package com.js.shipper.ui.wallet.presenter;
 
+import com.js.frame.mvp.RxPresenter;
 import com.js.http.ApiFactory;
 import com.js.shipper.api.PayApi;
 import com.js.shipper.global.Const;
@@ -8,8 +9,7 @@ import com.js.shipper.model.bean.PayRouter;
 import com.js.shipper.rx.RxException;
 import com.js.shipper.rx.RxResult;
 import com.js.shipper.rx.RxSchedulers;
-import com.js.shipper.ui.wallet.presenter.contract.RechargeContract;
-import com.js.frame.mvp.RxPresenter;
+import com.js.shipper.ui.wallet.presenter.contract.PayContract;
 
 import java.util.List;
 
@@ -19,17 +19,18 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by huyg on 2019/4/24.
+ * Created by huyg on 2019-06-13.
  */
-public class RechargePresenter extends RxPresenter<RechargeContract.View> implements RechargeContract.Presenter {
+public class PayPresenter extends RxPresenter<PayContract.View> implements PayContract.Presenter {
 
 
     private ApiFactory mApiFactory;
 
     @Inject
-    public RechargePresenter(ApiFactory apiFactory) {
+    public PayPresenter(ApiFactory apiFactory) {
         this.mApiFactory = apiFactory;
     }
+
 
 
     @Override
@@ -57,6 +58,7 @@ public class RechargePresenter extends RxPresenter<RechargeContract.View> implem
         addDispose(disposable);
     }
 
+
     @Override
     public void getPayRouter() {
         Disposable disposable = mApiFactory.getApi(PayApi.class)
@@ -75,4 +77,9 @@ public class RechargePresenter extends RxPresenter<RechargeContract.View> implem
                 }));
         addDispose(disposable);
     }
+
+
 }
+
+
+

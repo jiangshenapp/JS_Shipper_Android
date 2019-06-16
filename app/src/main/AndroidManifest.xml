@@ -50,9 +50,9 @@
         </activity>
 
 
-        <activity android:name=".ui.main.activity.MainActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name=".ui.main.activity.MainActivity"
+            android:launchMode="singleTask" />
 
         <activity
             android:name="com.js.shipper.ui.user.activity.LoginActivity"
@@ -115,32 +115,40 @@
             android:launchMode="singleTop" />
 
 
-        <service android:name="com.baidu.location.f"
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
 
-        <activity android:name=".ui.center.activity.AboutActivity"
+        <activity
+            android:name=".ui.center.activity.AboutActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".ui.center.activity.FeedBackActivity"
+        <activity
+            android:name=".ui.center.activity.FeedBackActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".ui.user.activity.VerifiedActivity"
+        <activity
+            android:name=".ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".ui.ship.activity.SelectCityActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".ui.ship.activity.SelectCityActivity"
+            android:launchMode="singleTop" />
 
-        <activity android:name=".ui.ship.activity.ShipUserInfoActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".ui.ship.activity.ShipUserInfoActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop"></activity>
+
+
+        <activity
+            android:name=".ui.wallet.activity.PayActivity"
+            android:launchMode="singleTop" />
 
         <service
             android:name=".service.LocationService"

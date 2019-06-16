@@ -18,6 +18,7 @@ import com.js.shipper.ui.ship.activity.SelectCityActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.wallet.activity.BailActivity;
+import com.js.shipper.ui.wallet.activity.PayActivity;
 import com.js.shipper.ui.wallet.activity.RechargeActivity;
 import com.js.shipper.ui.wallet.activity.WalletActivity;
 import com.js.shipper.ui.wallet.activity.WithdrawActivity;
@@ -67,5 +68,7 @@ public interface ActivityComponent {
     void inject(FeedBackActivity feedBackActivity);
 
     void inject(SelectCityActivity selectCityActivity);
+
+    void inject(PayActivity payActivity);
 }
 

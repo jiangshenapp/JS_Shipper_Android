@@ -4,11 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.PayTask;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -25,10 +25,8 @@ import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.PayInfo;
 import com.js.shipper.model.bean.PayRouter;
 import com.js.shipper.ui.wallet.adapter.PayAdapter;
-import com.js.shipper.ui.wallet.presenter.RechargePresenter;
-import com.js.shipper.ui.wallet.presenter.contract.RechargeContract;
-import com.js.frame.view.BaseActivity;
-import com.js.shipper.util.AppUtils;
+import com.js.shipper.ui.wallet.presenter.PayPresenter;
+import com.js.shipper.ui.wallet.presenter.contract.PayContract;
 import com.js.shipper.util.pay.PayResult;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.wxapi.WXPayEntryActivity;
@@ -40,25 +38,28 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by huyg on 2019/4/24.
+ * Created by huyg on 2019-06-13.
  */
-public class RechargeActivity extends BaseActivity<RechargePresenter> implements RechargeContract.View, BaseQuickAdapter.OnItemClickListener {
+public class PayActivity extends BaseActivity<PayPresenter> implements PayContract.View, BaseQuickAdapter.OnItemClickListener {
 
-    @BindView(R.id.recharge_money)
-    EditText mMoney;
+
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
+    @BindView(R.id.pay_balance_check)
+    CheckBox mBalanceCheck;
 
-    private static final int SDK_PAY_FLAG = 99;
-    private int type;
-    private PayAdapter mAdapter;
     private List<PayRouter> mPayRouters;
     private int channelType = 0;
     private int routerId = 0;
 
+    private PayAdapter mAdapter;
+    private static final int SDK_PAY_FLAG = 99;
+
+
     public static void action(Context context) {
-        context.startActivity(new Intent(context, RechargeActivity.class));
+        context.startActivity(new Intent(context, PayActivity.class));
     }
+
 
     @Override
     protected void init() {
@@ -66,8 +67,12 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         initData();
     }
 
+    private void initData() {
+        mPresenter.getPayRouter();
+    }
+
+
     private void initView() {
-        mMoney.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         initAdapter();
     }
 
@@ -77,10 +82,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
-    }
-
-    private void initData() {
-        mPresenter.getPayRouter();
     }
 
     @Override
@@ -94,33 +95,28 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_wallet_recharge;
+        return R.layout.activity_pay;
     }
 
     @Override
     public void setActionBar() {
-        mTitle.setText("充值");
+        mTitle.setText("在线支付");
     }
 
-    @OnClick({R.id.wallet_recharge})
+
+    @OnClick({R.id.pay_balance_check, R.id.wallet_pay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.wallet_recharge://充值
-                String money = mMoney.getText().toString().trim();
-                if (TextUtils.isEmpty(money)) {
-                    toast("请输入金额");
-                    return;
-                }
+            case R.id.pay_balance_check:
 
-                if (!AppUtils.isMoney(money)) {
-                    toast("金钱输入有误");
-                    return;
-                }
+                break;
+            case R.id.wallet_pay:
                 //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
-                mPresenter.payOrder(1, channelType, Double.parseDouble(money), routerId,"");
+
                 break;
         }
     }
+
 
     public void aliPay(final String orderInfo) {
         Runnable payRunnable = new Runnable() {
@@ -186,8 +182,8 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
             return;
         }
         Intent intent = new Intent(mContext, WXPayEntryActivity.class);
-        intent.putExtra("orderInfo",orderInfo);
-        startActivityForResult(intent,100);
+        intent.putExtra("orderInfo", orderInfo);
+        startActivityForResult(intent, 100);
     }
 
     @Override
@@ -222,4 +218,5 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         }
         mAdapter.setNewData(payRouters);
     }
+
 }
