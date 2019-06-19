@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white">
+
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_carsource"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_carsource"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="车源"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+            <RadioButton
+                android:id="@+id/rb_delivery"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_delivery"
+                android:button="@null"
+                android:gravity="center"
+                android:text="网点"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_boutique"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_boutique"
+                android:button="@null"
+                android:gravity="center"
+                android:text="精品路线"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+        </RadioGroup>
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0.5dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -22,7 +22,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, OrderBean item) {
         helper.setText(R.id.waybill_order_no, "订单编号：" + item.getOrderNo())
-                .setText(R.id.waybill_state, item.getStateName())
+                .setText(R.id.waybill_state, item.getStateNameConsignor())
                 .setText(R.id.send_address, item.getSendAddress())
                 .setText(R.id.end_address, item.getReceiveAddress())
                 .setText(R.id.waybill_info, item.getGoodsType() + " "

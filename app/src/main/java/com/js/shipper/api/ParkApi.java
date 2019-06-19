@@ -3,12 +3,15 @@ package com.js.shipper.api;
 import com.js.http.HttpResponse;
 import com.js.shipper.di.FragmentScope;
 import com.js.shipper.model.bean.ParkBean;
+import com.js.shipper.model.request.ParkList;
 import com.js.shipper.model.response.ListResponse;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by huyg on 2019-05-21.
@@ -21,14 +24,18 @@ public interface ParkApi {
      * @param id
      * @return
      */
-    @FormUrlEncoded
     @POST("app/park/get")
-    Observable<HttpResponse<ParkBean>> getParkInfo(@Field("id") long id);
+    Observable<HttpResponse<ParkBean>> getParkInfo(@Query("id") long id);
 
 
-    @FormUrlEncoded
+    /**
+     * 找城市配送
+     * @param current
+     * @param size
+     * @return
+     */
     @POST("app/park/list")
-    Observable<HttpResponse<ListResponse<ParkBean>>> getParks(@Field("current") int current,
-                                                              @Field("parkAppFindListDTO") String data,
-                                                              @Field("size") int size);
+    Observable<HttpResponse<ListResponse<ParkBean>>> getParks(@Query("current") int current,
+                                                              @Body ParkList parkList,
+                                                              @Query("size") int size);
 }

@@ -9,6 +9,11 @@ import com.js.shipper.ui.center.activity.AddCarActivity;
 import com.js.shipper.ui.center.activity.CarsActivity;
 import com.js.shipper.ui.center.activity.DriversActivity;
 import com.js.shipper.ui.center.activity.FeedBackActivity;
+import com.js.shipper.ui.order.activity.OrderEditActivity;
+import com.js.shipper.ui.order.activity.SubmitOrderActivity;
+import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
+import com.js.shipper.ui.park.activity.BranchDetailActivity;
+import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -70,5 +75,15 @@ public interface ActivityComponent {
     void inject(SelectCityActivity selectCityActivity);
 
     void inject(PayActivity payActivity);
+
+    void inject(CarSourceDetailActivity carSourceDetailActivity);
+
+    void inject(BoutiqueDetailActivity boutiqueDetailActivity);
+
+    void inject(OrderEditActivity orderEditActivity);
+
+    void inject(SubmitOrderActivity submitOrderActivity);
+
+    void inject(BranchDetailActivity branchDetailActivity);
 }
 

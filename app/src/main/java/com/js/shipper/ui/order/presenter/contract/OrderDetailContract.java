@@ -14,7 +14,8 @@ public interface OrderDetailContract {
 
         void onCancelOrder(boolean isOk);
 
-        void onAgainOrder(boolean isOk);
+
+        void finishRefresh();
 
     }
 
@@ -23,6 +24,5 @@ public interface OrderDetailContract {
 
         void cancelOrder(long id);
 
-        void againOrder(long id);
     }
 }

@@ -3,8 +3,10 @@ package com.js.shipper.api;
 import com.js.http.BaseHttpResponse;
 import com.js.http.HttpResponse;
 import com.js.shipper.model.bean.OrderBean;
+import com.js.shipper.model.request.AddOrder;
 import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.model.request.AddStepTwo;
+import com.js.shipper.model.request.OrderEdit;
 import com.js.shipper.model.request.OrderList;
 import com.js.shipper.model.response.ListResponse;
 
@@ -72,5 +74,17 @@ public interface OrderApi {
     Observable<HttpResponse<ListResponse<OrderBean>>> getOrderList(@Query("current") int current,
                                                                    @Body OrderList data,
                                                                    @Query("size") int size);
+
+
+
+
+    @POST("app/order/edit/{id}")
+    Observable<HttpResponse<Boolean>> editOrder(@Body OrderEdit orderEdit,
+                                                @Path("id") long id);
+
+
+
+    @POST("app/order/addOrder")
+    Observable<HttpResponse<Boolean>> submitOrder(@Body AddOrder addOrder);
 
 }

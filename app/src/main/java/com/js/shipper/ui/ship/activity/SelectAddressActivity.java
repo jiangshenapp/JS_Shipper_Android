@@ -1,13 +1,14 @@
 package com.js.shipper.ui.ship.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -20,12 +21,21 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiDetailInfo;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiAddrInfo;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.google.gson.Gson;
 import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
@@ -35,8 +45,12 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.LatLngBean;
 import com.js.shipper.model.bean.ShipBean;
+import com.js.shipper.model.event.PoiAddrInfoEvent;
 import com.js.shipper.ui.ship.presenter.SelectAddressPresenter;
 import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
+import com.js.shipper.widget.window.SearchAddressWindow;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -63,6 +77,10 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     TextView receiverInfo;
     @BindView(R.id.confirm)
     TextView mConfirm;
+    @BindView(R.id.search_address)
+    TextView mSearchAddress;
+    @BindView(R.id.address_search_layout)
+    LinearLayout mSearchLayout;
 
 
     private int type;//0。发货；1.收货
@@ -70,7 +88,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     private GeoCoder mCoder;
     private String city;
     private ShipBean mShip = new ShipBean();
-
+    private PoiInfo mPoiInfo;
+    private SearchAddressWindow mSearchWindow;
+    private PoiSearch mPoiSearch;
 
     @Override
     protected void initInject() {
@@ -96,6 +116,12 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     protected void init() {
         initIntent();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        mPoiSearch = PoiSearch.newInstance();
+        mPoiSearch.setOnGetPoiSearchResultListener(mPoiListener);
     }
 
     private void initIntent() {
@@ -104,6 +130,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     }
 
     private void initView() {
+        mSearchWindow = new SearchAddressWindow(mContext);
         initMap();
         initLocation();
         switch (type) {
@@ -116,6 +143,33 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mConfirm.setText("确认收货地址");
                 break;
         }
+
+        mSearchAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    mPoiSearch.searchInCity(new PoiCitySearchOption()
+                            .city(mCity.getText().toString()) //必填
+                            .keyword(s.toString()) //必填
+                            .pageNum(10)
+                            .cityLimit(true)
+                            .scope(2));
+
+                } else {
+                    mSearchWindow.dismiss();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
 
@@ -170,11 +224,14 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     protected void onDestroy() {
         mMapView.onDestroy();
         mCoder.destroy();
+        if (mPoiSearch != null) {
+            mPoiSearch.destroy();
+        }
         super.onDestroy();
 
     }
 
-    @OnClick({R.id.receiver_info, R.id.confirm, R.id.city})
+    @OnClick({R.id.receiver_info, R.id.confirm, R.id.city, R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
@@ -203,6 +260,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 Intent intent = new Intent();
                 intent.setClass(mContext, SelectCityActivity.class);
                 startActivityForResult(intent, Const.CODE_REQ);
+                break;
+            case R.id.back:
+                finish();
                 break;
         }
     }
@@ -305,7 +365,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mShip.setAddressName(poiInfo.name);
                 mShip.setPosition(new Gson().toJson(new LatLngBean(poiInfo.location.latitude, poiInfo.location.longitude)));
             }
-            if (address!=null) {
+            if (address != null) {
                 mShip.setAddressCode(address.adcode);
             }
         }
@@ -331,4 +391,47 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 break;
         }
     }
+
+
+    OnGetPoiSearchResultListener mPoiListener = new OnGetPoiSearchResultListener() {
+        @Override
+        public void onGetPoiResult(PoiResult poiResult) {
+            List<PoiInfo> poiAddrInfos = poiResult.getAllPoi();
+            if (poiAddrInfos != null && poiAddrInfos.size() > 0) {
+                mSearchWindow.setData(poiAddrInfos);
+                if (!mSearchWindow.isShowing()) {
+                    mSearchWindow.showAsDropDown(mSearchLayout);
+                }
+            }
+        }
+
+        @Override
+        public void onGetPoiDetailResult(PoiDetailSearchResult poiDetailSearchResult) {
+            List<PoiDetailInfo> poiDetailInfos = poiDetailSearchResult.getPoiDetailInfoList();
+        }
+
+        @Override
+        public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+
+        }
+
+        //废弃
+        @Override
+        public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+        }
+    };
+
+    @Subscribe
+    public void onEvent(PoiAddrInfoEvent event) {
+        mPoiInfo = event.poiInfo;
+
+        mShip.setAddress(mPoiInfo.address);
+        mShip.setAddressName(mPoiInfo.name);
+        mShip.setPosition(new Gson().toJson(new LatLngBean(mPoiInfo.location.latitude, mPoiInfo.location.longitude)));
+
+        mAddressName.setText(mPoiInfo.name);
+        mAddress.setText(mPoiInfo.address);
+    }
+
 }

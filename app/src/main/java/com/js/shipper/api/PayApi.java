@@ -67,4 +67,9 @@ public interface PayApi {
     Observable<HttpResponse<List<PayRouter>>> getPayRouter(@Query("business") int businessId,
                                                            @Query("merchantId") int merchantId);
 
+
+
+    @POST("app/account/rechargeOrderFee")
+    Observable<BaseHttpResponse> payAccount(@Query("orderNo") String orderNo);
+
 }

@@ -1,8 +1,12 @@
 package com.js.shipper.util;
 
+import android.view.LayoutInflater;
+import android.view.View;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.js.shipper.App;
+import com.js.shipper.R;
 
 import java.text.DecimalFormat;
 import java.util.regex.Pattern;
@@ -30,6 +34,10 @@ public class AppUtils {
     }
 
 
+
+    public static View getEmptyView(){
+        return LayoutInflater.from(App.getInstance()).inflate(R.layout.layout_data_empty,null);
+    }
 
 
 

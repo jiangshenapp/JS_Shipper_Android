@@ -2,6 +2,7 @@ package com.js.shipper.ui.wallet.presenter;
 
 import com.js.frame.mvp.RxPresenter;
 import com.js.http.ApiFactory;
+import com.js.http.BaseHttpResponse;
 import com.js.shipper.api.PayApi;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.PayInfo;
@@ -32,6 +33,33 @@ public class PayPresenter extends RxPresenter<PayContract.View> implements PayCo
     }
 
 
+    @Override
+    public void payAccount(String orderNo) {
+        Disposable disposable = mApiFactory.getApi(PayApi.class)
+                .payAccount(orderNo)
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onPayAccount(true);
+                        }else {
+                            mView.onPayAccount(false);
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
 
     @Override
     public void payOrder(int tradeType, int channelType, double money, int routeId,String orderNo) {

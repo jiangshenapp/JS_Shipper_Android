@@ -18,11 +18,18 @@ import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.event.CitySelectEvent;
+import com.js.shipper.model.event.SortEvent;
+import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
+import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.CarSourcePresenter;
 import com.js.shipper.ui.main.presenter.contract.CarSourceContract;
+import com.js.shipper.util.AppUtils;
+import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
+import com.js.shipper.widget.window.FilterWindow;
+import com.js.shipper.widget.window.SortWindow;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -61,6 +68,12 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     private int type;
     private CityWindow mStartWindow;
     private CityWindow mEndWindow;
+    private SortWindow mSortWindow;
+    private FilterWindow mFilterWindow;
+    private LineAppFind lineAppFind = new LineAppFind();
+    private String arriveAddressCode = "0";
+    private String startAddressCode = "0";
+    private int sort;
 
     public static CarSourceFragment newInstance() {
         return new CarSourceFragment();
@@ -95,6 +108,8 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     private void initCityWindow() {
         mStartWindow = new CityWindow(mContext, 0);
         mEndWindow = new CityWindow(mContext, 1);
+        mSortWindow = new SortWindow(mContext);
+        mFilterWindow = new FilterWindow(mContext);
     }
 
     private void initRefresh() {
@@ -103,7 +118,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getCarSource(num);
             }
 
@@ -117,14 +132,20 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
 
     private void initRecycler() {
         mAdapter = new CarSourceAdapter(R.layout.item_car_source, mList);
+        mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+//        mAdapter.setEmptyView(AppUtils.getEmptyView());
         mAdapter.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        if (lineBean != null) {
+            CarSourceDetailActivity.action(mContext, lineBean.getId());
+        }
     }
 
     @Override
@@ -155,7 +176,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 mEndWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.sort:
-
+                mSortWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.filter:
 
@@ -167,6 +188,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     public void onEvent(CitySelectEvent event) {
         switch (event.type) {
             case 0:
+                startAddressCode = event.areaBean.getCode();
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
                     mSendAddress.setText(event.areaBean.getAlias());
                 } else {
@@ -175,6 +197,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
 
                 break;
             case 1:
+                arriveAddressCode = event.areaBean.getCode();
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
                     mEndAddress.setText(event.areaBean.getAlias());
                 } else {
@@ -186,7 +209,27 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         getCarSource(Const.PAGE_NUM);
     }
 
-    private void getCarSource(int num){
-        mPresenter.getCarSource(num, mEndAddress.getText().toString(), mSendAddress.getText().toString(), Const.PAGE_SIZE);
+
+    @Subscribe
+    public void onEvent(SortEvent sortEvent) {
+        sort = sortEvent.type;
+
+    }
+
+    private void getCarSource(int num) {
+        if ("发货地".equals(mSendAddress.getText().toString())) {
+            lineAppFind.setStartAddressCode("0");
+        } else {
+            lineAppFind.setStartAddressCode(startAddressCode);
+        }
+        if ("收货地".equals(mEndAddress.getText().toString())) {
+            lineAppFind.setArriveAddressCode("0");
+        } else {
+            lineAppFind.setArriveAddressCode(arriveAddressCode);
+        }
+
+        lineAppFind.setSort(sort);
+
+        mPresenter.getCarSource(num, lineAppFind, Const.PAGE_SIZE);
     }
 }

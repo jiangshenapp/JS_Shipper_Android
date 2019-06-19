@@ -53,8 +53,8 @@ public class FilePresenter extends RxPresenter<FileContract.View> implements Fil
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        mView.closeProgress();
                         mView.onUploadFile(s);
+                        mView.closeProgress();
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();

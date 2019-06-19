@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.PayInfo;
 import com.js.shipper.model.bean.PayRouter;
+import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.wallet.adapter.PayAdapter;
 import com.js.shipper.ui.wallet.presenter.PayPresenter;
 import com.js.shipper.ui.wallet.presenter.contract.PayContract;
@@ -45,8 +47,8 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
-    @BindView(R.id.pay_balance_check)
-    CheckBox mBalanceCheck;
+    @BindView(R.id.fee)
+    TextView mFee;
 
     private List<PayRouter> mPayRouters;
     private int channelType = 0;
@@ -54,17 +56,28 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
 
     private PayAdapter mAdapter;
     private static final int SDK_PAY_FLAG = 99;
+    private double fee;
+    private String orderNo;
 
 
-    public static void action(Context context) {
-        context.startActivity(new Intent(context, PayActivity.class));
+    public static void action(Context context, double fee, String orderNo) {
+        Intent intent = new Intent(context, PayActivity.class);
+        intent.putExtra("fee", fee);
+        intent.putExtra("orderNo", orderNo);
+        context.startActivity(intent);
     }
 
 
     @Override
     protected void init() {
+        initIntent();
         initView();
         initData();
+    }
+
+    private void initIntent() {
+        fee = getIntent().getDoubleExtra("fee", 0);
+        orderNo = getIntent().getStringExtra("orderNo");
     }
 
     private void initData() {
@@ -73,8 +86,10 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
 
 
     private void initView() {
+        mFee.setText(String.valueOf(fee));
         initAdapter();
     }
+
 
     private void initAdapter() {
         mAdapter = new PayAdapter(R.layout.item_pay_type, mPayRouters);
@@ -104,15 +119,16 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
     }
 
 
-    @OnClick({R.id.pay_balance_check, R.id.wallet_pay})
+    @OnClick({R.id.wallet_pay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.pay_balance_check:
-
-                break;
             case R.id.wallet_pay:
-                //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
-
+                if (channelType == Const.CHANNEL_ACCOUNT_PAY) {
+                    mPresenter.payAccount(orderNo);
+                } else {
+                    //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
+                    mPresenter.payOrder(5, channelType, fee, routerId, orderNo);
+                }
                 break;
         }
     }
@@ -200,7 +216,21 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
             channelType = payRouters.get(0).getChannelType();
             routerId = payRouters.get(0).getRouteId();
             payRouters.get(0).setChecked(true);
+            PayRouter payRouter = new PayRouter();
+            payRouter.setChannelType(Const.CHANNEL_ACCOUNT_PAY);
+            payRouter.setRouteId(1);
+            payRouters.add(payRouter);
             mAdapter.setNewData(payRouters);
+        }
+    }
+
+    @Override
+    public void onPayAccount(Boolean isOk) {
+        if (isOk) {
+            toast("支付成功");
+            OrdersActivity.action(mContext, 3);
+        } else {
+            toast("支付失败");
         }
     }
 

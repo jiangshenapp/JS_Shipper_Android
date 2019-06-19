@@ -4,8 +4,6 @@
     package="com.js.shipper">
 
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <!--获取设备网络状态，禁用后无法获取网络状态-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--网络权限，当禁用后，无法进行检索等相关业务-->
@@ -35,6 +33,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data android:name="android.max_aspect"
+            android:value="2.1" />
+
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -150,6 +152,31 @@
             android:name=".ui.wallet.activity.PayActivity"
             android:launchMode="singleTop" />
 
+
+        <activity android:name=".ui.park.activity.CarSourceDetailActivity"
+            android:launchMode="singleTop"
+            />
+
+
+        <activity android:name=".ui.park.activity.BoutiqueDetailActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.park.activity.CollectActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.order.activity.OrderEditActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.order.activity.SubmitOrderActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.park.activity.BranchDetailActivity"
+            android:launchMode="singleTop"
+            />
         <service
             android:name=".service.LocationService"
             android:enabled="true" />

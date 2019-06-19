@@ -1,9 +1,12 @@
 package com.js.shipper.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by huyg on 2019/4/24.
  */
-public class OrderBean {
+public class OrderBean implements Parcelable {
 
 
     /**
@@ -116,6 +119,123 @@ public class OrderBean {
     private String carModelName;
     private String receiveAddressCodeName;
     private String sendAddressCodeName;
+    private String driverNum;
+
+    protected OrderBean(Parcel in) {
+        carLength = in.readString();
+        carModel = in.readString();
+        createBy = in.readInt();
+        createTime = in.readString();
+        driverId = in.readInt();
+        fee = in.readDouble();
+        feeType = in.readInt();
+        finishTime = in.readString();
+        goodsType = in.readString();
+        goodsVolume = in.readInt();
+        goodsWeight = in.readInt();
+        id = in.readLong();
+        image1 = in.readString();
+        image2 = in.readString();
+        jdSubscriberId = in.readString();
+        loadingTime = in.readString();
+        matchState = in.readInt();
+        matchSubscriberId = in.readInt();
+        orderNo = in.readString();
+        payTime = in.readString();
+        payType = in.readInt();
+        payWay = in.readInt();
+        receiveAddress = in.readString();
+        receiveAddressCode = in.readString();
+        receiveMobile = in.readString();
+        receiveName = in.readString();
+        receivePosition = in.readString();
+        remark = in.readString();
+        sendAddress = in.readString();
+        sendAddressCode = in.readString();
+        sendMobile = in.readString();
+        sendName = in.readString();
+        sendPosition = in.readString();
+        state = in.readInt();
+        transferTime = in.readString();
+        useCarType = in.readString();
+        stateName = in.readString();
+        stateNameDriver = in.readString();
+        stateNameConsignor = in.readString();
+        useCarTypeName = in.readString();
+        goodsTypeName = in.readString();
+        carLengthName = in.readString();
+        carModelName = in.readString();
+        receiveAddressCodeName = in.readString();
+        sendAddressCodeName = in.readString();
+        driverNum = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(carLength);
+        dest.writeString(carModel);
+        dest.writeInt(createBy);
+        dest.writeString(createTime);
+        dest.writeInt(driverId);
+        dest.writeDouble(fee);
+        dest.writeInt(feeType);
+        dest.writeString(finishTime);
+        dest.writeString(goodsType);
+        dest.writeInt(goodsVolume);
+        dest.writeInt(goodsWeight);
+        dest.writeLong(id);
+        dest.writeString(image1);
+        dest.writeString(image2);
+        dest.writeString(jdSubscriberId);
+        dest.writeString(loadingTime);
+        dest.writeInt(matchState);
+        dest.writeInt(matchSubscriberId);
+        dest.writeString(orderNo);
+        dest.writeString(payTime);
+        dest.writeInt(payType);
+        dest.writeInt(payWay);
+        dest.writeString(receiveAddress);
+        dest.writeString(receiveAddressCode);
+        dest.writeString(receiveMobile);
+        dest.writeString(receiveName);
+        dest.writeString(receivePosition);
+        dest.writeString(remark);
+        dest.writeString(sendAddress);
+        dest.writeString(sendAddressCode);
+        dest.writeString(sendMobile);
+        dest.writeString(sendName);
+        dest.writeString(sendPosition);
+        dest.writeInt(state);
+        dest.writeString(transferTime);
+        dest.writeString(useCarType);
+        dest.writeString(stateName);
+        dest.writeString(stateNameDriver);
+        dest.writeString(stateNameConsignor);
+        dest.writeString(useCarTypeName);
+        dest.writeString(goodsTypeName);
+        dest.writeString(carLengthName);
+        dest.writeString(carModelName);
+        dest.writeString(receiveAddressCodeName);
+        dest.writeString(sendAddressCodeName);
+        dest.writeString(driverNum);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<OrderBean> CREATOR = new Creator<OrderBean>() {
+        @Override
+        public OrderBean createFromParcel(Parcel in) {
+            return new OrderBean(in);
+        }
+
+        @Override
+        public OrderBean[] newArray(int size) {
+            return new OrderBean[size];
+        }
+    };
 
     public String getCarLength() {
         return carLength;
@@ -498,5 +618,13 @@ public class OrderBean {
 
     public void setSendAddressCodeName(String sendAddressCodeName) {
         this.sendAddressCodeName = sendAddressCodeName;
+    }
+
+    public String getDriverNum() {
+        return driverNum;
+    }
+
+    public void setDriverNum(String driverNum) {
+        this.driverNum = driverNum;
     }
 }

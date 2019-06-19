@@ -11,20 +11,21 @@ import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.response.ListResponse;
+import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
-import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.BoutiquePresenter;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
+import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 
 /**
@@ -74,9 +75,10 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     }
 
     private void initRecycler() {
-        mAdapter = new BoutiqueAdapter(R.layout.item_bill_detail, mList);
+        mAdapter = new BoutiqueAdapter(R.layout.item_boutique, mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -86,7 +88,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 mPresenter.getClassicLine(num, "", "", Const.PAGE_SIZE);
             }
 
@@ -101,6 +103,11 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        if (lineBean != null) {
+            BoutiqueDetailActivity.action(mContext, lineBean.getId());
+        }
 
     }
 
@@ -115,6 +122,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 break;
         }
     }
+
+
 
     @Override
     public void finishRefreshAndLoadMore() {

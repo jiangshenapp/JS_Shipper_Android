@@ -15,6 +15,7 @@ import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.adapter.OrderAdapter;
 import com.js.shipper.ui.order.presenter.OrderPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderContract;
+import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.js.frame.view.BaseFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -112,6 +113,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         mRecycler.setAdapter(mOrderAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mOrderAdapter.setOnItemClickListener(this);
+        mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
     }
 
 

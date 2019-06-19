@@ -34,7 +34,7 @@ public class OrdersActivity extends SimpleActivity {
         context.startActivity(intent);
     }
 
-    private String[] titles = {"全部", "发布中", "待支付","待收货","待评价"};
+    private String[] titles = {"全部", "发布中", "待支付","待配送","待收货"};
     private int type;
     private List<Fragment> mFragments;
 
@@ -65,10 +65,10 @@ public class OrdersActivity extends SimpleActivity {
         //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
         mFragments = new ArrayList<>();
         mFragments.add(OrderFragment.newInstance(0));
-        mFragments.add(OrderFragment.newInstance(1));
+        mFragments.add(OrderFragment.newInstance(2));
         mFragments.add(OrderFragment.newInstance(4));
+        mFragments.add(OrderFragment.newInstance(5));
         mFragments.add(OrderFragment.newInstance(6));
-        mFragments.add(OrderFragment.newInstance(7));
     }
 
     private void initViewPager() {

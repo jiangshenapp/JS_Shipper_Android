@@ -51,6 +51,7 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel:
+                dismiss();
                 break;
             case R.id.submit:
                 List<DictBean> selectDict = new ArrayList<>();

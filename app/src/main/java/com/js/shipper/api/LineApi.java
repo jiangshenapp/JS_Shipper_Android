@@ -2,6 +2,7 @@ package com.js.shipper.api;
 
 import com.js.http.HttpResponse;
 import com.js.shipper.model.bean.LineBean;
+import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.request.LineClassic;
 import com.js.shipper.model.response.ListResponse;
 
@@ -14,6 +15,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -31,7 +33,7 @@ public interface LineApi {
      */
     @POST("app/line/find")
     Observable<HttpResponse<ListResponse<LineBean>>> getCarLine(@Query("current") int current,
-                                                                @Body LineClassic data,
+                                                                @Body LineAppFind data,
                                                                 @Query("size") int size);
 
 
@@ -49,5 +51,11 @@ public interface LineApi {
 
 
 
+
+    /**
+     * 线路详情
+     */
+    @POST("app/line/get/{id}")
+    Observable<HttpResponse<LineBean>> getLineDetail(@Path("id") long id);
 
 }

@@ -34,22 +34,12 @@ public class LoginActivity extends SimpleActivity {
     private PwdLoginFragment mPwdLoginFragment;
     private List<Fragment> mFragments;
     private Fragment mCurrentFragment;
-    private boolean mBackHome;
 
-    public static void action(Context context, boolean backHome) {
+    public static void action(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra("backHome", backHome);
         context.startActivity(intent);
     }
 
-    @Override
-    public void backAction() {
-        if (mBackHome) {
-            MainActivity.action(this);
-        } else {
-            finish();
-        }
-    }
 
     @Override
     protected int getLayout() {
@@ -58,13 +48,9 @@ public class LoginActivity extends SimpleActivity {
 
     @Override
     protected void init() {
-        initIntent();
         initView();
     }
 
-    private void initIntent() {
-        mBackHome = getIntent().getBooleanExtra("backHome",false);
-    }
 
     private void initView() {
         initFragment();

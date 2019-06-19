@@ -16,9 +16,14 @@ public interface PayContract {
         void onPayOrder(PayInfo payInfo);
 
         void onPayRouter(List<PayRouter> payRouters);
+
+        void onPayAccount(Boolean isOk);
     }
 
     interface Presenter extends IPresenter<View>{
+
+        void payAccount(String orderNo);
+
         void payOrder(int tradeType, int channelType, double money, int routeId,String orderNo);
 
         void getPayRouter();

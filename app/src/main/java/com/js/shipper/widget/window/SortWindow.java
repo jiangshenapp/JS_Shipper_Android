@@ -26,12 +26,6 @@ public class SortWindow extends PopupWindow {
 
 
     private Context mContext;
-    private CityAdapter mAdapter;
-    private List<AreaBean> mList;
-    private CityInfo cityInfo = new CityInfo();
-    private int level = 1;
-    private String selectCode;
-    private int type;
 
     public SortWindow(Context context) {
         super(context);

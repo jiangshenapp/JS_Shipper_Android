@@ -52,6 +52,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        mViewpager.setCurrentItem(0);
+    }
+
+
     @Override
     protected void init() {
         initView();
@@ -159,7 +167,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 break;
             case R.id.navigation_mine:
                 mViewpager.setCurrentItem(4);
-                UserManager.getUserManager().isLogin(true, true);
                 break;
         }
         return true;

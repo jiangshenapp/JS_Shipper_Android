@@ -13,6 +13,9 @@ import com.js.shipper.ui.main.fragment.MineFragment;
 import com.js.shipper.ui.main.fragment.ServiceFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.order.fragment.OrderFragment;
+import com.js.shipper.ui.park.fragment.CollectBoutiqueFragment;
+import com.js.shipper.ui.park.fragment.CollectBranchFragment;
+import com.js.shipper.ui.park.fragment.CollectCarSourceFragment;
 import com.js.shipper.ui.user.fragment.CodeLoginFragment;
 import com.js.shipper.ui.user.fragment.CompanyVerifiedFragment;
 import com.js.shipper.ui.user.fragment.PersonVerifiedFragment;
@@ -60,4 +63,10 @@ public interface FragmentComponent {
     void inject(CompanyVerifiedFragment companyVerifiedFragment);
 
     void inject(PersonVerifiedFragment personVerifiedFragment);
+
+    void inject(CollectCarSourceFragment collectCarSourceFragment);
+
+    void inject(CollectBoutiqueFragment collectBoutiqueFragment);
+
+    void inject(CollectBranchFragment collectBranchFragment);
 }

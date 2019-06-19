@@ -9,9 +9,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="运费"
@@ -23,9 +26,9 @@
             />
 
         <TextView
+            android:id="@+id/fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="58,3784.10"
             android:textColor="@color/_ECA73F"
             android:textSize="30sp"
             android:layout_marginTop="5dp"
@@ -44,10 +47,6 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-
-    <include layout="@layout/include_pay_balance" />
-
-
     <TextView
         android:id="@+id/wallet_pay"
         android:layout_width="match_parent"
@@ -60,6 +59,5 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_btn_eca73f" />
-
 
 </LinearLayout>

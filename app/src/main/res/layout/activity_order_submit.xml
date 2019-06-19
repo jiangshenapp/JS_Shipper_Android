@@ -431,8 +431,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="输入价格"
-                    android:textColor="@color/_B8B8B8"
-                    android:inputType="number"
+                    android:textColorHint="@color/_B8B8B8"
+                    android:inputType="numberDecimal"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -622,7 +622,9 @@
                 android:gravity="center"
                 android:text="指定发布"
                 android:textColor="@color/_000000"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@+id/release"

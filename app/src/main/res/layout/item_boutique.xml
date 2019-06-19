@@ -26,9 +26,9 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/item_send_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="北京 朝阳区"
                 android:textColor="@color/_000000"
                 android:textSize="17sp"
                 />
@@ -44,9 +44,9 @@
                 />
 
             <TextView
+                android:id="@+id/item_arrive_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="天津 北城区"
                 android:textColor="@color/_000000"
                 android:textSize="17sp"
                 />
@@ -55,9 +55,9 @@
 
 
         <TextView
+            android:id="@+id/item_send_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2月29日出发"
             android:textColor="@color/_000000"
             android:textSize="14sp"
             android:layout_marginTop="10dp"

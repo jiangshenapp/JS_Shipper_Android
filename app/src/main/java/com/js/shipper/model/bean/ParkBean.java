@@ -8,73 +8,61 @@ public class ParkBean {
 
 
     /**
-     * address : string
-     * auditId : 0
-     * businessLicenceImage : string
-     * companyName : string
-     * companyType : 0
-     * contactAddress : string
-     * contactLocation : string
-     * contactName : string
-     * contractPhone : string
-     * detailAddress : string
-     * id : 0
-     * image1 : string
-     * image2 : string
-     * image3 : string
-     * image4 : string
-     * registrationNumber : string
-     * remark : string
-     * state : 0
-     * subscriberId : 0
-     * ts : 2019-05-18T14:25:05.320Z
-     * valid : 0
+     * id : 1
+     * companyName : 1
+     * companyType : 1
+     * registrationNumber : 1
+     * address : 北京市北京市东城区
+     * detailAddress : 1
+     * businessLicenceImage : 7a15c2177b6e44df8dfe67f854159aef.png
+     * auditId : 37
+     * remark : null
+     * contactName : null
+     * contactLocation : null
+     * contactAddress : null
+     * contractPhone : null
+     * image1 : null
+     * image2 : null
+     * image3 : null
+     * image4 : null
+     * state : 1
+     * subscriberId : 3
+     * ts : 2019-05-15 14:31:31
+     * valid : 1
      */
 
-    private String address;//所在地
-    private int auditId;//审核流id
-    private String businessLicenceImage;//营业执照图片
-    private String companyName;//机构名称
-    private int companyType;//机构类型
-    private String contactAddress;//联系地址
-    private String contactLocation;//园区经纬度
-    private String contactName;//联系人
-    private String contractPhone;//联系人电话
-    private String detailAddress;//详细地址
-    private int id;//主键
-    private String image1;//图片1
-    private String image2;//图片2
-    private String image3;//图片3
-    private String image4;//图片4
-    private String registrationNumber;//统一信用社代码
-    private String remark;//描述
-    private int state;//状态，1启用，0未启用
-    private int subscriberId;//会员id
-    private String ts;//编辑时间
-    private int valid;//是否有效，1是，0否
+    private int id;
+    private int parkId;
+    private String companyName;
+    private int companyType;
+    private String registrationNumber;
+    private String address;
+    private String detailAddress;
+    private String businessLicenceImage;
+    private int auditId;
+    private String remark;
+    private String contactName;
+    private String contactLocation;
+    private String contactAddress;
+    private String contractPhone;
+    private String image1;
+    private String image2;
+    private String image3;
+    private String image4;
+    private int state;
+    private int subscriberId;
+    private String ts;
+    private int valid;
+    private boolean isCollect;
+    private boolean isRemark;
 
-    public String getAddress() {
-        return address;
+
+    public int getId() {
+        return id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getAuditId() {
-        return auditId;
-    }
-
-    public void setAuditId(int auditId) {
-        this.auditId = auditId;
-    }
-
-    public String getBusinessLicenceImage() {
-        return businessLicenceImage;
-    }
-
-    public void setBusinessLicenceImage(String businessLicenceImage) {
-        this.businessLicenceImage = businessLicenceImage;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCompanyName() {
@@ -93,36 +81,20 @@ public class ParkBean {
         this.companyType = companyType;
     }
 
-    public String getContactAddress() {
-        return contactAddress;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setContactAddress(String contactAddress) {
-        this.contactAddress = contactAddress;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
-    public String getContactLocation() {
-        return contactLocation;
+    public String getAddress() {
+        return address;
     }
 
-    public void setContactLocation(String contactLocation) {
-        this.contactLocation = contactLocation;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getContractPhone() {
-        return contractPhone;
-    }
-
-    public void setContractPhone(String contractPhone) {
-        this.contractPhone = contractPhone;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDetailAddress() {
@@ -133,12 +105,60 @@ public class ParkBean {
         this.detailAddress = detailAddress;
     }
 
-    public int getId() {
-        return id;
+    public String getBusinessLicenceImage() {
+        return businessLicenceImage;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBusinessLicenceImage(String businessLicenceImage) {
+        this.businessLicenceImage = businessLicenceImage;
+    }
+
+    public int getAuditId() {
+        return auditId;
+    }
+
+    public void setAuditId(int auditId) {
+        this.auditId = auditId;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactLocation() {
+        return contactLocation;
+    }
+
+    public void setContactLocation(String contactLocation) {
+        this.contactLocation = contactLocation;
+    }
+
+    public String getContactAddress() {
+        return contactAddress;
+    }
+
+    public void setContactAddress(String contactAddress) {
+        this.contactAddress = contactAddress;
+    }
+
+    public String getContractPhone() {
+        return contractPhone;
+    }
+
+    public void setContractPhone(String contractPhone) {
+        this.contractPhone = contractPhone;
     }
 
     public String getImage1() {
@@ -173,22 +193,6 @@ public class ParkBean {
         this.image4 = image4;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public int getState() {
         return state;
     }
@@ -219,5 +223,29 @@ public class ParkBean {
 
     public void setValid(int valid) {
         this.valid = valid;
+    }
+
+    public boolean isCollect() {
+        return isCollect;
+    }
+
+    public void setCollect(boolean collect) {
+        isCollect = collect;
+    }
+
+    public int getParkId() {
+        return parkId;
+    }
+
+    public void setParkId(int parkId) {
+        this.parkId = parkId;
+    }
+
+    public boolean isRemark() {
+        return isRemark;
+    }
+
+    public void setRemark(boolean remark) {
+        isRemark = remark;
     }
 }

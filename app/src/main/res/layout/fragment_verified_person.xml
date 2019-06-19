@@ -147,7 +147,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="姓名"
-                android:textColor="@color/_B4B4B4"
+                android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp" />
 
             <EditText
@@ -158,7 +158,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="身份证号"
-                android:textColor="@color/_B4B4B4"
+                android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -180,7 +180,7 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:hint="所在区域"
-                    android:textColor="@color/_B4B4B4"
+                    android:textColorHint="@color/_B4B4B4"
                     android:textSize="14sp" />
 
                 <ImageView

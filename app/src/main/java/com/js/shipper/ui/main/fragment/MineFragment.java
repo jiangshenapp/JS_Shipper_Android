@@ -26,6 +26,7 @@ import com.js.shipper.ui.main.adapter.MineMenuAdapter;
 import com.js.shipper.ui.main.presenter.MinePresenter;
 import com.js.shipper.ui.main.presenter.contract.MineContract;
 import com.js.shipper.ui.order.activity.OrdersActivity;
+import com.js.shipper.ui.park.activity.CollectActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.wallet.activity.WalletActivity;
 import com.js.shipper.util.UIUtil;
@@ -103,9 +104,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     private void initData() {
-        if (!TextUtils.isEmpty(App.getInstance().token)) { //判断token是否为空
-            mPresenter.getUserInfo();
-            mPresenter.getAccountInfo();
+        mPresenter.getUserInfo();
+        mPresenter.getAccountInfo();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!isHidden()) {
+            initData();
         }
     }
 
@@ -247,6 +254,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position) {
             case 0://我的园区
+                CollectActivity.action(mContext, 0);
                 break;
             case 1://我的服务
                 break;

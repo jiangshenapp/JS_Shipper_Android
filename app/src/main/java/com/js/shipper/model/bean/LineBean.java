@@ -8,32 +8,60 @@ public class LineBean {
 
 
     /**
-     * arriveAddressCode : string
-     * carLength : string
-     * carModel : string
+     * id : 4
+     * startAddressCode : 130000
+     * arriveAddressCode : 190000
+     * carLength : 111
+     * carModel : 111
+     * remark : null
+     * state : 1
      * classic : 0
-     * cphm : string
-     * driverName : string
-     * driverPhone : string
-     * id : 0
-     * remark : string
-     * startAddressCode : string
-     * state : 0
-     * subscriberId : 0
+     * subscriberId : null
+     * driverName : null
+     * driverPhone : null
+     * cphm : null
+     * carLengthName :
+     * carModelName :
+     * arriveAddressCodeName :
+     * startAddressCodeName : 河北省
+     * classicName : 普通
      */
 
-    private String arriveAddressCode;//目的地编码
-    private String carLength;//车长,多选，逗号分隔
-    private String carModel;//车型,多选，逗号分隔
-    private int classic;//精品线路
-    private String cphm;//车牌
-    private String driverName;//司机名
-    private String driverPhone;//司机手机号
-    private int id;//主键
-    private String remark;//简介
-    private String startAddressCode;//出发地编码
-    private int state;//状态，0未启用，1启用
-    private int subscriberId;//会员id
+    private int id;
+    private String startAddressCode;
+    private String arriveAddressCode;
+    private String carLength;
+    private String carModel;
+    private String remark;
+    private int state;
+    private int classic;
+    private long subscriberId;
+    private String driverName;
+    private String driverPhone;
+    private String cphm;
+    private String carLengthName;
+    private String carModelName;
+    private String arriveAddressCodeName;
+    private String startAddressCodeName;
+    private String classicName;
+    private boolean isCollect;
+    private String receiveAddressCodeName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getStartAddressCode() {
+        return startAddressCode;
+    }
+
+    public void setStartAddressCode(String startAddressCode) {
+        this.startAddressCode = startAddressCode;
+    }
 
     public String getArriveAddressCode() {
         return arriveAddressCode;
@@ -59,6 +87,22 @@ public class LineBean {
         this.carModel = carModel;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public int getClassic() {
         return classic;
     }
@@ -67,12 +111,12 @@ public class LineBean {
         this.classic = classic;
     }
 
-    public String getCphm() {
-        return cphm;
+    public long getSubscriberId() {
+        return subscriberId;
     }
 
-    public void setCphm(String cphm) {
-        this.cphm = cphm;
+    public void setSubscriberId(long subscriberId) {
+        this.subscriberId = subscriberId;
     }
 
     public String getDriverName() {
@@ -91,43 +135,67 @@ public class LineBean {
         this.driverPhone = driverPhone;
     }
 
-    public int getId() {
-        return id;
+    public String getCphm() {
+        return cphm;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCphm(String cphm) {
+        this.cphm = cphm;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getCarLengthName() {
+        return carLengthName;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setCarLengthName(String carLengthName) {
+        this.carLengthName = carLengthName;
     }
 
-    public String getStartAddressCode() {
-        return startAddressCode;
+    public String getCarModelName() {
+        return carModelName;
     }
 
-    public void setStartAddressCode(String startAddressCode) {
-        this.startAddressCode = startAddressCode;
+    public void setCarModelName(String carModelName) {
+        this.carModelName = carModelName;
     }
 
-    public int getState() {
-        return state;
+    public String getArriveAddressCodeName() {
+        return arriveAddressCodeName;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setArriveAddressCodeName(String arriveAddressCodeName) {
+        this.arriveAddressCodeName = arriveAddressCodeName;
     }
 
-    public int getSubscriberId() {
-        return subscriberId;
+    public String getStartAddressCodeName() {
+        return startAddressCodeName;
     }
 
-    public void setSubscriberId(int subscriberId) {
-        this.subscriberId = subscriberId;
+    public void setStartAddressCodeName(String startAddressCodeName) {
+        this.startAddressCodeName = startAddressCodeName;
+    }
+
+    public String getClassicName() {
+        return classicName;
+    }
+
+    public void setClassicName(String classicName) {
+        this.classicName = classicName;
+    }
+
+    public boolean isCollect() {
+        return isCollect;
+    }
+
+    public void setCollect(boolean collect) {
+        isCollect = collect;
+    }
+
+    public String getReceiveAddressCodeName() {
+        return receiveAddressCodeName;
+    }
+
+    public void setReceiveAddressCodeName(String receiveAddressCodeName) {
+        this.receiveAddressCodeName = receiveAddressCodeName;
     }
 }

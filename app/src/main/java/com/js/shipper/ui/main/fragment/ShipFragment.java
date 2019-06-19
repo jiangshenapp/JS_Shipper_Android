@@ -24,6 +24,7 @@ import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.ui.main.presenter.ShipPresenter;
 import com.js.shipper.ui.main.presenter.contract.ShipContract;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
+import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
 import com.js.shipper.widget.window.ItemWindow;
 import com.youth.banner.Banner;
@@ -116,7 +117,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @OnClick({R.id.ship_start_layout, R.id.ship_end_layout,
             R.id.ship_car_extent_layout, R.id.ship_car_type_layout,
-            R.id.ship_submit})
+            R.id.ship_submit,R.id.orders})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ship_start_layout://发货地址
@@ -134,6 +135,10 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 break;
             case R.id.ship_car_type_layout://车型
                 mTypeWindow.showAsDropDown(mTitleLayout, 0, 0);
+                break;
+
+            case R.id.orders:
+                OrdersActivity.action(mContext,0);
                 break;
             case R.id.ship_submit://发货
 
@@ -172,6 +177,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 mPresenter.addStepOne(addStepOne);
 
                 break;
+
         }
     }
 

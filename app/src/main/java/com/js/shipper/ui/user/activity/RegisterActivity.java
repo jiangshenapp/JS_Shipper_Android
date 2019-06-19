@@ -110,7 +110,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
-                if (pwd.length()<6 || pwd.length()>16) {
+                if (pwd.length() < 6 || pwd.length() > 16) {
                     toast("请设置6-16位密码（字母、数字）");
                     return;
                 }
@@ -125,6 +125,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 mPresenter.register(phone, pwd, code);
                 break;
             case R.id.tv_protocal:
+
                 break;
         }
     }
@@ -151,12 +152,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void onRegister() {
-        LoginActivity.action(this,false);
+        LoginActivity.action(this);
+        finish();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mCodePresenter != null) {
+            mCodePresenter.detachView();
+        }
         if (mDisposable != null) {
             mDisposable.dispose();
         }
