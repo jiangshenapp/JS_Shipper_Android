@@ -1,5 +1,7 @@
-package com.js.shipper.ui.user.fragment;
+package com.js.shipper.ui.user.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -7,20 +9,13 @@ import android.widget.TextView;
 
 import com.js.shipper.App;
 import com.js.shipper.R;
-import com.js.shipper.di.componet.DaggerFragmentComponent;
-import com.js.shipper.di.module.FragmentModule;
-import com.js.shipper.manager.SpManager;
-import com.js.shipper.model.event.LoginChangeEvent;
-import com.js.shipper.model.event.UserStatusChangeEvent;
-import com.js.shipper.ui.main.activity.MainActivity;
-import com.js.shipper.ui.user.activity.RegisterActivity;
-import com.js.shipper.ui.user.presenter.CodeLoginPresenter;
+import com.js.shipper.di.componet.DaggerActivityComponent;
+import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.ui.user.presenter.ForgetPwdPresenter;
 import com.js.shipper.ui.user.presenter.SmsCodePresenter;
-import com.js.shipper.ui.user.presenter.contract.CodeLoginContract;
+import com.js.shipper.ui.user.presenter.contract.ForgetPwdContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
-import com.js.frame.view.BaseFragment;
-
-import org.greenrobot.eventbus.EventBus;
+import com.js.frame.view.BaseActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,18 +30,22 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by huyg on 2019/4/21.
+ * author : hzb
+ * e-mail : hanzhanbing@evcoming.com
+ * time   : 2019/05/02
+ * desc   : 忘记密码第一步
+ * version: 3.0.0
  */
-public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implements CodeLoginContract.View, SmsCodeContract.View {
+public class ForgetPwdActivity extends BaseActivity<ForgetPwdPresenter> implements ForgetPwdContract.View, SmsCodeContract.View {
 
     @BindView(R.id.edit_phone)
     EditText mPhone;
     @BindView(R.id.edit_code)
     EditText mCode;
-    @BindView(R.id.tv_protocal)
-    TextView tvProtocal;
     @BindView(R.id.tv_get_code)
     TextView mGetCode;
+    @BindView(R.id.btn_next_step)
+    TextView mNextStep;
 
     private String phone;
     private String code;
@@ -55,22 +54,8 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     @Inject
     SmsCodePresenter mCodePresenter;
 
-    public static CodeLoginFragment newInstance() {
-        return new CodeLoginFragment();
-    }
-
-    @Override
-    protected void initInject() {
-        DaggerFragmentComponent.builder()
-                .fragmentModule(new FragmentModule(this))
-                .appComponent(App.getInstance().getAppComponent())
-                .build()
-                .inject(this);
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_login_phonecode;
+    public static void action(Context context) {
+        context.startActivity(new Intent(context, ForgetPwdActivity.class));
     }
 
     @Override
@@ -78,12 +63,28 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         mCodePresenter.attachView(this);
     }
 
-    @OnClick({R.id.tv_register, R.id.tv_get_code, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_password})
-    public void onViewClicked(View view) {
+    @Override
+    protected void initInject() {
+        DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .appComponent(App.getInstance().getAppComponent())
+                .build()
+                .inject(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_pwd_forget;
+    }
+
+    @Override
+    public void setActionBar() {
+        mTitle.setText("");
+    }
+
+    @OnClick({R.id.tv_get_code, R.id.btn_next_step})
+    public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_register:
-                RegisterActivity.action(getActivity());
-                break;
             case R.id.tv_get_code:
                 phone = mPhone.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
@@ -92,9 +93,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                 }
                 mCodePresenter.sendSmsCode(phone);
                 break;
-            case R.id.tv_protocal:
-                break;
-            case R.id.btn_login:
+            case R.id.btn_next_step:
                 phone = mPhone.getText().toString().trim();
                 code = mCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
@@ -105,12 +104,14 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                     toast("请输入验证码");
                     return;
                 }
-                mPresenter.login(phone, code);
-                break;
-            case R.id.tv_login_password:
-                EventBus.getDefault().post(new LoginChangeEvent(0));
+                mPresenter.forgetPwd(phone, code);
                 break;
         }
+    }
+
+    @Override
+    public void onForgetPwd() {
+        ResetPwdActivity.action(this, phone);
     }
 
     @Override
@@ -121,28 +122,16 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                 .doOnNext(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        if (isVisible()) {
-                            mGetCode.setText(String.format("%d秒", 60 - aLong));
-                        }
+                        mGetCode.setText(String.format("%d秒", 60 - aLong));
                     }
                 })
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        if (isVisible()) {
-                            mGetCode.setClickable(true);
-                            mGetCode.setText("重新获取");
-                        }
+                        mGetCode.setClickable(true);
+                        mGetCode.setText("重新获取");
                     }
                 }).subscribe();
-    }
-
-    @Override
-    public void onLogin(String token) {
-        toast("登录成功");
-        App.getInstance().putToken(token);
-        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
-        MainActivity.action(mContext);
     }
 
     @Override
