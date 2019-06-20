@@ -23,7 +23,7 @@ import butterknife.OnClick;
 /**
  * Created by huyg on 2019-05-22.
  */
-public class FilterWindow extends PopupWindow implements BaseQuickAdapter.OnItemClickListener {
+public class FilterWindow extends PopupWindow{
 
 
     @BindView(R.id.user_car_type)
@@ -54,7 +54,6 @@ public class FilterWindow extends PopupWindow implements BaseQuickAdapter.OnItem
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setFocusable(true);//内容可点击
         setOutsideTouchable(false); //点击外部popupWindow消失
-        setClippingEnabled(false);
         setBackgroundDrawable(null);
         initView();
         initData();
@@ -68,9 +67,33 @@ public class FilterWindow extends PopupWindow implements BaseQuickAdapter.OnItem
         mCarTypeAdapter = new DictAdapter(R.layout.item_window_dict, mCarTypeDict);
         mLengthAdapter = new DictAdapter(R.layout.item_window_dict, mLengthDict);
         mTypeAdapter = new DictAdapter(R.layout.item_window_dict, mTypeDict);
-        mCarTypeAdapter.setOnItemClickListener(this);
-        mLengthAdapter.setOnItemClickListener(this);
-        mTypeAdapter.setOnItemClickListener(this);
+        mCarTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<DictBean> dictBeans = mCarTypeAdapter.getData();
+                DictBean dictBean = dictBeans.get(position);
+                dictBean.setChecked(!dictBean.isChecked());
+                mCarTypeAdapter.setNewData(dictBeans);
+            }
+        });
+        mLengthAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<DictBean> dictBeans = mLengthAdapter.getData();
+                DictBean dictBean = dictBeans.get(position);
+                dictBean.setChecked(!dictBean.isChecked());
+                mLengthAdapter.setNewData(dictBeans);
+            }
+        });
+        mTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<DictBean> dictBeans = mTypeAdapter.getData();
+                DictBean dictBean = dictBeans.get(position);
+                dictBean.setChecked(!dictBean.isChecked());
+                mTypeAdapter.setNewData(dictBeans);
+            }
+        });
         mCarType.setAdapter(mCarTypeAdapter);
         mCarType.setLayoutManager(new GridLayoutManager(mContext, 4));
         mLength.setAdapter(mLengthAdapter);
@@ -83,8 +106,10 @@ public class FilterWindow extends PopupWindow implements BaseQuickAdapter.OnItem
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cancel:
+                dismiss();
                 break;
             case R.id.submit:
+                dismiss();
                 break;
         }
     }
@@ -115,8 +140,4 @@ public class FilterWindow extends PopupWindow implements BaseQuickAdapter.OnItem
         }
     }
 
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-    }
 }

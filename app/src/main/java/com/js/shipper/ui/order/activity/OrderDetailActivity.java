@@ -6,12 +6,15 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.baidu.mapapi.model.LatLng;
+import com.google.gson.Gson;
 import com.js.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -23,6 +26,10 @@ import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.shipper.ui.wallet.activity.PayActivity;
+import com.js.shipper.util.MapUtils;
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.callback.ConfigDialog;
+import com.mylhyl.circledialog.params.DialogParams;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -80,6 +87,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     private int status;
     private MenuItem menuItem;
     private OrderBean mOrderBean;
+    private String[] items = {"百度地图", "高德地图"};
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
@@ -145,7 +153,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mCarInfo.setText(orderBean.getGoodsVolume() + "方/"
                 + orderBean.getGoodsWeight() + "吨");
         mGoodType.setText(orderBean.getGoodsType());
-        mUseCarType.setText(orderBean.getUseCarTypeName());
+        mUseCarType.setText(orderBean.getUseCarType());
         switch (orderBean.getPayWay()) {
             case 1:
                 mPayWay.setText("线上支付");
@@ -192,6 +200,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     }
 
     private void setBottom(int state) {
+        //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
         mPositive.setClickable(true);
         mPositive.setBackgroundColor(getResources().getColor(R.color._ECA73F));
         menuItem.setVisible(false);
@@ -216,9 +225,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 5:
+            case 6:
                 mPositive.setText("确认收货");
                 mNavigate.setText("查看路线");
                 controlLayout.setVisibility(View.VISIBLE);
+                break;
+            case 7:
+                mPositive.setText("评价");
+                mNavigate.setText("查看路线");
+                break;
+            case 8:
+                mPositive.setText("查看路线");
+                mNavigate.setVisibility(View.GONE);
                 break;
             case 9:
                 controlLayout.setVisibility(View.GONE);
@@ -242,8 +260,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mRefresh.finishRefresh();
     }
 
+    @Override
+    public void onConfirmOrder(boolean isOk) {
+        if (isOk) {
+            toast("确认收货成功");
+            mPresenter.getOrderDetail(orderId);
+        } else {
+            toast("确认收货失败");
+        }
+    }
 
-    @OnClick({R.id.control_navigate, R.id.control_positive})
+
+    @OnClick({R.id.control_navigate, R.id.control_positive, R.id.detail_send_navigate, R.id.detail_arrive_navigate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.control_navigate:
@@ -254,6 +282,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.cancelOrder(orderId);
                         break;
                     case 5://查看路线
+                    case 6:
+                    case 7:
                         break;
 
                 }
@@ -275,11 +305,35 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
                         }
                         break;
-                    case 5:
+                    case 5://确认收货
+                    case 6:
+                        mPresenter.confirmOrder(orderId);
+                        break;
 
+                    case 7://评价
+                        break;
+                    case 8://查看路线
                         break;
 
                 }
+
+            case R.id.detail_send_navigate:
+                if (App.getInstance().mLocation == null) {
+                    toast("定位失败");
+                    return;
+                }
+                Gson gson = new Gson();
+                LatLng latLng = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                showSelectDialog(latLng, gson.fromJson(mOrderBean.getSendPosition(), LatLng.class), mOrderBean.getSendAddress());
+                break;
+            case R.id.detail_arrive_navigate:
+                if (App.getInstance().mLocation == null) {
+                    toast("定位失败");
+                    return;
+                }
+                Gson gson1 = new Gson();
+                LatLng latLng1 = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                showSelectDialog(latLng1, gson1.fromJson(mOrderBean.getReceivePosition(), LatLng.class), mOrderBean.getReceiveAddress());
                 break;
         }
     }
@@ -313,4 +367,28 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             initData();
         }
     }
+
+
+    public void showSelectDialog(LatLng start, LatLng end, String dName) {
+        new CircleDialog.Builder(this)
+                .configDialog(new ConfigDialog() {
+                    @Override
+                    public void onConfig(DialogParams params) {
+                        params.animStyle = R.style.dialogWindowAnim;
+                    }
+                })
+                .setItems(items, new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) { //百度地图
+                            MapUtils.startBaidu(mContext, start, end, dName);
+                        } else {//高德地图
+                            MapUtils.startGaode(mContext, start, end, dName);
+                        }
+                    }
+                })
+                .setNegative("取消", null)
+                .show();
+    }
+
 }

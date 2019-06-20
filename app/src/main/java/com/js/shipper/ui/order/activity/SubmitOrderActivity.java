@@ -483,7 +483,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         addOrder.setSendAddressCode(String.valueOf(mSendShip.getAddressCode()));
         addOrder.setSendName(mSendShip.getName());
         addOrder.setSendPosition(mSendShip.getPosition());
-        addOrder.setMatchId(matchId);
+        if (matchId==0){
+            addOrder.setMatchId("");
+        }else {
+            addOrder.setMatchId(String.valueOf(matchId));
+        }
         if (feeWay == 1) {
             addOrder.setFee(Double.parseDouble(mFee.getText().toString()));
         }

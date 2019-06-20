@@ -17,12 +17,17 @@ public interface OrderDetailContract {
 
         void finishRefresh();
 
+        void onConfirmOrder(boolean isOk);
+
     }
 
     interface Presenter extends IPresenter<View> {
         void getOrderDetail(long id);
 
         void cancelOrder(long id);
+
+
+        void confirmOrder(long id);
 
     }
 }

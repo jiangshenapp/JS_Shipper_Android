@@ -2,6 +2,8 @@ package com.js.frame.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.js.frame.mvp.IBaseView;
@@ -30,6 +32,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     private static final String TAG = "BaseActivity";
     protected CircleProgressDialog mDialog;
     protected Bundle savedInstanceState;
+    private String[] items = {"百度地图", "高德地图"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,5 +115,8 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     protected abstract void initInject();
 
     protected abstract int getLayoutId();
+
+
+
 
 }

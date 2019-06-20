@@ -44,7 +44,7 @@ public class AddOrder {
     private String image1;
     private String image2;
     private String loadingTime;
-    private long matchId;
+    private String matchId;
     private int payType;
     private int payWay;
     private String receiveAddress;
@@ -100,7 +100,7 @@ public class AddOrder {
         this.loadingTime = loadingTime;
     }
 
-    public void setMatchId(long matchId) {
+    public void setMatchId(String matchId) {
         this.matchId = matchId;
     }
 
