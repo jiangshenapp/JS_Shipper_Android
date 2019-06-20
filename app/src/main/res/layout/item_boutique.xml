@@ -78,17 +78,17 @@
         >
 
         <ImageView
+            android:id="@+id/item_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_home_phone"
-            />
+            android:src="@mipmap/ic_home_phone" />
 
         <ImageView
+            android:id="@+id/item_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:src="@mipmap/ic_home_chat"
-            />
+            android:src="@mipmap/ic_home_chat" />
 
     </LinearLayout>
 

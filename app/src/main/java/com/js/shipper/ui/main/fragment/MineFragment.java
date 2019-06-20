@@ -27,6 +27,7 @@ import com.js.shipper.ui.main.presenter.MinePresenter;
 import com.js.shipper.ui.main.presenter.contract.MineContract;
 import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.park.activity.CollectActivity;
+import com.js.shipper.ui.user.activity.LoginActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.wallet.activity.WalletActivity;
 import com.js.shipper.util.UIUtil;
@@ -94,6 +95,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     protected void init() {
         initConfig();
         initView();
+        if (App.getInstance().token.isEmpty()) {
+            authState.setText("请先登录");
+        }
     }
 
     private void initConfig() {
@@ -147,6 +151,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             R.id.mine_community_layout, R.id.mine_invitation_layout,
             R.id.mine_draft_layout, R.id.mine_wallet_money_layout, R.id.mine_wallet_integral_layout})
     public void onViewClicked(View view) {
+
+        if (App.getInstance().token.isEmpty()) {
+            LoginActivity.action(mContext);
+            return;
+        }
         switch (view.getId()) {
             case R.id.user_info_layout://用户详情
                 UserCenterActivity.action(mContext);

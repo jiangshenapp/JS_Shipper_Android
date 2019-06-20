@@ -29,6 +29,7 @@ import com.js.shipper.ui.main.adapter.DeliveryAdapter;
 import com.js.shipper.ui.main.presenter.DeliveryPresenter;
 import com.js.shipper.ui.main.presenter.contract.DeliveryContract;
 import com.js.shipper.ui.park.activity.BranchDetailActivity;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
@@ -207,6 +208,12 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                     return;
                 }
                 showSelectDialog(latLng, endLat, parkBean.getAddress());
+                break;
+            case R.id.item_phone:
+                AppUtils.callPhone(parkBean.getContractPhone());
+                break;
+            case R.id.item_chat:
+                toast("该功能暂未开放");
                 break;
         }
 

@@ -39,6 +39,8 @@ public class DeliveryAdapter extends BaseQuickAdapter<ParkBean, BaseViewHolder> 
                 .setText(R.id.item_remark, item.getRemark());
         helper.addOnClickListener(R.id.remark_status_layout);
         helper.addOnClickListener(R.id.navigation);
+        helper.addOnClickListener(R.id.item_phone);
+        helper.addOnClickListener(R.id.item_chat);
         TextView remark = helper.getView(R.id.item_remark);
         if (item.isRemark()) {
             remark.setVisibility(View.VISIBLE);

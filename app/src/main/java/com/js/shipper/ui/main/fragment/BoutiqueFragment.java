@@ -25,6 +25,7 @@ import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
 import com.js.shipper.ui.main.presenter.BoutiquePresenter;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
 import com.js.shipper.widget.window.FilterWindow;
@@ -50,7 +51,7 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/30.
  * 精品路线
  */
-public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements BoutiqueContract.View, BaseQuickAdapter.OnItemClickListener, DictContract.View {
+public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements BoutiqueContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, DictContract.View {
 
 
     @BindView(R.id.recycler)
@@ -158,6 +159,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemChildClickListener(this);
     }
 
     private void initRefresh() {
@@ -187,7 +189,20 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         if (lineBean != null) {
             BoutiqueDetailActivity.action(mContext, lineBean.getId());
         }
+    }
 
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        switch (view.getId()) {
+            case R.id.item_phone:
+                AppUtils.callPhone(lineBean.getDriverPhone());
+                break;
+            case R.id.item_chat:
+                toast("该功能暂未开放");
+                break;
+        }
     }
 
     @Override

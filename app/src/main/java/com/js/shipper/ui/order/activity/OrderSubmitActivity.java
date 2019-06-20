@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -82,6 +83,14 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     ImageView mImg1;
     @BindView(R.id.img2)
     ImageView mImg2;
+    @BindView(R.id.pay_type_pay)
+    RadioButton mTypePay;
+    @BindView(R.id.pay_type_cash)
+    RadioButton mTypeCash;
+    @BindView(R.id.pay_way_online)
+    RadioButton mWayOnline;
+    @BindView(R.id.pay_way_offline)
+    RadioButton mWayOffline;
 
     private long orderId;
     private String img1Url;
@@ -92,7 +101,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
-    private int payType = 1;
+    private int payType = 2;
     private int payWay = 1;
     private int feeWay = 1;
 
@@ -116,11 +125,15 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.pay_type_pay:
+                    case R.id.pay_type_pay: //到付
                         payType = 1;
+                        mWayOffline.setChecked(true);
+                        payWay = 2;
+                        mWayOnline.setClickable(false);
                         break;
-                    case R.id.pay_type_cash:
+                    case R.id.pay_type_cash: //现付
                         payType = 2;
+                        mWayOnline.setClickable(true);
                         break;
                 }
             }
@@ -129,11 +142,15 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.pay_way_online:
+                    case R.id.pay_way_online: //在线支付
                         payWay = 1;
+                        mTypeCash.setChecked(true);
+                        payType = 2;
+                        mTypePay.setClickable(false);
                         break;
-                    case R.id.pay_way_offline:
+                    case R.id.pay_way_offline: //线下支付
                         payWay = 2;
+                        mTypePay.setClickable(true);
                         break;
                 }
             }

@@ -44,7 +44,6 @@ import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.model.event.DictSelectEvent;
 import com.js.shipper.model.request.AddOrder;
-import com.js.shipper.model.request.AddStepTwo;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.FilePresenter;
 import com.js.shipper.presenter.contract.DictContract;
@@ -120,6 +119,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     RadioButton mWayOnline;
     @BindView(R.id.pay_way_offline)
     RadioButton mWayOffline;
+    @BindView(R.id.release)
+    TextView mRelease;
 
 
     private long matchId;
@@ -130,7 +131,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
-    private int payType = 1;
+    private int payType = 2;
     private int payWay = 1;
     private int feeWay = 1;
 
@@ -193,6 +194,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
 
     private void initView() {
+
+        if (matchId != 0) {
+            mRelease.setText("指定发布");
+        }
+
         mTypeWindow = new ItemWindow(mContext, Const.DICT_CAR_TYPE);
         mLengthWindow = new ItemWindow(mContext, Const.DICT_LENGTH);
         mFilePresenter.attachView(this);
@@ -201,11 +207,15 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.pay_type_pay:
+                    case R.id.pay_type_pay: //到付
                         payType = 1;
+                        mWayOffline.setChecked(true);
+                        payWay = 2;
+                        mWayOnline.setClickable(false);
                         break;
-                    case R.id.pay_type_cash:
+                    case R.id.pay_type_cash: //现付
                         payType = 2;
+                        mWayOnline.setClickable(true);
                         break;
                 }
             }
@@ -214,11 +224,15 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.pay_way_online:
+                    case R.id.pay_way_online: //在线支付
                         payWay = 1;
+                        mTypeCash.setChecked(true);
+                        payType = 2;
+                        mTypePay.setClickable(false);
                         break;
-                    case R.id.pay_way_offline:
+                    case R.id.pay_way_offline: //线下支付
                         payWay = 2;
+                        mTypePay.setClickable(true);
                         break;
                 }
             }
@@ -289,7 +303,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             mSendShip.setPhone(mOrderBean.getSendMobile());
             mSendShip.setName(mOrderBean.getSendName());
 
-
             mEndShip.setPosition(mOrderBean.getReceivePosition());
             mEndShip.setAddress(mOrderBean.getReceiveAddress());
             mEndShip.setAddressCode(Integer.parseInt(mOrderBean.getReceiveAddressCode()));
@@ -306,12 +319,10 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         }
     }
 
-
     @Override
     public void setActionBar() {
         mTitle.setText("发货");
     }
-
 
     @OnClick({R.id.ship_time_layout, R.id.car_type_layout,
             R.id.image_1, R.id.image_2, R.id.fee_mine_layout,
@@ -450,7 +461,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             return;
         }
 
-
         if (TextUtils.isEmpty(carType)) {
             toast("请选择用车类型");
             return;
@@ -483,9 +493,9 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         addOrder.setSendAddressCode(String.valueOf(mSendShip.getAddressCode()));
         addOrder.setSendName(mSendShip.getName());
         addOrder.setSendPosition(mSendShip.getPosition());
-        if (matchId==0){
+        if (matchId == 0) {
             addOrder.setMatchId("");
-        }else {
+        } else {
             addOrder.setMatchId(String.valueOf(matchId));
         }
         if (feeWay == 1) {

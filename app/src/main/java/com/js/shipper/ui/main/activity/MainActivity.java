@@ -52,13 +52,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         mViewpager.setCurrentItem(0);
     }
-
 
     @Override
     protected void init() {
