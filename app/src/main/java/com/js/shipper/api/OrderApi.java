@@ -87,4 +87,8 @@ public interface OrderApi {
     @POST("app/order/addOrder")
     Observable<HttpResponse<Boolean>> submitOrder(@Body AddOrder addOrder);
 
+
+    @POST("app/order/confirm/{id}")
+    Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
+
 }

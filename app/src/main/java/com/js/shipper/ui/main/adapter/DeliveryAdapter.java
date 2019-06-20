@@ -23,17 +23,29 @@ public class DeliveryAdapter extends BaseQuickAdapter<ParkBean, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, ParkBean item) {
-        helper.setText(R.id.item_delivery_branch, item.getCompanyName())
-                .setText(R.id.item_address, item.getDetailAddress())
+        switch (item.getCompanyType()) {
+            case 1:
+                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[服务中心]");
+                break;
+            case 2:
+                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[车代点]");
+                break;
+            case 3:
+                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[网点]");
+                break;
+        }
+
+        helper.setText(R.id.item_address, item.getDetailAddress())
                 .setText(R.id.item_remark, item.getRemark());
         helper.addOnClickListener(R.id.remark_status_layout);
+        helper.addOnClickListener(R.id.navigation);
         TextView remark = helper.getView(R.id.item_remark);
-        if (item.isRemark()){
+        if (item.isRemark()) {
             remark.setVisibility(View.VISIBLE);
-            helper.setImageResource(R.id.remark_status,R.mipmap.ic_delivery_arrow_up);
-        }else {
+            helper.setImageResource(R.id.remark_status, R.mipmap.ic_delivery_arrow_up);
+        } else {
             remark.setVisibility(View.GONE);
-            helper.setImageResource(R.id.remark_status,R.mipmap.ic_delivery_arrow_down);
+            helper.setImageResource(R.id.remark_status, R.mipmap.ic_delivery_arrow_down);
         }
     }
 }

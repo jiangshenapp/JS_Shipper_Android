@@ -41,7 +41,6 @@ public class SortWindow extends PopupWindow {
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setFocusable(true);//内容可点击
         setOutsideTouchable(false); //点击外部popupWindow消失
-        setClippingEnabled(false);
         setBackgroundDrawable(null);
     }
 
@@ -49,10 +48,10 @@ public class SortWindow extends PopupWindow {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.item_sort_default:
-                EventBus.getDefault().post(new SortEvent(0));
+                EventBus.getDefault().post(new SortEvent(1));
                 break;
             case R.id.item_sort_distance:
-                EventBus.getDefault().post(new SortEvent(1));
+                EventBus.getDefault().post(new SortEvent(2));
                 break;
         }
         dismiss();

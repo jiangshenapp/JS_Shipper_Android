@@ -16,11 +16,14 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.event.CitySelectEvent;
 import com.js.shipper.model.event.SortEvent;
 import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
+import com.js.shipper.presenter.DictPresenter;
+import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.CarSourcePresenter;
@@ -38,6 +41,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -45,7 +50,7 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/30.
  * 车源
  */
-public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implements CarSourceContract.View, BaseQuickAdapter.OnItemClickListener {
+public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implements CarSourceContract.View, BaseQuickAdapter.OnItemClickListener, DictContract.View {
 
 
     @BindView(R.id.recycler)
@@ -62,6 +67,9 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     TextView mSort;
     @BindView(R.id.filter)
     TextView mFilter;
+
+    @Inject
+    DictPresenter mDictPresenter;
 
     private CarSourceAdapter mAdapter;
     private List<LineBean> mList;
@@ -96,10 +104,18 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     @Override
     protected void init() {
         initView();
+        initData();
+    }
+
+    private void initData() {
+        mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
+        mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+        mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
 
 
     private void initView() {
+        mDictPresenter.attachView(this);
         initRefresh();
         initRecycler();
         initCityWindow();
@@ -179,7 +195,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 mSortWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.filter:
-
+                mFilterWindow.showAsDropDown(mCondition, 0, 0);
                 break;
         }
     }
@@ -213,7 +229,8 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     @Subscribe
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
-
+        mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        getCarSource(Const.PAGE_NUM);
     }
 
     private void getCarSource(int num) {
@@ -231,5 +248,20 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         lineAppFind.setSort(sort);
 
         mPresenter.getCarSource(num, lineAppFind, Const.PAGE_SIZE);
+    }
+
+    @Override
+    public void onDictByType(String type, List<DictBean> dictBeans) {
+        switch (type) {
+            case Const.DICT_CAR_TYPE_NAME:
+                mFilterWindow.setTypes(dictBeans);
+                break;
+            case Const.DICT_LENGTH_NAME:
+                mFilterWindow.setCarLengths(dictBeans);
+                break;
+            case Const.DICT_USE_CAR_TYPE_NAME:
+                mFilterWindow.setCarTypes(dictBeans);
+                break;
+        }
     }
 }
