@@ -65,6 +65,14 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name="com.js.shipper.ui.user.activity.ForgetPwdActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.shipper.ui.user.activity.ResetPwdActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.shipper.ui.user.activity.UserCenterActivity"
             android:launchMode="singleTop" />
 

@@ -14,6 +14,7 @@ import com.js.shipper.manager.SpManager;
 import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.model.event.UserStatusChangeEvent;
 import com.js.shipper.ui.main.activity.MainActivity;
+import com.js.shipper.ui.user.activity.ForgetPwdActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.presenter.PwdLoginPresenter;
 import com.js.shipper.ui.user.presenter.contract.PwdLoginContract;
@@ -69,6 +70,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
                 RegisterActivity.action(getActivity());
                 break;
             case R.id.tv_forget_pwd:
+                ForgetPwdActivity.action(getActivity());
                 break;
             case R.id.tv_protocal:
                 break;
@@ -93,6 +95,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onLogin(String token) {
+        toast("登录成功");
         App.getInstance().putToken(token);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         getActivity().finish();
