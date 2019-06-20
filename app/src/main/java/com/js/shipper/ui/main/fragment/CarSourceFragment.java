@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.mapapi.model.LatLng;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.js.frame.view.BaseFragment;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -18,6 +20,7 @@ import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.LineBean;
+import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.event.CitySelectEvent;
 import com.js.shipper.model.event.FilterEvent;
 import com.js.shipper.model.event.SortEvent;
@@ -51,7 +54,7 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/30.
  * 车源
  */
-public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implements CarSourceContract.View, BaseQuickAdapter.OnItemClickListener, DictContract.View {
+public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implements CarSourceContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, DictContract.View {
 
 
     @BindView(R.id.recycler)
@@ -154,6 +157,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         mRecycler.setAdapter(mAdapter);
         mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemChildClickListener(this);
     }
 
     @Override
@@ -162,6 +166,20 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         LineBean lineBean = lineBeans.get(position);
         if (lineBean != null) {
             CarSourceDetailActivity.action(mContext, lineBean.getId());
+        }
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        switch (view.getId()) {
+            case R.id.item_phone:
+                AppUtils.callPhone(lineBean.getDriverPhone());
+                break;
+            case R.id.item_chat:
+                toast("该功能暂未开放");
+                break;
         }
     }
 
