@@ -68,10 +68,31 @@ public class VerifiedActivity extends SimpleActivity {
     }
 
     private void initView() {
-        authState = App.getInstance().personConsignorVerified;
-        initAuthState();
+
         initFragment();
-        switchFragment(VerifiedChangeEvent.VERIFIED_PERSON);
+
+        if (App.getInstance().personConsignorVerified == 1
+        || App.getInstance().personConsignorVerified == 2) { //个人
+            authState = App.getInstance().personConsignorVerified;
+            switchFragment(VerifiedChangeEvent.VERIFIED_PERSON);
+            rbPerson.setClickable(false);
+            rbCompany.setClickable(false);
+        } else if (App.getInstance().companyConsignorVerified == 1
+        || App.getInstance().companyConsignorVerified == 2) { //公司
+            authState = App.getInstance().companyConsignorVerified;
+            switchFragment(VerifiedChangeEvent.VERIFIED_COMPANY);
+            rbPerson.setClickable(false);
+            rbCompany.setClickable(false);
+            rbPerson.setChecked(false);
+            rbCompany.setChecked(true);
+            rbCompany.setTextColor(getResources().getColor(R.color.white));
+            rbPerson.setTextColor(getResources().getColor(R.color._000000));
+        } else {
+            authState = App.getInstance().personConsignorVerified;
+            switchFragment(VerifiedChangeEvent.VERIFIED_PERSON);
+        }
+
+        initAuthState();
     }
 
     private void initAuthState() {
