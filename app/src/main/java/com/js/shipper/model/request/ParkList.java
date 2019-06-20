@@ -5,15 +5,16 @@ package com.js.shipper.model.request;
  */
 public class ParkList {
 
+
     /**
      * addressCode : string
+     * companyType : 0
+     * sort : 0
      */
 
-    private String addressCode;//所在地
-
-    public ParkList(String addressCode) {
-        this.addressCode = addressCode;
-    }
+    private String addressCode;
+    private String companyType;
+    private int sort;
 
     public String getAddressCode() {
         return addressCode;
@@ -21,5 +22,21 @@ public class ParkList {
 
     public void setAddressCode(String addressCode) {
         this.addressCode = addressCode;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 }

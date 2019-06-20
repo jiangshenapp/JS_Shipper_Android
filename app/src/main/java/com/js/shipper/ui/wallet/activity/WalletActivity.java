@@ -69,7 +69,6 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     }
 
     private void initView() {
-        mRefresh.autoRefresh();
         mRefresh.setEnableLoadMore(false);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -102,5 +101,10 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     public void onAccountInfo(AccountInfo accountInfo) {
         mAccountInfo = accountInfo;
         mMoney.setText(String.valueOf(accountInfo.getBalance()));
+    }
+
+    @Override
+    public void finishRefresh() {
+        mRefresh.finishRefresh();
     }
 }

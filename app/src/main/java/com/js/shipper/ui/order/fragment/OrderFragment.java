@@ -113,6 +113,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         mRecycler.setAdapter(mOrderAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mOrderAdapter.setOnItemClickListener(this);
+        mOrderAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
     }
 

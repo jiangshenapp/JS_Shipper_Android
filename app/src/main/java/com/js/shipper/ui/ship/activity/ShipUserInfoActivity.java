@@ -32,14 +32,16 @@ public class ShipUserInfoActivity extends SimpleActivity {
     private int type;//0。发货；1.收货
     private String address;
     private String addressName;
+    private ShipBean mShipBean;
 
 
-    public static void action(Activity context, int type, String address, String addressName) {
+    public static void action(Activity context, int type, String address, String addressName, ShipBean shipBean) {
         Intent intent = new Intent(context, ShipUserInfoActivity.class);
         intent.putExtra("type", type);
         intent.putExtra("address", address);
         intent.putExtra("addressName", addressName);
-        context.startActivityForResult(intent,888);
+        intent.putExtra("ship", shipBean);
+        context.startActivityForResult(intent, 888);
     }
 
     @Override
@@ -57,6 +59,7 @@ public class ShipUserInfoActivity extends SimpleActivity {
         type = getIntent().getIntExtra("type", 0);
         address = getIntent().getStringExtra("address");
         addressName = getIntent().getStringExtra("addressName");
+        mShipBean = getIntent().getParcelableExtra("ship");
         mAddress.setText(address);
         mAddressName.setText(addressName);
     }
@@ -74,6 +77,11 @@ public class ShipUserInfoActivity extends SimpleActivity {
                 mPhone.setHint("收货人手机号");
                 break;
         }
+        if (mShipBean != null) {
+            mAddressDetail.setText(mShipBean.getAddressDetail());
+            mName.setText(mShipBean.getName());
+            mPhone.setText(mShipBean.getPhone());
+        }
     }
 
     @Override
@@ -88,13 +96,14 @@ public class ShipUserInfoActivity extends SimpleActivity {
         String name = mName.getText().toString().trim();
         String address = mAddressDetail.getText().toString().trim();
 
-        if (TextUtils.isEmpty(address)) {
-            toast("请输入详细地址");
-            return;
-        }
 
         if (TextUtils.isEmpty(phone)) {
             toast("请输入手机号");
+            return;
+        }
+
+        if (phone.length()!=11){
+            toast("请输入正确手机号");
             return;
         }
 

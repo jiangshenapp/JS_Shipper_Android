@@ -235,7 +235,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
-                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString());
+                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(),mShip);
                 break;
             case R.id.confirm:
                 if (TextUtils.isEmpty(mShip.getName())) {

@@ -1,5 +1,6 @@
 package com.js.shipper.ui.main.fragment;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.ParkBean;
+import com.js.shipper.model.event.CitySelectEvent;
+import com.js.shipper.model.event.CompanyEvent;
 import com.js.shipper.model.event.SortEvent;
 import com.js.shipper.model.request.ParkList;
 import com.js.shipper.model.response.ListResponse;
@@ -29,6 +32,7 @@ import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.util.MapUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
+import com.js.shipper.widget.window.CompanyWindow;
 import com.js.shipper.widget.window.FilterWindow;
 import com.js.shipper.widget.window.SortWindow;
 import com.mylhyl.circledialog.CircleDialog;
@@ -61,6 +65,8 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     TextView mArea;
     @BindView(R.id.sort)
     TextView mSort;
+    @BindView(R.id.branch)
+    TextView mBranch;
     @BindView(R.id.condition_layout)
     LinearLayout mCondition;
 
@@ -68,10 +74,13 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     private List<ParkBean> mLists;
     private int type;
     private int sort;
+    private String areaCode;
 
     private CityWindow mAreaWindow;
     private SortWindow mSortWindow;
+    private CompanyWindow mCompanyWindow;
     private String[] items = {"百度地图", "高德地图"};
+    private ParkList mPark = new ParkList();
 
     public static DeliveryFragment newInstance() {
         return new DeliveryFragment();
@@ -102,6 +111,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     private void initCityWindow() {
         mAreaWindow = new CityWindow(mContext, 0);
         mSortWindow = new SortWindow(mContext);
+        mCompanyWindow = new CompanyWindow(mContext);
     }
 
     private void initView() {
@@ -134,12 +144,20 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemChildClickListener(this);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
     }
 
 
     private void getParkList(int num) {
-        mPresenter.getParkList(num, Const.PAGE_SIZE, new ParkList(mArea.getText().toString()));
+        if ("区域".equals(mArea.getText().toString())) {
+            mPark.setAddressCode("0");
+        } else {
+            mPark.setAddressCode(areaCode);
+        }
+
+        mPark.setSort(sort);
+        mPresenter.getParkList(num, Const.PAGE_SIZE, mPark);
     }
 
     @Override
@@ -189,15 +207,16 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
 
     }
 
-    @OnClick({R.id.area, R.id.branch, R.id.sort})
+    @OnClick({R.id.area_layout, R.id.branch_layout, R.id.sort_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.area:
+            case R.id.area_layout:
                 mAreaWindow.showAsDropDown(mCondition, 0, 0);
                 break;
-            case R.id.branch:
+            case R.id.branch_layout:
+                mCompanyWindow.showAsDropDown(mCondition, 0, 0);
                 break;
-            case R.id.sort:
+            case R.id.sort_layout:
                 mSortWindow.showAsDropDown(mCondition, 0, 0);
                 break;
         }
@@ -232,4 +251,33 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
         getParkList(Const.PAGE_NUM);
     }
+
+    @Subscribe
+    public void onEvent(CitySelectEvent event) {
+        switch (event.type) {
+            case 0:
+                areaCode = event.areaBean.getCode();
+                if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
+                    mArea.setText(event.areaBean.getAlias());
+                } else {
+                    mArea.setText(event.areaBean.getName());
+                }
+                break;
+
+        }
+
+        getParkList(Const.PAGE_NUM);
+    }
+
+    @Subscribe
+    public void onEvent(CompanyEvent event) {
+        mBranch.setText(event.content);
+        if ("全部".equals(event.content)) {
+            mPark.setCompanyType("");
+        }else {
+            mPark.setCompanyType(String.valueOf(event.position));
+        }
+        getParkList(Const.PAGE_NUM);
+    }
+
 }

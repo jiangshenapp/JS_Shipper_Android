@@ -97,6 +97,7 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemClickListener(this);
     }
 

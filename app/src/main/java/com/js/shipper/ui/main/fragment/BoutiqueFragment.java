@@ -15,7 +15,9 @@ import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.event.CitySelectEvent;
+import com.js.shipper.model.event.FilterEvent;
 import com.js.shipper.model.event.SortEvent;
+import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
@@ -68,7 +70,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     @BindView(R.id.condition_layout)
     LinearLayout mCondition;
 
-
+    private LineAppFind lineAppFind = new LineAppFind();
 
     @OnClick({R.id.send_address, R.id.end_address, R.id.sort, R.id.filter})
     public void onViewClicked(View view) {
@@ -153,6 +155,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         mAdapter = new BoutiqueAdapter(R.layout.item_boutique, mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
     }
@@ -222,20 +225,22 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         }
     }
 
+
+
     private void getCarSource(int num) {
-//        if ("发货地".equals(mSendAddress.getText().toString())) {
-//            lineAppFind.setStartAddressCode("0");
-//        } else {
-//            lineAppFind.setStartAddressCode(startAddressCode);
-//        }
-//        if ("收货地".equals(mEndAddress.getText().toString())) {
-//            lineAppFind.setArriveAddressCode("0");
-//        } else {
-//            lineAppFind.setArriveAddressCode(arriveAddressCode);
-//        }
-//
-//        lineAppFind.setSort(sort);
-        mPresenter.getClassicLine(num, "", "", Const.PAGE_SIZE);
+        if ("发货地".equals(mSendAddress.getText().toString())) {
+            lineAppFind.setStartAddressCode("0");
+        } else {
+            lineAppFind.setStartAddressCode(startAddressCode);
+        }
+        if ("收货地".equals(mEndAddress.getText().toString())) {
+            lineAppFind.setArriveAddressCode("0");
+        } else {
+            lineAppFind.setArriveAddressCode(arriveAddressCode);
+        }
+
+        lineAppFind.setSort(sort);
+        mPresenter.getClassicLine(num, lineAppFind, Const.PAGE_SIZE);
     }
 
     @Subscribe
@@ -268,6 +273,14 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        getCarSource(Const.PAGE_NUM);
+    }
+
+    @Subscribe
+    public void onEvent(FilterEvent event){
+        lineAppFind.setCarLength(event.lengthStr);
+        lineAppFind.setCarModel(event.typeStr);
+        lineAppFind.setUseCarType(event.carTypeStr);
         getCarSource(Const.PAGE_NUM);
     }
 }

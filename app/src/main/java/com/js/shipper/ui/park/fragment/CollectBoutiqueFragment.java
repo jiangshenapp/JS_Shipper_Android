@@ -78,6 +78,7 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
         mAdapter = new BoutiqueAdapter(R.layout.item_boutique, mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
     }

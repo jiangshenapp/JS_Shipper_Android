@@ -112,8 +112,13 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
         }
         Gson gson = new Gson();
         LatLng latLng = new LatLng(App.getInstance().mLocation.getLatitude(),App.getInstance().mLocation.getLongitude());
-        double distance = DistanceUtil.getDistance(gson.fromJson(parkBean.getContactLocation(), LatLng.class), latLng);
-        mBranchDistance.setText("距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+        try {
+            double distance = DistanceUtil.getDistance(gson.fromJson(parkBean.getContactLocation(), LatLng.class), latLng);
+            mBranchDistance.setText("距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+        }catch (Exception e){
+
+        }
+
         if (moreItem != null) {
             if (isCollection) {
                 moreItem.setIcon(R.mipmap.ic_navigationbar_collection_selected);

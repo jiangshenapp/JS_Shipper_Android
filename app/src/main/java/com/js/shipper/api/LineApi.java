@@ -46,7 +46,7 @@ public interface LineApi {
      */
     @POST("app/line/classic")
     Observable<HttpResponse<ListResponse<LineBean>>> getClassicLine(@Query("current") int current,
-                                                                    @Body LineClassic data,
+                                                                    @Body LineAppFind data,
                                                                     @Query("size") int size);
 
 

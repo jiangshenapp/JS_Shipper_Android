@@ -5,6 +5,7 @@ import com.js.http.ApiFactory;
 import com.js.shipper.App;
 import com.js.shipper.api.LineApi;
 import com.js.shipper.model.bean.LineBean;
+import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.request.LineClassic;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.rx.RxException;
@@ -29,9 +30,9 @@ public class BoutiquePresenter extends RxPresenter<BoutiqueContract.View> implem
     }
 
     @Override
-    public void getClassicLine(int current, String arriveAddress, String startAddress, int size) {
+    public void getClassicLine(int current, LineAppFind lineAppFind, int size) {
         Disposable disposable = mApiFactory.getApi(LineApi.class).getClassicLine(current,
-                new LineClassic(arriveAddress,startAddress),
+                lineAppFind,
                 size)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())

@@ -97,6 +97,7 @@ public class CollectBranchFragment extends BaseFragment<CollectDeliveryPresenter
         mAdapter.setOnItemClickListener(this);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemChildClickListener(this);
     }

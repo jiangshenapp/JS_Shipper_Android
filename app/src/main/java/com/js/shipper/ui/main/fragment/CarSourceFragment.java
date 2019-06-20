@@ -19,6 +19,7 @@ import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.event.CitySelectEvent;
+import com.js.shipper.model.event.FilterEvent;
 import com.js.shipper.model.event.SortEvent;
 import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
@@ -151,7 +152,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-//        mAdapter.setEmptyView(AppUtils.getEmptyView());
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -230,6 +231,15 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        getCarSource(Const.PAGE_NUM);
+    }
+
+
+    @Subscribe
+    public void onEvent(FilterEvent event){
+        lineAppFind.setCarLength(event.lengthStr);
+        lineAppFind.setCarModel(event.typeStr);
+        lineAppFind.setUseCarType(event.carTypeStr);
         getCarSource(Const.PAGE_NUM);
     }
 
