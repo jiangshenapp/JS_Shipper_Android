@@ -201,7 +201,12 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 }
                 Gson gson = new Gson();
                 LatLng latLng = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
-                showSelectDialog(latLng, gson.fromJson(parkBean.getContactLocation(), LatLng.class), parkBean.getAddress());
+                LatLng endLat = gson.fromJson(parkBean.getContactLocation(), LatLng.class);
+                if (endLat == null || endLat.latitude == 0 || endLat.latitude == 0) {
+                    toast("位置错误");
+                    return;
+                }
+                showSelectDialog(latLng, endLat, parkBean.getAddress());
                 break;
         }
 
@@ -274,7 +279,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mBranch.setText(event.content);
         if ("全部".equals(event.content)) {
             mPark.setCompanyType("");
-        }else {
+        } else {
             mPark.setCompanyType(String.valueOf(event.position));
         }
         getParkList(Const.PAGE_NUM);
