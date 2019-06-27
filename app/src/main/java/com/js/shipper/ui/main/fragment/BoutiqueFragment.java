@@ -217,8 +217,6 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         }
     }
 
-
-
     @Override
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
@@ -239,8 +237,6 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 break;
         }
     }
-
-
 
     private void getCarSource(int num) {
         if ("发货地".equals(mSendAddress.getText().toString())) {

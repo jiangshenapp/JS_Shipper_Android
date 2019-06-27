@@ -40,6 +40,10 @@ public class LoginActivity extends SimpleActivity {
         context.startActivity(intent);
     }
 
+    @Override
+    public void backAction() {
+        MainActivity.action(this);
+    }
 
     @Override
     protected int getLayout() {

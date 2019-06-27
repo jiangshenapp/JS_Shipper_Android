@@ -66,11 +66,21 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   finish();
+                   backAction();
                 }
             });
             setActionBar();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        backAction();
+    }
+
+    public void backAction() {
+        finish();
     }
 
     @Override
