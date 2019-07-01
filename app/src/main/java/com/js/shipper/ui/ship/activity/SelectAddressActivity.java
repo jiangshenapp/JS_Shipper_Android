@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     @BindView(R.id.confirm)
     TextView mConfirm;
     @BindView(R.id.search_address)
-    TextView mSearchAddress;
+    EditText mSearchAddress;
     @BindView(R.id.address_search_layout)
     LinearLayout mSearchLayout;
 

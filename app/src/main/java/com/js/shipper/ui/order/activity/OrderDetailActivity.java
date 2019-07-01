@@ -170,7 +170,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mSendAddress.setText(orderBean.getSendAddress());
         mEndAddress.setText(orderBean.getReceiveAddress());
         mTime.setText(orderBean.getLoadingTime());
-        mCarInfo.setText(orderBean.getGoodsVolume() + "方/"
+        mCarInfo.setText(orderBean.getCarModelName()+"/"+orderBean.getGoodsVolume() + "方/"
                 + orderBean.getGoodsWeight() + "吨");
         mGoodName.setText(orderBean.getGoodsName());
         mUseCarType.setText(orderBean.getUseCarType());
@@ -386,6 +386,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         break;
 
                 }
+                break;
 
             case R.id.detail_send_navigate:
                 if (App.getInstance().mLocation == null) {

@@ -57,8 +57,8 @@ public class OrderBean implements Parcelable {
     private int feeType;//运费类型，1自己出价，2电议
     private String finishTime;//订单完成时间
     private String goodsType;//货物类型,字典表，多个
-    private int goodsVolume;//货物体积，单位立方米
-    private int goodsWeight;//货物重量、吨
+    private double goodsVolume;//货物体积，单位立方米
+    private double goodsWeight;//货物重量、吨
     private long id;//主键
     private String image1;//图片1
     private String image2;//图片2
@@ -136,8 +136,8 @@ public class OrderBean implements Parcelable {
         feeType = in.readInt();
         finishTime = in.readString();
         goodsType = in.readString();
-        goodsVolume = in.readInt();
-        goodsWeight = in.readInt();
+        goodsVolume = in.readDouble();
+        goodsWeight = in.readDouble();
         id = in.readLong();
         image1 = in.readString();
         image2 = in.readString();
@@ -193,8 +193,8 @@ public class OrderBean implements Parcelable {
         dest.writeInt(feeType);
         dest.writeString(finishTime);
         dest.writeString(goodsType);
-        dest.writeInt(goodsVolume);
-        dest.writeInt(goodsWeight);
+        dest.writeDouble(goodsVolume);
+        dest.writeDouble(goodsWeight);
         dest.writeLong(id);
         dest.writeString(image1);
         dest.writeString(image2);
@@ -328,7 +328,7 @@ public class OrderBean implements Parcelable {
         this.goodsType = goodsType;
     }
 
-    public int getGoodsVolume() {
+    public double getGoodsVolume() {
         return goodsVolume;
     }
 
@@ -336,7 +336,7 @@ public class OrderBean implements Parcelable {
         this.goodsVolume = goodsVolume;
     }
 
-    public int getGoodsWeight() {
+    public double getGoodsWeight() {
         return goodsWeight;
     }
 
