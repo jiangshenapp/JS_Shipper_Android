@@ -103,6 +103,7 @@
                 android:background="@color/_F0F0F0" />
 
             <LinearLayout
+                android:id="@+id/good_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
@@ -111,22 +112,71 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="货物类型"
+                    android:text="货物名称"
                     android:textColor="#FF000000"
                     android:textSize="14sp" />
 
 
-                <EditText
-                    android:id="@+id/good_type"
+                <TextView
+                    android:id="@+id/good_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请输入货物类型"
+                    android:hint="请输入货物名称"
                     android:textColorHint="@color/_B8B8B8"
                     android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_list_arrow_black" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_F0F0F0" />
+
+
+            <LinearLayout
+                android:id="@+id/ship_package_layout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="包装类型"
+                    android:textColor="#FF000000"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/good_package"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入包装类型"
+                    android:textColorHint="@color/_B8B8B8"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_list_arrow_black" />
 
 
             </LinearLayout>
@@ -289,9 +339,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -323,8 +372,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <CheckBox
                 android:layout_width="110dp"
@@ -372,8 +420,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:background="@color/_FAFAFA"
-                android:hint="请输入备注信息"
                 android:gravity="left|top"
+                android:hint="请输入备注信息"
                 android:padding="10dp"
                 android:textColor="@color/_000000"
                 android:textSize="14sp" />
@@ -431,8 +479,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="输入价格"
-                    android:textColorHint="@color/_B8B8B8"
                     android:inputType="numberDecimal"
+                    android:textColorHint="@color/_B8B8B8"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -583,9 +631,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:button="@drawable/selector_checkbox"
+                        android:clickable="false"
                         android:paddingStart="10dp"
                         android:text="到付"
-                        android:clickable="false"
                         android:textColor="@color/_000000"
                         android:textSize="14sp" />
 
@@ -601,8 +649,55 @@
                         android:text="现付"
                         android:textColor="@color/_000000"
                         android:textSize="14sp" />
-
                 </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
+
+                <CheckBox
+                    android:id="@+id/cb_bail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:button="@drawable/selector_checkbox"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="是否需要保证金"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <EditText
+                    android:id="@+id/bail_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/_F0F0F0"
+                    android:hint="输入需要交纳的金额"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="12sp"
+                    android:paddingStart="8dp"
+                    android:inputType="numberDecimal"
+                    android:enabled="false"
+                    />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -624,8 +719,7 @@
                 android:text="指定发布"
                 android:textColor="@color/_000000"
                 android:textSize="17sp"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/release"

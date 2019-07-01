@@ -107,9 +107,9 @@ public class OrderBean implements Parcelable {
      * receiveAddressCodeName : 浙江省宁波市鄞州区
      * sendAddressCodeName : 浙江省宁波市鄞州区
      */
-    private Object commentImage1;
-    private Object commentImage2;
-    private Object commentImage3;
+    private String commentImage1;
+    private String commentImage2;
+    private String commentImage3;
     private String stateName;
     private String stateNameDriver;
     private String stateNameConsignor;
@@ -120,6 +120,11 @@ public class OrderBean implements Parcelable {
     private String receiveAddressCodeName;
     private String sendAddressCodeName;
     private String driverNum;
+    private String goodsName;
+    private String packType;
+    private boolean requireDeposit;
+    private double deposit;
+
 
     protected OrderBean(Parcel in) {
         carLength = in.readString();
@@ -158,6 +163,9 @@ public class OrderBean implements Parcelable {
         state = in.readInt();
         transferTime = in.readString();
         useCarType = in.readString();
+        commentImage1 = in.readString();
+        commentImage2 = in.readString();
+        commentImage3 = in.readString();
         stateName = in.readString();
         stateNameDriver = in.readString();
         stateNameConsignor = in.readString();
@@ -168,6 +176,10 @@ public class OrderBean implements Parcelable {
         receiveAddressCodeName = in.readString();
         sendAddressCodeName = in.readString();
         driverNum = in.readString();
+        goodsName = in.readString();
+        packType = in.readString();
+        requireDeposit = in.readByte() != 0;
+        deposit = in.readDouble();
     }
 
     @Override
@@ -208,6 +220,9 @@ public class OrderBean implements Parcelable {
         dest.writeInt(state);
         dest.writeString(transferTime);
         dest.writeString(useCarType);
+        dest.writeString(commentImage1);
+        dest.writeString(commentImage2);
+        dest.writeString(commentImage3);
         dest.writeString(stateName);
         dest.writeString(stateNameDriver);
         dest.writeString(stateNameConsignor);
@@ -218,6 +233,10 @@ public class OrderBean implements Parcelable {
         dest.writeString(receiveAddressCodeName);
         dest.writeString(sendAddressCodeName);
         dest.writeString(driverNum);
+        dest.writeString(goodsName);
+        dest.writeString(packType);
+        dest.writeByte((byte) (requireDeposit ? 1 : 0));
+        dest.writeDouble(deposit);
     }
 
     @Override
@@ -524,27 +543,28 @@ public class OrderBean implements Parcelable {
     public void setUseCarType(String useCarType) {
         this.useCarType = useCarType;
     }
-    public Object getCommentImage1() {
+
+    public String getCommentImage1() {
         return commentImage1;
     }
 
-    public void setCommentImage1(Object commentImage1) {
+    public void setCommentImage1(String commentImage1) {
         this.commentImage1 = commentImage1;
     }
 
-    public Object getCommentImage2() {
+    public String getCommentImage2() {
         return commentImage2;
     }
 
-    public void setCommentImage2(Object commentImage2) {
+    public void setCommentImage2(String commentImage2) {
         this.commentImage2 = commentImage2;
     }
 
-    public Object getCommentImage3() {
+    public String getCommentImage3() {
         return commentImage3;
     }
 
-    public void setCommentImage3(Object commentImage3) {
+    public void setCommentImage3(String commentImage3) {
         this.commentImage3 = commentImage3;
     }
 
@@ -626,5 +646,30 @@ public class OrderBean implements Parcelable {
 
     public void setDriverNum(String driverNum) {
         this.driverNum = driverNum;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getPackType() {
+        return packType;
+    }
+
+    public void setPackType(String packType) {
+        this.packType = packType;
+    }
+
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
     }
 }

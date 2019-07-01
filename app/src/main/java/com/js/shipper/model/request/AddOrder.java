@@ -59,6 +59,10 @@ public class AddOrder {
     private String sendName;
     private String sendPosition;
     private String useCarType;
+    private double deposit;//保证金
+    private boolean requireDeposit;//是否开启保证金
+    private String goodsName;//货物名称
+    private String packType;//包装类型
 
     public void setCarLength(String carLength) {
         this.carLength = carLength;
@@ -158,5 +162,21 @@ public class AddOrder {
 
     public void setUseCarType(String useCarType) {
         this.useCarType = useCarType;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
+    }
+
+    public void setRequireDeposit(boolean requireDeposit) {
+        this.requireDeposit = requireDeposit;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public void setPackType(String packType) {
+        this.packType = packType;
     }
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -78,8 +80,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     EditText mGoodWeight;
     @BindView(R.id.good_volume)
     EditText mGoodVolume;
-    @BindView(R.id.good_type)
-    TextView mGoodType;
+    @BindView(R.id.good_name)
+    TextView mGoodName;
     @BindView(R.id.ship_time)
     TextView mShipTime;
     @BindView(R.id.car_type)
@@ -121,6 +123,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     RadioButton mWayOffline;
     @BindView(R.id.release)
     TextView mRelease;
+    @BindView(R.id.cb_bail)
+    CheckBox mBail;
+    @BindView(R.id.bail_number)
+    EditText mBailNumber;
+    @BindView(R.id.good_package)
+    TextView mPackType;
 
 
     private long matchId;
@@ -146,6 +154,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private String typeStr;
     private String lengthStr;
     private OrderBean mOrderBean;
+    private boolean isBail;//是否需要保证金
 
     @Inject
     DictPresenter mDictPresenter;
@@ -237,7 +246,18 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 }
             }
         });
-
+        mBail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    isBail = true;
+                    mBailNumber.setEnabled(true);
+                } else {
+                    isBail = false;
+                    mBailNumber.setEnabled(false);
+                }
+            }
+        });
         initDetail();
 
     }
@@ -249,8 +269,9 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             mGoodWeight.setText(String.valueOf(mOrderBean.getGoodsWeight()));
             mShipTime.setText(mOrderBean.getLoadingTime());
             mGoodVolume.setText(String.valueOf(mOrderBean.getGoodsVolume()));
-            mGoodType.setText(mOrderBean.getGoodsType());
+            mGoodName.setText(mOrderBean.getGoodsName());
             mUseCarType.setText(mOrderBean.getUseCarType());
+            mPackType.setText(mOrderBean.getPackType());
             switch (mOrderBean.getPayWay()) {
                 case 1:
                     mWayOnline.setChecked(true);
@@ -409,12 +430,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     public void confirm() {
         String weight = mGoodWeight.getText().toString().trim();
         String volume = mGoodVolume.getText().toString().trim();
-        String goodType = mGoodType.getText().toString().trim();
+        String goodName = mGoodName.getText().toString().trim();
         String remark = mRemark.getText().toString().trim();
-        String type = mGoodType.getText().toString().trim();
         String time = mShipTime.getText().toString().trim();
         String carType = mUseCarType.getText().toString().trim();
-
+        String pickType = mPackType.getText().toString().trim();
 
         if (TextUtils.isEmpty(mStartAddress.getText().toString())) {
             toast("请输入发货地址");
@@ -446,10 +466,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             return;
         }
 
-        if (TextUtils.isEmpty(goodType)) {
-            toast("请输入货物类型");
-            return;
-        }
 
         if (TextUtils.isEmpty(time)) {
             toast("请选择时间");
@@ -469,12 +485,18 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             toast("请输入价格");
             return;
         }
+        if (isBail && TextUtils.isEmpty(mBailNumber.getText().toString())) {
+            toast("请输入保证金");
+            return;
+        }
+
         AddOrder addOrder = new AddOrder();
         addOrder.setGoodsWeight(Integer.parseInt(weight));
         addOrder.setGoodsVolume(Integer.parseInt(volume));
-        addOrder.setGoodsType(type);
+        addOrder.setGoodsName(goodName);
         addOrder.setUseCarType(carType);
         addOrder.setLoadingTime(time);
+        addOrder.setPackType(pickType);
         addOrder.setImage1(img1Url);
         addOrder.setImage2(img2Url);
         addOrder.setRemark(remark);
@@ -493,6 +515,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         addOrder.setSendAddressCode(String.valueOf(mSendShip.getAddressCode()));
         addOrder.setSendName(mSendShip.getName());
         addOrder.setSendPosition(mSendShip.getPosition());
+        addOrder.setRequireDeposit(isBail);
+        addOrder.setDeposit(TextUtils.isEmpty(mBailNumber.getText().toString()) ? 0 : Double.parseDouble(mBailNumber.getText().toString()));
         if (matchId == 0) {
             addOrder.setMatchId("");
         } else {
@@ -501,6 +525,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         if (feeWay == 1) {
             addOrder.setFee(Double.parseDouble(mFee.getText().toString()));
         }
+
         mPresenter.submitOrder(addOrder);
     }
 
@@ -597,7 +622,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         getTakePhoto().onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Const.CODE_REQ) {
+        if (requestCode == Const.CODE_REQ && resultCode == 888) {
             if (data != null) {
                 ShipBean shipBean = data.getParcelableExtra("ship");
                 switch (shipBean.getType()) {
@@ -616,6 +641,17 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 mMileage.setText("总里程" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
             }
 
+        } else if (requestCode == Const.CODE_REQ && resultCode == 111) {
+            String content = data.getStringExtra("content");
+            int type = data.getIntExtra("type", 0);
+            switch (type) {
+                case Const.DICT_PICK_TYPE:
+                    mPackType.setText(content);
+                    break;
+                case Const.DICT_GOODS_NAME:
+                    mGoodName.setText(content);
+                    break;
+            }
         }
     }
 

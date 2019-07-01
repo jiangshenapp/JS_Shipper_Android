@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
+import com.js.shipper.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
@@ -34,8 +36,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.http.Body;
 
 /**
  * Created by huyg on 2019/4/29.
@@ -53,8 +58,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     TextView mTime;
     @BindView(R.id.car_info)
     TextView mCarInfo;
-    @BindView(R.id.good_type)
-    TextView mGoodType;
+    @BindView(R.id.good_name)
+    TextView mGoodName;
     @BindView(R.id.use_car_type)
     TextView mUseCarType;
     @BindView(R.id.pay_way)
@@ -83,6 +88,21 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     LinearLayout mIngLayout;
     @BindView(R.id.driver_count)
     TextView mDriverCount;
+    @BindView(R.id.bail)
+    TextView mBail;
+    @BindView(R.id.pack_type)
+    TextView mPackType;
+    @BindView(R.id.receipt_layout)
+    LinearLayout mReceiptLayout;
+    @BindView(R.id.receipt_title)
+    TextView mReceiptTitle;
+    @BindView(R.id.detail_img1)
+    ImageView mImg1;
+    @BindView(R.id.detail_img2)
+    ImageView mImg2;
+    @BindView(R.id.detail_img3)
+    ImageView mImg3;
+
     private long orderId;
     private int status;
     private MenuItem menuItem;
@@ -144,7 +164,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     public void onOrderDetail(OrderBean orderBean) {
         this.mOrderBean = orderBean;
         status = orderBean.getState();
-        //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
+        //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待确认收货，8待回单收到确认，9待评价，10已完成，11已取消，12已关闭）
         mOrderNo.setText("订单编号：" + orderBean.getOrderNo());
         mOrderStatus.setText(orderBean.getStateNameConsignor());
         mSendAddress.setText(orderBean.getSendAddress());
@@ -152,8 +172,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mTime.setText(orderBean.getLoadingTime());
         mCarInfo.setText(orderBean.getGoodsVolume() + "方/"
                 + orderBean.getGoodsWeight() + "吨");
-        mGoodType.setText(orderBean.getGoodsType());
+        mGoodName.setText(orderBean.getGoodsName());
         mUseCarType.setText(orderBean.getUseCarType());
+        mBail.setText(String.valueOf(orderBean.getDeposit()));
+        mPackType.setText(orderBean.getPackType());
         switch (orderBean.getPayWay()) {
             case 1:
                 mPayWay.setText("线上支付");
@@ -196,15 +218,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mIngLayout.setVisibility(View.GONE);
         }
         setBottom(orderBean.getState());
-
     }
 
     private void setBottom(int state) {
-        //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
+        //(1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待确认收货，8待回单收到确认，9待评价，10已完成，11已取消，12已关闭）
         mPositive.setClickable(true);
         mPositive.setBackgroundColor(getResources().getColor(R.color._ECA73F));
         menuItem.setVisible(false);
         switch (state) {
+            case 1:
             case 2:
                 controlLayout.setVisibility(View.VISIBLE);
                 mPositive.setText("再发一次");
@@ -225,22 +247,49 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 5:
+                mPositive.setText("取消发布");
+                mNavigate.setVisibility(View.GONE);
+                break;
             case 6:
+            case 7:
                 mPositive.setText("确认收货");
                 mNavigate.setText("查看路线");
                 controlLayout.setVisibility(View.VISIBLE);
                 break;
-            case 7:
+            case 8:
+                mPositive.setText("回单收到确认");
+                mNavigate.setText("查看路线");
+                break;
+            case 9:
                 mPositive.setText("评价");
                 mNavigate.setText("查看路线");
                 break;
-            case 8:
-                mPositive.setText("查看路线");
-                mNavigate.setVisibility(View.GONE);
+            case 10:
+                mPositive.setText("重新发货");
+                mNavigate.setText("查看路线");
                 break;
-            case 9:
+            case 11:
+                mPositive.setText("重新发货");
+                mNavigate.setVisibility(View.GONE);
+            case 12:
                 controlLayout.setVisibility(View.GONE);
                 break;
+        }
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
+        }
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
+        }
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
+        }
+        if (state > 7) {
+            mReceiptTitle.setVisibility(View.VISIBLE);
+            mReceiptLayout.setVisibility(View.VISIBLE);
+        } else {
+            mReceiptTitle.setVisibility(View.GONE);
+            mReceiptLayout.setVisibility(View.GONE);
         }
     }
 
@@ -270,6 +319,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
+    @Override
+    public void onReceiptOrder(boolean isOk) {
+        if (isOk) {
+            toast("确认成功");
+            mPresenter.getOrderDetail(orderId);
+        } else {
+            toast("确认失败");
+        }
+    }
+
 
     @OnClick({R.id.control_navigate, R.id.control_positive, R.id.detail_send_navigate, R.id.detail_arrive_navigate})
     public void onViewClicked(View view) {
@@ -284,12 +343,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 5://查看路线
                     case 6:
                     case 7:
+                    case 8:
+                    case 9:
                         break;
 
                 }
                 break;
             case R.id.control_positive:
                 switch (status) {
+                    case 1:
                     case 2://再发一次
                         SubmitOrderActivity.action(mContext, 0, mOrderBean);
                         break;
@@ -305,14 +367,22 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
                         }
                         break;
-                    case 5://确认收货
-                    case 6:
+                    case 5:
+                        mPresenter.cancelOrder(orderId);
+                        break;
+                    case 6://确认收货
+                    case 7:
                         mPresenter.confirmOrder(orderId);
                         break;
 
-                    case 7://评价
+                    case 8://回单收到确认
+                        mPresenter.receiptOrder(orderId);
                         break;
-                    case 8://查看路线
+                    case 9://评价
+                        break;
+                    case 10:
+                    case 11://重新发货
+                        SubmitOrderActivity.action(mContext, 0, mOrderBean);
                         break;
 
                 }

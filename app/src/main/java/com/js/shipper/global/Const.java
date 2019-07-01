@@ -40,5 +40,10 @@ public class Const {
     public static final String DICT_CAR_TYPE_NAME ="carModel";
     public static final int DICT_USE_CAR = 3;
     public static final String DICT_USE_CAR_TYPE_NAME ="useCarType";
+    public static final int DICT_PICK_TYPE = 4;
+    public static final String DICT_PICK_TYPE_NAME  ="packType ";//包装类型
+    public static final int DICT_GOODS_NAME = 5;
+    public static final String DICT_GOODS_NAME_  ="goodsName";
+
 
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -34,6 +36,7 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.global.Const;
 import com.js.shipper.manager.CommonGlideImageLoader;
 import com.js.shipper.model.request.AddStepTwo;
 import com.js.shipper.presenter.FilePresenter;
@@ -61,8 +64,8 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     EditText mGoodWeight;
     @BindView(R.id.good_volume)
     EditText mGoodVolume;
-    @BindView(R.id.good_type)
-    TextView mGoodType;
+    @BindView(R.id.good_name)
+    TextView mGoodName;
     @BindView(R.id.ship_time)
     TextView mShipTime;
     @BindView(R.id.car_type)
@@ -91,6 +94,12 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     RadioButton mWayOnline;
     @BindView(R.id.pay_way_offline)
     RadioButton mWayOffline;
+    @BindView(R.id.cb_bail)
+    CheckBox mBail;
+    @BindView(R.id.bail_number)
+    EditText mBailNumber;
+    @BindView(R.id.good_package)
+    TextView mPackType;
 
     private long orderId;
     private String img1Url;
@@ -104,6 +113,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private int payType = 2;
     private int payWay = 1;
     private int feeWay = 1;
+    private boolean isBail;//是否需要保证金
 
 
     public static void action(Context context, long orderId) {
@@ -155,6 +165,19 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
                 }
             }
         });
+
+        mBail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    isBail = true;
+                    mBailNumber.setEnabled(true);
+                } else {
+                    isBail = false;
+                    mBailNumber.setEnabled(false);
+                }
+            }
+        });
     }
 
     private void initIntent() {
@@ -181,7 +204,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     }
 
 
-    @OnClick({R.id.ship_time_layout, R.id.car_type_layout, R.id.image_1, R.id.image_2, R.id.fee_mine_layout, R.id.power_layout, R.id.specified_release, R.id.release})
+    @OnClick({R.id.ship_time_layout, R.id.car_type_layout,
+            R.id.image_1, R.id.image_2, R.id.fee_mine_layout,
+            R.id.power_layout, R.id.specified_release,
+            R.id.release, R.id.good_type_layout,
+            R.id.ship_package_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ship_time_layout:
@@ -213,6 +240,12 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
                 break;
             case R.id.release:
                 confirm();
+                break;
+            case R.id.good_type_layout:
+                TypeInputActivity.action(OrderSubmitActivity.this, Const.DICT_GOODS_NAME);
+                break;
+            case R.id.ship_package_layout:
+                TypeInputActivity.action(OrderSubmitActivity.this, Const.DICT_PICK_TYPE);
                 break;
         }
     }
@@ -246,11 +279,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     public void confirm() {
         String weight = mGoodWeight.getText().toString().trim();
         String volume = mGoodVolume.getText().toString().trim();
-        String goodType = mGoodType.getText().toString().trim();
         String remark = mRemark.getText().toString().trim();
-        String type = mGoodType.getText().toString().trim();
+        String name = mGoodName.getText().toString().trim();
         String time = mShipTime.getText().toString().trim();
         String carType = mCarType.getText().toString().trim();
+        String packType = mPackType.getText().toString().trim();
 
         if (TextUtils.isEmpty(weight)) {
             toast("请输入货物重量");
@@ -262,18 +295,9 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             return;
         }
 
-        if (TextUtils.isEmpty(goodType)) {
-            toast("请输入货物类型");
-            return;
-        }
-
         if (TextUtils.isEmpty(time)) {
             toast("请选择时间");
             return;
-        }
-
-        if (TextUtils.isEmpty(img1Url) || TextUtils.isEmpty(img2Url)) {
-            toast("请上传照片");
         }
 
         if (TextUtils.isEmpty(carType)) {
@@ -284,11 +308,19 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             toast("请输入价格");
             return;
         }
+
+        if (isBail && TextUtils.isEmpty(mBailNumber.getText().toString())) {
+            toast("请输入保证金");
+            return;
+        }
+
+
         AddStepTwo addStepTwo = new AddStepTwo();
         addStepTwo.setId(orderId);
         addStepTwo.setGoodsWeight(Integer.parseInt(weight));
         addStepTwo.setGoodsVolume(Integer.parseInt(volume));
-        addStepTwo.setGoodsType(type);
+        addStepTwo.setGoodsName(name);
+        addStepTwo.setPackType(packType);
         addStepTwo.setUseCarType(carType);
         addStepTwo.setLoadingTime(time);
         addStepTwo.setImage1(img1Url);
@@ -297,6 +329,8 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         addStepTwo.setFeeType(feeWay);
         addStepTwo.setPayWay(payWay);
         addStepTwo.setPayType(payType);
+        addStepTwo.setRequireDeposit(isBail);
+        addStepTwo.setDeposit(TextUtils.isEmpty(mBailNumber.getText().toString()) ? 0 : Double.parseDouble(mBailNumber.getText().toString()));
         if (feeWay == 1) {
             addStepTwo.setFee(Double.parseDouble(mFee.getText().toString()));
         }
@@ -403,6 +437,18 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         getTakePhoto().onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.CODE_REQ && resultCode == 111) {
+            String content = data.getStringExtra("content");
+            int type = data.getIntExtra("type", 0);
+            switch (type) {
+                case Const.DICT_PICK_TYPE:
+                    mPackType.setText(content);
+                    break;
+                case Const.DICT_GOODS_NAME:
+                    mGoodName.setText(content);
+                    break;
+            }
+        }
     }
 
 }

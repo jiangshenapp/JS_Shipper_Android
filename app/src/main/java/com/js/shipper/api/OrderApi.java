@@ -91,4 +91,8 @@ public interface OrderApi {
     @POST("app/order/confirm/{id}")
     Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
 
+    //确认收到回执
+    @POST("app/order/receipt/{id}")
+    Observable<HttpResponse<Boolean>> receiptOrder(@Path("id") long id);
+
 }

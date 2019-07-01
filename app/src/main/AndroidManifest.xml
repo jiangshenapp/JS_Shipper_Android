@@ -185,9 +185,14 @@
         <activity android:name=".ui.park.activity.BranchDetailActivity"
             android:launchMode="singleTop"
             />
+
+        <activity android:name=".ui.order.activity.TypeInputActivity"
+            android:launchMode="singleTop"
+            />
         <service
             android:name=".service.LocationService"
             android:enabled="true" />
+
 
     </application>
 

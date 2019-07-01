@@ -23,7 +23,6 @@ public class AddStepTwo {
 
     private double fee;//运费
     private int feeType;//运费类型，1自己出价，2电议
-    private String goodsType;//货物类型,字典表，多个
     private int goodsVolume;//货物体积，单位立方米
     private int goodsWeight;//货物重量、吨
     private long id;//订单号
@@ -34,26 +33,15 @@ public class AddStepTwo {
     private int payWay;//支付方式，1线上支付，2线下支付
     private String remark;//备注
     private String useCarType;//用车类型，字典
+    private double deposit;//保证金
+    private boolean requireDeposit;//是否开启保证金
+    private String goodsName;//货物名称
+    private String packType;//包装类型
 
     public AddStepTwo(){
 
     }
 
-    public AddStepTwo(int fee, int feeType, String goodsType, int goodsVolume, int goodsWeight, int id, String image1, String image2, String loadingTime, int payType, int payWay, String remark, String useCarType) {
-        this.fee = fee;
-        this.feeType = feeType;
-        this.goodsType = goodsType;
-        this.goodsVolume = goodsVolume;
-        this.goodsWeight = goodsWeight;
-        this.id = id;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.loadingTime = loadingTime;
-        this.payType = payType;
-        this.payWay = payWay;
-        this.remark = remark;
-        this.useCarType = useCarType;
-    }
 
     public double getFee() {
         return fee;
@@ -71,13 +59,6 @@ public class AddStepTwo {
         this.feeType = feeType;
     }
 
-    public String getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(String goodsType) {
-        this.goodsType = goodsType;
-    }
 
     public int getGoodsVolume() {
         return goodsVolume;
@@ -157,5 +138,37 @@ public class AddStepTwo {
 
     public void setUseCarType(String useCarType) {
         this.useCarType = useCarType;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
+    }
+
+    public void setRequireDeposit(boolean requireDeposit) {
+        this.requireDeposit = requireDeposit;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public boolean getRequireDeposit() {
+        return requireDeposit;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getPackType() {
+        return packType;
+    }
+
+    public void setPackType(String packType) {
+        this.packType = packType;
     }
 }

@@ -14,6 +14,7 @@ import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderEditActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
+import com.js.shipper.ui.order.activity.TypeInputActivity;
 import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
@@ -91,5 +92,7 @@ public interface ActivityComponent {
     void inject(ForgetPwdActivity forgetPwdActivity);
 
     void inject(ResetPwdActivity resetPwdActivity);
+
+    void inject(TypeInputActivity typeInputActivity);
 }
 

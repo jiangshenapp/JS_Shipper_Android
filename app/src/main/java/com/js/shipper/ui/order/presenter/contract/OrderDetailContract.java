@@ -19,6 +19,8 @@ public interface OrderDetailContract {
 
         void onConfirmOrder(boolean isOk);
 
+        void onReceiptOrder(boolean isOk);
+
     }
 
     interface Presenter extends IPresenter<View> {
@@ -28,6 +30,8 @@ public interface OrderDetailContract {
 
 
         void confirmOrder(long id);
+
+        void receiptOrder(long id);
 
     }
 }
