@@ -18,6 +18,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.manager.CommonGlideImageLoader;
+import com.js.shipper.manager.UserManager;
 import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.MineMenu;
 import com.js.shipper.model.bean.UserInfo;
@@ -29,9 +30,11 @@ import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.park.activity.CollectActivity;
 import com.js.shipper.ui.user.activity.LoginActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
+import com.js.shipper.ui.user.activity.VerifiedActivity;
 import com.js.shipper.ui.wallet.activity.WalletActivity;
 import com.js.shipper.util.UIUtil;
 import com.js.shipper.widget.adapter.DividerGridItemDecoration;
+import com.js.shipper.widget.dialog.AppDialogFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -188,6 +191,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
                 break;
             case R.id.mine_wallet_money_layout://我的钱包
+                if (!UserManager.getUserManager().isVerified()) {
+                    AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+                    appDialogFragment.setTitle("温馨提示");
+                    appDialogFragment.setMessage("您尚未认证通过");
+                    appDialogFragment.setPositiveButton("前往认证", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            VerifiedActivity.action(mContext);
+                        }
+                    });
+                    appDialogFragment.show(getActivity().getSupportFragmentManager(), "appDialog");
+                    return;
+                }
                 WalletActivity.action(mContext);
                 break;
             case R.id.mine_wallet_integral_layout://我的积分
