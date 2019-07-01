@@ -291,4 +291,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 break;
         }
     }
+
+
+    public void showVerifiedDialog(){
+
+    }
 }

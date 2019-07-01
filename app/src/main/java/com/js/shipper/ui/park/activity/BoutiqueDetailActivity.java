@@ -14,6 +14,8 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.CollectLine;
+import com.js.shipper.ui.order.activity.OrderSubmitActivity;
+import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BoutiqueDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BoutiqueDetailContract;
 import com.youth.banner.Banner;
@@ -44,6 +46,7 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
     private long id;
     private boolean isCollection = false;
     private MenuItem moreItem;
+    private LineBean mLineBean;
 
 
     public static void action(Context context, long id) {
@@ -91,8 +94,9 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
 
     @Override
     public void onLineDetail(LineBean lineBean) {
+        this.mLineBean = lineBean;
         mStartAddress.setText(lineBean.getStartAddressCodeName());
-        mEndAddress.setText(lineBean.getReceiveAddressCodeName());
+        mEndAddress.setText(lineBean.getArriveAddressCodeName());
         mDriverName.setText(lineBean.getDriverName());
         mType.setText(lineBean.getCarModelName());
         mLength.setText(lineBean.getCarLengthName());
@@ -128,12 +132,15 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
     }
 
 
-    @OnClick({R.id.phone, R.id.im})
+    @OnClick({R.id.phone, R.id.im,R.id.ship})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
                 break;
             case R.id.im:
+                break;
+            case R.id.ship:
+                SubmitOrderActivity.action(mContext,mLineBean.getSubscriberId(),null);
                 break;
         }
     }

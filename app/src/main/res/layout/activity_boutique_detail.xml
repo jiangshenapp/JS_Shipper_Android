@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,11 +38,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/shape_app_block"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/ship_start_layout"
@@ -127,9 +126,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -152,8 +150,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
 
                     <TextView
@@ -177,11 +175,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
 
                     <TextView
@@ -205,83 +202,84 @@
             </LinearLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:text="简介"
-            android:textColor="@color/_B4B4B4"
-            android:textSize="12sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:text="简介"
+                android:textColor="@color/_B4B4B4"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_app_block"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+
+                <TextView
+                    android:id="@+id/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/_FAFAFA"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/shape_app_block"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_waybill_phone" />
+
+            <ImageView
+                android:id="@+id/im"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:src="@mipmap/ic_home_chat" />
 
 
-            <TextView
-                android:id="@+id/remark"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/_FAFAFA"
-                android:gravity="left"
-                android:padding="10dp"
-                android:textColor="@color/_000000"
-                android:textSize="14sp" />
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/ship"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/_ECA73F"
+            android:gravity="center"
+            android:text="立即下单"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+
     </LinearLayout>
-</ScrollView>
 
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="50dp"
-android:background="@color/white"
-android:orientation="horizontal"
-app:layout_constraintBottom_toBottomOf="parent">
-
-
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="2"
-    android:gravity="center"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_waybill_phone" />
-
-    <ImageView
-        android:id="@+id/im"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@mipmap/ic_home_chat" />
-
-
-</LinearLayout>
-
-
-<TextView
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="3"
-    android:background="@color/_ECA73F"
-    android:gravity="center"
-    android:text="立即下单"
-    android:textColor="@color/white"
-    android:textSize="17sp" />
-
-
-</LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

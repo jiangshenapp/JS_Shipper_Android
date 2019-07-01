@@ -95,7 +95,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     public void onLineDetail(LineBean lineBean) {
         mLineBean = lineBean;
         mStartAddress.setText(lineBean.getStartAddressCodeName());
-        mEndAddress.setText(lineBean.getReceiveAddressCodeName());
+        mEndAddress.setText(lineBean.getArriveAddressCodeName());
         mDriverName.setText(lineBean.getDriverName());
         mNumber.setText(lineBean.getDriverPhone());
         mType.setText(lineBean.getCarModelName());
