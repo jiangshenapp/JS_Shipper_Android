@@ -2,7 +2,9 @@ package com.js.shipper.ui.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -157,6 +160,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private String lengthStr;
     private OrderBean mOrderBean;
     private boolean isBail;//是否需要保证金
+    private String[] items = {"拍摄","从相册选择"};
 
     @Inject
     DictPresenter mDictPresenter;
@@ -621,8 +625,29 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        getTakePhoto().onPickFromGallery();
+        showDialog();
     }
+
+    private void showDialog(){
+        new MaterialDialog.Builder(mContext)
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        if (position==0){
+                            File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+                            if (!file.getParentFile().exists()) {
+                                file.getParentFile().mkdirs();
+                            }
+                            Uri imageUri = Uri.fromFile(file);
+                            getTakePhoto().onPickFromCapture(imageUri);
+                        }else {
+                            getTakePhoto().onPickFromGallery();
+                        }
+                    }
+                }).show();
+    }
+
 
     public TakePhoto getTakePhoto() {
         if (takePhoto == null) {

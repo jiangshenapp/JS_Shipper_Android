@@ -17,7 +17,7 @@ import com.js.shipper.ui.user.presenter.SmsCodePresenter;
 import com.js.shipper.ui.user.presenter.contract.RegisterContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
 import com.js.frame.view.BaseActivity;
-import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.RegexUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -101,8 +101,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
-                if (!AppUtils.isMobile(phone)){
-                    toast("请输入正确手机号");
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
                     return;
                 }
                 mCodePresenter.sendSmsCode(phone);
@@ -115,8 +115,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
-                if (!AppUtils.isMobile(phone)){
-                    toast("请输入正确手机号");
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
                     return;
                 }
                 if (pwd.length() < 6 || pwd.length() > 16) {

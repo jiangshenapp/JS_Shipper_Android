@@ -20,6 +20,7 @@ import com.js.shipper.ui.user.presenter.PwdLoginPresenter;
 import com.js.shipper.ui.user.presenter.contract.PwdLoginContract;
 import com.js.frame.view.BaseFragment;
 import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.RegexUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -82,8 +83,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
-                if (!AppUtils.isMobile(phone)){
-                    toast("请输入正确手机号");
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
                     return;
                 }
                 if (TextUtils.isEmpty(pwd)) {

@@ -2,7 +2,9 @@ package com.js.shipper.ui.user.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -97,6 +100,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
     private TakePhoto takePhoto;
     private AuthInfo mAuthInfo;
     private int authState;
+    private String[] items = {"拍摄","从相册选择"};
 
     // 省
     private List<ShengBean> options1Items = new ArrayList<ShengBean>();
@@ -185,6 +189,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
                 break;
             case R.id.auth_business_license:
                 getPhoto(Const.AUTH_BUSINESS_LICENSE);
+                showDialog();
                 break;
             case R.id.cb_select:
                 cbSelect.setChecked(cbSelect.isChecked());
@@ -197,6 +202,27 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
                 break;
         }
     }
+
+    private void showDialog(){
+        new MaterialDialog.Builder(mContext)
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        if (position==0){
+                            File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+                            if (!file.getParentFile().exists()) {
+                                file.getParentFile().mkdirs();
+                            }
+                            Uri imageUri = Uri.fromFile(file);
+                            getTakePhoto().onPickFromCapture(imageUri);
+                        }else {
+                            getTakePhoto().onPickFromGallery();
+                        }
+                    }
+                }).show();
+    }
+
 
     /**
      * 解析省市区数据并组装成自己想要的list
@@ -383,7 +409,6 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        getTakePhoto().onPickFromGallery();
     }
 
     public TakePhoto getTakePhoto() {

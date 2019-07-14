@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.js.shipper.R;
 import com.js.shipper.model.event.AddDriverEvent;
-import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.RegexUtils;
 import com.js.shipper.util.UIUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,8 +65,9 @@ public class AddDriverFragment extends DialogFragment {
                     UIUtil.toast("请输入手机号");
                     return;
                 }
-                if (!AppUtils.isMobile(phone)){
-                    UIUtil.toast("请输入正确手机号");
+
+                if (!RegexUtils.isMobile(phone)) {
+                    UIUtil.toast("请输入正确的手机号");
                     return;
                 }
 

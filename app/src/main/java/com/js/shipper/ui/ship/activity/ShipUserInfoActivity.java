@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.js.frame.view.SimpleActivity;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.ShipBean;
+import com.js.shipper.util.RegexUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -102,8 +103,8 @@ public class ShipUserInfoActivity extends SimpleActivity {
             return;
         }
 
-        if (phone.length()!=11){
-            toast("请输入正确手机号");
+        if (!RegexUtils.isMobile(phone)) {
+            toast("请输入正确的手机号");
             return;
         }
 
