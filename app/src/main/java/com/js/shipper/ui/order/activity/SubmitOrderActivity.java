@@ -431,7 +431,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             R.id.image_1, R.id.image_2, R.id.fee_mine_layout,
             R.id.power_layout, R.id.specified_release, R.id.release,
             R.id.ship_start_layout, R.id.ship_end_layout,
-            R.id.ship_car_extent_layout, R.id.ship_car_type_layout})
+            R.id.ship_car_extent_layout, R.id.ship_car_type_layout,
+            R.id.good_type_layout,R.id.ship_package_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ship_time_layout:
@@ -479,6 +480,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 break;
             case R.id.ship_car_type_layout://车型
                 mTypeWindow.showAsDropDown(mToolbar, 0, 0);
+                break;
+            case R.id.good_type_layout:
+                TypeInputActivity.action(SubmitOrderActivity.this, Const.DICT_GOODS_NAME);
+                break;
+            case R.id.ship_package_layout:
+                TypeInputActivity.action(SubmitOrderActivity.this, Const.DICT_PICK_TYPE);
                 break;
         }
     }
@@ -554,11 +561,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             return;
         }
 
-        if (TextUtils.isEmpty(img1Url) || TextUtils.isEmpty(img2Url)) {
-            toast("请上传照片");
-            return;
-        }
-
         if (TextUtils.isEmpty(carType)) {
             toast("请选择用车类型");
             return;
@@ -573,8 +575,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         }
 
         AddOrder addOrder = new AddOrder();
-        addOrder.setGoodsWeight(Integer.parseInt(weight));
-        addOrder.setGoodsVolume(Integer.parseInt(volume));
+        addOrder.setGoodsWeight(Double.parseDouble(weight));
+        addOrder.setGoodsVolume(Double.parseDouble(volume));
         addOrder.setGoodsName(goodName);
         addOrder.setUseCarType(carType);
         addOrder.setLoadingTime(time);

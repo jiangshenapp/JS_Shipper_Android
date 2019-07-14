@@ -16,6 +16,7 @@ import com.js.shipper.ui.user.presenter.SmsCodePresenter;
 import com.js.shipper.ui.user.presenter.contract.ForgetPwdContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
 import com.js.frame.view.BaseActivity;
+import com.js.shipper.util.AppUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -91,6 +92,10 @@ public class ForgetPwdActivity extends BaseActivity<ForgetPwdPresenter> implemen
                     toast("请输入手机号");
                     return;
                 }
+                if (!AppUtils.isMobile(phone)){
+                    toast("请输入正确手机号");
+                    return;
+                }
                 mCodePresenter.sendSmsCode(phone);
                 break;
             case R.id.btn_next_step:
@@ -100,6 +105,11 @@ public class ForgetPwdActivity extends BaseActivity<ForgetPwdPresenter> implemen
                     toast("请输入手机号");
                     return;
                 }
+                if (!AppUtils.isMobile(phone)){
+                    toast("请输入正确手机号");
+                    return;
+                }
+
                 if (TextUtils.isEmpty(code)) {
                     toast("请输入验证码");
                     return;

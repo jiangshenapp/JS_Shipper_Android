@@ -134,9 +134,18 @@ public class CollectBranchFragment extends BaseFragment<CollectDeliveryPresenter
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        List<ParkBean> parkBeans = adapter.getData();
-        ParkBean parkBean = parkBeans.get(position);
-        parkBean.setRemark(!parkBean.isRemark());
-        mAdapter.setNewData(parkBeans);
+        switch (view.getId()){
+            case R.id.remark_status_layout:
+                List<ParkBean> parkBeans = adapter.getData();
+                ParkBean parkBean = parkBeans.get(position);
+                parkBean.setRemark(!parkBean.isRemark());
+                mAdapter.setNewData(parkBeans);
+                break;
+            case R.id.navigation:
+            case R.id.item_phone:
+            case R.id.item_chat:
+                toast("功能暂未开放");
+                break;
+        }
     }
 }

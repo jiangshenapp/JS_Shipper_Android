@@ -19,6 +19,7 @@ import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.park.presenter.CollectCarSourcePresenter;
 import com.js.shipper.ui.park.presenter.contract.CollectCarSourceContract;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  * Created by huyg on 2019/4/30.
  * 车源
  */
-public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePresenter> implements CollectCarSourceContract.View, BaseQuickAdapter.OnItemClickListener {
+public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePresenter> implements CollectCarSourceContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
 
     @BindView(R.id.recycler)
@@ -99,6 +100,7 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
         mRecycler.setAdapter(mAdapter);
         mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemChildClickListener(this);
     }
 
     @Override
@@ -131,5 +133,19 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
 
     private void getCarSource(int num) {
         mPresenter.getCollectLines(num,Const.PAGE_SIZE);
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        switch (view.getId()) {
+            case R.id.item_phone:
+                AppUtils.callPhone(lineBean.getDriverPhone());
+                break;
+            case R.id.item_chat:
+                toast("该功能暂未开放");
+                break;
+        }
     }
 }

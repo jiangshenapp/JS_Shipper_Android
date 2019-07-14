@@ -65,6 +65,7 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }
@@ -89,6 +90,7 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }
@@ -113,6 +115,7 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }

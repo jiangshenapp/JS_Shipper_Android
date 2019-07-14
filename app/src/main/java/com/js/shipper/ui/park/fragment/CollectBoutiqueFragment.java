@@ -19,6 +19,7 @@ import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
 import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.park.presenter.CollectBoutiquePresenter;
 import com.js.shipper.ui.park.presenter.contract.CollectBoutiqueContract;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  * Created by huyg on 2019/4/30.
  * 精品路线收藏
  */
-public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresenter> implements CollectBoutiqueContract.View, BaseQuickAdapter.OnItemClickListener {
+public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresenter> implements CollectBoutiqueContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
 
     @BindView(R.id.recycler)
@@ -81,6 +82,7 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
         mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemChildClickListener(this);
     }
 
     private void initRefresh() {
@@ -128,5 +130,19 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
         mRefresh.finishLoadMore();
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        List<LineBean> lineBeans = adapter.getData();
+        LineBean lineBean = lineBeans.get(position);
+        switch (view.getId()) {
+            case R.id.item_phone:
+                AppUtils.callPhone(lineBean.getDriverPhone());
+                break;
+            case R.id.item_chat:
+                toast("该功能暂未开放");
+                break;
+        }
     }
 }

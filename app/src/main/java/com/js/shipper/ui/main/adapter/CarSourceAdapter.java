@@ -45,9 +45,6 @@ public class CarSourceAdapter extends BaseQuickAdapter<LineBean, BaseViewHolder>
                 .setText(R.id.item_driver_info, info);
         helper.addOnClickListener(R.id.item_phone);
         helper.addOnClickListener(R.id.item_chat);
-//        double distance = DistanceUtil.getDistance(mGson.fromJson(mSendShip.getPosition(), LatLng.class), mGson.fromJson(mEndShip.getPosition(), LatLng.class));
-//        helper.setText(R.id.item_distance,"总里程" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米");)
-//                .setText(R.id.item_time, TimeUtils.format(item.getti))
 
     }
 }

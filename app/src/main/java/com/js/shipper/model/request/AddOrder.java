@@ -39,8 +39,8 @@ public class AddOrder {
     private double fee;
     private int feeType;
     private String goodsType;
-    private int goodsVolume;
-    private int goodsWeight;
+    private double goodsVolume;
+    private double goodsWeight;
     private String image1;
     private String image2;
     private String loadingTime;
@@ -84,11 +84,11 @@ public class AddOrder {
         this.goodsType = goodsType;
     }
 
-    public void setGoodsVolume(int goodsVolume) {
+    public void setGoodsVolume(double goodsVolume) {
         this.goodsVolume = goodsVolume;
     }
 
-    public void setGoodsWeight(int goodsWeight) {
+    public void setGoodsWeight(double goodsWeight) {
         this.goodsWeight = goodsWeight;
     }
 

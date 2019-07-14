@@ -212,7 +212,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mReceiverPhone.setText(orderBean.getReceiveMobile());
 
         if (orderBean.getState() == 1||orderBean.getState() == 2) {
-            mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
+//            mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
+            mDriverCount.setText("已为您通知司机");
             mIngLayout.setVisibility(View.VISIBLE);
         } else {
             mIngLayout.setVisibility(View.GONE);

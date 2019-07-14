@@ -1,5 +1,6 @@
 package com.js.shipper.ui.ship.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,12 +53,14 @@ import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.LatLngBean;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.model.event.PoiAddrInfoEvent;
+import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.ship.presenter.SelectAddressPresenter;
 import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
 import com.js.shipper.widget.window.SearchAddressWindow;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,7 +87,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     @BindView(R.id.confirm)
     TextView mConfirm;
     @BindView(R.id.search_address)
-    EditText mSearchAddress;
+    AutoCompleteTextView mSearchAddress;
     @BindView(R.id.address_search_layout)
     LinearLayout mSearchLayout;
 
@@ -90,8 +98,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     private String city;
     private ShipBean mShip = new ShipBean();
     private PoiInfo mPoiInfo;
-    private SearchAddressWindow mSearchWindow;
     private PoiSearch mPoiSearch;
+    private ArrayAdapter<String> mAdapter;
+    private InputMethodManager inputMethodManager;
 
     @Override
     protected void initInject() {
@@ -121,6 +130,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     }
 
     private void initData() {
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(mPoiListener);
     }
@@ -131,7 +141,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     }
 
     private void initView() {
-        mSearchWindow = new SearchAddressWindow(mContext);
         initMap();
         initLocation();
         switch (type) {
@@ -153,6 +162,11 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s)) {
                     mPoiSearch.searchInCity(new PoiCitySearchOption()
                             .city(mCity.getText().toString()) //必填
@@ -161,17 +175,16 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                             .cityLimit(true)
                             .scope(2));
 
-                } else {
-                    mSearchWindow.dismiss();
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
 
+        initAdapter();
+
+    }
+
+    private void initAdapter() {
+        mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_dropdown_item_1line);
     }
 
     private void initLocation() {
@@ -236,7 +249,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
-                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(),mShip);
+                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(), mShip);
                 break;
             case R.id.confirm:
                 if (TextUtils.isEmpty(mShip.getName())) {
@@ -335,6 +348,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
          */
         @Override
         public void onMapStatusChangeFinish(MapStatus status) {
+            mSearchAddress.setText("");
             LatLng latLng = status.target;
             Log.d(getClass().getSimpleName(), latLng.toString());
             if (latLng != null) {
@@ -398,11 +412,32 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         @Override
         public void onGetPoiResult(PoiResult poiResult) {
             List<PoiInfo> poiAddrInfos = poiResult.getAllPoi();
+            List<String> suggest = new ArrayList<>();
             if (poiAddrInfos != null && poiAddrInfos.size() > 0) {
-                mSearchWindow.setData(poiAddrInfos);
-                if (!mSearchWindow.isShowing()) {
-                    mSearchWindow.showAsDropDown(mSearchLayout);
+                for (PoiInfo info : poiAddrInfos) {
+                    suggest.add(info.name);
                 }
+                mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_dropdown_item_1line, suggest);
+                mSearchAddress.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                mSearchAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        mPoiInfo = poiAddrInfos.get(position);
+                        mShip.setAddress(mPoiInfo.address);
+                        mShip.setAddressName(mPoiInfo.name);
+                        mShip.setPosition(new Gson().toJson(new LatLngBean(mPoiInfo.location.latitude, mPoiInfo.location.longitude)));
+
+                        mAddressName.setText(mPoiInfo.name);
+                        mAddress.setText(mPoiInfo.address);
+                        setUserMapCenter(mPoiInfo.location.latitude, mPoiInfo.location.longitude);
+                        if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+                            if (getCurrentFocus() != null)
+                                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                        InputMethodManager.HIDE_NOT_ALWAYS);
+                        }
+                    }
+                });
             }
         }
 
@@ -423,16 +458,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         }
     };
 
-    @Subscribe
-    public void onEvent(PoiAddrInfoEvent event) {
-        mPoiInfo = event.poiInfo;
 
-        mShip.setAddress(mPoiInfo.address);
-        mShip.setAddressName(mPoiInfo.name);
-        mShip.setPosition(new Gson().toJson(new LatLngBean(mPoiInfo.location.latitude, mPoiInfo.location.longitude)));
-
-        mAddressName.setText(mPoiInfo.name);
-        mAddress.setText(mPoiInfo.address);
-    }
 
 }

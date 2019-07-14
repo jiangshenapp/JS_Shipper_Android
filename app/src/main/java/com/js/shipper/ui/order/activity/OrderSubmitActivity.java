@@ -49,6 +49,7 @@ import com.js.shipper.util.TimeUtils;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -345,6 +346,9 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     }
 
     private void showDateTime() {
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime =  Calendar.getInstance();
+        endTime.add(Calendar.YEAR,2000);
         //时间选择器
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
@@ -353,6 +357,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             }
         })
                 .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
+                .setRangDate(startTime,endTime)
                 .build();
         pvTime.show();
     }
@@ -399,8 +404,8 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
 
         AddStepTwo addStepTwo = new AddStepTwo();
         addStepTwo.setId(orderId);
-        addStepTwo.setGoodsWeight(Integer.parseInt(weight));
-        addStepTwo.setGoodsVolume(Integer.parseInt(volume));
+        addStepTwo.setGoodsWeight(Double.parseDouble(weight));
+        addStepTwo.setGoodsVolume(Double.parseDouble(volume));
         addStepTwo.setGoodsName(name);
         addStepTwo.setPackType(packType);
         addStepTwo.setUseCarType(carType);
