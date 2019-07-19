@@ -43,17 +43,22 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.manager.CommonGlideImageLoader;
+import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.request.AddStepTwo;
+import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.FilePresenter;
+import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.presenter.contract.FileContract;
 import com.js.shipper.ui.order.presenter.OrderSubmitPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderSubmitContract;
 import com.js.shipper.util.TimeUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -63,7 +68,7 @@ import butterknife.OnClick;
 /**
  * Created by huyg on 2019/5/6.
  */
-public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> implements OrderSubmitContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener {
+public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> implements OrderSubmitContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener, DictContract.View {
 
 
     @BindView(R.id.good_weight)
@@ -110,9 +115,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private long orderId;
     private String img1Url;
     private String img2Url;
-    private String[] cartype = {"零单", "整车"};
     @Inject
     FilePresenter mFilePresenter;
+    @Inject
+    DictPresenter mDictPresenter;
+
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
@@ -120,8 +127,9 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private int payWay = 1;
     private int feeWay = 1;
     private boolean isBail;//是否需要保证金
-    private String[] items = {"拍摄","从相册选择"};
-
+    private String[] items = {"拍摄", "从相册选择"};
+    private OptionsPickerView pvOptions;
+    private List<String> list;
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderSubmitActivity.class);
@@ -134,10 +142,16 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     protected void init() {
         initIntent();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
 
     private void initView() {
         mFilePresenter.attachView(this);
+        mDictPresenter.attachView(this);
         mPayType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -197,7 +211,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 2+1);
+                                s.toString().indexOf(".") + 2 + 1);
                         mBailNumber.setText(s);
                         mBailNumber.setSelection(s.length()); //光标移到最后
                     }
@@ -237,7 +251,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 2+1);
+                                s.toString().indexOf(".") + 2 + 1);
                         mFee.setText(s);
                         mFee.setSelection(s.length()); //光标移到最后
                     }
@@ -265,6 +279,17 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
 
             }
         });
+
+        //条件选择器
+        pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                if (list != null && list.size() > 0) {
+                    mCarType.setText(list.get(options1));
+                }
+            }
+        }).build();
+
     }
 
     private void initIntent() {
@@ -338,21 +363,13 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     }
 
     private void showUserCarType() {
-        //条件选择器
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                mCarType.setText(cartype[options1]);
-            }
-        }).build();
-        pvOptions.setPicker(Arrays.asList(cartype));
         pvOptions.show();
     }
 
     private void showDateTime() {
         Calendar startTime = Calendar.getInstance();
-        Calendar endTime =  Calendar.getInstance();
-        endTime.add(Calendar.YEAR,2000);
+        Calendar endTime = Calendar.getInstance();
+        endTime.add(Calendar.YEAR, 2000);
         //时间选择器
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
@@ -361,7 +378,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             }
         })
                 .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
-                .setRangDate(startTime,endTime)
+                .setRangDate(startTime, endTime)
                 .build();
         pvTime.show();
     }
@@ -450,20 +467,20 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         showDialog();
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new MaterialDialog.Builder(mContext)
                 .items(items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        if (position==0){
+                        if (position == 0) {
                             File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
                             if (!file.getParentFile().exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             Uri imageUri = Uri.fromFile(file);
                             getTakePhoto().onPickFromCapture(imageUri);
-                        }else {
+                        } else {
                             getTakePhoto().onPickFromGallery();
                         }
                     }
@@ -563,4 +580,12 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         }
     }
 
+    @Override
+    public void onDictByType(String type, List<DictBean> dictBeans) {
+        list = new ArrayList<>();
+        for (DictBean dictBean : dictBeans) {
+            list.add(dictBean.getLabel());
+        }
+        pvOptions.setPicker(list);
+    }
 }

@@ -65,6 +65,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +140,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private long matchId;
     private String img1Url;
     private String img2Url;
-    private String[] useCarType = {"零单", "整车"};
 
     private int choseCode;
     private InvokeParam invokeParam;
@@ -161,6 +161,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private OrderBean mOrderBean;
     private boolean isBail;//是否需要保证金
     private String[] items = {"拍摄","从相册选择"};
+    private List<String> list;
+    private OptionsPickerView pvOptions;
 
     @Inject
     DictPresenter mDictPresenter;
@@ -191,6 +193,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private void initData() {
         mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
         mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+        mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
 
     @Override
@@ -344,6 +347,15 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
             }
         });
+
+        //条件选择器
+        pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                mUseCarType.setText(list.get(options1));
+            }
+        }).build();
+
         initDetail();
 
     }
@@ -495,14 +507,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     }
 
     private void showUserCarType() {
-        //条件选择器
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                mUseCarType.setText(useCarType[options1]);
-            }
-        }).build();
-        pvOptions.setPicker(Arrays.asList(useCarType));
         pvOptions.show();
     }
 
@@ -536,16 +540,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
         if (TextUtils.isEmpty(mEndAddress.getText().toString())) {
             toast("请输入收货地址");
-            return;
-        }
-
-        if (TextUtils.isEmpty(lengthStr)) {
-            toast("请选择车长");
-            return;
-        }
-
-        if (TextUtils.isEmpty(typeStr)) {
-            toast("请选择车型");
             return;
         }
 
@@ -766,29 +760,14 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
     @Subscribe
     public void onEvent(DictSelectEvent event) {
-        StringBuilder builder = new StringBuilder();
-        StringBuilder builder1 = new StringBuilder();
-        List<DictBean> dictBeans = event.mDicts;
-        for (DictBean dictBean : dictBeans) {
-            builder.append(dictBean.getLabel());
-            builder.append(",");
-            builder1.append(dictBean.getValue());
-            builder1.append(",");
-        }
-        if (builder.length() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        if (builder1.length() > 0) {
-            builder1.deleteCharAt(builder1.length() - 1);
-        }
         switch (event.type) {
             case Const.DICT_LENGTH:
-                mCarExtent.setText(builder.toString());
-                lengthStr = builder1.toString();
+                mCarExtent.setText(event.labelStr);
+                lengthStr = event.valueStr;
                 break;
             case Const.DICT_CAR_TYPE:
-                mCarType.setText(builder.toString());
-                typeStr = builder1.toString();
+                mCarType.setText(event.labelStr);
+                typeStr = event.valueStr;
                 break;
         }
     }
@@ -802,6 +781,13 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 break;
             case Const.DICT_LENGTH_NAME:
                 mLengthWindow.setData(dictBeans);
+                break;
+            case Const.DICT_USE_CAR_TYPE_NAME:
+                list = new ArrayList<>();
+                for (DictBean dictBean : dictBeans) {
+                    list.add(dictBean.getLabel());
+                }
+                pvOptions.setPicker(list);
                 break;
         }
     }

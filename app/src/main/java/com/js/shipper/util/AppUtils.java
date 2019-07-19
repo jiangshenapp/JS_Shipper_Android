@@ -1,5 +1,6 @@
 package com.js.shipper.util;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -46,11 +47,11 @@ public class AppUtils {
      *
      * @param phoneNum 电话号码
      */
-    public static void callPhone(String phoneNum) {
+    public static void callPhone(Context context,String phoneNum) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         Uri data = Uri.parse("tel:" + phoneNum);
         intent.setData(data);
-        App.getInstance().startActivity(intent);
+        context.startActivity(intent);
     }
 
     public static boolean isMobile(String str) {

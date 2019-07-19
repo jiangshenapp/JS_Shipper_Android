@@ -229,6 +229,7 @@ public class PayActivity extends BaseActivity<PayPresenter> implements PayContra
         if (isOk) {
             toast("支付成功");
             OrdersActivity.action(mContext, 0);
+            finish();
         } else {
             toast("支付失败");
         }

@@ -138,7 +138,7 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
         LineBean lineBean = lineBeans.get(position);
         switch (view.getId()) {
             case R.id.item_phone:
-                AppUtils.callPhone(lineBean.getDriverPhone());
+                AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
                 toast("该功能暂未开放");

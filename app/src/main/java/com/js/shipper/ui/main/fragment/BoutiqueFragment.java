@@ -101,8 +101,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     private CityWindow mEndWindow;
     private SortWindow mSortWindow;
     private FilterWindow mFilterWindow;
-    private String arriveAddressCode = "0";
-    private String startAddressCode = "0";
+    private String arriveAddressCode;
+    private String startAddressCode;
     private int sort;
 
     public static BoutiqueFragment newInstance() {
@@ -197,7 +197,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         LineBean lineBean = lineBeans.get(position);
         switch (view.getId()) {
             case R.id.item_phone:
-                AppUtils.callPhone(lineBean.getDriverPhone());
+                AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
                 toast("该功能暂未开放");
@@ -239,17 +239,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     }
 
     private void getCarSource(int num) {
-        if ("发货地".equals(mSendAddress.getText().toString())) {
-            lineAppFind.setStartAddressCode("0");
-        } else {
-            lineAppFind.setStartAddressCode(startAddressCode);
-        }
-        if ("收货地".equals(mEndAddress.getText().toString())) {
-            lineAppFind.setArriveAddressCode("0");
-        } else {
-            lineAppFind.setArriveAddressCode(arriveAddressCode);
-        }
-
+        lineAppFind.setArriveAddressCode(arriveAddressCode);
+        lineAppFind.setStartAddressCode(startAddressCode);
         lineAppFind.setSort(sort);
         mPresenter.getClassicLine(num, lineAppFind, Const.PAGE_SIZE);
     }

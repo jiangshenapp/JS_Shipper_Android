@@ -210,7 +210,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 showSelectDialog(latLng, endLat, parkBean.getAddress());
                 break;
             case R.id.item_phone:
-                AppUtils.callPhone(parkBean.getContractPhone());
+                AppUtils.callPhone(mContext,parkBean.getContractPhone());
                 break;
             case R.id.item_chat:
                 toast("该功能暂未开放");

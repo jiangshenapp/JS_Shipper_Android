@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
-                    android:text="请选择车型"
+                    android:hint="请选择车型"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
 

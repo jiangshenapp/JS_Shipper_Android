@@ -66,8 +66,8 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     private String startAddress;
     private String endAddress;
-    private ShipBean mSendShip;
-    private ShipBean mEndShip;
+    private ShipBean mSendShip = new ShipBean();
+    private ShipBean mEndShip = new ShipBean();
     private Gson mGson = new Gson();
     private DecimalFormat df = new DecimalFormat("#####0.0");
     private ItemWindow mTypeWindow;
@@ -117,17 +117,19 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @OnClick({R.id.ship_start_layout, R.id.ship_end_layout,
             R.id.ship_car_extent_layout, R.id.ship_car_type_layout,
-            R.id.ship_submit,R.id.orders})
+            R.id.ship_submit, R.id.orders})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ship_start_layout://发货地址
                 Intent startIntent = new Intent(mContext, SelectAddressActivity.class);
                 startIntent.putExtra("type", 0);
+                startIntent.putExtra("ship", mSendShip);
                 startActivityForResult(startIntent, Const.CODE_REQ);
                 break;
             case R.id.ship_end_layout://收货地址
                 Intent endIntent = new Intent(mContext, SelectAddressActivity.class);
                 endIntent.putExtra("type", 1);
+                endIntent.putExtra("ship", mEndShip);
                 startActivityForResult(endIntent, Const.CODE_REQ);
                 break;
             case R.id.ship_car_extent_layout://车长
@@ -138,7 +140,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 break;
 
             case R.id.orders:
-                OrdersActivity.action(mContext,0);
+                OrdersActivity.action(mContext, 0);
                 break;
             case R.id.ship_submit://发货
 
@@ -152,15 +154,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                     return;
                 }
 
-                if (TextUtils.isEmpty(lengthStr)) {
-                    toast("请选择车长");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(typeStr)) {
-                    toast("请选择车型");
-                    return;
-                }
                 AddStepOne addStepOne = new AddStepOne();
                 addStepOne.setCarLength(lengthStr);
                 addStepOne.setCarModel(typeStr);
@@ -213,29 +206,14 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @Subscribe
     public void onEvent(DictSelectEvent event) {
-        StringBuilder builder = new StringBuilder();
-        StringBuilder builder1 = new StringBuilder();
-        List<DictBean> dictBeans = event.mDicts;
-        for (DictBean dictBean : dictBeans) {
-            builder.append(dictBean.getLabel());
-            builder.append(",");
-            builder1.append(dictBean.getValue());
-            builder1.append(",");
-        }
-        if (builder.length() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        if (builder1.length() > 0) {
-            builder1.deleteCharAt(builder1.length() - 1);
-        }
         switch (event.type) {
             case Const.DICT_LENGTH:
-                mCarExtent.setText(builder.toString());
-                lengthStr = builder1.toString();
+                mCarExtent.setText(event.labelStr);
+                lengthStr = event.valueStr;
                 break;
             case Const.DICT_CAR_TYPE:
-                mCarType.setText(builder.toString());
-                typeStr = builder1.toString();
+                mCarType.setText(event.labelStr);
+                typeStr = event.valueStr;
                 break;
         }
     }

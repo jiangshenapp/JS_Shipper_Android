@@ -109,7 +109,7 @@
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrdersActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrderDetailActivity"
