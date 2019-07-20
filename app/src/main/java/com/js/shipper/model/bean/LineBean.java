@@ -46,6 +46,7 @@ public class LineBean {
     private String classicName;
     private boolean isCollect;
     private String receiveAddressCodeName;
+    private String enableTime;
 
     public int getId() {
         return id;
@@ -197,5 +198,13 @@ public class LineBean {
 
     public void setReceiveAddressCodeName(String receiveAddressCodeName) {
         this.receiveAddressCodeName = receiveAddressCodeName;
+    }
+
+    public String getEnableTime() {
+        return enableTime;
+    }
+
+    public void setEnableTime(String enableTime) {
+        this.enableTime = enableTime;
     }
 }

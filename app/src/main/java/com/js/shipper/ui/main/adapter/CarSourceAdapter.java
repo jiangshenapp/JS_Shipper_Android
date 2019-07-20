@@ -7,6 +7,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.Gson;
+import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.util.TimeUtils;
@@ -34,6 +36,9 @@ public class CarSourceAdapter extends BaseQuickAdapter<LineBean, BaseViewHolder>
         if (!TextUtils.isEmpty(item.getDriverName())) {
             info += item.getDriverName();
         }
+        if (!TextUtils.isEmpty(item.getCphm())) {
+            info += " " + item.getCphm();
+        }
         if (!TextUtils.isEmpty(item.getCarLengthName())) {
             info += " " + item.getCarLengthName();
         }
@@ -45,6 +50,8 @@ public class CarSourceAdapter extends BaseQuickAdapter<LineBean, BaseViewHolder>
                 .setText(R.id.item_driver_info, info);
         helper.addOnClickListener(R.id.item_phone);
         helper.addOnClickListener(R.id.item_chat);
-
+        if (!TextUtils.isEmpty(item.getEnableTime())) {
+            helper.setText(R.id.item_distance, TimeUtils.format(item.getEnableTime()));
+        }
     }
 }

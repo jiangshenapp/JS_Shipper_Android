@@ -21,9 +21,9 @@ public class BoutiqueAdapter extends BaseQuickAdapter<LineBean, BaseViewHolder> 
     @Override
     protected void convert(BaseViewHolder helper, LineBean item) {
         helper.setText(R.id.item_send_address,item.getStartAddressCodeName())
-                .setText(R.id.item_arrive_address,item.getArriveAddressCodeName());
+                .setText(R.id.item_arrive_address,item.getArriveAddressCodeName())
+                .setText(R.id.item_send_remark,item.getRemark());
         helper.addOnClickListener(R.id.item_phone);
         helper.addOnClickListener(R.id.item_chat);
-//                .setText(R.id.item_send_date,item.ge)
     }
 }

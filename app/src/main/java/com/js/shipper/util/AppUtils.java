@@ -3,8 +3,10 @@ package com.js.shipper.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
@@ -48,10 +50,14 @@ public class AppUtils {
      * @param phoneNum 电话号码
      */
     public static void callPhone(Context context,String phoneNum) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        Uri data = Uri.parse("tel:" + phoneNum);
-        intent.setData(data);
-        context.startActivity(intent);
+        if (TextUtils.isEmpty(phoneNum)) {
+            Toast.makeText(context, "手机号码为空", Toast.LENGTH_SHORT).show();
+        } else{
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            Uri data = Uri.parse("tel:" + phoneNum);
+            intent.setData(data);
+            context.startActivity(intent);
+        }
     }
 
     public static boolean isMobile(String str) {
