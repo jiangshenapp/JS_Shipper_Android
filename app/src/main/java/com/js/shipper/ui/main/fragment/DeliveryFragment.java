@@ -74,14 +74,14 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     private DeliveryAdapter mAdapter;
     private List<ParkBean> mLists;
     private int type;
-    private int sort;
-    private String areaCode;
+    private int sort = 1;
+    private String areaCode = "0";
+    private String companyType;
 
     private CityWindow mAreaWindow;
     private SortWindow mSortWindow;
     private CompanyWindow mCompanyWindow;
     private String[] items = {"百度地图", "高德地图"};
-    private ParkList mPark = new ParkList();
 
     public static DeliveryFragment newInstance() {
         return new DeliveryFragment();
@@ -126,14 +126,12 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                type = Const.MORE;
                 int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getParkList(num);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                type = Const.REFRESH;
                 getParkList(Const.PAGE_NUM);
             }
         });
@@ -149,14 +147,19 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
     }
 
-
     private void getParkList(int num) {
-        if ("区域".equals(mArea.getText().toString())) {
-            mPark.setAddressCode("0");
+        if (num == Const.PAGE_NUM) {
+            type = Const.REFRESH;
         } else {
+            type = Const.MORE;
+        }
+        ParkList mPark = new ParkList();
+        if (areaCode.length() == 6) {
             mPark.setAddressCode(areaCode);
         }
-
+        if (!TextUtils.isEmpty(companyType)) {
+            mPark.setCompanyType(companyType);
+        }
         mPark.setSort(sort);
         mPresenter.getParkList(num, Const.PAGE_SIZE, mPark);
     }
@@ -216,7 +219,6 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 toast("该功能暂未开放");
                 break;
         }
-
     }
 
     @OnClick({R.id.area_layout, R.id.branch_layout, R.id.sort_layout})
@@ -233,7 +235,6 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 break;
         }
     }
-
 
     public void showSelectDialog(LatLng start, LatLng end, String dName) {
         new CircleDialog.Builder(getActivity())
@@ -275,19 +276,15 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                     mArea.setText(event.areaBean.getName());
                 }
                 break;
-
         }
-
         getParkList(Const.PAGE_NUM);
     }
 
     @Subscribe
     public void onEvent(CompanyEvent event) {
         mBranch.setText(event.content);
-        if ("全部".equals(event.content)) {
-            mPark.setCompanyType("");
-        } else {
-            mPark.setCompanyType(String.valueOf(event.position));
+        if (!"全部".equals(event.content)) {
+            companyType = String.valueOf(event.position);
         }
         getParkList(Const.PAGE_NUM);
     }

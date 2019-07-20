@@ -163,7 +163,7 @@ public class FilterWindow extends PopupWindow {
                 }
 
                 StringBuilder typeStr = new StringBuilder();
-                for (DictBean dictBean : mCarTypeDict) {
+                for (DictBean dictBean : mTypeDict) {
                     if (dictBean.isChecked()) {
                         if (!"不限".equals(dictBean.getValue())) {
                             typeStr.append(dictBean.getValue());

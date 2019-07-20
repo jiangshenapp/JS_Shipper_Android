@@ -82,10 +82,11 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     private CityWindow mEndWindow;
     private SortWindow mSortWindow;
     private FilterWindow mFilterWindow;
-    private LineAppFind lineAppFind = new LineAppFind();
     private String arriveAddressCode = "0";
     private String startAddressCode = "0";
-    private int sort;
+    private int sort = 1;
+    private String lengthStr;
+    private String typeStr;
 
     public static CarSourceFragment newInstance() {
         return new CarSourceFragment();
@@ -137,14 +138,12 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                type = Const.MORE;
                 int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getCarSource(num);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                type = Const.REFRESH;
                 getCarSource(Const.PAGE_NUM);
             }
         });
@@ -244,7 +243,6 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         getCarSource(Const.PAGE_NUM);
     }
 
-
     @Subscribe
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
@@ -252,29 +250,33 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         getCarSource(Const.PAGE_NUM);
     }
 
-
     @Subscribe
     public void onEvent(FilterEvent event){
-        lineAppFind.setCarLength(event.lengthStr);
-        lineAppFind.setCarModel(event.typeStr);
-        lineAppFind.setUseCarType(event.carTypeStr);
+        lengthStr = event.lengthStr;
+        typeStr = event.typeStr;
         getCarSource(Const.PAGE_NUM);
     }
 
     private void getCarSource(int num) {
-        if ("发货地".equals(mSendAddress.getText().toString())) {
-            lineAppFind.setStartAddressCode("0");
+        if (num == Const.PAGE_NUM) {
+            type = Const.REFRESH;
         } else {
+            type = Const.MORE;
+        }
+        LineAppFind lineAppFind = new LineAppFind();
+        if (startAddressCode.length() == 6) {
             lineAppFind.setStartAddressCode(startAddressCode);
         }
-        if ("收货地".equals(mEndAddress.getText().toString())) {
-            lineAppFind.setArriveAddressCode("0");
-        } else {
+        if (arriveAddressCode.length() == 6) {
             lineAppFind.setArriveAddressCode(arriveAddressCode);
         }
-
         lineAppFind.setSort(sort);
-
+        if (!TextUtils.isEmpty(lengthStr)) {
+            lineAppFind.setCarLength(lengthStr);
+        }
+        if (!TextUtils.isEmpty(typeStr)) {
+            lineAppFind.setCarModel(typeStr);
+        }
         mPresenter.getCarSource(num, lineAppFind, Const.PAGE_SIZE);
     }
 

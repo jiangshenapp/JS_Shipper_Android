@@ -71,8 +71,6 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     @BindView(R.id.condition_layout)
     LinearLayout mCondition;
 
-    private LineAppFind lineAppFind = new LineAppFind();
-
     @OnClick({R.id.send_address, R.id.end_address, R.id.sort, R.id.filter})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -101,9 +99,11 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     private CityWindow mEndWindow;
     private SortWindow mSortWindow;
     private FilterWindow mFilterWindow;
-    private String arriveAddressCode;
-    private String startAddressCode;
-    private int sort;
+    private String arriveAddressCode = "0";
+    private String startAddressCode = "0";
+    private int sort = 1;
+    private String lengthStr;
+    private String typeStr;
 
     public static BoutiqueFragment newInstance() {
         return new BoutiqueFragment();
@@ -129,13 +129,11 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         initData();
     }
 
-
     private void initData() {
         mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
         mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
         mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
-
 
     private void initView() {
         mDictPresenter.attachView(this);
@@ -143,7 +141,6 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         initRecycler();
         initCityWindow();
     }
-
 
     private void initCityWindow() {
         mStartWindow = new CityWindow(mContext, 0);
@@ -167,20 +164,17 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                type = Const.MORE;
                 int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getCarSource(num);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                type = Const.REFRESH;
                 getCarSource(Const.PAGE_NUM);
 
             }
         });
     }
-
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -239,9 +233,25 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     }
 
     private void getCarSource(int num) {
-        lineAppFind.setArriveAddressCode(arriveAddressCode);
-        lineAppFind.setStartAddressCode(startAddressCode);
+        if (num == Const.PAGE_NUM) {
+            type = Const.REFRESH;
+        } else {
+            type = Const.MORE;
+        }
+        LineAppFind lineAppFind = new LineAppFind();
+        if (startAddressCode.length() == 6) {
+            lineAppFind.setStartAddressCode(startAddressCode);
+        }
+        if (arriveAddressCode.length() == 6) {
+            lineAppFind.setArriveAddressCode(arriveAddressCode);
+        }
         lineAppFind.setSort(sort);
+        if (!TextUtils.isEmpty(lengthStr)) {
+            lineAppFind.setCarLength(lengthStr);
+        }
+        if (!TextUtils.isEmpty(typeStr)) {
+            lineAppFind.setCarModel(typeStr);
+        }
         mPresenter.getClassicLine(num, lineAppFind, Const.PAGE_SIZE);
     }
 
@@ -266,10 +276,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 }
                 break;
         }
-
         getCarSource(Const.PAGE_NUM);
     }
-
 
     @Subscribe
     public void onEvent(SortEvent sortEvent) {
@@ -280,9 +288,8 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
 
     @Subscribe
     public void onEvent(FilterEvent event){
-        lineAppFind.setCarLength(event.lengthStr);
-        lineAppFind.setCarModel(event.typeStr);
-        lineAppFind.setUseCarType(event.carTypeStr);
+        lengthStr = event.lengthStr;
+        typeStr = event.typeStr;
         getCarSource(Const.PAGE_NUM);
     }
 }
