@@ -25,7 +25,8 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 .setText(R.id.waybill_state, item.getStateNameConsignor())
                 .setText(R.id.send_address, item.getSendAddress())
                 .setText(R.id.end_address, item.getReceiveAddress())
-                .setText(R.id.waybill_info, item.getGoodsType() + " "
+                .setText(R.id.waybill_info, item.getCarModelName() + " "
+                        +item.getCarLengthName()+"/"
                         + item.getGoodsVolume() + "方/"
                         + item.getGoodsWeight()+"吨");
         if (item.getFee() == 0) {

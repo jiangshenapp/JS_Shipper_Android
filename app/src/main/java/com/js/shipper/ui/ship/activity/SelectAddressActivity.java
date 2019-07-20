@@ -138,27 +138,33 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     private void initIntent() {
         type = getIntent().getIntExtra("type", 0);
         mShip = getIntent().getParcelableExtra("ship");
+        if (mShip==null){
+            mShip = new ShipBean();
+        }
         mShip.setType(type);
     }
 
     private void initView() {
         initMap();
         initLocation();
-        if (mShip != null && !TextUtils.isEmpty(mShip.getPosition())) {
-            Gson gson = new Gson();
-            LatLngBean latLngBean = gson.fromJson(mShip.getPosition(), LatLngBean.class);
-            if (latLngBean != null) {
-                setUserMapCenter(latLngBean.getLatitude(), latLngBean.getLongitude());
+        if (mShip != null) {
+            if (!TextUtils.isEmpty(mShip.getPosition())) {
+                Gson gson = new Gson();
+                LatLngBean latLngBean = gson.fromJson(mShip.getPosition(), LatLngBean.class);
+                if (latLngBean != null) {
+                    setUserMapCenter(latLngBean.getLatitude(), latLngBean.getLongitude());
+                }
+            } else {
+                setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
             }
-        } else {
-            setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+            if (!TextUtils.isEmpty(mShip.getAddress())) {
+                mAddress.setText(mShip.getAddress());
+            }
+            if (!TextUtils.isEmpty(mShip.getAddressName())) {
+                mAddress.setText(mShip.getAddressName());
+            }
         }
-        if (!TextUtils.isEmpty(mShip.getAddress())) {
-            mAddress.setText(mShip.getAddress());
-        }
-        if (!TextUtils.isEmpty(mShip.getAddressName())) {
-            mAddress.setText(mShip.getAddressName());
-        }
+
         switch (type) {
             case 0:
                 receiverInfo.setText("发货人信息");

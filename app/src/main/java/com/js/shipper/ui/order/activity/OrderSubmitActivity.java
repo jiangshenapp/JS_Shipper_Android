@@ -374,11 +374,15 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
+                if (date.before(new Date())){
+                    toast("装货时间必须大于当前时间");
+                    return;
+                }
                 mShipTime.setText(TimeUtils.formatYYMMDDHHMMSS(date));
             }
         })
                 .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
-                .setRangDate(startTime, endTime)
+//                .setRangDate(startTime, endTime)
                 .build();
         pvTime.show();
     }

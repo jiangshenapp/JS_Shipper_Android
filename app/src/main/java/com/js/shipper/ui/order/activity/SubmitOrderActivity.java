@@ -67,6 +67,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -484,11 +485,13 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             case R.id.ship_start_layout://发货地址
                 Intent startIntent = new Intent(mContext, SelectAddressActivity.class);
                 startIntent.putExtra("type", 0);
+                startIntent.putExtra("ship", mSendShip);
                 startActivityForResult(startIntent, Const.CODE_REQ);
                 break;
             case R.id.ship_end_layout://收货地址
                 Intent endIntent = new Intent(mContext, SelectAddressActivity.class);
                 endIntent.putExtra("type", 1);
+                endIntent.putExtra("ship", mEndShip);
                 startActivityForResult(endIntent, Const.CODE_REQ);
                 break;
             case R.id.ship_car_extent_layout://车长
@@ -511,14 +514,22 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     }
 
     private void showDateTime() {
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+        endTime.add(Calendar.YEAR, 2000);
         //时间选择器
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
+                if (date.before(new Date())){
+                    toast("装货时间必须大于当前时间");
+                    return;
+                }
                 mShipTime.setText(TimeUtils.formatYYMMDDHHMMSS(date));
             }
         })
                 .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
+//                .setRangDate(startTime, endTime)
                 .build();
         pvTime.show();
     }
