@@ -3,6 +3,7 @@ package com.js.shipper.ui.park.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +24,13 @@ import com.js.shipper.model.request.CollectPark;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BranchDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BranchDetailContract;
+import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.glide.GlideImageLoader;
 import com.youth.banner.Banner;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +59,7 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
     private MenuItem moreItem;
     private ParkBean mParkBean;
     private DecimalFormat df = new DecimalFormat("#####0.0");
+    private List<String> imgPaths;
 
     public static void action(Context context, long id) {
         Intent intent = new Intent(context, BranchDetailActivity.class);
@@ -73,6 +79,11 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
     }
 
     private void initView() {
+        initBanner();
+    }
+
+    private void initBanner() {
+        mBanner.setImageLoader(new GlideImageLoader());
     }
 
     private void initData() {
@@ -106,8 +117,24 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
         isCollection = parkBean.isCollect();
         mBranchName.setText(parkBean.getCompanyName());
         mBranchContact.setText(parkBean.getContactName());
-        mBranchAddress.setText(parkBean.getDetailAddress());
-        if (App.getInstance().mLocation==null){
+        mBranchAddress.setText(parkBean.getContactAddress());
+        if (moreItem != null) {
+            if (isCollection) {
+                moreItem.setIcon(R.mipmap.ic_navigationbar_collection_selected);
+            } else {
+                moreItem.setIcon(R.mipmap.ic_navigationbar_collection_default);
+            }
+        }
+        if (TextUtils.isEmpty(parkBean.getBusinessLicenceImage())) {
+            mBanner.setVisibility(View.GONE);
+        } else {
+            imgPaths = new ArrayList<>();
+            imgPaths.add(com.js.http.global.Const.IMG_URL+parkBean.getBusinessLicenceImage());
+            mBanner.setVisibility(View.VISIBLE);
+            mBanner.setImages(imgPaths);
+            mBanner.start();
+        }
+        if (App.getInstance().mLocation==null || TextUtils.isEmpty(parkBean.getContactLocation())){
             return;
         }
         Gson gson = new Gson();
@@ -115,16 +142,8 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
         try {
             double distance = DistanceUtil.getDistance(gson.fromJson(parkBean.getContactLocation(), LatLng.class), latLng);
             mBranchDistance.setText("距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
-        }catch (Exception e){
+        }catch (Exception e) {
 
-        }
-
-        if (moreItem != null) {
-            if (isCollection) {
-                moreItem.setIcon(R.mipmap.ic_navigationbar_collection_selected);
-            } else {
-                moreItem.setIcon(R.mipmap.ic_navigationbar_collection_default);
-            }
         }
     }
 
@@ -153,8 +172,10 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
+                AppUtils.callPhone(mContext,mParkBean.getContractPhone());
                 break;
             case R.id.im:
+                toast("该功能暂未开放");
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mParkBean.getSubscriberId(),null);

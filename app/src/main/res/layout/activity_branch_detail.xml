@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:text="简介"
+                android:text="服务范围"
                 android:textColor="@color/_B4B4B4"
                 android:textSize="12sp" />
 

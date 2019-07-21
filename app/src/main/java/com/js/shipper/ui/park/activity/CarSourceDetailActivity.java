@@ -2,6 +2,7 @@ package com.js.shipper.ui.park.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,12 @@ import com.js.shipper.model.request.CollectLine;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.CarSourceDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.CarSourceDetailContract;
+import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.glide.GlideImageLoader;
 import com.youth.banner.Banner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,7 +32,6 @@ import butterknife.OnClick;
  * Created by huyg on 2019-06-16.
  */
 public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresenter> implements CarSourceDetailContract.View {
-
 
     @BindView(R.id.banner)
     Banner mBanner;
@@ -50,7 +55,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     private boolean isCollection = false;
     private MenuItem moreItem;
     private LineBean mLineBean;
-
+    private List<String> imgPaths;
 
     public static void action(Context context, long id) {
         Intent intent = new Intent(context, CarSourceDetailActivity.class);
@@ -61,7 +66,12 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     @Override
     protected void init() {
         initIntent();
+        initBanner();
         initData();
+    }
+
+    private void initBanner() {
+        mBanner.setImageLoader(new GlideImageLoader());
     }
 
     private void initIntent() {
@@ -94,10 +104,19 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     @Override
     public void onLineDetail(LineBean lineBean) {
         mLineBean = lineBean;
+        if (TextUtils.isEmpty(lineBean.getImage2())) {
+            mBanner.setVisibility(View.GONE);
+        } else {
+            imgPaths = new ArrayList<>();
+            imgPaths.add(com.js.http.global.Const.IMG_URL+lineBean.getImage2());
+            mBanner.setVisibility(View.VISIBLE);
+            mBanner.setImages(imgPaths);
+            mBanner.start();
+        }
         mStartAddress.setText(lineBean.getStartAddressCodeName());
         mEndAddress.setText(lineBean.getArriveAddressCodeName());
         mDriverName.setText(lineBean.getDriverName());
-        mNumber.setText(lineBean.getDriverPhone());
+        mNumber.setText(lineBean.getCphm());
         mType.setText(lineBean.getCarModelName());
         mLength.setText(lineBean.getCarLengthName());
         mRemark.setText(lineBean.getRemark());
@@ -131,13 +150,14 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
         }
     }
 
-
     @OnClick({R.id.phone, R.id.im, R.id.place_order})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
+                AppUtils.callPhone(mContext,mLineBean.getDriverPhone());
                 break;
             case R.id.im:
+                toast("该功能暂未开放");
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(),null);

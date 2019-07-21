@@ -18,6 +18,7 @@ import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BoutiqueDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BoutiqueDetailContract;
+import com.js.shipper.util.AppUtils;
 import com.youth.banner.Banner;
 
 import butterknife.BindView;
@@ -136,8 +137,10 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
+                AppUtils.callPhone(mContext,mLineBean.getDriverPhone());
                 break;
             case R.id.im:
+                toast("该功能暂未开放");
                 break;
             case R.id.ship:
                 SubmitOrderActivity.action(mContext,mLineBean.getSubscriberId(),null);
