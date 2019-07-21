@@ -110,7 +110,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
 
 
     private void initCityWindow() {
-        mAreaWindow = new CityWindow(mContext, 0);
+        mAreaWindow = new CityWindow(mContext, 2);
         mSortWindow = new SortWindow(mContext);
         mCompanyWindow = new CompanyWindow(mContext);
     }
@@ -154,9 +154,9 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
             type = Const.MORE;
         }
         ParkList mPark = new ParkList();
-        if (areaCode.length() == 6) {
-            mPark.setAddressCode(areaCode);
-        }
+//        if (areaCode.length() == 6) {
+//            mPark.setAddressCode(areaCode);
+//        }
         if (!TextUtils.isEmpty(companyType)) {
             mPark.setCompanyType(companyType);
         }
@@ -268,16 +268,16 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     @Subscribe
     public void onEvent(CitySelectEvent event) {
         switch (event.type) {
-            case 0:
+            case 2:
                 areaCode = event.areaBean.getCode();
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
                     mArea.setText(event.areaBean.getAlias());
                 } else {
                     mArea.setText(event.areaBean.getName());
                 }
+                getParkList(Const.PAGE_NUM);
                 break;
         }
-        getParkList(Const.PAGE_NUM);
     }
 
     @Subscribe

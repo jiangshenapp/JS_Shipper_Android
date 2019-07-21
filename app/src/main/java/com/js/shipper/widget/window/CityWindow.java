@@ -96,7 +96,6 @@ public class CityWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
         mAdapter = new CityAdapter(R.layout.item_window_city, mList);
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-
     }
 
     @OnClick({R.id.window_upper, R.id.blank})
@@ -121,7 +120,6 @@ public class CityWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
                 break;
         }
     }
-
 
     public String getJson(Context context, String fileName) {
 

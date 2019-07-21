@@ -228,7 +228,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 } else {
                     mSendAddress.setText(event.areaBean.getName());
                 }
-
+                getCarSource(Const.PAGE_NUM);
                 break;
             case 1:
                 arriveAddressCode = event.areaBean.getCode();
@@ -237,10 +237,9 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 } else {
                     mEndAddress.setText(event.areaBean.getName());
                 }
+                getCarSource(Const.PAGE_NUM);
                 break;
         }
-
-        getCarSource(Const.PAGE_NUM);
     }
 
     @Subscribe
