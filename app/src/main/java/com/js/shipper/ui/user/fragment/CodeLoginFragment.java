@@ -77,7 +77,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     protected void init() {
-        mPhone.setText(SpManager.getInstance(getActivity()).getSP("loginPhone"));
+        mPhone.setText(SpManager.getInstance(App.getInstance()).getSP("loginPhone"));
         mCodePresenter.attachView(this);
     }
 
@@ -152,7 +152,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     public void onLogin(String token) {
         toast("登录成功");
         App.getInstance().putToken(token);
-        SpManager.getInstance(getActivity()).putSP("loginPhone",phone);
+        SpManager.getInstance(App.getInstance()).putSP("loginPhone",phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         MainActivity.action(mContext);
     }
