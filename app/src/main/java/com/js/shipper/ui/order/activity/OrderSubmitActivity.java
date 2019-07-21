@@ -111,6 +111,10 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     EditText mBailNumber;
     @BindView(R.id.good_package)
     TextView mPackType;
+    @BindView(R.id.cb_banhuo)
+    CheckBox mBanhuo;
+    @BindView(R.id.cb_xiehuo)
+    CheckBox mXiehuo;
 
     private long orderId;
     private String img1Url;
@@ -152,6 +156,38 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private void initView() {
         mFilePresenter.attachView(this);
         mDictPresenter.attachView(this);
+
+        mBanhuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mXiehuo.setChecked(false);
+                    mBanhuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                    mXiehuo.setTextColor(getResources().getColor(R.color._C8C8C8));
+                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                        mRemark.setText(mRemark.getText().toString() + mBanhuo.getText().toString());
+                    } else {
+                        mRemark.setText(mRemark.getText().toString() + " " + mBanhuo.getText().toString());
+                    }
+                }
+            }
+        });
+        mXiehuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mBanhuo.setChecked(false);
+                    mXiehuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                    mBanhuo.setTextColor(getResources().getColor(R.color._C8C8C8));
+                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                        mRemark.setText(mRemark.getText().toString() + mXiehuo.getText().toString());
+                    } else {
+                        mRemark.setText(mRemark.getText().toString() + " " + mXiehuo.getText().toString());
+                    }
+                }
+            }
+        });
+
         mPayType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

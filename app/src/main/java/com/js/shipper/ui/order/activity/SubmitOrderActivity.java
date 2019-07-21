@@ -66,7 +66,6 @@ import org.greenrobot.eventbus.Subscribe;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -136,7 +135,10 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     EditText mBailNumber;
     @BindView(R.id.good_package)
     TextView mPackType;
-
+    @BindView(R.id.cb_banhuo)
+    CheckBox mBanhuo;
+    @BindView(R.id.cb_xiehuo)
+    CheckBox mXiehuo;
 
     private long matchId;
     private String img1Url;
@@ -161,7 +163,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private String lengthStr;
     private OrderBean mOrderBean;
     private boolean isBail;//是否需要保证金
-    private String[] items = {"拍摄","从相册选择"};
+    private String[] items = {"拍摄", "从相册选择"};
     private List<String> list;
     private OptionsPickerView pvOptions;
 
@@ -222,6 +224,38 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         mLengthWindow = new ItemWindow(mContext, Const.DICT_LENGTH);
         mFilePresenter.attachView(this);
         mDictPresenter.attachView(this);
+
+        mBanhuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mXiehuo.setChecked(false);
+                    mBanhuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                    mXiehuo.setTextColor(getResources().getColor(R.color._C8C8C8));
+                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                        mRemark.setText(mRemark.getText().toString() + mBanhuo.getText().toString());
+                    } else {
+                        mRemark.setText(mRemark.getText().toString() + " " + mBanhuo.getText().toString());
+                    }
+                }
+            }
+        });
+        mXiehuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mBanhuo.setChecked(false);
+                    mXiehuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                    mBanhuo.setTextColor(getResources().getColor(R.color._C8C8C8));
+                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                        mRemark.setText(mRemark.getText().toString() + mXiehuo.getText().toString());
+                    } else {
+                        mRemark.setText(mRemark.getText().toString() + " " + mXiehuo.getText().toString());
+                    }
+                }
+            }
+        });
+
         mPayType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -280,7 +314,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 2+1);
+                                s.toString().indexOf(".") + 2 + 1);
                         mBailNumber.setText(s);
                         mBailNumber.setSelection(s.length()); //光标移到最后
                     }
@@ -320,7 +354,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 2+1);
+                                s.toString().indexOf(".") + 2 + 1);
                         mFee.setText(s);
                         mFee.setSelection(s.length()); //光标移到最后
                     }
@@ -449,7 +483,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             R.id.power_layout, R.id.specified_release, R.id.release,
             R.id.ship_start_layout, R.id.ship_end_layout,
             R.id.ship_car_extent_layout, R.id.ship_car_type_layout,
-            R.id.good_type_layout,R.id.ship_package_layout})
+            R.id.good_type_layout, R.id.ship_package_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ship_time_layout:
@@ -521,7 +555,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                if (date.before(new Date())){
+                if (date.before(new Date())) {
                     toast("装货时间必须大于当前时间");
                     return;
                 }
@@ -633,20 +667,20 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         showDialog();
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new MaterialDialog.Builder(mContext)
                 .items(items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        if (position==0){
+                        if (position == 0) {
                             File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
                             if (!file.getParentFile().exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             Uri imageUri = Uri.fromFile(file);
                             getTakePhoto().onPickFromCapture(imageUri);
-                        }else {
+                        } else {
                             getTakePhoto().onPickFromGallery();
                         }
                     }
