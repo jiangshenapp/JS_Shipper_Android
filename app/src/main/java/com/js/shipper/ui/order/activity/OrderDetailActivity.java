@@ -235,12 +235,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     private void setBottom(int state) {
         //(1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待确认收货，8待回单收到确认，9待评价，10已完成，11已取消，12已关闭）
+        controlLayout.setVisibility(View.VISIBLE);
         mPositive.setClickable(true);
         mPositive.setBackgroundColor(getResources().getColor(R.color._ECA73F));
         switch (state) {
             case 1:
             case 2:
-                controlLayout.setVisibility(View.VISIBLE);
                 mPositive.setText("再发一次");
                 mNavigate.setText("取消发布");
                 break;
@@ -250,13 +250,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 mPositive.setText("立即支付");
                 mPositive.setBackgroundColor(getResources().getColor(R.color._B4B4B4));
                 mNavigate.setText("取消发布");
-                controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 menuItem.setTitle("修改");
                 mPositive.setText("立即支付");
                 mNavigate.setText("取消发布");
-                controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 5:
                 mPositive.setText("取消发布");
@@ -266,7 +264,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             case 7:
                 mPositive.setText("确认收货");
                 mNavigate.setText("查看路线");
-                controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 8:
                 mPositive.setText("回单收到确认");
