@@ -228,30 +228,28 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         mBanhuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mXiehuo.setChecked(false);
-                    mBanhuo.setTextColor(getResources().getColor(R.color._ECA73F));
-                    mXiehuo.setTextColor(getResources().getColor(R.color._C8C8C8));
-                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
-                        mRemark.setText(mRemark.getText().toString() + mBanhuo.getText().toString());
-                    } else {
-                        mRemark.setText(mRemark.getText().toString() + " " + mBanhuo.getText().toString());
-                    }
+                mBanhuo.setBackground(getResources().getDrawable(R.drawable.shape_border_eca73f));
+                mXiehuo.setBackground(getResources().getDrawable(R.drawable.shape_border_c8c8c8));
+                mBanhuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                mXiehuo.setTextColor(getResources().getColor(R.color._B4B4B4));
+                if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                    mRemark.setText(mRemark.getText().toString() + mBanhuo.getText().toString());
+                } else {
+                    mRemark.setText(mRemark.getText().toString() + " " + mBanhuo.getText().toString());
                 }
             }
         });
         mXiehuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mBanhuo.setChecked(false);
-                    mXiehuo.setTextColor(getResources().getColor(R.color._ECA73F));
-                    mBanhuo.setTextColor(getResources().getColor(R.color._C8C8C8));
-                    if (TextUtils.isEmpty(mRemark.getText().toString())) {
-                        mRemark.setText(mRemark.getText().toString() + mXiehuo.getText().toString());
-                    } else {
-                        mRemark.setText(mRemark.getText().toString() + " " + mXiehuo.getText().toString());
-                    }
+                mXiehuo.setBackground(getResources().getDrawable(R.drawable.shape_border_eca73f));
+                mBanhuo.setBackground(getResources().getDrawable(R.drawable.shape_border_c8c8c8));
+                mXiehuo.setTextColor(getResources().getColor(R.color._ECA73F));
+                mBanhuo.setTextColor(getResources().getColor(R.color._B4B4B4));
+                if (TextUtils.isEmpty(mRemark.getText().toString())) {
+                    mRemark.setText(mRemark.getText().toString() + mXiehuo.getText().toString());
+                } else {
+                    mRemark.setText(mRemark.getText().toString() + " " + mXiehuo.getText().toString());
                 }
             }
         });
