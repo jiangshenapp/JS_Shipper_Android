@@ -24,10 +24,10 @@ public class AccountInfo {
     private int subscriberId;
     private int id;
     private int balanceState;
-    private int driverDeposit;
-    private int tradeDeposit;
+    private double driverDeposit;
+    private double tradeDeposit;
     private double balance;
-    private int consignorDeposit;
+    private double consignorDeposit;
 
     public int getDriverDepositState() {
         return driverDepositState;
@@ -61,7 +61,7 @@ public class AccountInfo {
         this.balanceState = balanceState;
     }
 
-    public int getDriverDeposit() {
+    public double getDriverDeposit() {
         return driverDeposit;
     }
 
@@ -69,7 +69,7 @@ public class AccountInfo {
         this.driverDeposit = driverDeposit;
     }
 
-    public int getTradeDeposit() {
+    public double getTradeDeposit() {
         return tradeDeposit;
     }
 
@@ -85,7 +85,7 @@ public class AccountInfo {
         this.balance = balance;
     }
 
-    public int getConsignorDeposit() {
+    public double getConsignorDeposit() {
         return consignorDeposit;
     }
 
