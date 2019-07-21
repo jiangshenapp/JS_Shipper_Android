@@ -188,6 +188,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
                     android:hint="请选择车长"
+                    android:text="不限"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
 
@@ -230,6 +231,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
                     android:hint="请选择车型"
+                    android:text="不限"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
 

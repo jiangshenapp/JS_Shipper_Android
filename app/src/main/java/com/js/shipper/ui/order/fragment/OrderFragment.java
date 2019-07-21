@@ -117,7 +117,6 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
     }
 
-
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         List<OrderBean> orderBeans = adapter.getData();

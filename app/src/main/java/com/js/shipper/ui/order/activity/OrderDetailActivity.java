@@ -170,8 +170,20 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mSendAddress.setText(orderBean.getSendAddress());
         mEndAddress.setText(orderBean.getReceiveAddress());
         mTime.setText(orderBean.getLoadingTime());
-        mCarInfo.setText(orderBean.getCarModelName()+"/"+orderBean.getGoodsVolume() + "方/"
-                + orderBean.getGoodsWeight() + "吨");
+        String info = "";
+        if (!TextUtils.isEmpty(orderBean.getCarModelName())) {
+            info += orderBean.getCarModelName();
+        }
+        if (!TextUtils.isEmpty(orderBean.getCarLengthName())) {
+            info += orderBean.getCarLengthName();
+        }
+        if (orderBean.getGoodsVolume()!=0) {
+            info += "/"+orderBean.getGoodsVolume()+"方";
+        }
+        if (orderBean.getGoodsWeight()!=0) {
+            info += "/"+orderBean.getGoodsWeight()+"吨";
+        }
+        mCarInfo.setText(info);
         mGoodName.setText(orderBean.getGoodsName());
         mUseCarType.setText(orderBean.getUseCarType());
         mBail.setText(String.valueOf(orderBean.getDeposit()));
@@ -225,7 +237,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         //(1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待确认收货，8待回单收到确认，9待评价，10已完成，11已取消，12已关闭）
         mPositive.setClickable(true);
         mPositive.setBackgroundColor(getResources().getColor(R.color._ECA73F));
-        menuItem.setVisible(false);
         switch (state) {
             case 1:
             case 2:
@@ -234,7 +245,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 mNavigate.setText("取消发布");
                 break;
             case 3:
-                menuItem.setVisible(true);
+                menuItem.setTitle("修改");
                 mPositive.setClickable(false);
                 mPositive.setText("立即支付");
                 mPositive.setBackgroundColor(getResources().getColor(R.color._B4B4B4));
@@ -242,7 +253,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 controlLayout.setVisibility(View.VISIBLE);
                 break;
             case 4:
-                menuItem.setVisible(true);
+                menuItem.setTitle("修改");
                 mPositive.setText("立即支付");
                 mNavigate.setText("取消发布");
                 controlLayout.setVisibility(View.VISIBLE);
@@ -304,7 +315,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-
     @Override
     public void finishRefresh() {
         mRefresh.finishRefresh();
@@ -330,7 +340,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-
     @OnClick({R.id.control_navigate, R.id.control_positive, R.id.detail_send_navigate, R.id.detail_arrive_navigate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -347,14 +356,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 8:
                     case 9:
                         break;
-
                 }
                 break;
             case R.id.control_positive:
                 switch (status) {
                     case 1:
                     case 2://再发一次
-                        SubmitOrderActivity.action(mContext, 0, mOrderBean);
+                        SubmitOrderActivity.action(mContext, mOrderBean.getMatchSubscriberId(), mOrderBean);
                         break;
                     case 4://支付
                         if (mOrderBean.getFeeType() == 2) {
@@ -375,7 +383,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 7:
                         mPresenter.confirmOrder(orderId);
                         break;
-
                     case 8://回单收到确认
                         mPresenter.receiptOrder(orderId);
                         break;
@@ -385,7 +392,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 11://重新发货
                         SubmitOrderActivity.action(mContext, 0, mOrderBean);
                         break;
-
                 }
                 break;
 
@@ -410,23 +416,25 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menuItem = menu.add(Menu.NONE, R.id.order_edit, Menu.FIRST, "修改");
+        menuItem = menu.add(Menu.NONE, R.id.order_edit, Menu.FIRST, "再发一次");
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.order_edit:
-                Intent intent = new Intent(mContext, OrderEditActivity.class);
-                intent.putExtra("order", mOrderBean);
-                startActivityForResult(intent, Const.CODE_REQ);
+                if (item.getTitle().equals("修改")) {
+                    Intent intent = new Intent(mContext, OrderEditActivity.class);
+                    intent.putExtra("order", mOrderBean);
+                    startActivityForResult(intent, Const.CODE_REQ);
+                }
+                if (item.getTitle().equals("再发一次")) {
+                    SubmitOrderActivity.action(mContext, mOrderBean.getMatchSubscriberId(), mOrderBean);
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
