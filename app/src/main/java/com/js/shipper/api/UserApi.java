@@ -21,6 +21,7 @@ public interface UserApi {
 
     /**
      * 绑定手机号
+     *
      * @param mobile
      * @param code
      * @return
@@ -31,6 +32,7 @@ public interface UserApi {
 
     /**
      * 短信验证码登录
+     *
      * @param mobile
      * @param code
      * @return
@@ -42,18 +44,21 @@ public interface UserApi {
 
     /**
      * 密码登录
+     *
      * @param mobile
      * @param password
      * @return
      */
     @FormUrlEncoded
-    @POST("app/subscriber/login")
-    Observable<HttpResponse<String>> login(@Field("mobile") String mobile,
-                                       @Field("password") String password);
+    @POST("app/subscriber/login2")
+    Observable<HttpResponse<String>> login(@Field("appType") int appType,
+                                           @Field("mobile") String mobile,
+                                           @Field("password") String password);
 
 
     /**
      * 退出登录
+     *
      * @param token
      * @return
      */
@@ -64,6 +69,7 @@ public interface UserApi {
 
     /**
      * 获取当前登录人信息
+     *
      * @return
      */
     @GET("app/subscriber/profile")
@@ -72,6 +78,7 @@ public interface UserApi {
 
     /**
      * 会员注册
+     *
      * @param mobile
      * @param password
      * @param code
@@ -86,6 +93,7 @@ public interface UserApi {
 
     /**
      * 重置密码步骤1
+     *
      * @param mobile
      * @param code
      * @return
@@ -97,6 +105,7 @@ public interface UserApi {
 
     /**
      * 重置密码步骤2
+     *
      * @param mobile
      * @param password
      * @return
@@ -108,6 +117,7 @@ public interface UserApi {
 
     /**
      * 发送短信验证码
+     *
      * @param mobile
      * @return
      */
@@ -118,6 +128,7 @@ public interface UserApi {
 
     /**
      * 设置密码
+     *
      * @param password
      * @return
      */
@@ -128,6 +139,7 @@ public interface UserApi {
 
     /**
      * 修改头像
+     *
      * @param avatar
      * @return
      */
@@ -138,6 +150,7 @@ public interface UserApi {
 
     /**
      * 修改昵称
+     *
      * @param nickname
      * @return
      */
@@ -148,6 +161,7 @@ public interface UserApi {
 
     /**
      * 个人货主认证
+     *
      * @param data
      * @return
      */
@@ -157,6 +171,7 @@ public interface UserApi {
 
     /**
      * 获取个人货主认证信息
+     *
      * @return
      */
     @POST("app/subscriber/verify/getPersonConsignorVerifiedInfo")
@@ -165,6 +180,7 @@ public interface UserApi {
 
     /**
      * 企业货主认证
+     *
      * @param data
      * @return
      */
@@ -174,6 +190,7 @@ public interface UserApi {
 
     /**
      * 获取企业货主认证信息
+     *
      * @return
      */
     @POST("app/subscriber/verify/getCompanyConsignorVerifiedInfo")

@@ -29,7 +29,7 @@ public class PwdLoginPresenter extends RxPresenter<PwdLoginContract.View> implem
     @Override
     public void login(String phone, String pwd) {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .login(phone, pwd)
+                .login(1,phone, pwd)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {

@@ -73,11 +73,13 @@
                 android:layout_weight="1"
                 android:hint="请输入地址"
                 android:completionThreshold="1"
-                android:dropDownHorizontalOffset="5dp"
+                android:dropDownVerticalOffset="1dp"
+                android:dropDownAnchor="@id/address_search_layout"
                 android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp"
                 android:layout_marginStart="8dp"
                 android:background="@null"
+                android:dropDownWidth="match_parent"
                 />
 
         </LinearLayout>
