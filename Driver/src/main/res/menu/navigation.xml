@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_find"
+        android:title="找货"
+        android:icon="@mipmap/ic_menubar_cargoods_black"
+        />
+
+    <item
+        android:id="@+id/navigation_service"
+        android:title="服务"
+        android:icon="@mipmap/ic_menubar_service_black"
+        />
+
+    <item
+        android:id="@+id/navigation_information"
+        android:title="消息"
+        android:icon="@mipmap/ic_menubar_news_black"
+        />
+
+    <item
+        android:id="@+id/navigation_community"
+        android:title="社区"
+        android:icon="@mipmap/ic_menubar_community_black"
+        />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:title="我的"
+        android:icon="@mipmap/ic_menubar_mine_black"
+        />
+
+</menu>

@@ -196,9 +196,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                         break;
                 }
             }
-            if (mSendShip != null && mEndShip != null) {
+            if (mSendShip != null &&!TextUtils.isEmpty(mSendShip.getPosition())&& mEndShip != null&&!TextUtils.isEmpty(mEndShip.getPosition())) {
                 double distance = DistanceUtil.getDistance(mGson.fromJson(mSendShip.getPosition(), LatLng.class), mGson.fromJson(mEndShip.getPosition(), LatLng.class));
                 mMileage.setText("总里程" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+            }else {
+                mMileage.setText("总里程0公里");
             }
 
         }

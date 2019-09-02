@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="名称"
+                    android:textColor="@color/_000000"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请输入代理点名称/个人姓名"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    android:lines="1"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginEnd="12dp"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="机构类型"
+                    android:textColor="@color/_000000"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="服务中心/车代点/网点"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    android:lines="1"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginEnd="12dp"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
