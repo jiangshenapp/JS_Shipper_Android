@@ -9,11 +9,8 @@ import android.widget.RadioGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 import com.js.shipper.R;
-import com.js.shipper.ui.main.fragment.BoutiqueFragment;
-import com.js.shipper.ui.main.fragment.CarSourceFragment;
-import com.js.shipper.ui.main.fragment.DeliveryFragment;
 import com.js.shipper.ui.park.fragment.CollectBoutiqueFragment;
 import com.js.shipper.ui.park.fragment.CollectBranchFragment;
 import com.js.shipper.ui.park.fragment.CollectCarSourceFragment;

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.poi.PoiAddrInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.shipper.R;
 import com.js.shipper.model.event.PoiAddrInfoEvent;

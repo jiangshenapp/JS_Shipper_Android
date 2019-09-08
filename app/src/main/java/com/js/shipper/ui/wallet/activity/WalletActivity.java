@@ -14,7 +14,7 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.ui.wallet.presenter.WalletPresenter;
 import com.js.shipper.ui.wallet.presenter.contract.WalletContract;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;

@@ -7,7 +7,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.PayTask;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;

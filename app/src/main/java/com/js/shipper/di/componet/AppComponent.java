@@ -2,7 +2,7 @@ package com.js.shipper.di.componet;
 
 
 import com.js.shipper.di.module.AppModule;
-import com.js.http.ApiFactory;
+import com.base.http.ApiFactory;
 
 import javax.inject.Singleton;
 

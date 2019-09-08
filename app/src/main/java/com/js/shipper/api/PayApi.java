@@ -4,8 +4,8 @@ import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.BillBean;
 import com.js.shipper.model.bean.PayInfo;
 import com.js.shipper.model.bean.PayRouter;
-import com.js.http.BaseHttpResponse;
-import com.js.http.HttpResponse;
+import com.base.http.BaseHttpResponse;
+import com.base.http.HttpResponse;
 
 import java.util.List;
 

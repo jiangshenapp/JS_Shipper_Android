@@ -15,12 +15,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
-import com.js.shipper.manager.UserManager;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
 import com.js.shipper.ui.main.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;

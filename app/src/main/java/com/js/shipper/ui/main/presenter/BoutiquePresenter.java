@@ -1,16 +1,14 @@
 package com.js.shipper.ui.main.presenter;
 
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
-import com.js.shipper.App;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
 import com.js.shipper.api.LineApi;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.LineAppFind;
-import com.js.shipper.model.request.LineClassic;
 import com.js.shipper.model.response.ListResponse;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxResult;
+import com.base.http.rx.RxSchedulers;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
 
 import javax.inject.Inject;

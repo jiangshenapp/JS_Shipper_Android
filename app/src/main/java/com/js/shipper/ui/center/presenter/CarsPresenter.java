@@ -1,8 +1,8 @@
 package com.js.shipper.ui.center.presenter;
 
 import com.js.shipper.ui.center.presenter.contract.CarsContract;
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
 
 import javax.inject.Inject;
 

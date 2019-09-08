@@ -6,7 +6,7 @@ import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.ServicePresenter;
 import com.js.shipper.ui.main.presenter.contract.ServiceContract;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 
 /**
  * Created by huyg on 2019/4/1.

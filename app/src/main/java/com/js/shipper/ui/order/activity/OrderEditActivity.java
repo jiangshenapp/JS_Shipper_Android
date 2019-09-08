@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -25,7 +25,6 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.Body;
 
 /**
  * Created by huyg on 2019-06-17.

@@ -1,32 +1,21 @@
 package com.js.shipper.ui.main.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Pair;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.hyphenate.EMConnectionListener;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
+import com.base.shipper.R;
 import com.hyphenate.chat.EMConversation;
-import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.easeui.widget.EaseConversationList;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.App;
-import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.InformationPresenter;
 import com.js.shipper.ui.main.presenter.contract.InformationContract;
-import com.js.shipper.ui.message.chat.EaseChatActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;

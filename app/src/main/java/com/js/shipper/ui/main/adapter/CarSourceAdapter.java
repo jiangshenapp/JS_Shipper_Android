@@ -1,14 +1,9 @@
 package com.js.shipper.ui.main.adapter;
 
 import android.text.TextUtils;
-import android.view.TextureView;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.google.gson.Gson;
-import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.util.TimeUtils;

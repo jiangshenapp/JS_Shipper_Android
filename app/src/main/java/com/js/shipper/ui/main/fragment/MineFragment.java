@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.js.frame.view.BaseFragment;
-import com.js.http.global.Const;
+import com.base.frame.view.BaseFragment;
+import com.base.http.global.Const;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;

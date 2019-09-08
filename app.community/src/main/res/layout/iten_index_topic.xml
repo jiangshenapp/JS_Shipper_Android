@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="44dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/social_circle_icon_green"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="话题二"
+        android:textColor="@color/_000000"
+        android:textSize="12sp"
+        android:lines="1"
+        android:ellipsize="end"
+        />
+
+
+</LinearLayout>

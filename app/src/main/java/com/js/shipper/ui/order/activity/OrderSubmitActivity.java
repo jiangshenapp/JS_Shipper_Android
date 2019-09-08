@@ -36,7 +36,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -55,7 +55,6 @@ import com.js.shipper.util.TimeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -538,11 +537,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg2);
                 break;
         }
     }

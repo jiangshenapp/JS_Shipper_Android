@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.baidu.mapapi.model.LatLng;
+import com.base.frame.view.BaseFragment;
+import com.base.shipper.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
-import com.js.frame.view.BaseFragment;
 import com.js.shipper.App;
-import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
@@ -34,7 +34,6 @@ import com.js.shipper.util.MapUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
 import com.js.shipper.widget.window.CompanyWindow;
-import com.js.shipper.widget.window.FilterWindow;
 import com.js.shipper.widget.window.SortWindow;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
@@ -49,7 +48,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.Body;
 
 /**
  * Created by huyg on 2019/4/30.

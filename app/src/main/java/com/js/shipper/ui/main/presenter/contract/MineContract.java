@@ -2,8 +2,8 @@ package com.js.shipper.ui.main.presenter.contract;
 
 import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.UserInfo;
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 
 /**
  * Created by huyg on 2019/4/1.

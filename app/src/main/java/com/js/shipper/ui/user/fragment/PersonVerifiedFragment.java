@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +31,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -53,7 +52,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -166,11 +164,11 @@ public class PersonVerifiedFragment extends BaseFragment<PersonVerifiedPresenter
 
         mAuthInfo = authInfo;
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getIdImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdImage()
                 , mAuthCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_idpositive));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getIdBackImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdBackImage()
                 , mAuthBehindCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getIdHandImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdHandImage()
                 , mAuthBody, mContext.getResources().getDrawable(R.mipmap.img_authentication_body));
         etName.setText(authInfo.getPersonName());
         etIdcard.setText(authInfo.getIdCode());
@@ -331,15 +329,15 @@ public class PersonVerifiedFragment extends BaseFragment<PersonVerifiedPresenter
         switch (choseCode) {
             case Const.AUTH_CARD:
                 mAuthInfo.setIdImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthCard);
                 break;
             case Const.AUTH_BEHIND_CARD:
                 mAuthInfo.setIdBackImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthBehindCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthBehindCard);
                 break;
             case Const.AUTH_BODY:
                 mAuthInfo.setIdHandImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthBody);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthBody);
                 break;
         }
     }

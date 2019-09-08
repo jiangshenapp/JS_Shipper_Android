@@ -1,6 +1,6 @@
 package com.js.shipper.api;
 
-import com.js.http.HttpResponse;
+import com.base.http.HttpResponse;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;

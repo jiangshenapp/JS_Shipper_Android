@@ -1,4 +1,4 @@
-package com.js.http;
+package com.base.http;
 
 import org.junit.Test;
 

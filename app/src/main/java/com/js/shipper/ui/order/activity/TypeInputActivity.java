@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.baidu.mapapi.map.TextureMapFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;

@@ -39,7 +39,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -461,8 +461,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             mEndShip.setPhone(mOrderBean.getReceiveMobile());
             mEndShip.setName(mOrderBean.getReceiveName());
 
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getImage1(), mImg1);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getImage2(), mImg2);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getImage1(), mImg1);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getImage2(), mImg2);
 
             if (mSendShip != null && mEndShip != null) {
                 double distance = DistanceUtil.getDistance(mGson.fromJson(mSendShip.getPosition(), LatLng.class), mGson.fromJson(mEndShip.getPosition(), LatLng.class));
@@ -698,11 +698,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg2);
                 break;
         }
     }

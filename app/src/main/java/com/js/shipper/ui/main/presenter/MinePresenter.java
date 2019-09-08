@@ -1,18 +1,15 @@
 package com.js.shipper.ui.main.presenter;
 
-import android.text.TextUtils;
-
-import com.js.shipper.App;
 import com.js.shipper.api.PayApi;
 import com.js.shipper.api.UserApi;
 import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.UserInfo;
 import com.js.shipper.ui.main.presenter.contract.MineContract;
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxResult;
+import com.base.http.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

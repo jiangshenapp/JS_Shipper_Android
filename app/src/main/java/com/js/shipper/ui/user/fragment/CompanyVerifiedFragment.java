@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +31,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -154,7 +153,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
         etAddress.setText(authInfo.getAddress());
         etDetailAddress.setText(authInfo.getDetailAddress());
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
                 , authBusinessLicense, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
     }
 
@@ -337,7 +336,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
         switch (choseCode) {
             case Const.AUTH_BUSINESS_LICENSE:
                 mAuthInfo.setBusinessLicenceImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, authBusinessLicense);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, authBusinessLicense);
                 break;
         }
     }

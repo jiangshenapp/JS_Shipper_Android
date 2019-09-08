@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.google.gson.Gson;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;

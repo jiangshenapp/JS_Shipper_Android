@@ -1,7 +1,7 @@
 package com.js.shipper.ui.wallet.presenter;
 
 import com.js.shipper.ui.wallet.presenter.contract.BailContract;
-import com.js.frame.mvp.RxPresenter;
+import com.base.frame.mvp.RxPresenter;
 
 import javax.inject.Inject;
 

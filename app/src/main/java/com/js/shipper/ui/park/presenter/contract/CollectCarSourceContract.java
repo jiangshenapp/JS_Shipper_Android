@@ -1,7 +1,7 @@
 package com.js.shipper.ui.park.presenter.contract;
 
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.response.ListResponse;
 

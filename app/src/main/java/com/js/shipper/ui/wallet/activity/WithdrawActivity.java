@@ -15,7 +15,7 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.wallet.presenter.WithdrawPresenter;
 import com.js.shipper.ui.wallet.presenter.contract.WithdrawContract;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

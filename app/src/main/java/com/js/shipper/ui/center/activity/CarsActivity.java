@@ -15,7 +15,7 @@ import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

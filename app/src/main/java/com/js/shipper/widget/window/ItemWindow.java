@@ -1,8 +1,6 @@
 package com.js.shipper.widget.window;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
 import com.js.shipper.R;
-import com.js.shipper.model.bean.AreaBean;
-import com.js.shipper.model.bean.ChinaArea;
-import com.js.shipper.model.bean.CityInfo;
 import com.js.shipper.model.bean.DictBean;
-import com.js.shipper.model.event.CitySelectEvent;
 import com.js.shipper.model.event.DictSelectEvent;
-import com.js.shipper.widget.window.adapter.CityAdapter;
 import com.js.shipper.widget.window.adapter.DictAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

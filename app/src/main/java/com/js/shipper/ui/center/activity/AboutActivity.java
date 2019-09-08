@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.js.shipper.R;
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 
 /**
  * author : hzb

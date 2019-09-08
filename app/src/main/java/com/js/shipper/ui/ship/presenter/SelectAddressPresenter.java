@@ -1,6 +1,6 @@
 package com.js.shipper.ui.ship.presenter;
 
-import com.js.frame.mvp.RxPresenter;
+import com.base.frame.mvp.RxPresenter;
 import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
 
 import javax.inject.Inject;

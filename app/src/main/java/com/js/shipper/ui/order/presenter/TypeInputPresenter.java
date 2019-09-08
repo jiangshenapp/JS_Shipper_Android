@@ -1,15 +1,12 @@
 package com.js.shipper.ui.order.presenter;
 
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
 import com.js.shipper.api.DictApi;
-import com.js.shipper.api.OrderApi;
 import com.js.shipper.model.bean.DictBean;
-import com.js.shipper.model.bean.OrderBean;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
-import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxResult;
+import com.base.http.rx.RxSchedulers;
 import com.js.shipper.ui.order.presenter.contract.TypeInputContract;
 
 import java.util.List;

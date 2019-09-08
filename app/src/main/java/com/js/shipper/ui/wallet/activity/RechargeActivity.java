@@ -29,7 +29,7 @@ import com.js.shipper.model.bean.PayRouter;
 import com.js.shipper.ui.wallet.adapter.PayAdapter;
 import com.js.shipper.ui.wallet.presenter.RechargePresenter;
 import com.js.shipper.ui.wallet.presenter.contract.RechargeContract;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.pay.PayResult;
 import com.js.shipper.widget.adapter.Divider;

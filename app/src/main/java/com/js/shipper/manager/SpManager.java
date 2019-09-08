@@ -2,7 +2,6 @@ package com.js.shipper.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Parcelable;
 
 /**
  * Created by huyg on 2019/4/21.

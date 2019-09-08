@@ -9,8 +9,8 @@ import com.js.shipper.di.componet.AppComponent;
 import com.js.shipper.di.componet.DaggerAppComponent;
 import com.js.shipper.di.module.AppModule;
 import com.js.shipper.manager.SpManager;
-import com.js.frame.BaseApplication;
-import com.js.http.HttpApp;
+import com.base.frame.BaseApplication;
+import com.base.http.HttpApp;
 import com.js.shipper.model.bean.UserInfo;
 
 /**

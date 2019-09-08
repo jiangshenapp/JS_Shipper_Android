@@ -3,7 +3,6 @@ package com.js.shipper.ui.user.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.global.Const;
@@ -20,13 +19,10 @@ import com.js.shipper.model.event.VerifiedChangeEvent;
 import com.js.shipper.ui.user.fragment.CompanyVerifiedFragment;
 import com.js.shipper.ui.user.fragment.PersonVerifiedFragment;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

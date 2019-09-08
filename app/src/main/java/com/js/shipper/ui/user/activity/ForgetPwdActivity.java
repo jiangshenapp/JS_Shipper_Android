@@ -15,8 +15,7 @@ import com.js.shipper.ui.user.presenter.ForgetPwdPresenter;
 import com.js.shipper.ui.user.presenter.SmsCodePresenter;
 import com.js.shipper.ui.user.presenter.contract.ForgetPwdContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
-import com.js.frame.view.BaseActivity;
-import com.js.shipper.util.AppUtils;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.util.RegexUtils;
 
 import java.util.concurrent.TimeUnit;

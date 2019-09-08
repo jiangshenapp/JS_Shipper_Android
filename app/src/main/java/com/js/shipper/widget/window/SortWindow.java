@@ -7,14 +7,9 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 import com.js.shipper.R;
-import com.js.shipper.model.bean.AreaBean;
-import com.js.shipper.model.bean.CityInfo;
 import com.js.shipper.model.event.SortEvent;
-import com.js.shipper.widget.window.adapter.CityAdapter;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

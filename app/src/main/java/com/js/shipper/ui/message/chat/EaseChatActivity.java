@@ -10,11 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 import com.js.shipper.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by huyg on 2019-07-08.

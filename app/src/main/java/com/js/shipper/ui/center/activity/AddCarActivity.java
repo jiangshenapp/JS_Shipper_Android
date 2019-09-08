@@ -9,7 +9,7 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.center.presenter.AddCarPresenter;
 import com.js.shipper.ui.center.presenter.contract.AddCarContract;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 
 /**
  * Created by huyg on 2019/4/29.

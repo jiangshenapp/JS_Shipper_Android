@@ -1,6 +1,5 @@
 package com.js.shipper.ui.main.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;

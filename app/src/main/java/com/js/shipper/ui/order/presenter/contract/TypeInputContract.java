@@ -1,10 +1,8 @@
 package com.js.shipper.ui.order.presenter.contract;
 
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 import com.js.shipper.model.bean.DictBean;
-import com.js.shipper.model.bean.OrderBean;
-import com.js.shipper.model.response.ListResponse;
 
 import java.util.List;
 

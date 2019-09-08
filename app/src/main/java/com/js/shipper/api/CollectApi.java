@@ -1,6 +1,6 @@
 package com.js.shipper.api;
 
-import com.js.http.HttpResponse;
+import com.base.http.HttpResponse;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.request.CollectLine;

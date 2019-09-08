@@ -3,7 +3,6 @@ package com.js.shipper.widget.window.adapter;
 import androidx.annotation.Nullable;
 
 import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.poi.PoiAddrInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.shipper.R;

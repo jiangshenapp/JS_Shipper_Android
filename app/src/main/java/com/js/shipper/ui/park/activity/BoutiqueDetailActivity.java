@@ -7,14 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.CollectLine;
-import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BoutiqueDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BoutiqueDetailContract;

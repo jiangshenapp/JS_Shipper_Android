@@ -18,8 +18,7 @@ import com.js.shipper.ui.user.presenter.CodeLoginPresenter;
 import com.js.shipper.ui.user.presenter.SmsCodePresenter;
 import com.js.shipper.ui.user.presenter.contract.CodeLoginContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
-import com.js.frame.view.BaseFragment;
-import com.js.shipper.util.AppUtils;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.util.RegexUtils;
 
 import org.greenrobot.eventbus.EventBus;

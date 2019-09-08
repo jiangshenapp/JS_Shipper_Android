@@ -1,7 +1,6 @@
 package com.js.shipper.api;
 
-import com.js.http.BaseHttpResponse;
-import com.js.http.HttpResponse;
+import com.base.http.HttpResponse;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.request.AddOrder;
 import com.js.shipper.model.request.AddStepOne;
@@ -12,8 +11,6 @@ import com.js.shipper.model.response.ListResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,7 +29,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -94,7 +93,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
     private void initView() {
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.js.http.global.Const.IMG_URL + App.getInstance().avatar
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + App.getInstance().avatar
                 , ivHead, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
         tvNick.setText(App.getInstance().nickName);
         try {
@@ -337,7 +336,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     public void onChangeAvatar() {
         toast("头像修改成功");
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.js.http.global.Const.IMG_URL + avatar, ivHead);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + avatar, ivHead);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 

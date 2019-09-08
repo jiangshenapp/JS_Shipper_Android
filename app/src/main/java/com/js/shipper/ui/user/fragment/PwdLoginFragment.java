@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.js.http.HttpApp;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -13,13 +12,11 @@ import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.manager.SpManager;
 import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.model.event.UserStatusChangeEvent;
-import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.user.activity.ForgetPwdActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.presenter.PwdLoginPresenter;
 import com.js.shipper.ui.user.presenter.contract.PwdLoginContract;
-import com.js.frame.view.BaseFragment;
-import com.js.shipper.util.AppUtils;
+import com.base.frame.view.BaseFragment;
 import com.js.shipper.util.RegexUtils;
 
 import org.greenrobot.eventbus.EventBus;

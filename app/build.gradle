@@ -65,21 +65,17 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     implementation 'com.google.android.material:material:1.0.0-beta01'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0-rc01'
+
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':lib.frame')
     implementation project(path: ':lib.http')
     implementation project(path: ':easeui')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
-    //di
-    implementation rootProject.ext.dependencies.dagger
-    annotationProcessor rootProject.ext.dependencies.dagger_annotation
-    implementation rootProject.ext.dependencies.butterknife
-    annotationProcessor rootProject.ext.dependencies.butterknife_annotation
+
     implementation rootProject.ext.dependencies.constraintlayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+
     implementation 'com.jph.takephoto:takephoto_library:4.0.3'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'

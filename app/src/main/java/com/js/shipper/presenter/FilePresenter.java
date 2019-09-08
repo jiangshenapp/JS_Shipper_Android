@@ -1,14 +1,12 @@
 package com.js.shipper.presenter;
 
-import com.js.shipper.App;
 import com.js.shipper.api.FileApi;
-import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.presenter.contract.FileContract;
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxResult;
+import com.base.http.rx.RxSchedulers;
 
 import java.io.File;
 

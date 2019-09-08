@@ -13,10 +13,8 @@ import com.js.shipper.ui.wallet.presenter.contract.BillContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;

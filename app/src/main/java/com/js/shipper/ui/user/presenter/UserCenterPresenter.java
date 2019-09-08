@@ -1,12 +1,12 @@
 package com.js.shipper.ui.user.presenter;
 
-import com.js.http.ApiFactory;
-import com.js.http.BaseHttpResponse;
+import com.base.http.ApiFactory;
+import com.base.http.BaseHttpResponse;
 import com.js.shipper.api.UserApi;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxSchedulers;
 import com.js.shipper.ui.user.presenter.contract.UserCenterContract;
-import com.js.frame.mvp.RxPresenter;
+import com.base.frame.mvp.RxPresenter;
 
 import javax.inject.Inject;
 

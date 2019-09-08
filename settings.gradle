@@ -1,1 +1,1 @@
-include ':app', ':lib.frame', 'lib.http', ':easeui', ':Driver'
+include ':app', ':lib.frame', ':app.community', 'lib.http', ':easeui', ':app.driver'

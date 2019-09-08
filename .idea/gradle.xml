@@ -8,8 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Driver" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app.community" />
+            <option value="$PROJECT_DIR$/app.driver" />
             <option value="$PROJECT_DIR$/easeui" />
             <option value="$PROJECT_DIR$/lib.frame" />
             <option value="$PROJECT_DIR$/lib.http" />

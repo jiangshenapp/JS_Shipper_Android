@@ -1,6 +1,5 @@
 package com.js.shipper.ui.ship.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;

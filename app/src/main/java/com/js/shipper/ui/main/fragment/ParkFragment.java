@@ -4,7 +4,7 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.js.frame.view.SimpleFragment;
+import com.base.frame.view.SimpleFragment;
 import com.js.shipper.R;
 
 import java.util.ArrayList;

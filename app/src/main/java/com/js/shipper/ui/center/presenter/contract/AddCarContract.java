@@ -1,7 +1,7 @@
 package com.js.shipper.ui.center.presenter.contract;
 
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 
 /**
  * Created by huyg on 2019/4/29.

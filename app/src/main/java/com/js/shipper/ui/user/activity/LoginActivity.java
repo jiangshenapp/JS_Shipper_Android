@@ -10,7 +10,7 @@ import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.user.fragment.CodeLoginFragment;
 import com.js.shipper.ui.user.fragment.PwdLoginFragment;
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 

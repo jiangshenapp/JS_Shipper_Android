@@ -2,11 +2,11 @@ package com.js.shipper.ui.user.presenter;
 
 import com.js.shipper.api.UserApi;
 import com.js.shipper.ui.user.presenter.contract.PwdLoginContract;
-import com.js.frame.mvp.RxPresenter;
-import com.js.http.ApiFactory;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.frame.mvp.RxPresenter;
+import com.base.http.ApiFactory;
+import com.base.http.rx.RxException;
+import com.base.http.rx.RxResult;
+import com.base.http.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

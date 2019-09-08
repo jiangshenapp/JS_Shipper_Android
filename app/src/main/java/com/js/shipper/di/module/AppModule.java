@@ -1,6 +1,6 @@
 package com.js.shipper.di.module;
 
-import com.js.http.ApiFactory;
+import com.base.http.ApiFactory;
 
 import javax.inject.Singleton;
 

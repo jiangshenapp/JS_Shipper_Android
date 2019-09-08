@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
 import com.js.shipper.R;
 import com.js.shipper.ui.wallet.fragment.BillFragment;
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 
 import java.util.ArrayList;
 import java.util.List;

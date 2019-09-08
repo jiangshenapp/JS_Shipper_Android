@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -108,7 +108,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
             mBanner.setVisibility(View.GONE);
         } else {
             imgPaths = new ArrayList<>();
-            imgPaths.add(com.js.http.global.Const.IMG_URL+lineBean.getImage2());
+            imgPaths.add(com.base.http.global.Const.IMG_URL+lineBean.getImage2());
             mBanner.setVisibility(View.VISIBLE);
             mBanner.setImages(imgPaths);
             mBanner.start();

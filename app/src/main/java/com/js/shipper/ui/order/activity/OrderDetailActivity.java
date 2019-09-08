@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -36,11 +36,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.Body;
 
 /**
  * Created by huyg on 2019/4/29.
@@ -285,13 +282,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
         }
         if (state > 7) {
             mReceiptTitle.setVisibility(View.VISIBLE);

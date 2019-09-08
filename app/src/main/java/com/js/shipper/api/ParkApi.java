@@ -1,15 +1,12 @@
 package com.js.shipper.api;
 
-import com.js.http.HttpResponse;
-import com.js.shipper.di.FragmentScope;
+import com.base.http.HttpResponse;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.request.ParkList;
 import com.js.shipper.model.response.ListResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 

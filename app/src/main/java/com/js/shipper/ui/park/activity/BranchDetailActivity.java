@@ -2,7 +2,6 @@ package com.js.shipper.ui.park.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +11,12 @@ import android.widget.TextView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.google.gson.Gson;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
-import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.bean.ParkBean;
-import com.js.shipper.model.request.CollectLine;
 import com.js.shipper.model.request.CollectPark;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BranchDetailPresenter;
@@ -33,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -129,7 +125,7 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
             mBanner.setVisibility(View.GONE);
         } else {
             imgPaths = new ArrayList<>();
-            imgPaths.add(com.js.http.global.Const.IMG_URL+parkBean.getBusinessLicenceImage());
+            imgPaths.add(com.base.http.global.Const.IMG_URL+parkBean.getBusinessLicenceImage());
             mBanner.setVisibility(View.VISIBLE);
             mBanner.setImages(imgPaths);
             mBanner.start();

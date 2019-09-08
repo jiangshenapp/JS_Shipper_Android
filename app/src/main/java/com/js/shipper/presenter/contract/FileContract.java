@@ -1,7 +1,7 @@
 package com.js.shipper.presenter.contract;
 
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 
 import java.io.File;
 

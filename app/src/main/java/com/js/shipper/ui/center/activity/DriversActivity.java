@@ -16,7 +16,7 @@ import com.js.shipper.ui.center.presenter.DriversPresenter;
 import com.js.shipper.ui.center.presenter.contract.DriversContract;
 import com.js.shipper.widget.dialog.AddDriverFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.js.frame.view.BaseActivity;
+import com.base.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 

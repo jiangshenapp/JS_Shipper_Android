@@ -17,11 +17,10 @@ import com.js.shipper.ui.order.presenter.OrderPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderContract;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.js.frame.view.BaseFragment;
+import com.base.frame.view.BaseFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;

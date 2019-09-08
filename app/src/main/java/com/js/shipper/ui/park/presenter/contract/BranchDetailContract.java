@@ -1,10 +1,8 @@
 package com.js.shipper.ui.park.presenter.contract;
 
-import com.js.frame.mvp.IBaseView;
-import com.js.frame.mvp.IPresenter;
-import com.js.shipper.model.bean.LineBean;
+import com.base.frame.mvp.IBaseView;
+import com.base.frame.mvp.IPresenter;
 import com.js.shipper.model.bean.ParkBean;
-import com.js.shipper.model.request.CollectLine;
 import com.js.shipper.model.request.CollectPark;
 
 /**

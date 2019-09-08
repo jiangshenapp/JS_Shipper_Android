@@ -1,13 +1,12 @@
 package com.js.shipper.ui.ship.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.js.frame.view.SimpleActivity;
+import com.base.frame.view.SimpleActivity;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.util.RegexUtils;

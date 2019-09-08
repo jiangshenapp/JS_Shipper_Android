@@ -1,11 +1,10 @@
 package com.js.shipper.api;
 
-import com.js.http.HttpResponse;
+import com.base.http.HttpResponse;
 import com.js.shipper.model.bean.ConsigneeBean;
 import com.js.shipper.model.response.ListResponse;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
