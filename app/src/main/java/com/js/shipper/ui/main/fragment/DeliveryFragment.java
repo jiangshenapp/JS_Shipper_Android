@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.baidu.mapapi.model.LatLng;
 import com.base.frame.view.BaseFragment;
-import com.base.shipper.R;
+import com.js.shipper.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.js.shipper.App;
+import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
