@@ -110,18 +110,6 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.js.shipper.ui.center.activity.DriversActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.center.activity.CarsActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.shipper.ui.center.activity.AddCarActivity"
-            android:launchMode="singleTop" />
-
-        <activity
             android:name="com.js.shipper.ui.ship.activity.SelectAddressActivity"
             android:launchMode="singleTop" />
 
