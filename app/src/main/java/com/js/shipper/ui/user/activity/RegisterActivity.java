@@ -8,10 +8,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.base.frame.view.SimpleWebActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.global.Const;
 import com.js.shipper.ui.user.presenter.RegisterPresenter;
 import com.js.shipper.ui.user.presenter.SmsCodePresenter;
 import com.js.shipper.ui.user.presenter.contract.RegisterContract;
@@ -134,7 +136,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 mPresenter.register(phone, pwd, code);
                 break;
             case R.id.tv_protocal:
-
+                SimpleWebActivity.action(this, Const.H5_RegisterProtocal, "用户协议");
                 break;
         }
     }

@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.js.driver">
 
-
-
     <!--获取设备网络状态，禁用后无法获取网络状态-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--网络权限，当禁用后，无法进行检索等相关业务-->
@@ -26,7 +24,6 @@
     <!--程序在手机屏幕关闭后后台进程仍然运行-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
@@ -34,7 +31,6 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:name="com.js.driver.App"
@@ -48,12 +44,9 @@
         <meta-data android:name="android.max_aspect"
             android:value="2.1" />
 
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="A74igKB8DlMQ8ieml7WwRl6pcEVZsCqi" />
-
-
 
         <activity android:name="com.js.driver.ui.SplashActivity">
             <intent-filter>
@@ -62,7 +55,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <activity android:name="com.js.driver.ui.main.activity.MainActivity"
             android:launchMode="singleTask"
@@ -174,16 +166,15 @@
             android:launchMode="singleTop">
         </activity>
 
-
         <activity android:name="com.js.driver.ui.message.chat.EaseChatActivity"/>
 
-
-
+        <activity android:name="com.base.frame.view.SimpleWebActivity"
+            android:launchMode="singleTop"
+            />
 
         <service
             android:name="com.js.driver.service.LocationService"
             android:enabled="true" />
-
 
         <!--&lt;!&ndash; 设置环信应用的AppKey &ndash;&gt;-->
         <!--<meta-data-->
@@ -209,7 +200,6 @@
                 <!--<action android:name="android.intent.action.USER_PRESENT" />-->
             <!--</intent-filter>-->
         <!--</receiver>-->
-
 
     </application>
 
