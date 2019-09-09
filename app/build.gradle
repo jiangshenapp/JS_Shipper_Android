@@ -97,5 +97,12 @@ dependencies {
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
+    //di
+    implementation rootProject.ext.dependencies.dagger
+    annotationProcessor rootProject.ext.dependencies.dagger_annotation
+
+    implementation rootProject.ext.dependencies.butterknife
+    annotationProcessor rootProject.ext.dependencies.butterknife_annotation
+
 
 }

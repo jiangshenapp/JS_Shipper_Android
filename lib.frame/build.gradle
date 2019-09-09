@@ -54,7 +54,7 @@ dependencies {
 
 
     //di
-    api rootProject.ext.dependencies.dagger
+    implementation rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies.dagger_annotation
 
     api rootProject.ext.dependencies.butterknife

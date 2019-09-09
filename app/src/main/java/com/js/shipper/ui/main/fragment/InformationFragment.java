@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.base.shipper.R;
+import com.js.shipper.R;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.widget.EaseConversationList;
 import com.base.frame.view.BaseFragment;
