@@ -5,6 +5,8 @@ package com.js.driver.global;
  */
 public class Const {
 
+    public static final String H5_RegisterProtocal = "http://www.jiangshen56.com/yhzcxy.html";
+
     public static final String APP_ID = "wxbba5c5b208ed8f31";
     public static final int BUSINESS_ID = 1;//业务id
     public static final int MERCHANT_ID = 1;//商户编号

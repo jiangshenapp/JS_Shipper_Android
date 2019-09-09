@@ -5,10 +5,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.base.frame.view.SimpleWebActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.global.Const;
 import com.js.shipper.manager.SpManager;
 import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.model.event.UserStatusChangeEvent;
@@ -99,6 +101,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                 mCodePresenter.sendSmsCode(phone);
                 break;
             case R.id.tv_protocal:
+                SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal, "用户协议");
                 break;
             case R.id.btn_login:
                 phone = mPhone.getText().toString().trim();

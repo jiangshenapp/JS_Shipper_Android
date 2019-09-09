@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.base.frame.view.SimpleWebActivity;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -194,7 +195,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
                 cbSelect.setChecked(cbSelect.isChecked());
                 break;
             case R.id.tv_protocal:
-                toast("用户协议");
+                SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal, "用户协议");
                 break;
             case R.id.auth_submit:
                 submitAction();
