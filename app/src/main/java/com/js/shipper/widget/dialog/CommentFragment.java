@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RatingBar;
+import com.js.shipper.widget.view.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +39,7 @@ public class CommentFragment extends DialogFragment {
     @BindView(R.id.ratingBar)
     RatingBar mRatingBar;
     private Unbinder unbinder;
+    private float mRatingCount;
 
     public static CommentFragment getInstance() {
         CommentFragment commentFragment = new CommentFragment();
@@ -80,6 +81,13 @@ public class CommentFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //初始化数据
+        mRatingBar.setStar(5);
+        mRatingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float ratingCount) {//点击星星变化后选中的个数
+                mRatingCount = ratingCount;
+            }
+        });
     }
 
     @Override
@@ -95,7 +103,7 @@ public class CommentFragment extends DialogFragment {
                 dismiss();
                 break;
             case R.id.btn_commit:
-                EventBus.getDefault().post(new CommentEvent(mRatingBar.getRating()));
+                EventBus.getDefault().post(new CommentEvent(mRatingCount));
                 break;
         }
     }

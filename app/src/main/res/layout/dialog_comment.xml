@@ -29,16 +29,19 @@
             android:textSize="17sp" />
     </LinearLayout>
 
-    <RatingBar
+    <com.js.shipper.widget.view.RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="45dp"
-        android:layout_gravity="center_horizontal"
-        android:numStars="5"
-        android:stepSize="1"
-        android:rating="5"
-        android:progressTint="@color/_ECA73F" />
+        android:gravity="center_horizontal"
+        app:starCount="5"
+        app:starEmpty="@mipmap/ic_star_normal"
+        app:starFill="@mipmap/ic_star_select"
+        app:starImageSize="40dp"
+        app:starPadding="20dp"
+        app:starStep="1">
+    </com.js.shipper.widget.view.RatingBar>
 
     <TextView
         android:id="@+id/btn_commit"
