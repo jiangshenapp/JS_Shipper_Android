@@ -30,12 +30,15 @@
                     android:id="@+id/driver_info_layout"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:background="@color/_FFFFFF"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_avatar"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginStart="12dp"
                         android:src="@mipmap/ic_center_shipper_head_land" />
 
@@ -43,34 +46,59 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:layout_marginStart="12dp"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="张女士"
-                            android:textColor="@color/_000000"
-                            android:textSize="14sp" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/detail_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/_000000"
+                                android:textSize="14sp" />
+
+                            <com.js.shipper.widget.view.RatingBar
+                                android:id="@+id/ratingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="5dp"
+                                app:starEmpty="@mipmap/ic_star_normal"
+                                app:starFill="@mipmap/ic_star_select"
+                                app:starImageSize="12dp"
+                                app:starPadding="2dp"
+                                app:starCount="5"
+                                app:starStep="0">
+                            </com.js.shipper.widget.view.RatingBar>
+                        </LinearLayout>
 
                         <TextView
+                            android:id="@+id/detail_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="介绍文字text"
                             android:textColor="@color/_B4B4B4"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:visibility="visible" />
 
                     </LinearLayout>
 
 
                     <ImageView
+                        android:id="@+id/detail_call"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:src="@mipmap/ic_home_phone" />
 
                     <ImageView
+                        android:id="@+id/detail_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -89,7 +117,6 @@
                     android:background="@color/white"
                     android:visibility="gone"
                     >
-
 
                     <ImageView
                         android:layout_width="40dp"

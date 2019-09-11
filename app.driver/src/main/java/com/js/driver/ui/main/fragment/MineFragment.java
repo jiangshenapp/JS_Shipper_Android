@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.base.frame.view.BaseFragment;
+import com.base.http.global.Const;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
 import com.js.driver.R;
@@ -35,11 +37,10 @@ import com.js.driver.ui.wallet.activity.WalletActivity;
 import com.js.driver.util.UIUtil;
 import com.js.driver.widget.adapter.DividerGridItemDecoration;
 import com.js.driver.widget.dialog.AppDialogFragment;
+import com.js.driver.widget.view.RatingBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.base.frame.view.BaseFragment;
-import com.base.http.global.Const;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -70,6 +71,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     SmartRefreshLayout mRefresh;
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
+    @BindView(R.id.ratingBar)
+    RatingBar mRatingBar;
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
@@ -220,6 +223,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         } else {
             mUserPhone.setText("");
         }
+
+        mRatingBar.setClickable(false);
+        mRatingBar.setStar(userInfo.getScore());
 
         if (userInfo.getDriverVerified() == 3 || userInfo.getParkVerified() == 3) {
             authState.setText("认证失败");

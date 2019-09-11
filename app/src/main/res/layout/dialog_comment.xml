@@ -35,12 +35,12 @@
         android:layout_height="40dp"
         android:layout_marginTop="45dp"
         android:gravity="center_horizontal"
-        app:starCount="5"
         app:starEmpty="@mipmap/ic_star_normal"
         app:starFill="@mipmap/ic_star_select"
         app:starImageSize="40dp"
         app:starPadding="20dp"
-        app:starStep="1">
+        app:starCount="5"
+        app:starStep="5">
     </com.js.shipper.widget.view.RatingBar>
 
     <TextView

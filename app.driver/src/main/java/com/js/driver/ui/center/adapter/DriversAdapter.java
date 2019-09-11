@@ -6,6 +6,7 @@ import com.js.driver.R;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.DriverBean;
 import com.base.http.global.Const;
+import com.js.driver.widget.view.RatingBar;
 
 import java.util.List;
 
@@ -29,5 +30,8 @@ public class DriversAdapter extends BaseQuickAdapter<DriverBean, BaseViewHolder>
                 .setText(R.id.item_driver_type,"驾照类型："+item.getDriverLevel());
         CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL + item.getAvatar()
                 , helper.getView(R.id.item_driver_avatar), mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
+        RatingBar mRatingBar = helper.getView(R.id.ratingBar);
+        mRatingBar.setStar(item.getScore());
+        mRatingBar.setClickable(false);
     }
 }

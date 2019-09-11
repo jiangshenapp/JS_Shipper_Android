@@ -81,7 +81,6 @@ public class CommentFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //初始化数据
-        mRatingBar.setStar(5);
         mRatingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(float ratingCount) {//点击星星变化后选中的个数

@@ -2,6 +2,7 @@ package com.js.shipper.ui.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.baidu.mapapi.model.LatLng;
-import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
+import com.google.gson.Gson;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -30,8 +31,10 @@ import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.shipper.ui.wallet.activity.PayActivity;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;
 import com.js.shipper.widget.dialog.CommentFragment;
+import com.js.shipper.widget.view.RatingBar;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
@@ -42,6 +45,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -85,6 +89,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     SmartRefreshLayout mRefresh;
     @BindView(R.id.detail_order_status)
     TextView mOrderStatus;
+    @BindView(R.id.detail_avatar)
+    ImageView mDetailAvatar;
+    @BindView(R.id.detail_name)
+    TextView mDetailName;
+    @BindView(R.id.detail_phone)
+    TextView mDetailPhone;
+    @BindView(R.id.detail_call)
+    ImageView mDetailCall;
+    @BindView(R.id.detail_chat)
+    ImageView mDetailChat;
+    @BindView(R.id.driver_info_layout)
+    LinearLayout mDriverInfoLayout;
     @BindView(R.id.status_ing_layout)
     LinearLayout mIngLayout;
     @BindView(R.id.driver_count)
@@ -103,6 +119,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     ImageView mImg2;
     @BindView(R.id.detail_img3)
     ImageView mImg3;
+    @BindView(R.id.ratingBar)
+    RatingBar mRatingBar;
 
     private long orderId;
     private int status;
@@ -179,11 +197,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         if (!TextUtils.isEmpty(orderBean.getCarLengthName())) {
             info += orderBean.getCarLengthName();
         }
-        if (orderBean.getGoodsVolume()!=0) {
-            info += "/"+orderBean.getGoodsVolume()+"方";
+        if (orderBean.getGoodsVolume() != 0) {
+            info += "/" + orderBean.getGoodsVolume() + "方";
         }
-        if (orderBean.getGoodsWeight()!=0) {
-            info += "/"+orderBean.getGoodsWeight()+"吨";
+        if (orderBean.getGoodsWeight() != 0) {
+            info += "/" + orderBean.getGoodsWeight() + "吨";
         }
         mCarInfo.setText(info);
         mGoodName.setText(orderBean.getGoodsName());
@@ -225,12 +243,29 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mReceiverName.setText(orderBean.getReceiveName());
         mReceiverPhone.setText(orderBean.getReceiveMobile());
 
-        if (orderBean.getState() == 1||orderBean.getState() == 2) {
-//            mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
-            mDriverCount.setText("已为您通知司机");
+        if (orderBean.getState() == 1 || orderBean.getState() == 2) {
             mIngLayout.setVisibility(View.VISIBLE);
+            mDriverInfoLayout.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(orderBean.getDriverNum())) {
+                mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
+            } else {
+                mDriverCount.setText("已为您通知个司机");
+            }
         } else {
             mIngLayout.setVisibility(View.GONE);
+            mDriverInfoLayout.setVisibility(View.VISIBLE);
+            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + orderBean.getDriverAvatar()
+                    , mDetailAvatar, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
+            if (!TextUtils.isEmpty(orderBean.getDotName())) { //网点接单
+                mDetailPhone.setVisibility(View.GONE);
+                mDetailName.setText(orderBean.getDotName());
+            } else { //司机接单
+                mDetailPhone.setVisibility(View.VISIBLE);
+                mDetailName.setText(orderBean.getDriverName());
+                mDetailPhone.setText(orderBean.getDriverPhone());
+                mRatingBar.setClickable(false);
+                mRatingBar.setStar(orderBean.getScore());
+            }
         }
         setBottom(orderBean.getState());
     }
@@ -286,13 +321,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 controlLayout.setVisibility(View.GONE);
                 break;
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
         }
         if (state > 7) {
@@ -432,8 +467,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Subscribe
     public void onEvent(CommentEvent commentEvent) {
         OrderComment orderComment = new OrderComment();
-        orderComment.setScore((int)commentEvent.score);
-        mPresenter.commentOrder(orderComment,orderId);
+        orderComment.setScore((int) commentEvent.score);
+        mPresenter.commentOrder(orderComment, orderId);
     }
 
     @Override
@@ -468,7 +503,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-
     public void showSelectDialog(LatLng start, LatLng end, String dName) {
         new CircleDialog.Builder(this)
                 .configDialog(new ConfigDialog() {
@@ -491,4 +525,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 .show();
     }
 
+    @OnClick({R.id.detail_call, R.id.detail_chat})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.detail_call: //打电话
+                AppUtils.callPhone(mContext,mOrderBean.getDriverPhone());
+                break;
+            case R.id.detail_chat: //聊天
+                toast("该功能暂未开放");
+                break;
+        }
+    }
 }
