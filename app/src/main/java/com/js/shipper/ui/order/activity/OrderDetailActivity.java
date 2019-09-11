@@ -25,6 +25,7 @@ import com.js.shipper.global.Const;
 import com.js.shipper.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.event.CommentEvent;
+import com.js.shipper.model.request.OrderComment;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
@@ -430,7 +431,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     @Subscribe
     public void onEvent(CommentEvent commentEvent) {
-        toast(""+commentEvent.score);
+        OrderComment orderComment = new OrderComment();
+        orderComment.setScore((int)commentEvent.score);
+        mPresenter.commentOrder(orderComment,orderId);
     }
 
     @Override
