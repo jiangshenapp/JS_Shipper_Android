@@ -241,7 +241,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         context.startActivity(intent);
     }
 
-
     @Override
     protected void init() {
         initIntent();
