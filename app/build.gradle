@@ -103,6 +103,4 @@ dependencies {
 
     implementation rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknife_annotation
-
-
 }

@@ -52,12 +52,11 @@ dependencies {
     api 'org.greenrobot:eventbus:3.0.0'
     api 'androidx.multidex:multidex:2.0.0'
 
-
     //di
     implementation rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies.dagger_annotation
 
-    api rootProject.ext.dependencies.butterknife
+    implementation rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknife_annotation
 
     api 'androidx.recyclerview:recyclerview:1.0.0-rc01'
@@ -87,6 +86,4 @@ dependencies {
     //ARouter
     implementation rootProject.ext.dependencies.arouter
     annotationProcessor rootProject.ext.dependencies.arouter_annotation
-
-
 }

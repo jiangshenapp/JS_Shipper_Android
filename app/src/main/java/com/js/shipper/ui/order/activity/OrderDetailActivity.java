@@ -24,17 +24,21 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
+import com.js.shipper.model.event.CommentEvent;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.shipper.ui.wallet.activity.PayActivity;
 import com.js.shipper.util.MapUtils;
+import com.js.shipper.widget.dialog.CommentFragment;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +47,6 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/29.
  */
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View {
-
 
     @BindView(R.id.order_number)
     TextView mOrderNo;
@@ -105,13 +108,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     private MenuItem menuItem;
     private OrderBean mOrderBean;
     private String[] items = {"百度地图", "高德地图"};
+    private CommentFragment mCommentFragment;
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
         intent.putExtra("orderId", orderId);
         context.startActivity(intent);
     }
-
 
     @Override
     protected void init() {
@@ -120,6 +123,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     }
 
     private void initView() {
+        mCommentFragment = CommentFragment.getInstance();
         mRefresh.autoRefresh();
         mRefresh.setEnableLoadMore(false);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -334,6 +338,17 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
+    @Override
+    public void onCommentOrder(boolean isOk) {
+        if (isOk) {
+            toast("评价成功");
+            mCommentFragment.dismiss();
+            mPresenter.getOrderDetail(orderId);
+        } else {
+            toast("评价失败");
+        }
+    }
+
     @OnClick({R.id.control_navigate, R.id.control_positive, R.id.detail_send_navigate, R.id.detail_arrive_navigate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -381,6 +396,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.receiptOrder(orderId);
                         break;
                     case 9://评价
+                        if (!mCommentFragment.isAdded()) {
+                            mCommentFragment.show(getSupportFragmentManager(), "comment");
+                        }
                         break;
                     case 10:
                     case 11://重新发货
@@ -408,6 +426,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 showSelectDialog(latLng1, gson1.fromJson(mOrderBean.getReceivePosition(), LatLng.class), mOrderBean.getReceiveAddress());
                 break;
         }
+    }
+
+    @Subscribe
+    public void onEvent(CommentEvent commentEvent) {
+        toast(""+commentEvent.score);
     }
 
     @Override

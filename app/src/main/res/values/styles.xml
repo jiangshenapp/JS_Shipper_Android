@@ -8,4 +8,8 @@
         <item name="android:windowBackground">@color/_f2f2f2</item>
     </style>
 
+    <style name="myRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/em_ratingbar_drawable</item>
+    </style>
+
 </resources>

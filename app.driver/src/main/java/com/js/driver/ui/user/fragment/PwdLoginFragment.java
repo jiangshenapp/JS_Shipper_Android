@@ -62,6 +62,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     @Override
     protected void init() {
         mPhone.setText(SpManager.getInstance(App.getInstance()).getSP("loginPhone"));
+        mPhone.setText("15737936517");
+        mPwd.setText("000000");
     }
 
     @OnClick({R.id.tv_register, R.id.tv_forget_pwd, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_phonecode})

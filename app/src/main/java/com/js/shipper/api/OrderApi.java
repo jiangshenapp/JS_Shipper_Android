@@ -5,6 +5,7 @@ import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.request.AddOrder;
 import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.model.request.AddStepTwo;
+import com.js.shipper.model.request.OrderComment;
 import com.js.shipper.model.request.OrderEdit;
 import com.js.shipper.model.request.OrderList;
 import com.js.shipper.model.response.ListResponse;
@@ -91,5 +92,10 @@ public interface OrderApi {
     //确认收到回执
     @POST("app/order/receipt/{id}")
     Observable<HttpResponse<Boolean>> receiptOrder(@Path("id") long id);
+
+    //评价
+    @POST("app/order/score/{id}")
+    Observable<HttpResponse<Boolean>> commentOrder(@Body OrderComment orderComment,
+                                                @Path("id") long id);
 
 }
