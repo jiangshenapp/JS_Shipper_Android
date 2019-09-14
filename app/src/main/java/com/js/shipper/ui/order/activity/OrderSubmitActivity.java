@@ -42,7 +42,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.manager.CommonGlideImageLoader;
+import com.base.util.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.request.AddStepTwo;
 import com.js.shipper.presenter.DictPresenter;
@@ -51,7 +51,7 @@ import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.presenter.contract.FileContract;
 import com.js.shipper.ui.order.presenter.OrderSubmitPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderSubmitContract;
-import com.js.shipper.util.TimeUtils;
+import com.base.util.TimeUtils;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.base.community">
+    package="com.js.community">
 
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true">
-
+    <application android:allowBackup="true">
         <meta-data
-            android:name="com.xlgcx.control.ControlApp"
+            android:name="com.js.community.CommunityApp"
             android:value="IModuleConfig" />
+
+
+
+        <activity android:name=".ui.activity.FindCircleActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.activity.CircleIndexActivity"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".ui.activity.PublishPostActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".ui.activity.MemberManageActivity"
+            android:launchMode="singleTop"
+            />
+
     </application>
 
 </manifest>

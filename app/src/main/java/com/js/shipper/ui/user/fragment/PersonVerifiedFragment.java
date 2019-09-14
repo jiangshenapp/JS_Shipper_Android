@@ -38,7 +38,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.manager.CommonGlideImageLoader;
+import com.base.util.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.AuthInfo;
 import com.js.shipper.model.bean.ShengBean;
 import com.js.shipper.model.event.UserStatusChangeEvent;

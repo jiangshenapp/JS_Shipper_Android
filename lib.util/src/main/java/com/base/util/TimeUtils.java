@@ -1,4 +1,4 @@
-package com.js.shipper.util;
+package com.base.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

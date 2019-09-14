@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.LineBean;
-import com.js.shipper.util.TimeUtils;
+import com.base.util.TimeUtils;
 
 import java.text.DecimalFormat;
 import java.util.List;

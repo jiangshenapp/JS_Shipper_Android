@@ -1,10 +1,11 @@
-package com.js.shipper.manager;
+package com.base.util.manager;
 
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;

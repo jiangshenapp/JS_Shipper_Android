@@ -11,7 +11,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.manager.SpManager;
+import com.base.util.manager.SpManager;
 import com.js.shipper.model.event.LoginChangeEvent;
 import com.js.shipper.model.event.UserStatusChangeEvent;
 import com.js.shipper.ui.user.activity.ForgetPwdActivity;
