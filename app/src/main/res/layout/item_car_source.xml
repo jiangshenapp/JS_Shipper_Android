@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:minHeight="120dp"
+    android:minHeight="140dp"
     android:background="@color/white"
     >
 
@@ -17,7 +17,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +31,6 @@
                 android:textSize="17sp"
                 android:fontFamily="sans-serif-medium"
                 />
-
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -54,7 +52,6 @@
 
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/item_driver_info"
             android:layout_width="wrap_content"
@@ -63,6 +60,19 @@
             android:textSize="14sp"
             android:layout_marginTop="10dp"
             />
+
+        <com.js.shipper.widget.view.RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:starEmpty="@mipmap/ic_star_normal"
+            app:starFill="@mipmap/ic_star_select"
+            app:starImageSize="12dp"
+            app:starPadding="2dp"
+            app:starCount="5"
+            app:starStep="0">
+        </com.js.shipper.widget.view.RatingBar>
 
         <TextView
             android:id="@+id/item_distance"
@@ -73,10 +83,7 @@
             android:layout_marginTop="18dp"
             android:fontFamily="sans-serif-medium"
             />
-
-
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/item_time"
@@ -89,8 +96,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -116,6 +121,5 @@
             android:src="@mipmap/ic_home_chat" />
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

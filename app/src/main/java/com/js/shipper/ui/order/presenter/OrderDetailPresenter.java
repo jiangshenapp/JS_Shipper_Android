@@ -6,6 +6,7 @@ import com.js.shipper.model.bean.OrderBean;
 import com.base.http.rx.RxException;
 import com.base.http.rx.RxResult;
 import com.base.http.rx.RxSchedulers;
+import com.js.shipper.model.request.OrderComment;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.base.frame.mvp.RxPresenter;
 
@@ -120,4 +121,28 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
         addDispose(disposable);
     }
 
+    @Override
+    public void commentOrder(OrderComment orderComment, long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class)
+                .commentOrder(orderComment, id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCommentOrder(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
 }

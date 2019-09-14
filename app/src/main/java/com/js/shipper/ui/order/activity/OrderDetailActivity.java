@@ -2,6 +2,7 @@ package com.js.shipper.ui.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.baidu.mapapi.model.LatLng;
-import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
+import com.google.gson.Gson;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -24,11 +25,16 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
+import com.js.shipper.model.event.CommentEvent;
+import com.js.shipper.model.request.OrderComment;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.presenter.OrderDetailPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderDetailContract;
 import com.js.shipper.ui.wallet.activity.PayActivity;
+import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;
+import com.js.shipper.widget.dialog.CommentFragment;
+import com.js.shipper.widget.view.RatingBar;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
@@ -36,14 +42,16 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/29.
  */
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View {
-
 
     @BindView(R.id.order_number)
     TextView mOrderNo;
@@ -81,6 +89,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     SmartRefreshLayout mRefresh;
     @BindView(R.id.detail_order_status)
     TextView mOrderStatus;
+    @BindView(R.id.detail_avatar)
+    ImageView mDetailAvatar;
+    @BindView(R.id.detail_name)
+    TextView mDetailName;
+    @BindView(R.id.detail_phone)
+    TextView mDetailPhone;
+    @BindView(R.id.detail_call)
+    ImageView mDetailCall;
+    @BindView(R.id.detail_chat)
+    ImageView mDetailChat;
+    @BindView(R.id.driver_info_layout)
+    LinearLayout mDriverInfoLayout;
     @BindView(R.id.status_ing_layout)
     LinearLayout mIngLayout;
     @BindView(R.id.driver_count)
@@ -99,19 +119,21 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     ImageView mImg2;
     @BindView(R.id.detail_img3)
     ImageView mImg3;
+    @BindView(R.id.ratingBar)
+    RatingBar mRatingBar;
 
     private long orderId;
     private int status;
     private MenuItem menuItem;
     private OrderBean mOrderBean;
     private String[] items = {"百度地图", "高德地图"};
+    private CommentFragment mCommentFragment;
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
         intent.putExtra("orderId", orderId);
         context.startActivity(intent);
     }
-
 
     @Override
     protected void init() {
@@ -120,6 +142,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     }
 
     private void initView() {
+        mCommentFragment = CommentFragment.getInstance();
         mRefresh.autoRefresh();
         mRefresh.setEnableLoadMore(false);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -174,11 +197,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         if (!TextUtils.isEmpty(orderBean.getCarLengthName())) {
             info += orderBean.getCarLengthName();
         }
-        if (orderBean.getGoodsVolume()!=0) {
-            info += "/"+orderBean.getGoodsVolume()+"方";
+        if (orderBean.getGoodsVolume() != 0) {
+            info += "/" + orderBean.getGoodsVolume() + "方";
         }
-        if (orderBean.getGoodsWeight()!=0) {
-            info += "/"+orderBean.getGoodsWeight()+"吨";
+        if (orderBean.getGoodsWeight() != 0) {
+            info += "/" + orderBean.getGoodsWeight() + "吨";
         }
         mCarInfo.setText(info);
         mGoodName.setText(orderBean.getGoodsName());
@@ -220,12 +243,29 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         mReceiverName.setText(orderBean.getReceiveName());
         mReceiverPhone.setText(orderBean.getReceiveMobile());
 
-        if (orderBean.getState() == 1||orderBean.getState() == 2) {
-//            mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
-            mDriverCount.setText("已为您通知司机");
+        if (orderBean.getState() == 1 || orderBean.getState() == 2) {
             mIngLayout.setVisibility(View.VISIBLE);
+            mDriverInfoLayout.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(orderBean.getDriverNum())) {
+                mDriverCount.setText(String.format("已为您通知%s个司机", orderBean.getDriverNum()));
+            } else {
+                mDriverCount.setText("已为您通知个司机");
+            }
         } else {
             mIngLayout.setVisibility(View.GONE);
+            mDriverInfoLayout.setVisibility(View.VISIBLE);
+            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + orderBean.getDriverAvatar()
+                    , mDetailAvatar, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
+            if (!TextUtils.isEmpty(orderBean.getDotName())) { //网点接单
+                mDetailPhone.setVisibility(View.GONE);
+                mDetailName.setText(orderBean.getDotName());
+            } else { //司机接单
+                mDetailPhone.setVisibility(View.VISIBLE);
+                mDetailName.setText(orderBean.getDriverName());
+                mDetailPhone.setText(orderBean.getDriverPhone());
+                mRatingBar.setClickable(false);
+                mRatingBar.setStar(orderBean.getScore());
+            }
         }
         setBottom(orderBean.getState());
     }
@@ -281,13 +321,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 controlLayout.setVisibility(View.GONE);
                 break;
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
         }
-        if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
+        if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())) {
             CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
         }
         if (state > 7) {
@@ -331,6 +371,17 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mPresenter.getOrderDetail(orderId);
         } else {
             toast("确认失败");
+        }
+    }
+
+    @Override
+    public void onCommentOrder(boolean isOk) {
+        if (isOk) {
+            toast("评价成功");
+            mCommentFragment.dismiss();
+            mPresenter.getOrderDetail(orderId);
+        } else {
+            toast("评价失败");
         }
     }
 
@@ -381,6 +432,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.receiptOrder(orderId);
                         break;
                     case 9://评价
+                        if (!mCommentFragment.isAdded()) {
+                            mCommentFragment.show(getSupportFragmentManager(), "comment");
+                        }
                         break;
                     case 10:
                     case 11://重新发货
@@ -408,6 +462,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 showSelectDialog(latLng1, gson1.fromJson(mOrderBean.getReceivePosition(), LatLng.class), mOrderBean.getReceiveAddress());
                 break;
         }
+    }
+
+    @Subscribe
+    public void onEvent(CommentEvent commentEvent) {
+        OrderComment orderComment = new OrderComment();
+        orderComment.setScore((int) commentEvent.score);
+        mPresenter.commentOrder(orderComment, orderId);
     }
 
     @Override
@@ -442,7 +503,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-
     public void showSelectDialog(LatLng start, LatLng end, String dName) {
         new CircleDialog.Builder(this)
                 .configDialog(new ConfigDialog() {
@@ -465,4 +525,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 .show();
     }
 
+    @OnClick({R.id.detail_call, R.id.detail_chat})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.detail_call: //打电话
+                AppUtils.callPhone(mContext,mOrderBean.getDriverPhone());
+                break;
+            case R.id.detail_chat: //聊天
+                toast("该功能暂未开放");
+                break;
+        }
+    }
 }

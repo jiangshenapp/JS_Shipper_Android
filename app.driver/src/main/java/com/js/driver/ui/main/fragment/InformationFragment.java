@@ -11,6 +11,7 @@ import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.InformationPresenter;
 import com.js.driver.ui.main.presenter.contract.InformationContract;
 import com.base.frame.view.BaseFragment;
+import com.js.driver.ui.message.activity.MessageActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -79,6 +80,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.message_layout:
+                MessageActivity.action(getActivity());
                 break;
             case R.id.customer_service_layout:
                 break;

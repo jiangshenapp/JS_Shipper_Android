@@ -49,6 +49,7 @@ public class LineBean {
     private String enableTime;
     private String image1;
     private String image2;
+    private int score;
 
     public int getId() {
         return id;
@@ -224,5 +225,13 @@ public class LineBean {
 
     public void setImage2(String image2) {
         this.image2 = image2;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

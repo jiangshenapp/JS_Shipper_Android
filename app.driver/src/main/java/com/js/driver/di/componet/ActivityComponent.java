@@ -13,6 +13,8 @@ import com.js.driver.ui.center.activity.FeedBackActivity;
 import com.js.driver.ui.center.activity.RoutesActivity;
 import com.js.driver.ui.center.activity.RoutesDetailActivity;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.message.activity.MessageActivity;
+import com.js.driver.ui.message.activity.MessageDetailActivity;
 import com.js.driver.ui.order.activity.DistributionActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
@@ -82,5 +84,9 @@ public interface ActivityComponent {
     void inject(AddRouteActivity addRouteActivity);
 
     void inject(DistributionActivity branchDetailActivity);
+
+    void inject(MessageActivity messageActivity);
+
+    void inject(MessageDetailActivity messageDetailActivity);
 }
 

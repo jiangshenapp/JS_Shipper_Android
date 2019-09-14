@@ -20,6 +20,7 @@ public class UserInfo {
      */
 
     private int id;
+    private int score;
     private String mobile;
     private String nickName;
     private String avatar;
@@ -38,6 +39,14 @@ public class UserInfo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getMobile() {

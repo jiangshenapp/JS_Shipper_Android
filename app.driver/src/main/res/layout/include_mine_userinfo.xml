@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/user_info_layout"
     android:layout_width="match_parent"
     android:layout_height="120dp"
@@ -52,6 +53,19 @@
             android:layout_marginTop="6dp"
             android:textColor="@color/_969696"
             android:textSize="14sp" />
+
+        <com.js.driver.widget.view.RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:layout_marginTop="5dp"
+            app:starEmpty="@mipmap/ic_star_normal"
+            app:starFill="@mipmap/ic_star_select"
+            app:starImageSize="12dp"
+            app:starPadding="2dp"
+            app:starCount="5"
+            app:starStep="0">
+        </com.js.driver.widget.view.RatingBar>
 
     </LinearLayout>
 

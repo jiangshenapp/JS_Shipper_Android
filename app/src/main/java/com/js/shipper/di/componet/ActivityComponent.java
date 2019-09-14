@@ -5,11 +5,10 @@ import android.app.Activity;
 import com.js.shipper.di.ActivityScope;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.SplashActivity;
-import com.js.shipper.ui.center.activity.AddCarActivity;
-import com.js.shipper.ui.center.activity.CarsActivity;
-import com.js.shipper.ui.center.activity.DriversActivity;
 import com.js.shipper.ui.center.activity.FeedBackActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
+import com.js.shipper.ui.message.activity.MessageActivity;
+import com.js.shipper.ui.message.activity.MessageDetailActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderEditActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -59,12 +58,6 @@ public interface ActivityComponent {
 
     void inject(OrderDetailActivity orderDetailActivity);
 
-    void inject(DriversActivity driversActivity);
-
-    void inject(CarsActivity carsActivity);
-
-    void inject(AddCarActivity addCarActivity);
-
     void inject(OrderSubmitActivity orderSubmitActivity);
 
     void inject(SelectAddressActivity selectAddressActivity);
@@ -94,5 +87,9 @@ public interface ActivityComponent {
     void inject(ResetPwdActivity resetPwdActivity);
 
     void inject(TypeInputActivity typeInputActivity);
+
+    void inject(MessageActivity messageActivity);
+
+    void inject(MessageDetailActivity messageDetailActivity);
 }
 

@@ -2,6 +2,7 @@ package com.js.shipper.ui.park.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.base.frame.view.BaseActivity;
+import com.base.http.global.Const;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -20,12 +22,14 @@ import com.js.shipper.ui.park.presenter.CarSourceDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.CarSourceDetailContract;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.glide.GlideImageLoader;
+import com.js.shipper.widget.view.RatingBar;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -51,6 +55,8 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     TextView mRemark;
     @BindView(R.id.place_order)
     TextView mPlaceOrder;
+    @BindView(R.id.ratingBar)
+    RatingBar mRatingBar;
     private long id;
     private boolean isCollection = false;
     private MenuItem moreItem;
@@ -108,7 +114,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
             mBanner.setVisibility(View.GONE);
         } else {
             imgPaths = new ArrayList<>();
-            imgPaths.add(com.base.http.global.Const.IMG_URL+lineBean.getImage2());
+            imgPaths.add(Const.IMG_URL + lineBean.getImage2());
             mBanner.setVisibility(View.VISIBLE);
             mBanner.setImages(imgPaths);
             mBanner.start();
@@ -116,6 +122,8 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
         mStartAddress.setText(lineBean.getStartAddressCodeName());
         mEndAddress.setText(lineBean.getArriveAddressCodeName());
         mDriverName.setText(lineBean.getDriverName());
+        mRatingBar.setStar(lineBean.getScore());
+        mRatingBar.setClickable(false);
         mNumber.setText(lineBean.getCphm());
         mType.setText(lineBean.getCarModelName());
         mLength.setText(lineBean.getCarLengthName());
@@ -154,13 +162,13 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
-                AppUtils.callPhone(mContext,mLineBean.getDriverPhone());
+                AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
                 toast("该功能暂未开放");
                 break;
             case R.id.place_order:
-                SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(),null);
+                SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(), null);
                 break;
         }
     }

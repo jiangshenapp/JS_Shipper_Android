@@ -8,7 +8,6 @@ import android.os.Parcelable;
  */
 public class OrderBean implements Parcelable {
 
-
     /**
      * carLength : string
      * carModel : string
@@ -119,12 +118,16 @@ public class OrderBean implements Parcelable {
     private String carModelName;
     private String receiveAddressCodeName;
     private String sendAddressCodeName;
-    private String driverNum;
     private String goodsName;
     private String packType;
     private boolean requireDeposit;
     private double deposit;
-
+    private String driverNum;
+    private String driverAvatar;
+    private String driverName;
+    private String driverPhone;
+    private String dotName;
+    private int score;
 
     protected OrderBean(Parcel in) {
         carLength = in.readString();
@@ -176,10 +179,15 @@ public class OrderBean implements Parcelable {
         receiveAddressCodeName = in.readString();
         sendAddressCodeName = in.readString();
         driverNum = in.readString();
+        driverAvatar = in.readString();
+        driverName = in.readString();
+        driverPhone = in.readString();
+        dotName = in.readString();
         goodsName = in.readString();
         packType = in.readString();
         requireDeposit = in.readByte() != 0;
         deposit = in.readDouble();
+        score = in.readInt();
     }
 
     @Override
@@ -233,10 +241,15 @@ public class OrderBean implements Parcelable {
         dest.writeString(receiveAddressCodeName);
         dest.writeString(sendAddressCodeName);
         dest.writeString(driverNum);
+        dest.writeString(driverAvatar);
+        dest.writeString(driverName);
+        dest.writeString(driverPhone);
+        dest.writeString(dotName);
         dest.writeString(goodsName);
         dest.writeString(packType);
         dest.writeByte((byte) (requireDeposit ? 1 : 0));
         dest.writeDouble(deposit);
+        dest.writeInt(score);
     }
 
     @Override
@@ -648,6 +661,38 @@ public class OrderBean implements Parcelable {
         this.driverNum = driverNum;
     }
 
+    public String getDriverAvatar() {
+        return driverAvatar;
+    }
+
+    public void setDriverAvatar(String driverAvatar) {
+        this.driverAvatar = driverAvatar;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getDriverPhone() {
+        return driverPhone;
+    }
+
+    public void setDriverPhone(String driverPhone) {
+        this.driverPhone = driverPhone;
+    }
+
+    public String getDotName() {
+        return dotName;
+    }
+
+    public void setDotName(String dotName) {
+        this.dotName = dotName;
+    }
+
     public String getGoodsName() {
         return goodsName;
     }
@@ -664,12 +709,19 @@ public class OrderBean implements Parcelable {
         this.packType = packType;
     }
 
-
     public double getDeposit() {
         return deposit;
     }
 
     public void setDeposit(double deposit) {
         this.deposit = deposit;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

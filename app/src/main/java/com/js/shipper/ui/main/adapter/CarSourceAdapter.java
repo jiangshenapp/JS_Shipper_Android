@@ -6,7 +6,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.LineBean;
+<<<<<<< HEAD
 import com.base.util.TimeUtils;
+=======
+import com.js.shipper.util.TimeUtils;
+import com.js.shipper.widget.view.RatingBar;
+>>>>>>> a495d3d6e4795aba768be073c9670b625b0abf6c
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -48,5 +53,8 @@ public class CarSourceAdapter extends BaseQuickAdapter<LineBean, BaseViewHolder>
         if (!TextUtils.isEmpty(item.getEnableTime())) {
             helper.setText(R.id.item_distance, TimeUtils.format(item.getEnableTime()));
         }
+        RatingBar mRatingBar = helper.getView(R.id.ratingBar);
+        mRatingBar.setStar(item.getScore());
+        mRatingBar.setClickable(false);
     }
 }

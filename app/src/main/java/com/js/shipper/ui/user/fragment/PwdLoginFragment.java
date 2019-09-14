@@ -1,5 +1,6 @@
 package com.js.shipper.ui.user.fragment;
 
+import android.os.Debug;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -62,6 +63,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     @Override
     protected void init() {
         mPhone.setText(SpManager.getInstance(App.getInstance()).getSP("loginPhone"));
+        mPhone.setText("13758132864");
+        mPwd.setText("000000");
     }
 
     @OnClick({R.id.tv_register, R.id.tv_forget_pwd, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_phonecode})

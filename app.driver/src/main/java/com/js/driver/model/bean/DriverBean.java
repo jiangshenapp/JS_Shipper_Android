@@ -19,6 +19,7 @@ public class DriverBean {
     private String driverName;
     private String avatar;
     private int id;
+    private int score;
     private int driverId;
     private String driverPhone;
     private String driverLevel;
@@ -53,6 +54,14 @@ public class DriverBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getDriverId() {

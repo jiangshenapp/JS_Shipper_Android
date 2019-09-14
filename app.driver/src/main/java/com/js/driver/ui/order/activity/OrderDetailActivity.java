@@ -241,7 +241,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         context.startActivity(intent);
     }
 
-
     @Override
     protected void init() {
         initIntent();
@@ -294,6 +293,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             status = orderBean.getState();
 //            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,orderBean.get);
             mSendName.setText(orderBean.getSendName());
+            mSendIntroduce.setText(orderBean.getSendMobile());
             mOrderNumber.setText("订单编号：" + orderBean.getOrderNo());
             mOrderStatus.setText(orderBean.getStateName());
             mSendAddress.setText(orderBean.getSendAddressCodeName());
