@@ -198,11 +198,4 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
         }
         return true;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

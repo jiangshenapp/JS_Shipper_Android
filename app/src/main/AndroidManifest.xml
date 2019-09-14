@@ -174,6 +174,14 @@
             android:name="com.js.shipper.ui.order.activity.TypeInputActivity"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name="com.js.shipper.ui.message.activity.MessageActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.shipper.ui.message.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+
         <activity android:name="com.js.shipper.ui.message.chat.EaseChatActivity" />
 
         <activity android:name="com.base.frame.view.SimpleWebActivity"

@@ -13,6 +13,7 @@ import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.InformationPresenter;
 import com.js.shipper.ui.main.presenter.contract.InformationContract;
+import com.js.shipper.ui.message.activity.MessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.message_layout:
+                MessageActivity.action(getActivity());
                 break;
             case R.id.customer_service_layout:
                 break;

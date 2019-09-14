@@ -8,7 +8,6 @@ import android.os.Parcelable;
  */
 public class OrderBean implements Parcelable {
 
-
     /**
      * carLength : string
      * carModel : string

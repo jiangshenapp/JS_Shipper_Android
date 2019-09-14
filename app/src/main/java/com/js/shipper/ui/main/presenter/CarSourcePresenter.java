@@ -28,7 +28,6 @@ public class CarSourcePresenter extends RxPresenter<CarSourceContract.View> impl
         this.mApiFactory = apiFactory;
     }
 
-
     @Override
     public void getCarSource(int current, LineAppFind lineAppFind, int size) {
         Disposable disposable = mApiFactory.getApi(LineApi.class).getCarLine(current,

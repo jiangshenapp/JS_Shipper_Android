@@ -161,6 +161,14 @@
             />
 
         <activity
+            android:name="com.js.driver.ui.message.activity.MessageActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.driver.ui.message.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.driver.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">

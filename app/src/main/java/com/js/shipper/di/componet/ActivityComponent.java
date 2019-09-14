@@ -7,6 +7,8 @@ import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.SplashActivity;
 import com.js.shipper.ui.center.activity.FeedBackActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
+import com.js.shipper.ui.message.activity.MessageActivity;
+import com.js.shipper.ui.message.activity.MessageDetailActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderEditActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -85,5 +87,9 @@ public interface ActivityComponent {
     void inject(ResetPwdActivity resetPwdActivity);
 
     void inject(TypeInputActivity typeInputActivity);
+
+    void inject(MessageActivity messageActivity);
+
+    void inject(MessageDetailActivity messageDetailActivity);
 }
 
