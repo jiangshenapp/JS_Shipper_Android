@@ -1,9 +1,9 @@
-package com.js.driver.api;
+package com.js.shipper.api;
 
 import com.base.http.HttpResponse;
-import com.js.driver.model.bean.BannerBean;
-import com.js.driver.model.bean.ServiceBean;
-import com.js.driver.model.request.BannerRequest;
+import com.js.shipper.model.bean.BannerBean;
+import com.js.shipper.model.bean.ServiceBean;
+import com.js.shipper.model.request.BannerRequest;
 import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.Body;

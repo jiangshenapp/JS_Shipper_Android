@@ -56,7 +56,6 @@ import butterknife.OnClick;
  */
 public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements DeliveryContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -106,7 +105,6 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         initView();
 
     }
-
 
     private void initCityWindow() {
         mAreaWindow = new CityWindow(mContext, 2);
