@@ -45,7 +45,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.manager.CommonGlideImageLoader;
+import com.base.util.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.bean.ShipBean;
@@ -58,7 +58,7 @@ import com.js.shipper.presenter.contract.FileContract;
 import com.js.shipper.ui.order.presenter.SubmitOrderPresenter;
 import com.js.shipper.ui.order.presenter.contract.SubmitOrderContract;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
-import com.js.shipper.util.TimeUtils;
+import com.base.util.TimeUtils;
 import com.js.shipper.widget.window.ItemWindow;
 
 import org.greenrobot.eventbus.Subscribe;

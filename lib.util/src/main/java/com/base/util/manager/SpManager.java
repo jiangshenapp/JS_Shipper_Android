@@ -1,4 +1,4 @@
-package com.js.shipper.manager;
+package com.base.util.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

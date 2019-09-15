@@ -69,7 +69,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':lib.frame')
     implementation project(path: ':lib.http')
+    implementation project(path: ':lib.util')
     implementation project(path: ':easeui')
+    implementation project(path: ':app.community')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
 

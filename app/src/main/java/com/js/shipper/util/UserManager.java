@@ -1,4 +1,4 @@
-package com.js.shipper.manager;
+package com.js.shipper.util;
 
 import android.content.Context;
 

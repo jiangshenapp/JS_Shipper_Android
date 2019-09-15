@@ -23,7 +23,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.manager.CommonGlideImageLoader;
+import com.base.util.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.event.CommentEvent;
 import com.js.shipper.model.request.OrderComment;
