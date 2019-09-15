@@ -76,9 +76,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private String[] titles = {"我的车辆", "我的司机", "我的路线", "我的客服", "我的发票", "推广达人"};
+    private String[] titles = {"我的车辆", "我的司机", "我的路线", "我的客服"};
     private int[] resources = {R.mipmap.ic_center_cars, R.mipmap.ic_center_driver, R.mipmap.ic_center_route,
-            R.mipmap.ic_center_service, R.mipmap.ic_center_invoice, R.mipmap.ic_center_collection};
+            R.mipmap.ic_center_service};
 
     public static MineFragment newInstance() {
         return new MineFragment();
@@ -295,12 +295,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 RoutesActivity.action(mContext);
                 break;
             case 3://我的客服
-                toast("该功能暂未开通，敬请期待");
-                break;
-            case 4://我的发票
-                toast("该功能暂未开通，敬请期待");
-                break;
-            case 5://推广达人
                 toast("该功能暂未开通，敬请期待");
                 break;
         }

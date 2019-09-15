@@ -71,9 +71,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private String[] titles = {"我的园区", "我的服务", "我的发票", "推广达人", "我的客服"};
-    private int[] resources = {R.mipmap.ic_center_park, R.mipmap.ic_center_server, R.mipmap.ic_center_invoice,
-            R.mipmap.ic_center_collection, R.mipmap.ic_center_service};
+    private String[] titles = {"我的园区", "我的客服"};
+    private int[] resources = {R.mipmap.ic_center_park, R.mipmap.ic_center_service};
 
     public static MineFragment newInstance() {
         return new MineFragment();
@@ -281,13 +280,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case 0://我的园区
                 CollectActivity.action(mContext, 0);
                 break;
-            case 1://我的服务
-                break;
-            case 2://我的发票
-                break;
-            case 3://推广达人
-                break;
-            case 4://我的客服
+            case 1://我的客服
                 break;
         }
     }
