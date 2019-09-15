@@ -41,6 +41,7 @@ public class OrderPresenter extends RxPresenter<OrderContract.View> implements O
                         mView.onOrderList(response);
                     }
                 },new RxException<>(e->{
+                    mView.toast(e.getMessage());
                     mView.finishRefreshAndLoadMore();
                 }));
         addDispose(disposable);
