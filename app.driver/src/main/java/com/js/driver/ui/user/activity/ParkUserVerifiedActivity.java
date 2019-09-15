@@ -39,7 +39,6 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
-import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.ShengBean;
 import com.js.driver.model.event.UserStatusChangeEvent;
@@ -50,6 +49,7 @@ import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.ParkUserVerifiedContract;
 import com.js.driver.util.GetJsonDataUtil;
 import com.base.frame.view.BaseActivity;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 
 import org.greenrobot.eventbus.EventBus;

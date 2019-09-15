@@ -34,8 +34,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
-import com.js.driver.manager.CommonGlideImageLoader;
-import com.js.driver.manager.UserManager;
+import com.js.driver.util.UserManager;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
@@ -44,6 +43,7 @@ import com.js.driver.ui.center.activity.FeedBackActivity;
 import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
 import com.js.driver.util.DataCleanManager;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.js.driver.widget.dialog.AppDialogFragment;
 import com.base.frame.view.BaseActivity;
 

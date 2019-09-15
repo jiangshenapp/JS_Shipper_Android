@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.shipper.App;
 import com.js.shipper.R;
-import com.js.shipper.manager.CommonGlideImageLoader;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.MessageBean;
 
 import java.util.List;

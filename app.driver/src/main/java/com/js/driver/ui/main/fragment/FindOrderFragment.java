@@ -11,7 +11,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.global.Const;
-import com.js.driver.manager.UserManager;
+import com.js.driver.util.UserManager;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.event.CitySelectEvent;

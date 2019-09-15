@@ -12,10 +12,10 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
-import com.js.shipper.manager.CommonGlideImageLoader;
 import com.js.shipper.model.bean.MessageBean;
 import com.js.shipper.ui.message.presenter.MessageDetailPresenter;
 import com.js.shipper.ui.message.presenter.contract.MessageDetailContract;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 
 import butterknife.BindView;
 

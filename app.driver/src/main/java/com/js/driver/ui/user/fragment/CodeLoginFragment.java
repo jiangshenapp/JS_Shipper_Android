@@ -11,7 +11,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.global.Const;
-import com.js.driver.manager.SpManager;
+import com.js.driver.util.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.user.activity.RegisterActivity;

@@ -11,8 +11,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.App;
 import com.js.driver.R;
-import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MessageBean;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 
 import java.util.List;
 
