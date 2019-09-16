@@ -75,7 +75,7 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.getAllCircle("330200", 1);
+                mPresenter.getAllCircle("330200", showSide);
             }
         });
     }

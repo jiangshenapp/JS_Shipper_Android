@@ -108,7 +108,7 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
 
     @Override
     public void setActionBar() {
-
+        mTitle.setText("详情");
     }
 
     @OnClick({R2.id.to_comment, R2.id.post_like, R2.id.post_comment})

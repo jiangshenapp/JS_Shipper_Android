@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.community.model.bean.CircleBean;
 import com.js.community.ui.activity.CircleIndexActivity;
 import com.js.community.ui.activity.FindCircleActivity;
@@ -23,7 +23,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -93,7 +92,6 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter> implemen
         mAdapter = new CircleAdapter(R.layout.item_community_circle, mData);
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-//        mRecycler.addItemDecoration(new Divider());
     }
 
     @OnClick({R.id.favorite, R.id.comment, R.id.find})

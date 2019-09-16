@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/_F5F5F5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/_FFFFFF"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingTop="6dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="6dp">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/_FAFAFA"
+            android:hint="您碰到的问题或对我们的建议"
+            android:paddingLeft="6dp"
+            android:paddingTop="8dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/_000000"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/shape_btn_eca73f"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="@color/_FFFFFF"
+        android:textSize="17sp" />
+
+</LinearLayout>

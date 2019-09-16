@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:minHeight="130dp"
+    android:background="@color/white"
+    >
+    
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        >
+
+        <TextView
+            android:id="@+id/item_waybill_order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_B4B4B4"
+            android:textSize="12sp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="12dp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/item_waybill_order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待接单"
+            android:textColor="@color/_ECA73F"
+            android:textSize="12sp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginEnd="12dp"
+            />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/_F0F0F0"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="99dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_waybill_start"
+                    android:layout_marginStart="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/item_waybill_send_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宁波市 海曙区 白云街道14号"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp"
+                    android:layout_marginStart="10dp"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_waybill_end"
+                    android:layout_marginStart="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/item_waybill_arrive_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宁波市 海曙区 白云街道14号"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp"
+                    android:layout_marginStart="10dp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_waybill_car_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="普货 高栏货车4.2米/1.3方/1.0吨"
+                android:textColor="#FF6E6E6E"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/item_waybill_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFD0021B"
+            android:textSize="17sp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/item_waybill_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#FFB4B4B4"
+            android:textSize="11sp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_waybill_money"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    
+
+</LinearLayout>

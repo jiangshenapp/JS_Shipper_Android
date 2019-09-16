@@ -2,9 +2,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="0.5dp"
+        >
+
+        <EditText
+            android:id="@+id/post_content"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:hint="输入您要说的话"
+            android:gravity="left|top"
+            android:textColor="@color/_b4b4b4"
+            android:textSize="14sp"
+            android:layout_margin="16dp"
+            android:paddingTop="6dp"
+            android:paddingLeft="8dp"
+            android:paddingEnd="8dp"
+            android:background="@drawable/shape_publist_content"
+            />
+
+        <FrameLayout
+            android:id="@+id/image_layout"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
+            android:background="@drawable/shape_block_fafafa_border"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_waybill_upload_photo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="上传照片"
+                    android:textColor="@color/_b4b4b4"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/post_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 
+    <TextView
+        android:id="@+id/post"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/_ECA73F"
+        android:gravity="center"
+        android:text="发布"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 
 </LinearLayout>

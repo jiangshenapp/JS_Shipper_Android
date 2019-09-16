@@ -6,18 +6,28 @@ package com.js.community.model.bean;
 public class Member {
 
     /**
-     * circleId : 0
-     * id : 0
-     * nickName : string
-     * status : string
-     * subscriberId : 0
+     * id : 11
+     * circleId : 1
+     * subscriberId : 40
+     * status : 1
+     * nickName : yg
+     * avatar : 64b763dbc6264066b1d06a514b786e99.jpg
      */
 
+    private int id;
     private int circleId;
-    private long id;
-    private String nickName;
-    private String status;
     private int subscriberId;
+    private String status;
+    private String nickName;
+    private String avatar;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCircleId() {
         return circleId;
@@ -27,20 +37,12 @@ public class Member {
         this.circleId = circleId;
     }
 
-    public long getId() {
-        return id;
+    public int getSubscriberId() {
+        return subscriberId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setSubscriberId(int subscriberId) {
+        this.subscriberId = subscriberId;
     }
 
     public String getStatus() {
@@ -51,11 +53,19 @@ public class Member {
         this.status = status;
     }
 
-    public int getSubscriberId() {
-        return subscriberId;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setSubscriberId(int subscriberId) {
-        this.subscriberId = subscriberId;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

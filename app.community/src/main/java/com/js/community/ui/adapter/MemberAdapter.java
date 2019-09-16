@@ -33,7 +33,8 @@ public class MemberAdapter extends BaseQuickAdapter<Member, BaseViewHolder> {
         TextView agree = helper.getView(R.id.item_agree);
         TextView delete = helper.getView(R.id.item_delete);
         TextView refuse = helper.getView(R.id.item_refuse);
-        ImageView imageView = helper.getView(R.id.item_circle_img);
+        ImageView imageView = helper.getView(R.id.item_member_img);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,com.base.http.global.Const.IMG_URL+item.getAvatar(),imageView);
         if ("0".equals(item.getStatus())) {
             status.setVisibility(View.VISIBLE);
             delete.setVisibility(View.GONE);
