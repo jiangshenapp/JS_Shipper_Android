@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.community.model.bean.CircleBean;
 import com.js.shipper.R;
-import com.base.util.manager.CommonGlideImageLoader;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 
 import java.util.List;
 

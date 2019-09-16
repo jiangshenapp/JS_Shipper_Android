@@ -45,7 +45,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.base.util.manager.CommonGlideImageLoader;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.bean.ShipBean;
