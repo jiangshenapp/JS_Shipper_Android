@@ -40,7 +40,6 @@ public class MessagePresenter extends RxPresenter<MessageContract.View> implemen
                 .subscribe(new Consumer<ListResponse<MessageBean>>() {
                     @Override
                     public void accept(ListResponse<MessageBean> response) throws Exception {
-
                         mView.finishRefreshAndLoadMore();
                         mView.onMessage(response);
                     }

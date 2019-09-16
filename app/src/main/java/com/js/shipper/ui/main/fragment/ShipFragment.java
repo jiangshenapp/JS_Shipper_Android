@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.base.frame.view.SimpleWebActivity;
 import com.google.gson.Gson;
 import com.base.frame.view.BaseFragment;
 import com.js.shipper.App;
@@ -15,23 +16,30 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.DictBean;
+import com.js.shipper.model.bean.ServiceBean;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.model.event.DictSelectEvent;
 import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
+import com.js.shipper.ui.main.presenter.ServicePresenter;
 import com.js.shipper.ui.main.presenter.ShipPresenter;
+import com.js.shipper.ui.main.presenter.contract.ServiceContract;
 import com.js.shipper.ui.main.presenter.contract.ShipContract;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
+import com.js.shipper.util.glide.GlideImageLoader;
 import com.js.shipper.widget.window.ItemWindow;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,8 +51,7 @@ import butterknife.OnClick;
  * Created by huyg on 2019/4/30.
  * 发货
  */
-public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipContract.View, DictContract.View {
-
+public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipContract.View, DictContract.View, ServiceContract.View {
 
     @BindView(R.id.title_layout)
     FrameLayout mTitleLayout;
@@ -63,7 +70,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     @BindView(R.id.ship_submit)
     TextView mSubmit;
 
-
     private String startAddress;
     private String endAddress;
     private ShipBean mSendShip = new ShipBean();
@@ -77,11 +83,15 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @Inject
     DictPresenter mDictPresenter;
+    @Inject
+    ServicePresenter mServicePresenter;
+
+    private List<String> imgPaths;
+    private List<BannerBean> mBannerBeans;
 
     public static ShipFragment newInstance() {
         return new ShipFragment();
     }
-
 
     @Override
     protected void initInject() {
@@ -97,10 +107,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
         return R.layout.fragment_ship;
     }
 
-
     @Override
     protected void init() {
         mDictPresenter.attachView(this);
+        mServicePresenter.attachView(this);
+        initBanner();
         initView();
         initData();
     }
@@ -108,11 +119,23 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     private void initData() {
         mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
         mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+        mServicePresenter.getBannerList(2);
     }
 
     private void initView() {
         mTypeWindow = new ItemWindow(mContext, Const.DICT_CAR_TYPE);
         mLengthWindow = new ItemWindow(mContext, Const.DICT_LENGTH);
+    }
+
+    public void initBanner() {
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                BannerBean bannerBean = mBannerBeans.get(position);
+                SimpleWebActivity.action(getActivity(), bannerBean.getUrl(), bannerBean.getTitle());
+            }
+        });
+        mBanner.setImageLoader(new GlideImageLoader());
     }
 
     @OnClick({R.id.ship_start_layout, R.id.ship_end_layout,
@@ -170,7 +193,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 mPresenter.addStepOne(addStepOne);
 
                 break;
-
         }
     }
 
@@ -226,6 +248,9 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
         if (mDictPresenter != null) {
             mDictPresenter.detachView();
         }
+        if (mServicePresenter != null) {
+            mServicePresenter.detachView();
+        }
     }
 
     @Override
@@ -238,5 +263,27 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 mLengthWindow.setData(dictBeans);
                 break;
         }
+    }
+
+    @Override
+    public void onBannerList(List<BannerBean> bannerBeans) {
+        mBannerBeans = bannerBeans;
+        if (mBannerBeans.size() == 0) {
+            mBanner.setVisibility(View.GONE);
+        } else {
+            mBanner.setVisibility(View.VISIBLE);
+            imgPaths = new ArrayList<>();
+            for (int i = 0; i < mBannerBeans.size(); i++) {
+                BannerBean bannerBean = mBannerBeans.get(i);
+                imgPaths.add(com.base.http.global.Const.IMG_URL + bannerBean.getImage());
+            }
+            mBanner.setImages(imgPaths);
+            mBanner.start();
+        }
+    }
+
+    @Override
+    public void onServiceList(List<ServiceBean> mServiceBeans) {
+
     }
 }

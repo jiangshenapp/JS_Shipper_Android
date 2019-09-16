@@ -5,7 +5,6 @@ package com.js.driver.model.request;
  */
 public class LineAppFind {
 
-
     /**
      * arriveAddressCode : string
      * carLength : string

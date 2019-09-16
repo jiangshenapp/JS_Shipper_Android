@@ -1,4 +1,4 @@
-package com.js.driver.manager;
+package com.js.driver.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

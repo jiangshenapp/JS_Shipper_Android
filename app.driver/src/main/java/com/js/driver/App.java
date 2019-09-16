@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
-import com.js.driver.manager.SpManager;
+import com.js.driver.util.SpManager;
 import com.js.driver.model.bean.UserInfo;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;

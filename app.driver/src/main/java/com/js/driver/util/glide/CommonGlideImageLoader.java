@@ -1,4 +1,4 @@
-package com.js.driver.manager;
+package com.js.driver.util.glide;
 
 
 import android.content.Context;
@@ -203,7 +203,6 @@ public class CommonGlideImageLoader {
 
     private RequestOptions buildRequestOptionsSize(Drawable defaultDrawableImage, int width, int height) {
         return mRequestOptions.placeholder(defaultDrawableImage)
-                .fitCenter()
                 .override(width, height)
                 .error(defaultDrawableImage);
     }
