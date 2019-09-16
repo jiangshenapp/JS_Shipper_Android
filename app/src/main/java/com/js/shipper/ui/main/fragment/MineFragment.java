@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.base.frame.view.SimpleWebActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
 import com.base.http.global.Const;
@@ -18,6 +19,10 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.base.util.manager.CommonGlideImageLoader;
+import com.js.shipper.model.bean.BannerBean;
+import com.js.shipper.model.bean.ServiceBean;
+import com.js.shipper.ui.main.presenter.ServicePresenter;
+import com.js.shipper.ui.main.presenter.contract.ServiceContract;
 import com.js.shipper.util.UserManager;
 import com.js.shipper.model.bean.AccountInfo;
 import com.js.shipper.model.bean.MineMenu;
@@ -44,13 +49,15 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/1.
  */
-public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View, BaseQuickAdapter.OnItemClickListener {
+public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View, BaseQuickAdapter.OnItemClickListener, ServiceContract.View {
 
     @BindView(R.id.user_img)
     ImageView mUserImg;
@@ -69,15 +76,18 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
 
+    @Inject
+    ServicePresenter mServicePresenter;
+
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private String[] titles = {"我的园区", "我的客服"};
-    private int[] resources = {R.mipmap.ic_center_park, R.mipmap.ic_center_service};
+    private List<String> mTitles = new ArrayList<>();
+    private List<Object> mResources = new ArrayList<>();
+    private List<ServiceBean> mServiceBeans;
 
     public static MineFragment newInstance() {
         return new MineFragment();
     }
-
 
     @Override
     protected void initInject() {
@@ -95,8 +105,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     protected void init() {
+        mServicePresenter.attachView(this);
+        mServicePresenter.getServiceList();
+        mTitles.add("我的园区");
+        mTitles.add("我的客服");
+        mResources.add(R.mipmap.ic_center_park);
+        mResources.add(R.mipmap.ic_center_service);
         initConfig();
-        initView();
+        initRecycler();
+        initRefresh();
         if (App.getInstance().token.isEmpty()) {
             authState.setText("请先登录");
         }
@@ -104,8 +121,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private void initConfig() {
         mMineMenu = new ArrayList<>();
-        for (int i = 0; i < titles.length; i++) {
-            mMineMenu.add(new MineMenu(resources[i], titles[i]));
+        for (int i = 0; i < mTitles.size(); i++) {
+            mMineMenu.add(new MineMenu(mResources.get(i), mTitles.get(i)));
         }
     }
 
@@ -120,11 +137,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         if (!isHidden()) {
             initData();
         }
-    }
-
-    private void initView() {
-        initRecycler();
-        initRefresh();
     }
 
     private void initRefresh() {
@@ -283,10 +295,38 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case 1://我的客服
                 break;
         }
+        if (position>1) { //服务配置H5
+            ServiceBean serviceBean = mServiceBeans.get(position-2);
+            SimpleWebActivity.action(getActivity(),serviceBean.getUrl(),serviceBean.getTitle());
+        }
     }
 
 
     public void showVerifiedDialog(){
 
+    }
+
+    @Override
+    public void onBannerList(List<BannerBean> mBannerBeans) {
+
+    }
+
+    @Override
+    public void onServiceList(List<ServiceBean> serviceBeans) {
+        mServiceBeans = serviceBeans;
+        for (ServiceBean serviceBean : mServiceBeans) {
+            mTitles.add(serviceBean.getTitle());
+            mResources.add(serviceBean.getIcon());
+        }
+        initConfig();
+        initRecycler();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mServicePresenter != null) {
+            mServicePresenter.detachView();
+        }
     }
 }

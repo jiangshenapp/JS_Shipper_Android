@@ -11,12 +11,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseFragment;
+import com.base.frame.view.SimpleWebActivity;
 import com.base.http.global.Const;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.model.bean.BannerBean;
+import com.js.driver.model.bean.ServiceBean;
+import com.js.driver.ui.main.presenter.ServicePresenter;
+import com.js.driver.ui.main.presenter.contract.ServiceContract;
 import com.js.driver.util.UserManager;
 import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.MineMenu;
@@ -45,7 +50,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,7 +61,7 @@ import butterknife.OnClick;
 /**
  * Created by huyg on 2019/4/1.
  */
-public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View, BaseQuickAdapter.OnItemClickListener {
+public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View, BaseQuickAdapter.OnItemClickListener, ServiceContract.View {
 
     @BindView(R.id.user_img)
     ImageView mUserImg;
@@ -74,16 +82,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @BindView(R.id.ratingBar)
     RatingBar mRatingBar;
 
+    @Inject
+    ServicePresenter mServicePresenter;
+
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private String[] titles = {"我的车辆", "我的司机", "我的路线", "我的客服"};
-    private int[] resources = {R.mipmap.ic_center_cars, R.mipmap.ic_center_driver, R.mipmap.ic_center_route,
-            R.mipmap.ic_center_service};
+    private List<String> mTitles = new ArrayList<>();
+    private List<Object> mResources = new ArrayList<>();
+    private List<ServiceBean> mServiceBeans;
+
 
     public static MineFragment newInstance() {
         return new MineFragment();
     }
-
 
     @Override
     protected void initInject() {
@@ -101,8 +112,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     protected void init() {
+        mServicePresenter.attachView(this);
+        mServicePresenter.getServiceList();
+        mTitles.add("我的车辆");
+        mTitles.add("我的司机");
+        mTitles.add("我的路线");
+        mTitles.add("我的客服");
+        mResources.add(R.mipmap.ic_center_cars);
+        mResources.add(R.mipmap.ic_center_driver);
+        mResources.add(R.mipmap.ic_center_route);
+        mResources.add(R.mipmap.ic_center_service);
         initConfig();
-        initView();
+        initRecycler();
+        initRefresh();
         if (App.getInstance().token.isEmpty()) {
             authState.setText("请先登录");
         }
@@ -110,8 +132,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private void initConfig() {
         mMineMenu = new ArrayList<>();
-        for (int i = 0; i < titles.length; i++) {
-            mMineMenu.add(new MineMenu(resources[i], titles[i]));
+        for (int i = 0; i < mTitles.size(); i++) {
+            mMineMenu.add(new MineMenu(mResources.get(i), mTitles.get(i)));
         }
     }
 
@@ -126,11 +148,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         if (!hidden) {
             initData();
         }
-    }
-
-    private void initView() {
-        initRecycler();
-        initRefresh();
     }
 
     private void initRefresh() {
@@ -298,6 +315,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 toast("该功能暂未开通，敬请期待");
                 break;
         }
+        if (position>3) { //服务配置H5
+            ServiceBean serviceBean = mServiceBeans.get(position-4);
+            SimpleWebActivity.action(getActivity(),serviceBean.getUrl(),serviceBean.getTitle());
+        }
     }
 
 
@@ -314,4 +335,27 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         appDialogFragment.show(getChildFragmentManager(), "appDialog");
     }
 
+    @Override
+    public void onBannerList(List<BannerBean> mBannerBeans) {
+
+    }
+
+    @Override
+    public void onServiceList(List<ServiceBean> serviceBeans) {
+        mServiceBeans = serviceBeans;
+        for (ServiceBean serviceBean : mServiceBeans) {
+            mTitles.add(serviceBean.getTitle());
+            mResources.add(serviceBean.getIcon());
+        }
+        initConfig();
+        initRecycler();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mServicePresenter != null) {
+            mServicePresenter.detachView();
+        }
+    }
 }
