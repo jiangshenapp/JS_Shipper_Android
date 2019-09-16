@@ -35,7 +35,6 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
-import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.presenter.DictPresenter;
@@ -45,6 +44,7 @@ import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.center.presenter.AddCarPresenter;
 import com.js.driver.ui.center.presenter.contract.AddCarContract;
 import com.base.frame.view.BaseActivity;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 
 import java.io.File;
 import java.util.ArrayList;

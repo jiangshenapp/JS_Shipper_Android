@@ -12,10 +12,10 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
-import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MessageBean;
 import com.js.driver.ui.message.presenter.MessageDetailPresenter;
 import com.js.driver.ui.message.presenter.contract.MessageDetailContract;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 
 import butterknife.BindView;
 

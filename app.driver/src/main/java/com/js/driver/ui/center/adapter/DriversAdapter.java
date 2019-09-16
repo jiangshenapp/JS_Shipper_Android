@@ -3,9 +3,9 @@ package com.js.driver.ui.center.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.R;
-import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.DriverBean;
 import com.base.http.global.Const;
+import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.js.driver.widget.view.RatingBar;
 
 import java.util.List;

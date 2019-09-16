@@ -4,20 +4,20 @@ package com.js.shipper.model.bean;
  * Created by huyg on 2019/4/29.
  */
 public class MineMenu {
-    private int resouce;
+    private Object resouce;
     private String title;
 
 
-    public MineMenu(int resouce, String title) {
+    public MineMenu(Object resouce, String title) {
         this.resouce = resouce;
         this.title = title;
     }
 
-    public int getResouce() {
+    public Object getResouce() {
         return resouce;
     }
 
-    public void setResouce(int resouce) {
+    public void setResouce(Object resouce) {
         this.resouce = resouce;
     }
 
