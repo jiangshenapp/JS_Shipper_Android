@@ -18,7 +18,7 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
-import com.base.util.manager.CommonGlideImageLoader;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.ServiceBean;
 import com.js.shipper.ui.main.presenter.ServicePresenter;

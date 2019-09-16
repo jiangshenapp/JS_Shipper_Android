@@ -35,7 +35,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.base.util.manager.CommonGlideImageLoader;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.util.UserManager;
 import com.js.shipper.model.event.UserStatusChangeEvent;
 import com.js.shipper.presenter.FilePresenter;
