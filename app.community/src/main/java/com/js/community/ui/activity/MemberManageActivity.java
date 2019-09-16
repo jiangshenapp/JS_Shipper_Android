@@ -118,13 +118,28 @@ public class MemberManageActivity extends BaseActivity<MemberManagePresenter> im
     }
 
     @Override
+    public void onAuditApply(boolean b) {
+        if (b){
+            mPresenter.getMembers(mCircle.getId());
+        }
+    }
+
+    @Override
+    public void onDeleteSubscriber(boolean b) {
+        if (b){
+            mPresenter.getMembers(mCircle.getId());
+        }
+    }
+
+    @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        Member member = (Member) adapter.getItem(position);
         if (view.getId() == R.id.item_agree) {
-
+            mPresenter.auditApplyCircle(member.getId(), "1");
         } else if (view.getId() == R.id.item_refuse) {
-
+            mPresenter.auditApplyCircle(member.getId(), "2");
         } else if (view.getId() == R.id.item_delete) {
-
+            mPresenter.deleteSubscriber(member.getId());
         }
     }
 }

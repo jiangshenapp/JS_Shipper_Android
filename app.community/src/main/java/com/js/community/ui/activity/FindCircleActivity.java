@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -43,15 +44,15 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
 
 
     private AllCircleAdapter mAdapter;
-    private PostAdapter mPostAdapter;
     private List<CircleBean> mCircles;
     private int showSide;
 
-    public static void action(Context context,int showSide){
-        Intent intent = new Intent(context,FindCircleActivity.class);
-        intent.putExtra("showSide",showSide);
+    public static void action(Context context, int showSide) {
+        Intent intent = new Intent(context, FindCircleActivity.class);
+        intent.putExtra("showSide", showSide);
         context.startActivity(intent);
     }
+
     @Override
     protected void init() {
         initIntent();
@@ -59,7 +60,7 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     }
 
     private void initIntent() {
-        showSide = getIntent().getIntExtra("showSide",1);
+        showSide = getIntent().getIntExtra("showSide", 1);
     }
 
 
@@ -122,7 +123,7 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         if (b) {
             toast("申请成功");
             finish();
-        }else {
+        } else {
             toast("申请失败");
         }
     }
@@ -130,22 +131,26 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         CircleBean circleBean = (CircleBean) adapter.getItem(position);
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("加入圈子");
-        builder.setMessage("是否加入？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                mPresenter.applyCircle(circleBean.getId());
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
+        if (TextUtils.isEmpty(circleBean.getStatus()) || "3".equals(circleBean.getStatus())) {
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("加入圈子");
+            builder.setMessage("是否加入？");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    mPresenter.applyCircle(circleBean.getId());
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }
     }
 }

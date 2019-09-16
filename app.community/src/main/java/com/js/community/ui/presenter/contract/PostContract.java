@@ -6,15 +6,15 @@ import com.js.community.model.bean.PostBean;
 
 import java.util.List;
 
-import retrofit2.http.Field;
-
 /**
- * Created by huyg on 2019-09-09.
+ * Created by huyg on 2019-09-16.
  */
-public interface CircleIndexContract {
+public interface PostContract {
+
 
     interface View extends IBaseView {
         void onPosts(List<PostBean> postBeans);
+        void finishRefresh();
     }
 
     interface Presenter extends IPresenter<View> {

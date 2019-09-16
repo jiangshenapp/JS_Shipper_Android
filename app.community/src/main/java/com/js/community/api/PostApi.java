@@ -8,9 +8,11 @@ import com.js.community.model.bean.Comment;
 import com.js.community.model.bean.PostBean;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -55,7 +57,7 @@ public interface PostApi {
      */
     @FormUrlEncoded
     @POST("app/post/commentList")
-    Observable<HttpResponse<List<Comment>>> getComments(@Field("postId") String postId);
+    Observable<HttpResponse<List<Comment>>> getComments(@Field("postId") long postId);
 
 
     /**
@@ -76,7 +78,6 @@ public interface PostApi {
      */
     @FormUrlEncoded
     @POST("app/post/list")
-    Observable<HttpResponse<List<PostBean>>> getPostList(@Field("circleId") long circleId,
-                                                         @Field("subject") String subject);
+    Observable<HttpResponse<List<PostBean>>> getPostList(@FieldMap Map<String,Object> map);
 
 }

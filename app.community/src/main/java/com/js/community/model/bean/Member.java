@@ -14,7 +14,7 @@ public class Member {
      */
 
     private int circleId;
-    private int id;
+    private long id;
     private String nickName;
     private String status;
     private int subscriberId;
@@ -27,7 +27,7 @@ public class Member {
         this.circleId = circleId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

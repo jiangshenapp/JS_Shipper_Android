@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -19,39 +19,161 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_marginTop="0.5dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:src="@mipmap/social_circle_icon_blue" />
+
+                    <TextView
+                        android:id="@+id/circle_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="话题名称"
+                        android:textColor="@color/_000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#f2f2f2"
+
+                    />
+
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/post_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/white"
+                    android:text="标题名称显示"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp"
+                    />
 
                 <TextView
+                    android:id="@+id/post_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="6dp"
+                    android:text="01-23 16:00"
+                    android:textColor="@color/_b4b4b4"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/post_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="重要和紧急的事情，腾出大量时间做重要不紧要的事情，尽快做好紧急不重要的事情，避免不重要不紧急的事情高效做好重要和紧急的事情，腾出大量时间做重要不紧要的事情，尽快做好紧急不重要的事情，避免不重要不紧急的事情"
+                    android:textColor="@color/_6E6E64"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="10dp"
+                    />
 
             </LinearLayout>
 
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="全部评论(2345)"
+                android:textColor="@color/_000000"
+                android:textSize="14sp"
+                android:paddingStart="16dp"
+                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:layout_marginBottom="52dp"
+                >
 
-
+            </androidx.recyclerview.widget.RecyclerView>
+            
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:id="@+id/to_comment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="写评论"
+            android:layout_margin="8dp"
+            android:textColor="@color/_b4b4b4"
+            android:textSize="14sp"
+            android:background="@color/_F5F5F5"
+            android:paddingStart="12dp"
+            android:gravity="center_vertical"
+            />
+
+
+
+
+        <TextView
+            android:id="@+id/post_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:drawableStart="@mipmap/app_navigationbar_fabulous_unclicked"
+            android:drawablePadding="6dp"
+            android:text="12"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/_b4b4b4"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            />
+
+        <TextView
+            android:id="@+id/post_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/app_navigationbar_comment"
+            android:drawablePadding="6dp"
+            android:text="12"
+            android:textColor="@color/_b4b4b4"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

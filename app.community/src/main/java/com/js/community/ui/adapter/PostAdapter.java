@@ -28,4 +28,5 @@ public class PostAdapter extends BaseQuickAdapter<PostBean, BaseViewHolder> {
                 .setText(R.id.item_post_like, String.valueOf(item.getLikeCount()));
 
     }
+
 }

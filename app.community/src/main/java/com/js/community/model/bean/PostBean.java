@@ -1,9 +1,12 @@
 package com.js.community.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by huyg on 2019-09-10.
  */
-public class PostBean {
+public class PostBean implements Parcelable {
     /**
      * auditBy : 0
      * auditRemark : string
@@ -41,12 +44,76 @@ public class PostBean {
     private int id;
     private String image;
     private int likeCount;
-    private String likeFlag;
+    private boolean likeFlag;
     private String nickName;
     private String star;
     private String subject;
     private String title;
     private String type;
+
+    protected PostBean(Parcel in) {
+        auditBy = in.readInt();
+        auditRemark = in.readString();
+        auditStatus = in.readString();
+        auditTime = in.readString();
+        author = in.readInt();
+        avatar = in.readString();
+        circleId = in.readInt();
+        commentCount = in.readInt();
+        content = in.readString();
+        createTime = in.readString();
+        delFlag = in.readString();
+        id = in.readInt();
+        image = in.readString();
+        likeCount = in.readInt();
+        likeFlag = in.readByte() != 0;
+        nickName = in.readString();
+        star = in.readString();
+        subject = in.readString();
+        title = in.readString();
+        type = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(auditBy);
+        dest.writeString(auditRemark);
+        dest.writeString(auditStatus);
+        dest.writeString(auditTime);
+        dest.writeInt(author);
+        dest.writeString(avatar);
+        dest.writeInt(circleId);
+        dest.writeInt(commentCount);
+        dest.writeString(content);
+        dest.writeString(createTime);
+        dest.writeString(delFlag);
+        dest.writeInt(id);
+        dest.writeString(image);
+        dest.writeInt(likeCount);
+        dest.writeByte((byte) (likeFlag ? 1 : 0));
+        dest.writeString(nickName);
+        dest.writeString(star);
+        dest.writeString(subject);
+        dest.writeString(title);
+        dest.writeString(type);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<PostBean> CREATOR = new Creator<PostBean>() {
+        @Override
+        public PostBean createFromParcel(Parcel in) {
+            return new PostBean(in);
+        }
+
+        @Override
+        public PostBean[] newArray(int size) {
+            return new PostBean[size];
+        }
+    };
 
     public int getAuditBy() {
         return auditBy;
@@ -160,11 +227,11 @@ public class PostBean {
         this.likeCount = likeCount;
     }
 
-    public String getLikeFlag() {
+    public boolean getLikeFlag() {
         return likeFlag;
     }
 
-    public void setLikeFlag(String likeFlag) {
+    public void setLikeFlag(boolean likeFlag) {
         this.likeFlag = likeFlag;
     }
 
