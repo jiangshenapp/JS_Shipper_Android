@@ -2,11 +2,11 @@ package com.js.shipper.ui.main.adapter;
 
 import android.text.TextUtils;
 
+import com.base.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.LineBean;
-import com.base.util.TimeUtils;
 import com.js.shipper.widget.view.RatingBar;
 
 import java.text.DecimalFormat;

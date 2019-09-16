@@ -49,4 +49,54 @@ public class MemberManagePresenter extends RxPresenter<MemberManageContract.View
                 }));
         addDispose(disposable);
     }
+
+    @Override
+    public void auditApplyCircle(long id, String status) {
+        Disposable disposable = mApiFactory.getApi(CircleApi.class)
+                .auditApplyCircle(id,status)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onAuditApply(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void deleteSubscriber(long id) {
+        Disposable disposable = mApiFactory.getApi(CircleApi.class)
+                .deleteSbscriber(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onDeleteSubscriber(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
 }

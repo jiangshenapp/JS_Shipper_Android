@@ -51,7 +51,7 @@ public interface CircleApi {
      */
     @FormUrlEncoded
     @POST("app/circle/auditApply")
-    Observable<HttpResponse<Boolean>> auditApplyCircle(@Field("id") String id,
+    Observable<HttpResponse<Boolean>> auditApplyCircle(@Field("id") long id,
                                                        @Field("status") String status);
 
     /**
@@ -62,7 +62,7 @@ public interface CircleApi {
      */
     @FormUrlEncoded
     @POST("app/circle/deleteSubscriber")
-    Observable<HttpResponse<Boolean>> deleteSbscriber(@Field("id") String id);
+    Observable<HttpResponse<Boolean>> deleteSbscriber(@Field("id") long id);
 
 
     /**

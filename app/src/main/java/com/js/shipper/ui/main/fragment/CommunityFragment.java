@@ -11,6 +11,7 @@ import com.base.frame.view.BaseFragment;
 import com.js.community.model.bean.CircleBean;
 import com.js.community.ui.activity.CircleIndexActivity;
 import com.js.community.ui.activity.FindCircleActivity;
+import com.js.community.ui.activity.PostListActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -99,10 +100,10 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter> implemen
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.favorite://我的喜欢
-
+                PostListActivity.action(mContext,1);
                 break;
             case R.id.comment://评论
-
+                PostListActivity.action(mContext,2);
                 break;
             case R.id.find://找圈子
                 FindCircleActivity.action(mContext,1);

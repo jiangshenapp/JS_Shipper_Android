@@ -24,6 +24,13 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".ui.activity.PostListActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".ui.activity.PostDetailActivity"
+            android:launchMode="singleTop"
+            />
+
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.app.Activity;
 
 import com.js.community.di.FragmentScope;
 import com.js.community.di.module.FragmentModule;
+import com.js.community.ui.fragment.PostFragment;
 
 import dagger.Component;
 
@@ -18,5 +19,7 @@ import dagger.Component;
 public interface FragmentComponent {
 
     Activity getActivity();
+
+    void inject(PostFragment postFragment);
 
 }

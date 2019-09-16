@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,9 @@ import com.js.community.ui.adapter.PostAdapter;
 import com.js.community.ui.adapter.TopicAdapter;
 import com.js.community.ui.presenter.CircleIndexPresenter;
 import com.js.community.ui.presenter.contract.CircleIndexContract;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,7 +87,6 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
         if (item.getItemId() == R.id.more) {
             MemberManageActivity.action(mContext, mCircle);
         }
-
         return true;
     }
 
@@ -96,7 +99,7 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
             mTopics.addAll(Arrays.asList(subjects));
             mTopicAdapter.setNewData(mTopics);
         }
-        mPresenter.getPosts(mCircle.getId(), "");
+        mPresenter.getPosts(mCircle.getId(), "",false,false,false);
     }
 
     private void initView() {
@@ -115,7 +118,7 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
         mPostAdapter = new PostAdapter(R.layout.item_index_circle, mPosts);
         mRecycler.setAdapter(mPostAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
-        mTopicAdapter.setOnItemClickListener(this);
+        mPostAdapter.setOnItemClickListener(this);
     }
 
     private void initIntent() {
@@ -146,13 +149,13 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
         if (adapter instanceof TopicAdapter) {
             String topicName = (String) adapter.getItem(position);
             if ("全部".equals(topicName)) {
-                mPresenter.getPosts(mCircle.getId(), "");
+                mPresenter.getPosts(mCircle.getId(), "",false,false,false);
             } else {
-                mPresenter.getPosts(mCircle.getId(), topicName);
+                mPresenter.getPosts(mCircle.getId(), topicName,false,false,false);
             }
         } else if (adapter instanceof PostAdapter) {
             PostBean postBean = (PostBean) adapter.getItem(position);
-
+            PostDetailActivity.action(mContext,postBean);
         }
     }
 

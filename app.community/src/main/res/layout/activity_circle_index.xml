@@ -8,10 +8,9 @@
         android:id="@+id/topic_recycler"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        >
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -20,9 +19,9 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="16dp"
-        >
+        android:layout_weight="1">
+
     </androidx.recyclerview.widget.RecyclerView>
 
 
@@ -30,10 +29,9 @@
         android:id="@+id/post"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="发帖"
-        android:gravity="center"
         android:background="@color/_ECA73F"
+        android:gravity="center"
+        android:text="发帖"
         android:textColor="@color/white"
-        android:textSize="17sp"
-        />
+        android:textSize="17sp" />
 </LinearLayout>

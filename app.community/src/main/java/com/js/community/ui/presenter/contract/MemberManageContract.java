@@ -13,10 +13,19 @@ public interface MemberManageContract {
 
     interface View extends IBaseView {
         void onMembers(List<Member> members);
+
         void finishRefresh();
+
+        void onAuditApply(boolean b);
+
+        void onDeleteSubscriber(boolean b);
     }
 
     interface Presenter extends IPresenter<View> {
         void getMembers(long circleId);
+
+        void auditApplyCircle(long id, String status);
+
+        void deleteSubscriber(long id);
     }
 }

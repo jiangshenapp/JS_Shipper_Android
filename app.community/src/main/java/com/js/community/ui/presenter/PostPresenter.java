@@ -9,7 +9,7 @@ import com.base.http.rx.RxResult;
 import com.base.http.rx.RxSchedulers;
 import com.js.community.api.PostApi;
 import com.js.community.model.bean.PostBean;
-import com.js.community.ui.presenter.contract.CircleIndexContract;
+import com.js.community.ui.presenter.contract.PostContract;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,20 +21,21 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by huyg on 2019-09-09.
+ * Created by huyg on 2019-09-16.
  */
-public class CircleIndexPresenter extends RxPresenter<CircleIndexContract.View> implements CircleIndexContract.Presenter {
+public class PostPresenter extends RxPresenter<PostContract.View> implements PostContract.Presenter {
 
     private ApiFactory mApiFactory;
 
+
     @Inject
-    public CircleIndexPresenter(ApiFactory apiFactory) {
+    public PostPresenter(ApiFactory apiFactory) {
         this.mApiFactory = apiFactory;
     }
 
-
     @Override
     public void getPosts(long circleId, String subject, boolean commentFlag, boolean likeFlag, boolean myFlag) {
+
         Map<String, Object> params = new HashMap<>();
         if (circleId != -1) {
             params.put("circleId", circleId);
@@ -45,24 +46,19 @@ public class CircleIndexPresenter extends RxPresenter<CircleIndexContract.View> 
         params.put("commentFlag", commentFlag);
         params.put("likeFlag", likeFlag);
         params.put("myFlag", myFlag);
+
         Disposable disposable = mApiFactory.getApi(PostApi.class)
                 .getPostList(params)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mView.showProgress();
-                    }
-                })
                 .subscribe(new Consumer<List<PostBean>>() {
                     @Override
                     public void accept(List<PostBean> postBeans) throws Exception {
-                        mView.closeProgress();
+                        mView.finishRefresh();
                         mView.onPosts(postBeans);
                     }
                 }, new RxException<>(e -> {
-                    mView.closeProgress();
+                    mView.finishRefresh();
                     mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
