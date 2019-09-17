@@ -81,8 +81,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private List<String> mTitles = new ArrayList<>();
-    private List<Object> mResources = new ArrayList<>();
+    private List<String> mTitles;
+    private List<Object> mResources;
     private List<ServiceBean> mServiceBeans;
 
     public static MineFragment newInstance() {
@@ -107,6 +107,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     protected void init() {
         mServicePresenter.attachView(this);
         mServicePresenter.getServiceList();
+        mTitles = new ArrayList<>();
+        mResources = new ArrayList<>();
         mTitles.add("我的园区");
         mTitles.add("我的客服");
         mResources.add(R.mipmap.ic_center_park);
@@ -293,17 +295,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 CollectActivity.action(mContext, 0);
                 break;
             case 1://我的客服
+                toast("该功能暂未开通，敬请期待");
                 break;
         }
         if (position>1) { //服务配置H5
             ServiceBean serviceBean = mServiceBeans.get(position-2);
             SimpleWebActivity.action(getActivity(),serviceBean.getUrl(),serviceBean.getTitle());
         }
-    }
-
-
-    public void showVerifiedDialog(){
-
     }
 
     @Override

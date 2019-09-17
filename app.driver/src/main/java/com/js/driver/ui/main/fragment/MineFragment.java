@@ -87,8 +87,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
-    private List<String> mTitles = new ArrayList<>();
-    private List<Object> mResources = new ArrayList<>();
+    private List<String> mTitles;
+    private List<Object> mResources;
     private List<ServiceBean> mServiceBeans;
 
 
@@ -114,6 +114,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     protected void init() {
         mServicePresenter.attachView(this);
         mServicePresenter.getServiceList();
+        mTitles = new ArrayList<>();
+        mResources = new ArrayList<>();
         mTitles.add("我的车辆");
         mTitles.add("我的司机");
         mTitles.add("我的路线");
