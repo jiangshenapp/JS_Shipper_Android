@@ -4,8 +4,8 @@ import com.base.http.ApiFactory;
 import com.base.http.rx.RxException;
 import com.base.http.rx.RxResult;
 import com.base.http.rx.RxSchedulers;
-import com.js.community.api.CircleApi;
 import com.js.community.model.bean.CircleBean;
+import com.js.shipper.api.CircleApi;
 import com.js.shipper.ui.main.presenter.contract.CommunityContract;
 import com.base.frame.mvp.RxPresenter;
 

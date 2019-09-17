@@ -27,7 +27,7 @@ public class CircleBean implements Parcelable {
     private String status;
     private String showSide;
     private String image;
-    private boolean admin;
+    private Object admin;
     private String stopWord;
     private String subjects;
     private String applyStatus;
@@ -122,11 +122,11 @@ public class CircleBean implements Parcelable {
         this.image = image;
     }
 
-    public boolean getAdmin() {
+    public Object getAdmin() {
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(Object admin) {
         this.admin = admin;
     }
 

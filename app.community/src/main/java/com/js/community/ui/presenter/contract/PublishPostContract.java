@@ -9,11 +9,11 @@ import com.base.frame.mvp.IPresenter;
 public interface PublishPostContract {
 
 
-    interface View extends IBaseView{
-
+    interface View extends IBaseView {
+        void onAddPost();
     }
 
-    interface Presenter extends IPresenter<View>{
-
+    interface Presenter extends IPresenter<View> {
+        void addPost(long circleId, String content, String image, String subject);
     }
 }

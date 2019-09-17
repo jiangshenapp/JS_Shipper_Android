@@ -86,4 +86,9 @@ dependencies {
     //ARouter
     implementation rootProject.ext.dependencies.arouter
     annotationProcessor rootProject.ext.dependencies.arouter_annotation
+
+
+    api 'com.afollestad.material-dialogs:core:0.9.6.0'
+    api 'com.jph.takephoto:takephoto_library:4.0.3'
 }
+
