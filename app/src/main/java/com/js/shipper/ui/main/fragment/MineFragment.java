@@ -305,6 +305,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     @Override
+    public void onBannerListFail() {
+
+    }
+
+    @Override
     public void onBannerList(List<BannerBean> mBannerBeans) {
 
     }

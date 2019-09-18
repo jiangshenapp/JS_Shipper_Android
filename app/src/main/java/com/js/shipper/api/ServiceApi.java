@@ -3,11 +3,11 @@ package com.js.shipper.api;
 import com.base.http.HttpResponse;
 import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.ServiceBean;
-import com.js.shipper.model.request.BannerRequest;
+
 import java.util.List;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * author : hzb
@@ -28,6 +28,6 @@ public interface ServiceApi {
      * 根据类型获取banner
      * type 类型 1服务页广告、2发货页广告、3启动页广告
      */
-    @POST("app/banner/list")
-    Observable<HttpResponse<List<BannerBean>>> getBannerList(@Body BannerRequest bannerRequest);
+    @POST("app/banner/list/{type}")
+    Observable<HttpResponse<List<BannerBean>>> getBannerList(@Path("type") long type);
 }

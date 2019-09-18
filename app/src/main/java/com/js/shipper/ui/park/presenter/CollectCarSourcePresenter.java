@@ -27,8 +27,6 @@ public class CollectCarSourcePresenter extends RxPresenter<CollectCarSourceContr
         this.mApiFactory = apiFactory;
     }
 
-
-
     @Override
     public void getCollectLines(int current, int size) {
         Disposable disposable = mApiFactory.getApi(CollectApi.class).getLines(current, size)

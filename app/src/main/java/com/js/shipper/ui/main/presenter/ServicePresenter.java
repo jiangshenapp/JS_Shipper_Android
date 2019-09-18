@@ -5,7 +5,6 @@ import com.base.http.ApiFactory;
 import com.js.shipper.api.ServiceApi;
 import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.ServiceBean;
-import com.js.shipper.model.request.BannerRequest;
 import com.js.shipper.rx.RxException;
 import com.js.shipper.rx.RxResult;
 import com.js.shipper.rx.RxSchedulers;
@@ -37,7 +36,7 @@ public class ServicePresenter extends RxPresenter<ServiceContract.View> implemen
     @Override
     public void getBannerList(int type) {
         Disposable disposable = mApiFactory.getApi(ServiceApi.class)
-                .getBannerList(new BannerRequest(type))
+                .getBannerList(type)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -54,6 +53,7 @@ public class ServicePresenter extends RxPresenter<ServiceContract.View> implemen
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.onBannerListFail();
                 }));
         addDispose(disposable);
     }

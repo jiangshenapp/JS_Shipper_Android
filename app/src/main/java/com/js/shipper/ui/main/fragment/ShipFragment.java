@@ -266,6 +266,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     }
 
     @Override
+    public void onBannerListFail() {
+
+    }
+
+    @Override
     public void onBannerList(List<BannerBean> bannerBeans) {
         mBannerBeans = bannerBeans;
         if (mBannerBeans.size() == 0) {
