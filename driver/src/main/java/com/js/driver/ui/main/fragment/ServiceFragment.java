@@ -136,6 +136,11 @@ public class ServiceFragment extends BaseFragment<ServicePresenter> implements S
     }
 
     @Override
+    public void onBannerListFail() {
+
+    }
+
+    @Override
     public void onBannerList(List<BannerBean> bannerBeans) {
         mBannerBeans = bannerBeans;
         if (mBannerBeans.size() == 0) {

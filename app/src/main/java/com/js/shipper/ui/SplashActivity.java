@@ -1,7 +1,6 @@
 package com.js.shipper.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -43,14 +41,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SplashActivity extends BaseActivity<SplashPresenter> implements SplashContract.View, ServiceContract.View {
 
-    @Inject
-    ServicePresenter mServicePresenter;
-    @BindView(R.id.iv_logo)
-    ImageView mIvLogo;
     @BindView(R.id.iv_ad)
     ImageView mIvAd;
     @BindView(R.id.tv_skip)
     TextView mTvSkip;
+
+    @Inject
+    ServicePresenter mServicePresenter;
 
     private BannerBean mBannerBean;
 

@@ -37,7 +37,7 @@ public class ServicePresenter extends RxPresenter<ServiceContract.View> implemen
     @Override
     public void getBannerList(int type) {
         Disposable disposable = mApiFactory.getApi(ServiceApi.class)
-                .getBannerList(new BannerRequest(type))
+                .getBannerList(type)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -53,6 +53,7 @@ public class ServicePresenter extends RxPresenter<ServiceContract.View> implemen
                         mView.onBannerList(bannerBeans);
                     }
                 }, new RxException<>(e -> {
+                    mView.onBannerListFail();
                     mView.closeProgress();
                 }));
         addDispose(disposable);

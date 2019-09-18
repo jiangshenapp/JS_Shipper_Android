@@ -19,6 +19,7 @@ import java.util.List;
 public interface ServiceContract {
 
     interface View extends IBaseView {
+        void onBannerListFail();
         void onBannerList(List<BannerBean> mBannerBeans);
         void onServiceList(List<ServiceBean> mServiceBeans);
     }
