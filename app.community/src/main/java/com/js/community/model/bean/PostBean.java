@@ -38,15 +38,16 @@ public class PostBean implements Parcelable {
     private String avatar;
     private int circleId;
     private int commentCount;
+    private int commentFlag;
     private String content;
     private String createTime;
     private String delFlag;
     private int id;
     private String image;
     private int likeCount;
-    private boolean likeFlag;
+    private int likeFlag;
     private String nickName;
-    private String star;
+    private int star;
     private String subject;
     private String title;
     private String type;
@@ -66,9 +67,9 @@ public class PostBean implements Parcelable {
         id = in.readInt();
         image = in.readString();
         likeCount = in.readInt();
-        likeFlag = in.readByte() != 0;
+        likeFlag = in.readInt();
         nickName = in.readString();
-        star = in.readString();
+        star = in.readInt();
         subject = in.readString();
         title = in.readString();
         type = in.readString();
@@ -90,9 +91,9 @@ public class PostBean implements Parcelable {
         dest.writeInt(id);
         dest.writeString(image);
         dest.writeInt(likeCount);
-        dest.writeByte((byte) (likeFlag ? 1 : 0));
+        dest.writeInt(likeFlag);
         dest.writeString(nickName);
-        dest.writeString(star);
+        dest.writeInt(star);
         dest.writeString(subject);
         dest.writeString(title);
         dest.writeString(type);
@@ -227,11 +228,11 @@ public class PostBean implements Parcelable {
         this.likeCount = likeCount;
     }
 
-    public boolean getLikeFlag() {
+    public int getLikeFlag() {
         return likeFlag;
     }
 
-    public void setLikeFlag(boolean likeFlag) {
+    public void setLikeFlag(int likeFlag) {
         this.likeFlag = likeFlag;
     }
 
@@ -243,11 +244,11 @@ public class PostBean implements Parcelable {
         this.nickName = nickName;
     }
 
-    public String getStar() {
+    public int getStar() {
         return star;
     }
 
-    public void setStar(String star) {
+    public void setStar(int star) {
         this.star = star;
     }
 
@@ -273,5 +274,13 @@ public class PostBean implements Parcelable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getCommentFlag() {
+        return commentFlag;
+    }
+
+    public void setCommentFlag(int commentFlag) {
+        this.commentFlag = commentFlag;
     }
 }

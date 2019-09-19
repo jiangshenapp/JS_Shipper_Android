@@ -19,7 +19,7 @@
             android:layout_height="180dp"
             android:hint="输入您要说的话"
             android:gravity="left|top"
-            android:textColor="@color/_b4b4b4"
+            android:textColorHint="@color/_b4b4b4"
             android:textSize="14sp"
             android:layout_margin="16dp"
             android:paddingTop="6dp"

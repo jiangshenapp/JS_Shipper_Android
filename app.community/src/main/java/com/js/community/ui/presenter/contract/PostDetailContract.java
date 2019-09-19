@@ -17,11 +17,15 @@ public interface PostDetailContract {
 
         void onLikePost();
 
+        void onLikeSubject();
+
     }
 
     interface Presenter extends IPresenter<View> {
         void getCommentList(long postId);
 
         void likePost(long postId);
+
+        void likeSubject(String subject);
     }
 }

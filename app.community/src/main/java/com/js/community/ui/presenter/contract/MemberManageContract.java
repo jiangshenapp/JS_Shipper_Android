@@ -27,5 +27,7 @@ public interface MemberManageContract {
         void auditApplyCircle(long id, String status);
 
         void deleteSubscriber(long id);
+
+
     }
 }

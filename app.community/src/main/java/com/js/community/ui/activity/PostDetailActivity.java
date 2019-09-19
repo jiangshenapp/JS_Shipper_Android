@@ -3,12 +3,16 @@ package com.js.community.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseActivity;
+import com.base.util.TimeUtils;
+import com.base.util.manager.CommonGlideImageLoader;
 import com.js.community.CommunityApp;
 import com.js.community.R;
 import com.js.community.R2;
@@ -42,8 +46,14 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     RecyclerView mRecycler;
     @BindView(R2.id.post_like)
     TextView mLike;
+    @BindView(R2.id.post_like_img)
+    ImageView mLikeImg;
     @BindView(R2.id.post_comment)
     TextView mComment;
+    @BindView(R2.id.post_comment_img)
+    ImageView mCommentImg;
+    @BindView(R2.id.post_avatar)
+    ImageView mPostAvatar;
 
 
     private PostBean postBean;
@@ -80,12 +90,24 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     }
 
     private void initDetail() {
-        mName.setText(postBean.getTitle());
+        mName.setText(postBean.getNickName());
         mCircleName.setText(postBean.getSubject());
-        mTime.setText(postBean.getCreateTime());
+        mTime.setText(TimeUtils.format(postBean.getCreateTime()));
         mContent.setText(postBean.getContent());
         mLike.setText(String.valueOf(postBean.getLikeCount()));
         mComment.setText(String.valueOf(postBean.getCommentCount()));
+        if (postBean.getLikeFlag() == 0) {
+            mLikeImg.setImageResource(R.mipmap.app_navigationbar_fabulous_unclicked);
+        } else {
+            mLikeImg.setImageResource(R.mipmap.app_navigationbar_fabulous_click);
+        }
+        if (postBean.getCommentFlag() == 0) {
+            mCommentImg.setImageResource(R.mipmap.app_navigationbar_comment);
+        } else {
+            mCommentImg.setImageResource(R.mipmap.app_navigationbar_comment);
+        }
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + postBean.getImage(), mPostAvatar);
+
     }
 
     private void initIntent() {
@@ -114,11 +136,11 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     @OnClick({R2.id.to_comment, R2.id.post_like, R2.id.post_comment})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.to_comment) {
-
+            CommentActivity.action(mContext,postBean.getId());
         } else if (view.getId() == R.id.post_like) {
             mPresenter.likePost(postBean.getId());
         } else if (view.getId() == R.id.post_comment) {
-
+            CommentActivity.action(mContext,postBean.getId());
         }
     }
 
@@ -130,5 +152,18 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     @Override
     public void onLikePost() {
 
+    }
+
+    @Override
+    public void onLikeSubject() {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==999){
+            mPresenter.getCommentList(postBean.getId());
+        }
     }
 }

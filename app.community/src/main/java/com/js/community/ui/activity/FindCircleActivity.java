@@ -4,8 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +22,7 @@ import com.js.community.R2;
 import com.js.community.di.componet.DaggerActivityComponent;
 import com.js.community.di.module.ActivityModule;
 import com.js.community.model.bean.CircleBean;
+import com.js.community.model.bean.Member;
 import com.js.community.ui.adapter.AllCircleAdapter;
 import com.js.community.ui.adapter.PostAdapter;
 import com.js.community.ui.presenter.FindCirclePresenter;
@@ -27,6 +31,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,11 +46,14 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     RecyclerView mRecycler;
     @BindView(R2.id.refresh)
     SmartRefreshLayout mRefresh;
-
+    @BindView(R2.id.et_search_no)
+    EditText mSearch;
 
     private AllCircleAdapter mAdapter;
     private List<CircleBean> mCircles;
     private int showSide;
+    private List<CircleBean> searchCircle = new ArrayList<>();
+
 
     public static void action(Context context, int showSide) {
         Intent intent = new Intent(context, FindCircleActivity.class);
@@ -67,6 +75,34 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     private void initView() {
         initRecycler();
         initRefresh();
+        mSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(s)) {
+                    mAdapter.setNewData(mCircles);
+                    return;
+                }
+                if (mCircles != null && mCircles.size() > 0) {
+                    searchCircle.clear();
+                    for (CircleBean circleBean : mCircles) {
+                        if (circleBean.getName().contains(s)) {
+                            searchCircle.add(circleBean);
+                        }
+                    }
+                    mAdapter.setNewData(searchCircle);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void initRefresh() {
@@ -110,6 +146,7 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
 
     @Override
     public void onAllCircle(List<CircleBean> circleBeans) {
+        this.mCircles = circleBeans;
         mAdapter.setNewData(circleBeans);
     }
 

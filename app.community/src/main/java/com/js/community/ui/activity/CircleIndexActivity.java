@@ -20,6 +20,7 @@ import com.js.community.di.componet.DaggerActivityComponent;
 import com.js.community.di.module.ActivityModule;
 import com.js.community.model.bean.CircleBean;
 import com.js.community.model.bean.PostBean;
+import com.js.community.model.bean.TopicBean;
 import com.js.community.ui.adapter.PostAdapter;
 import com.js.community.ui.adapter.TopicAdapter;
 import com.js.community.ui.presenter.CircleIndexPresenter;
@@ -57,7 +58,7 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
     private TopicAdapter mTopicAdapter;
     private PostAdapter mPostAdapter;
     private List<PostBean> mPosts;
-    private List<String> mTopics;
+    private List<TopicBean> mTopics;
 
 
     public static void action(Context context, CircleBean circleBean) {
@@ -93,13 +94,15 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
     private void initData() {
         String subject = mCircle.getSubjects();
         mTopics = new ArrayList<>();
-        mTopics.add("全部");
+        mTopics.add(new TopicBean(true, "全部"));
         if (!TextUtils.isEmpty(subject)) {
             String[] subjects = subject.split(",");
-            mTopics.addAll(Arrays.asList(subjects));
-            mTopicAdapter.setNewData(mTopics);
+            for (int i = 0; i < subjects.length; i++) {
+                mTopics.add(new TopicBean(false, subjects[i]));
+            }
         }
-        mPresenter.getPosts(mCircle.getId(), "",false,false,false);
+        mTopicAdapter.setNewData(mTopics);
+        mPresenter.getPosts(mCircle.getId(), "", false, false, false);
     }
 
     private void initView() {
@@ -147,15 +150,21 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         if (adapter instanceof TopicAdapter) {
-            String topicName = (String) adapter.getItem(position);
-            if ("全部".equals(topicName)) {
-                mPresenter.getPosts(mCircle.getId(), "",false,false,false);
+            List<TopicBean> topicBeans = adapter.getData();
+            for (TopicBean topicBean : topicBeans) {
+                topicBean.setChecked(false);
+            }
+            TopicBean topicBean = (TopicBean) adapter.getItem(position);
+            topicBean.setChecked(true);
+            adapter.setNewData(topicBeans);
+            if ("全部".equals(topicBean.getName())) {
+                mPresenter.getPosts(mCircle.getId(), "", false, false, false);
             } else {
-                mPresenter.getPosts(mCircle.getId(), topicName,false,false,false);
+                mPresenter.getPosts(mCircle.getId(), topicBean.getName(), false, false, false);
             }
         } else if (adapter instanceof PostAdapter) {
             PostBean postBean = (PostBean) adapter.getItem(position);
-            PostDetailActivity.action(mContext,postBean);
+            PostDetailActivity.action(mContext, postBean);
         }
     }
 

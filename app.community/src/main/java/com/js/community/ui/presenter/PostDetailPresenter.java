@@ -84,4 +84,9 @@ public class PostDetailPresenter extends RxPresenter<PostDetailContract.View> im
                 }));
         addDispose(disposable);
     }
+
+    @Override
+    public void likeSubject(String subject) {
+
+    }
 }
