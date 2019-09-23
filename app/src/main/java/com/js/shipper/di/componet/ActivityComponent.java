@@ -19,7 +19,6 @@ import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.ship.activity.ReceiverInfoActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
-import com.js.shipper.ui.ship.activity.SelectCityActivity;
 import com.js.shipper.ui.user.activity.ForgetPwdActivity;
 import com.js.shipper.ui.user.activity.RegisterActivity;
 import com.js.shipper.ui.user.activity.ResetPwdActivity;
@@ -68,7 +67,6 @@ public interface ActivityComponent {
 
     void inject(FeedBackActivity feedBackActivity);
 
-    void inject(SelectCityActivity selectCityActivity);
 
     void inject(PayActivity payActivity);
 

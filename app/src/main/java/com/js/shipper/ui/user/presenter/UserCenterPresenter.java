@@ -1,10 +1,10 @@
 package com.js.shipper.ui.user.presenter;
 
 import com.base.http.ApiFactory;
-import com.base.http.BaseHttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
 import com.js.shipper.api.UserApi;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.user.presenter.contract.UserCenterContract;
 import com.base.frame.mvp.RxPresenter;
 

@@ -5,9 +5,9 @@ import com.js.shipper.api.PayApi;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.PayInfo;
 import com.js.shipper.model.bean.PayRouter;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.wallet.presenter.contract.RechargeContract;
 import com.base.frame.mvp.RxPresenter;
 

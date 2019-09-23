@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
-import com.base.http.BaseHttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
 import com.base.http.HttpApp;
 
 import java.io.IOException;

@@ -191,3 +191,7 @@
 
 -dontwarn android.net.**
 -keep class android.net.SSLCertificateSocketFactory{*;}
+
+#环信客服
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

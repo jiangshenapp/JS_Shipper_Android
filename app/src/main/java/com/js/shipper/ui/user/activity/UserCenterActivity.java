@@ -46,6 +46,7 @@ import com.js.shipper.ui.user.presenter.UserCenterPresenter;
 import com.js.shipper.ui.user.presenter.contract.UserCenterContract;
 import com.js.shipper.util.DataCleanManager;
 import com.js.shipper.widget.dialog.AppDialogFragment;
+import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -180,6 +181,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 clearCache();
                 break;
             case R.id.logout://登出
+                IMHelper.getInstance().logout();
                 UserManager.getUserManager().logout(mContext);
                 finish();
                 break;

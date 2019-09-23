@@ -3,6 +3,7 @@ package com.js.community.ui.presenter.contract;
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
 import com.js.community.model.bean.Comment;
+import com.js.community.model.bean.PostBean;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface PostDetailContract {
 
         void onLikeSubject();
 
+        void onPostDetail(PostBean postBean);
+
     }
 
     interface Presenter extends IPresenter<View> {
@@ -27,5 +30,7 @@ public interface PostDetailContract {
         void likePost(long postId);
 
         void likeSubject(String subject);
+
+        void getPostDetail(long postId);
     }
 }

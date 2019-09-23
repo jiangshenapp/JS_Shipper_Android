@@ -16,10 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.BaseActivity;
 import com.base.util.manager.SpManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.community.CommunityApp;
+import com.js.community.MainActivity;
 import com.js.community.R;
 import com.js.community.R2;
 import com.js.community.di.componet.DaggerActivityComponent;
@@ -62,6 +64,7 @@ public class MemberManageActivity extends BaseActivity<MemberManagePresenter> im
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    mPresenter.exitCircle(mCircle.getId());
                     dialog.dismiss();
                 }
             });
@@ -195,6 +198,13 @@ public class MemberManageActivity extends BaseActivity<MemberManagePresenter> im
     public void onDeleteSubscriber(boolean b) {
         if (b) {
             mPresenter.getMembers(mCircle.getId());
+        }
+    }
+
+    @Override
+    public void onExitCircle(boolean b) {
+        if (b){
+            ARouter.getInstance().build("/app/main").navigation();
         }
     }
 

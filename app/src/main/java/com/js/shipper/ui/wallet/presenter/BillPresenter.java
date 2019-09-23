@@ -3,9 +3,9 @@ package com.js.shipper.ui.wallet.presenter;
 import com.base.http.ApiFactory;
 import com.js.shipper.api.PayApi;
 import com.js.shipper.model.bean.BillBean;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.wallet.presenter.contract.BillContract;
 import com.base.frame.mvp.RxPresenter;
 

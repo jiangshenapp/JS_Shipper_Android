@@ -11,6 +11,7 @@ import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.fragment.CodeLoginFragment;
 import com.js.driver.ui.user.fragment.PwdLoginFragment;
 import com.base.frame.view.SimpleActivity;
+import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -53,6 +54,11 @@ public class LoginActivity extends SimpleActivity {
     @Override
     protected void init() {
         initView();
+        initIm();
+    }
+
+    private void initIm() {
+        IMHelper.getInstance().logout();
     }
 
 

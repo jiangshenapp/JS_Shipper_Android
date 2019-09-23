@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
@@ -48,6 +50,7 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
+import com.js.component.city.SelectCityActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -286,9 +289,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 finish();
                 break;
             case R.id.city:
-                Intent intent = new Intent();
-                intent.setClass(mContext, SelectCityActivity.class);
-                startActivityForResult(intent, Const.CODE_REQ);
+                ARouter.getInstance().build("/city/select").navigation(mContext,Const.CODE_REQ);
                 break;
             case R.id.back:
                 finish();

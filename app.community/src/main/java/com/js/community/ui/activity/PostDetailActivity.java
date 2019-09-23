@@ -75,10 +75,10 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
 
     private void initData() {
         mPresenter.getCommentList(postBean.getId());
+        mPresenter.getPostDetail(postBean.getId());
     }
 
     private void initView() {
-        initDetail();
         initRecycler();
     }
 
@@ -89,7 +89,7 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
 
     }
 
-    private void initDetail() {
+    private void initDetail(PostBean postBean) {
         mName.setText(postBean.getNickName());
         mCircleName.setText(postBean.getSubject());
         mTime.setText(TimeUtils.format(postBean.getCreateTime()));
@@ -151,12 +151,17 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
 
     @Override
     public void onLikePost() {
-
+        mPresenter.getPostDetail(postBean.getId());
     }
 
     @Override
     public void onLikeSubject() {
 
+    }
+
+    @Override
+    public void onPostDetail(PostBean postBean) {
+        initDetail(postBean);
     }
 
     @Override

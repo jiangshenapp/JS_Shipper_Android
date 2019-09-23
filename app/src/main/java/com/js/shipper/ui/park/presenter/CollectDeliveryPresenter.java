@@ -5,9 +5,9 @@ import com.base.http.ApiFactory;
 import com.js.shipper.api.CollectApi;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.response.ListResponse;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.park.presenter.contract.CollectDeliveryContract;
 
 import javax.inject.Inject;

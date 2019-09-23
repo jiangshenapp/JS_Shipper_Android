@@ -46,6 +46,7 @@ import com.js.driver.util.DataCleanManager;
 import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.js.driver.widget.dialog.AppDialogFragment;
 import com.base.frame.view.BaseActivity;
+import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -160,6 +161,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 clearCache();
                 break;
             case R.id.logout://登出
+                IMHelper.getInstance().logout();
                 UserManager.getUserManager().logout(mContext);
                 finish();
                 break;

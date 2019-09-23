@@ -1,12 +1,11 @@
 package com.js.driver.api;
 
-import com.base.http.HttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.driver.model.bean.BannerBean;
 import com.js.driver.model.bean.ServiceBean;
-import com.js.driver.model.request.BannerRequest;
+
 import java.util.List;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 

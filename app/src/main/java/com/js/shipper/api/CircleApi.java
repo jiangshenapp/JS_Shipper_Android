@@ -1,6 +1,6 @@
 package com.js.shipper.api;
 
-import com.base.http.HttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.community.model.bean.CircleBean;
 
 import java.util.List;

@@ -4,9 +4,9 @@ import com.js.driver.api.UserApi;
 import com.js.driver.ui.user.presenter.contract.PwdLoginContract;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxResult;
-import com.js.driver.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

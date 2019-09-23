@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.js.driver.App;
 import com.js.driver.R;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+@Route(path = "/app/main")
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.viewpager)

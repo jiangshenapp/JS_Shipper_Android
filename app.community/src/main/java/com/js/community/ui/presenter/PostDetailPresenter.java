@@ -1,15 +1,14 @@
 package com.js.community.ui.presenter;
 
-import androidx.annotation.UiThread;
-
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.BaseHttpResponse;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.community.api.PostApi;
 import com.js.community.model.bean.Comment;
+import com.js.community.model.bean.PostBean;
 import com.js.community.ui.presenter.contract.PostDetailContract;
 
 import java.util.List;
@@ -88,5 +87,30 @@ public class PostDetailPresenter extends RxPresenter<PostDetailContract.View> im
     @Override
     public void likeSubject(String subject) {
 
+    }
+
+    @Override
+    public void getPostDetail(long postId) {
+        Disposable disposable = mApiFactory.getApi(PostApi.class)
+                .getPostDetail(postId)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<PostBean>() {
+                    @Override
+                    public void accept(PostBean postBean) throws Exception {
+                        mView.closeProgress();
+                        mView.onPostDetail(postBean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
     }
 }

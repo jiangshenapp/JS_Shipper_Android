@@ -2,10 +2,10 @@ package com.js.community.ui.presenter;
 
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.BaseHttpResponse;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.community.api.CircleApi;
 import com.js.community.model.bean.CircleBean;
 import com.js.community.ui.presenter.contract.FindCircleContract;

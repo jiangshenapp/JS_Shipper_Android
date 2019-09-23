@@ -1,7 +1,7 @@
 package com.js.community.api;
 
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.community.model.bean.CircleBean;
 import com.js.community.model.bean.Member;
 
@@ -83,5 +83,11 @@ public interface CircleApi {
     @FormUrlEncoded
     @POST("app/circle/memberList")
     Observable<HttpResponse<List<Member>>> getCircleMembers(@Field("circleId") long circleId);
+
+
+
+    @FormUrlEncoded
+    @POST("app/circle/existCircle")
+    Observable<HttpResponse<Boolean>> existCircle(@Field("circleId") long circleId);
 
 }

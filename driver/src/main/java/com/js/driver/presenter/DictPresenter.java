@@ -5,9 +5,9 @@ import com.base.http.ApiFactory;
 import com.js.driver.api.DictApi;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.presenter.contract.DictContract;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxResult;
-import com.js.driver.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 
 import java.util.List;
 

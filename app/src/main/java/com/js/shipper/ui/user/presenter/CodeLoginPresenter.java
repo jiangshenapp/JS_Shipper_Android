@@ -4,9 +4,9 @@ import com.js.shipper.api.UserApi;
 import com.js.shipper.ui.user.presenter.contract.CodeLoginContract;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

@@ -3,8 +3,8 @@ package com.js.driver.api;
 import com.js.driver.model.bean.RouteBean;
 import com.js.driver.model.request.RouteRequest;
 import com.js.driver.model.response.ListResponse;
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

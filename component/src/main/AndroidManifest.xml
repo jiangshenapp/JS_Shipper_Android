@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.js.component">
+
+
+
+    <application android:allowBackup="true">
+        <meta-data
+            android:name="com.js.component.ComponentApp"
+            android:value="IModuleConfig" />
+
+
+        <activity android:name=".city.SelectCityActivity"
+            android:launchMode="singleTop"
+            />
+    </application>
+
+</manifest>

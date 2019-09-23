@@ -2,6 +2,9 @@ package com.js.driver.ui.main.presenter;
 
 import android.text.TextUtils;
 
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.driver.App;
 import com.js.driver.api.PayApi;
 import com.js.driver.api.UserApi;
@@ -10,9 +13,6 @@ import com.js.driver.model.bean.UserInfo;
 import com.js.driver.ui.main.presenter.contract.MineContract;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxResult;
-import com.js.driver.rx.RxSchedulers;
 
 import javax.inject.Inject;
 

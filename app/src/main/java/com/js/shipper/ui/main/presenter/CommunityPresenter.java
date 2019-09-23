@@ -1,9 +1,9 @@
 package com.js.shipper.ui.main.presenter;
 
 import com.base.http.ApiFactory;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.community.model.bean.CircleBean;
 import com.js.shipper.api.CircleApi;
 import com.js.shipper.ui.main.presenter.contract.CommunityContract;

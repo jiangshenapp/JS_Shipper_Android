@@ -49,7 +49,6 @@ public class RetrofitClient {
                 ;
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
             clientBuild.addInterceptor(logging);
         }
         mRetrofit = new Retrofit.Builder()

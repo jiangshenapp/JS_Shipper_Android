@@ -129,9 +129,6 @@
             android:name="com.js.shipper.ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
 
-        <activity
-            android:name="com.js.shipper.ui.ship.activity.SelectCityActivity"
-            android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.ship.activity.ShipUserInfoActivity"
@@ -181,8 +178,6 @@
         <activity
             android:name="com.js.shipper.ui.message.activity.MessageDetailActivity"
             android:launchMode="singleTop" />
-
-        <activity android:name="com.js.shipper.ui.message.chat.EaseChatActivity" />
 
         <activity android:name="com.base.frame.view.SimpleWebActivity"
             android:launchMode="singleTop" />
