@@ -2,9 +2,9 @@ package com.js.driver.ui.wallet.presenter;
 
 import com.js.driver.api.PayApi;
 import com.js.driver.model.bean.BillBean;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxResult;
-import com.js.driver.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.driver.ui.wallet.presenter.contract.BillContract;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;

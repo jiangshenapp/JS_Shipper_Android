@@ -157,6 +157,12 @@ public class CommonGlideImageLoader {
                 .into(imageView);
     }
 
+    public void displayLocalImage(Context context, Drawable drawable, ImageView imageView,Drawable defaultDrawableImage) {
+        Glide.with(context).load(drawable)
+                .apply(buildRequestOptions(defaultDrawableImage))
+                .into(imageView);
+    }
+
 
     /**
      * 加载指定宽高图片 有动画

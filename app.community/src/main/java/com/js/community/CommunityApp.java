@@ -3,6 +3,7 @@ package com.js.community;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.location.BDLocation;
 import com.base.frame.module.IAppLife;
 import com.js.community.di.componet.AppComponent;
 import com.js.community.di.componet.DaggerAppComponent;
@@ -17,6 +18,7 @@ public class CommunityApp implements IAppLife {
     public String token;
     private static CommunityApp mApp;
     private AppComponent mAppComponent;
+    public BDLocation mLocation;
 
     public static Application getInstance() {
         return mCommunityApp;

@@ -129,9 +129,6 @@
             android:name="com.js.shipper.ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
 
-        <activity
-            android:name="com.js.shipper.ui.ship.activity.SelectCityActivity"
-            android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.ship.activity.ShipUserInfoActivity"
@@ -182,10 +179,12 @@
             android:name="com.js.shipper.ui.message.activity.MessageDetailActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name="com.js.shipper.ui.message.chat.EaseChatActivity" />
-
         <activity android:name="com.base.frame.view.SimpleWebActivity"
             android:launchMode="singleTop" />
+
+        <activity android:name=".ui.message.chat.EaseChatActivity"
+            android:launchMode="singleTop"
+            />
 
         <service
             android:name="com.baidu.location.f"
@@ -194,30 +193,7 @@
         <service
             android:name="com.js.shipper.service.LocationService"
             android:enabled="true" />
-        <!-- 设置环信应用的AppKey -->
-        <meta-data
-            android:name="EASEMOB_APPKEY"
-            android:value="1114190326030612#android-driver" />
-        <!-- 声明SDK所需的service SDK核心功能-->
-        <service
-            android:name="com.hyphenate.chat.EMChatService"
-            android:exported="true" />
-        <service
-            android:name="com.hyphenate.chat.EMJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- 声明SDK所需的receiver -->
-        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <!-- 可选filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
+
 
     </application>
 

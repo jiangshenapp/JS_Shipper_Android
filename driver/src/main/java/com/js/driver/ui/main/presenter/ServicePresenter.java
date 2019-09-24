@@ -1,15 +1,12 @@
 package com.js.driver.ui.main.presenter;
 
 import com.base.http.ApiFactory;
-import com.base.http.HttpResponse;
 import com.js.driver.api.ServiceApi;
 import com.js.driver.model.bean.BannerBean;
 import com.js.driver.model.bean.ServiceBean;
-import com.js.driver.model.request.BannerRequest;
-import com.js.driver.model.response.ListResponse;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxResult;
-import com.js.driver.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.driver.ui.main.presenter.contract.ServiceContract;
 import com.base.frame.mvp.RxPresenter;
 

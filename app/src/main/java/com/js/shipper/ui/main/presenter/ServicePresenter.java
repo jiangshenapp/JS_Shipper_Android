@@ -5,9 +5,9 @@ import com.base.http.ApiFactory;
 import com.js.shipper.api.ServiceApi;
 import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.ServiceBean;
-import com.js.shipper.rx.RxException;
-import com.js.shipper.rx.RxResult;
-import com.js.shipper.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.main.presenter.contract.ServiceContract;
 
 import java.util.List;

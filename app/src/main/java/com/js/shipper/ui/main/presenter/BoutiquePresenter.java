@@ -6,9 +6,9 @@ import com.js.shipper.api.LineApi;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
 
 import javax.inject.Inject;

@@ -5,8 +5,8 @@ import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.request.DriverVerifiedRequest;
 import com.js.driver.model.request.ParkAddressRequest;
 import com.js.driver.model.request.ParkVerifiedRequest;
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

@@ -21,6 +21,7 @@ import com.js.shipper.ui.user.presenter.PwdLoginPresenter;
 import com.js.shipper.ui.user.presenter.contract.PwdLoginContract;
 import com.base.frame.view.BaseFragment;
 import com.js.shipper.util.RegexUtils;
+import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -105,6 +106,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     @Override
     public void onLogin(String token) {
         toast("登录成功");
+        IMHelper.getInstance().login(phone,phone);
         App.getInstance().putToken(token);
         SpManager.getInstance(App.getInstance()).putSP("loginPhone",phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));

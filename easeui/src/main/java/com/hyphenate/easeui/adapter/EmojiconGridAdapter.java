@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseEmojicon.Type;
@@ -18,6 +21,11 @@ import java.util.List;
 public class EmojiconGridAdapter extends ArrayAdapter<EaseEmojicon>{
 
     private Type emojiconType;
+
+    private static final RequestOptions mRequestOptions = new RequestOptions().centerCrop()
+            .priority(Priority.LOW)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .skipMemoryCache(false);
 
 
     public EmojiconGridAdapter(Context context, int textViewResourceId, List<EaseEmojicon> objects, EaseEmojicon.Type emojiconType) {
@@ -48,7 +56,9 @@ public class EmojiconGridAdapter extends ArrayAdapter<EaseEmojicon>{
             if(emojicon.getIcon() != 0){
                 imageView.setImageResource(emojicon.getIcon());
             }else if(emojicon.getIconPath() != null){
-                Glide.with(getContext()).load(emojicon.getIconPath()).placeholder(R.drawable.ease_default_expression).into(imageView);
+                Glide.with(getContext()).load(emojicon.getIconPath())
+                        .apply(mRequestOptions.placeholder(R.drawable.ease_default_expression))
+                        .into(imageView);
             }
         }
         

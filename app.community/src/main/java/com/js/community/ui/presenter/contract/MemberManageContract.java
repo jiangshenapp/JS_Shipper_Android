@@ -19,6 +19,8 @@ public interface MemberManageContract {
         void onAuditApply(boolean b);
 
         void onDeleteSubscriber(boolean b);
+
+        void onExitCircle(boolean b);
     }
 
     interface Presenter extends IPresenter<View> {
@@ -27,5 +29,9 @@ public interface MemberManageContract {
         void auditApplyCircle(long id, String status);
 
         void deleteSubscriber(long id);
+
+        void exitCircle(long circleId);
+
+
     }
 }

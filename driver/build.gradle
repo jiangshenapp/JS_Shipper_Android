@@ -76,7 +76,9 @@ dependencies {
     implementation project(path: ':lib.http')
     implementation project(path: ':app.community')
     implementation project(path: ':lib.util')
-//    implementation project(path: ':easeui')
+    implementation project(path: ':plugin.im')
+    implementation project(path: ':easeui')
+    implementation project(path: ':component')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
     //di
@@ -106,4 +108,5 @@ dependencies {
     implementation 'com.mylhyl:circleDialog:2.6.7'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'liji.library.dev:citypickerview:0.7.0'
+
 }

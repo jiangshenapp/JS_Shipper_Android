@@ -2,12 +2,10 @@ package com.js.shipper.ui.message.presenter;
 
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
-import com.js.shipper.api.LineApi;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.api.MessageApi;
-import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.bean.MessageBean;
 import com.js.shipper.ui.message.presenter.contract.MessageDetailContract;
 

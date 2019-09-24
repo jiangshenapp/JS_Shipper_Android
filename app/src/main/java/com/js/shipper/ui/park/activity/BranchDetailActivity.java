@@ -12,12 +12,14 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.request.CollectPark;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BranchDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BranchDetailContract;
@@ -171,7 +173,7 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
                 AppUtils.callPhone(mContext,mParkBean.getContractPhone());
                 break;
             case R.id.im:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mParkBean.getContractPhone());
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mParkBean.getSubscriberId(),null);

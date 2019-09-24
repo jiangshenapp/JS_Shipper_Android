@@ -6,8 +6,8 @@ import com.js.driver.model.request.OrderComment;
 import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.model.request.OrderStatus;
 import com.js.driver.model.response.ListResponse;
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

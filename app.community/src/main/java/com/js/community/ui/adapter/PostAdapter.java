@@ -25,12 +25,28 @@ public class PostAdapter extends BaseQuickAdapter<PostBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, PostBean item) {
         ImageView avatar = helper.getView(R.id.item_avatar);
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,com.base.http.global.Const.IMG_URL+item.getAvatar(),avatar);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + item.getAvatar(), avatar);
         helper.setText(R.id.item_name, item.getNickName())
                 .setText(R.id.item_post_content, item.getContent())
-                .setText(R.id.item_post_time, TimeUtils.format(item.getCreateTime()))
+                .setText(R.id.item_post_time, TimeUtils.format(item.getCreateTime())+"发布")
                 .setText(R.id.item_post_comment, String.valueOf(item.getCommentCount()))
                 .setText(R.id.item_post_like, String.valueOf(item.getLikeCount()));
+        if (item.getLikeFlag() == 0) {
+            helper.setImageResource(R.id.item_post_like_img,R.mipmap.app_navigationbar_fabulous_unclicked);
+        } else {
+            helper.setImageResource(R.id.item_post_like_img,R.mipmap.app_navigationbar_fabulous_click);
+        }
+        if (item.getCommentFlag() == 0) {
+            helper.setImageResource(R.id.item_post_comment_img,R.mipmap.app_navigationbar_comment);
+        } else {
+            helper.setImageResource(R.id.item_post_comment_img,R.mipmap.app_navigationbar_comment);
+        }
+        if (item.getStar()==0){
+            helper.setVisible(R.id.item_start,false);
+        }else {
+            helper.setVisible(R.id.item_start,true);
+        }
+
 
     }
 

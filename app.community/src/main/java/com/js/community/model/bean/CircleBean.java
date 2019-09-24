@@ -27,7 +27,7 @@ public class CircleBean implements Parcelable {
     private String status;
     private String showSide;
     private String image;
-    private Object admin;
+    private int admin;
     private String stopWord;
     private String subjects;
     private String applyStatus;
@@ -42,6 +42,7 @@ public class CircleBean implements Parcelable {
         stopWord = in.readString();
         subjects = in.readString();
         applyStatus = in.readString();
+        admin = in.readInt();
     }
 
     @Override
@@ -55,6 +56,7 @@ public class CircleBean implements Parcelable {
         dest.writeString(stopWord);
         dest.writeString(subjects);
         dest.writeString(applyStatus);
+        dest.writeInt(admin);
     }
 
     @Override
@@ -122,11 +124,11 @@ public class CircleBean implements Parcelable {
         this.image = image;
     }
 
-    public Object getAdmin() {
+    public int getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Object admin) {
+    public void setAdmin(int admin) {
         this.admin = admin;
     }
 

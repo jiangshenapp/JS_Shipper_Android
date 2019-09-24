@@ -6,9 +6,9 @@ import com.js.shipper.api.ParkApi;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.request.ParkList;
 import com.js.shipper.model.response.ListResponse;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.main.presenter.contract.DeliveryContract;
 
 import javax.inject.Inject;

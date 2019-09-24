@@ -177,3 +177,7 @@
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+
+#环信客服
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

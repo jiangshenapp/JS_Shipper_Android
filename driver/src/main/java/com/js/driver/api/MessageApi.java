@@ -1,6 +1,6 @@
 package com.js.driver.api;
 
-import com.base.http.HttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.driver.model.bean.MessageBean;
 import com.js.driver.model.response.ListResponse;
 

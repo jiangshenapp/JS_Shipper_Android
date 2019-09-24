@@ -22,6 +22,7 @@ import com.js.shipper.ui.user.presenter.contract.CodeLoginContract;
 import com.js.shipper.ui.user.presenter.contract.SmsCodeContract;
 import com.base.frame.view.BaseFragment;
 import com.js.shipper.util.RegexUtils;
+import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -78,6 +79,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     protected void init() {
+
         mPhone.setText(SpManager.getInstance(App.getInstance()).getSP("loginPhone"));
         mCodePresenter.attachView(this);
     }
@@ -153,6 +155,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     @Override
     public void onLogin(String token) {
         toast("登录成功");
+        IMHelper.getInstance().login(phone,phone);
         App.getInstance().putToken(token);
         SpManager.getInstance(App.getInstance()).putSP("loginPhone",phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));

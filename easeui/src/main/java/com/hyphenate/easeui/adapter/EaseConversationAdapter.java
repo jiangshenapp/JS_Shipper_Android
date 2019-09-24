@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import com.base.util.manager.CommonGlideImageLoader;
+import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -121,8 +123,8 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
             holder.motioned.setVisibility(View.GONE);
         }else {
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//            EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 
@@ -164,6 +166,15 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             } else {
                 holder.msgState.setVisibility(View.GONE);
             }
+
+            String avatar = lastMessage.getStringAttribute("avatar", null);
+            if (!TextUtils.isEmpty(avatar)) {
+                CommonGlideImageLoader.getInstance()
+                        .displayNetImageWithCircle(getContext(),avatar,holder.avatar,getContext().getResources().getDrawable(R.drawable.ease_default_avatar));
+            } else {
+                Glide.with(getContext()).load(R.drawable.ease_default_avatar).into(holder.avatar);
+            }
+            holder.name.setText(lastMessage.getStringAttribute("nickName", lastMessage.getUserName()));
         }
         
         //set property

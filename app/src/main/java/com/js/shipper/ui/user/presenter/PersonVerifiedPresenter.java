@@ -1,13 +1,13 @@
 package com.js.shipper.ui.user.presenter;
 
 import com.base.http.ApiFactory;
-import com.base.http.BaseHttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
 import com.js.shipper.api.UserApi;
 import com.js.shipper.model.bean.AuthInfo;
 import com.js.shipper.model.request.PersonVerifiedRequest;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.user.presenter.contract.PersonVerifiedContract;
 import com.base.frame.mvp.RxPresenter;
 

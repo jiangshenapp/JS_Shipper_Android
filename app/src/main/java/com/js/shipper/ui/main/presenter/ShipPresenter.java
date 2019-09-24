@@ -4,9 +4,9 @@ import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
 import com.js.shipper.api.OrderApi;
 import com.js.shipper.model.request.AddStepOne;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.main.presenter.contract.ShipContract;
 
 import javax.inject.Inject;

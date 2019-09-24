@@ -40,6 +40,7 @@ import com.js.shipper.ui.wallet.activity.WalletActivity;
 import com.js.shipper.util.UIUtil;
 import com.js.shipper.widget.adapter.DividerGridItemDecoration;
 import com.js.shipper.widget.dialog.AppDialogFragment;
+import com.plugin.im.IMHelper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -295,7 +296,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 CollectActivity.action(mContext, 0);
                 break;
             case 1://我的客服
-                toast("该功能暂未开通，敬请期待");
+                IMHelper.getInstance().goIm(mContext);
                 break;
         }
         if (position>1) { //服务配置H5

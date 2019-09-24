@@ -68,6 +68,7 @@ public class App extends BaseApplication {
         SpManager.getInstance(this).putIntSP("parkVerified",userInfo.getParkVerified());
         SpManager.getInstance(this).putIntSP("companyConsignorVerified",userInfo.getCompanyConsignorVerified());
         SpManager.getInstance(this).putIntSP("personConsignorVerified",userInfo.getPersonConsignorVerified());
+        SpManager.getInstance(this).putIntSP("id",userInfo.getId());
 
         getUserInfo();
     }

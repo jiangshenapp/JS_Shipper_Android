@@ -1,9 +1,7 @@
 package com.js.community.api;
 
-import android.system.Os;
-
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.community.model.bean.Comment;
 import com.js.community.model.bean.PostBean;
 
@@ -72,12 +70,15 @@ public interface PostApi {
 
     /**
      * 帖子列表
-     * @param circleId 圈子id
-     * @param subject 话题
      * @return
      */
     @FormUrlEncoded
     @POST("app/post/list")
     Observable<HttpResponse<List<PostBean>>> getPostList(@FieldMap Map<String,Object> map);
+
+
+    @FormUrlEncoded
+    @POST("app/post/detail")
+    Observable<HttpResponse<PostBean>> getPostDetail(@Field("postId") long postId);
 
 }

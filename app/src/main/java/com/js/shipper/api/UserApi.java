@@ -2,8 +2,8 @@ package com.js.shipper.api;
 
 import com.js.shipper.model.bean.AuthInfo;
 import com.js.shipper.model.bean.UserInfo;
-import com.base.http.BaseHttpResponse;
-import com.base.http.HttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.js.shipper.model.request.CompanyVerifiedRequest;
 import com.js.shipper.model.request.PersonVerifiedRequest;
 

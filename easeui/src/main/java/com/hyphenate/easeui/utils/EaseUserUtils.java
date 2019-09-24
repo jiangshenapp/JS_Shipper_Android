@@ -5,7 +5,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.EaseUI.EaseUserProfileProvider;
@@ -14,6 +16,10 @@ import com.hyphenate.easeui.domain.EaseUser;
 public class EaseUserUtils {
     
     static EaseUserProfileProvider userProvider;
+    private static final RequestOptions mRequestOptions = new RequestOptions().centerCrop()
+            .priority(Priority.LOW)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .skipMemoryCache(false);
     
     static {
         userProvider = EaseUI.getInstance().getUserProfileProvider();
@@ -43,7 +49,9 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+                Glide.with(context).load(user.getAvatar())
+                        .apply(mRequestOptions.placeholder(R.drawable.ease_default_avatar))
+                        .into(imageView);
             }
         }else{
             Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);

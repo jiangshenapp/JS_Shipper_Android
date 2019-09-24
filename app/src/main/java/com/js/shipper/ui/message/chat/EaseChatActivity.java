@@ -1,16 +1,16 @@
 package com.js.shipper.ui.message.chat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.base.frame.view.SimpleActivity;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
-import com.base.frame.view.SimpleActivity;
 import com.js.shipper.R;
 
 import butterknife.BindView;
@@ -35,6 +35,13 @@ public class EaseChatActivity extends SimpleActivity {
         context.startActivity(intent);
     }
 
+
+    public static void action(Context context, int type,String userId) {
+        Intent intent = new Intent(context, EaseChatActivity.class);
+        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, type);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID, userId);
+        context.startActivity(intent);
+    }
     private EaseChatFragment mEaseChatFragment;
 
     @Override
@@ -51,7 +58,6 @@ public class EaseChatActivity extends SimpleActivity {
     private void initIntent() {
         chatType = getIntent().getIntExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         userId = getIntent().getStringExtra(EaseConstant.EXTRA_USER_ID);
-        mTitle.setText(userId);
     }
 
     private void initView() {
@@ -66,7 +72,7 @@ public class EaseChatActivity extends SimpleActivity {
 
     @Override
     public void setActionBar() {
-
+        mToolbar.setVisibility(View.GONE);
     }
 
 

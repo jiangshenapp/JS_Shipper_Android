@@ -33,6 +33,7 @@ import com.js.community.R2;
 import com.js.community.di.componet.DaggerActivityComponent;
 import com.js.community.di.module.ActivityModule;
 import com.js.community.model.bean.CircleBean;
+import com.js.community.model.bean.TopicBean;
 import com.js.community.presenter.FilePresenter;
 import com.js.community.presenter.contract.FileContract;
 import com.js.community.ui.adapter.TopicAdapter;
@@ -53,7 +54,7 @@ import butterknife.OnClick;
  * Created by huyg on 2019-09-11.
  * 发布帖子
  */
-public class PublishPostActivity extends BaseActivity<PublishPostPresenter> implements PublishPostContract.View, BaseQuickAdapter.OnItemClickListener, FileContract.View, InvokeListener, TakePhoto.TakeResultListener  {
+public class PublishPostActivity extends BaseActivity<PublishPostPresenter> implements PublishPostContract.View, BaseQuickAdapter.OnItemClickListener, FileContract.View, InvokeListener, TakePhoto.TakeResultListener {
 
 
     @BindView(R2.id.post_img)
@@ -64,7 +65,7 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
     TextView mPostContent;
 
     private CircleBean mCircle;
-    private List<String> mTopics;
+    private List<TopicBean> mTopics;
     private TopicAdapter mTopicAdapter;
     private String selectTopic;
     private String imgUrl;
@@ -97,7 +98,7 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
     private void initRecycler() {
         mTopicAdapter = new TopicAdapter(R.layout.item_index_topic, mTopics);
         mRecycler.setAdapter(mTopicAdapter);
-        mRecycler.setLayoutManager(new GridLayoutManager(mContext,3));
+        mRecycler.setLayoutManager(new GridLayoutManager(mContext, 3));
         mTopicAdapter.setOnItemClickListener(this);
     }
 
@@ -106,7 +107,9 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
         mTopics = new ArrayList<>();
         if (!TextUtils.isEmpty(subject)) {
             String[] subjects = subject.split(",");
-            mTopics.addAll(Arrays.asList(subjects));
+            for (int i = 0; i < subjects.length; i++) {
+                mTopics.add(new TopicBean(false, subjects[i]));
+            }
             mTopicAdapter.setNewData(mTopics);
         }
     }
@@ -136,9 +139,9 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
     }
 
 
-    @OnClick({R2.id.post,R2.id.image_layout})
+    @OnClick({R2.id.post, R2.id.image_layout})
     public void onViewClicked(View view) {
-        if (view.getId()==R.id.post){
+        if (view.getId() == R.id.post) {
             String content = mPostContent.getText().toString().trim();
             if (TextUtils.isEmpty(content)) {
                 toast("请输入内容");
@@ -150,7 +153,7 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
                 return;
             }
             mPresenter.addPost(mCircle.getId(), content, imgUrl, selectTopic);
-        }else if (view.getId()==R.id.image_layout){
+        } else if (view.getId() == R.id.image_layout) {
             showDialog();
         }
 
@@ -164,7 +167,14 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        this.selectTopic = (String) adapter.getItem(position);
+        List<TopicBean> topicBeans = adapter.getData();
+        for (TopicBean topicBean : topicBeans) {
+            topicBean.setChecked(false);
+        }
+        TopicBean topicBean = (TopicBean) adapter.getItem(position);
+        topicBean.setChecked(true);
+        adapter.setNewData(topicBeans);
+        this.selectTopic = topicBean.getName();
     }
 
     private void showDialog() {

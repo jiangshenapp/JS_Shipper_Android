@@ -6,9 +6,9 @@ import com.js.shipper.api.CollectApi;
 import com.js.shipper.api.ParkApi;
 import com.js.shipper.model.bean.ParkBean;
 import com.js.shipper.model.request.CollectPark;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.shipper.ui.park.presenter.contract.BranchDetailContract;
 
 import javax.inject.Inject;

@@ -1,12 +1,12 @@
 package com.js.driver.ui.wallet.presenter;
 
 import com.js.driver.api.PayApi;
-import com.js.driver.rx.RxException;
-import com.js.driver.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxSchedulers;
 import com.js.driver.ui.wallet.presenter.contract.WithdrawContract;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.BaseHttpResponse;
+import com.base.frame.bean.BaseHttpResponse;
 
 import javax.inject.Inject;
 
