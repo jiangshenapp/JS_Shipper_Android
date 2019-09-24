@@ -2,9 +2,9 @@ package com.js.driver.ui.center.presenter;
 
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
-import com.base.http.rx.RxException;
-import com.base.http.rx.RxResult;
-import com.base.http.rx.RxSchedulers;
+import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
+import com.base.frame.rx.RxSchedulers;
 import com.js.driver.api.AreaApi;
 import com.js.driver.model.bean.SelectCity;
 import com.js.driver.ui.center.presenter.contract.SelectCityContract;
