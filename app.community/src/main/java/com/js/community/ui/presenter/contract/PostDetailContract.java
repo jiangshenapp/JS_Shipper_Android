@@ -18,7 +18,7 @@ public interface PostDetailContract {
 
         void onLikePost();
 
-        void onLikeSubject();
+        void onLikeSubject(boolean b);
 
         void onPostDetail(PostBean postBean);
 

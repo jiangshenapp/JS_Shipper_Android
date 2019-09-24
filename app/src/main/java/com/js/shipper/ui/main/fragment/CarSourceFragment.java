@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -25,6 +26,7 @@ import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.main.adapter.CarSourceAdapter;
 import com.js.shipper.ui.main.presenter.CarSourcePresenter;
@@ -174,7 +176,7 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
                 break;
         }
     }

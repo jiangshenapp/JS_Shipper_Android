@@ -43,6 +43,7 @@ import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.js.driver.widget.adapter.DividerGridItemDecoration;
 import com.js.driver.widget.dialog.AppDialogFragment;
 import com.js.driver.widget.view.RatingBar;
+import com.plugin.im.IMHelper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -314,7 +315,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 RoutesActivity.action(mContext);
                 break;
             case 3://我的客服
-                toast("该功能暂未开通，敬请期待");
+                IMHelper.getInstance().goIm(mContext);
                 break;
         }
         if (position>3) { //服务配置H5

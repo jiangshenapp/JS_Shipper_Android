@@ -6,6 +6,7 @@ import com.base.frame.bean.BaseHttpResponse;
 import com.base.frame.rx.RxException;
 import com.base.frame.rx.RxResult;
 import com.base.frame.rx.RxSchedulers;
+import com.js.community.api.CircleApi;
 import com.js.community.api.PostApi;
 import com.js.community.model.bean.Comment;
 import com.js.community.model.bean.PostBean;
@@ -86,7 +87,26 @@ public class PostDetailPresenter extends RxPresenter<PostDetailContract.View> im
 
     @Override
     public void likeSubject(String subject) {
-
+        Disposable disposable = mApiFactory.getApi(CircleApi.class)
+                .likeSubject(subject)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.onLikeSubject(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
     }
 
     @Override

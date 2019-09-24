@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
+import com.hyphenate.easeui.EaseConstant;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -38,6 +39,7 @@ import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.message.chat.EaseChatActivity;
 import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
 import com.js.driver.util.AppUtils;
@@ -139,6 +141,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
             case R.id.detail_send_wechat://微信
                 toast("该功能暂未开放");
+
                 break;
             case R.id.detail_send_navigate:
                 if (App.getInstance().mLocation == null) {

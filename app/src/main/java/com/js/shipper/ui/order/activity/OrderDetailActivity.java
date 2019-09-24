@@ -18,11 +18,13 @@ import androidx.annotation.Nullable;
 import com.baidu.mapapi.model.LatLng;
 import com.base.frame.view.BaseActivity;
 import com.google.gson.Gson;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.event.CommentEvent;
@@ -532,7 +534,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 AppUtils.callPhone(mContext,mOrderBean.getDriverPhone());
                 break;
             case R.id.detail_chat: //聊天
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
                 break;
         }
     }

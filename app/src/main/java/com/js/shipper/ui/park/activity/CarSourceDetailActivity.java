@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import com.base.frame.view.BaseActivity;
 import com.base.http.global.Const;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.CollectLine;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.CarSourceDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.CarSourceDetailContract;
@@ -165,7 +167,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
                 AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(), null);

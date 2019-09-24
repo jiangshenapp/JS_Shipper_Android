@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app.community" />
             <option value="$PROJECT_DIR$/component" />
             <option value="$PROJECT_DIR$/driver" />
+            <option value="$PROJECT_DIR$/easeui" />
             <option value="$PROJECT_DIR$/lib.frame" />
             <option value="$PROJECT_DIR$/lib.http" />
             <option value="$PROJECT_DIR$/lib.util" />

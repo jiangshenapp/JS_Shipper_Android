@@ -2,15 +2,27 @@ package com.plugin.im;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.chat.ChatManager;
+import com.hyphenate.chat.EMCmdMessageBody;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.chat.Message;
+import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
+import com.hyphenate.helpdesk.easeui.util.UserUtil;
+
+import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by huyg on 2019-09-23.
@@ -52,13 +64,15 @@ public class IMHelper {
         ChatClient.Options options = new ChatClient.Options();
         options.setAppkey("1114190326030612#android-driver");//必填项，appkey获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“AppKey”
         options.setTenantId("71051");//必填项，tenantId获取地址：kefu.easemob.com，“管理员模式 > 设置 > 企业信息”页面的“租户ID”
-
         // Kefu SDK 初始化
         if (!ChatClient.getInstance().init(context, options)) {
             return;
         }
         // Kefu EaseUI的初始化
         UIProvider.getInstance().init(context);
+
+        EMOptions emOptions = new EMOptions();
+        EaseUI.getInstance().init(context, emOptions);
     }
 
 

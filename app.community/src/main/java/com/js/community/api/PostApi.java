@@ -70,8 +70,6 @@ public interface PostApi {
 
     /**
      * 帖子列表
-     * @param circleId 圈子id
-     * @param subject 话题
      * @return
      */
     @FormUrlEncoded

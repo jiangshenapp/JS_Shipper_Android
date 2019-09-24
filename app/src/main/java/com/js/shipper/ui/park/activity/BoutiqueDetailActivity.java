@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.base.frame.view.BaseActivity;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.request.CollectLine;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BoutiqueDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BoutiqueDetailContract;
@@ -139,7 +141,7 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
                 AppUtils.callPhone(mContext,mLineBean.getDriverPhone());
                 break;
             case R.id.im:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
                 break;
             case R.id.ship:
                 SubmitOrderActivity.action(mContext,mLineBean.getSubscriberId(),null);

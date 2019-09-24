@@ -106,7 +106,6 @@
                 />
         </LinearLayout>
 
-        <EaseCo
 
         <com.hyphenate.easeui.widget.EaseConversationList
             android:id="@+id/list"

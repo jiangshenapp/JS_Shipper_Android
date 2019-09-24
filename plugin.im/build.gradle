@@ -43,14 +43,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':easeui')
     implementation project(path: ':lib.frame')
 
-    //环信客服SDK
-    compile 'com.hyphenate:kefu-easeui-android:1.1.9'
-
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+
 }

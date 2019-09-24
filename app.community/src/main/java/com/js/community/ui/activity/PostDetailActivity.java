@@ -54,6 +54,10 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     ImageView mCommentImg;
     @BindView(R2.id.post_avatar)
     ImageView mPostAvatar;
+    @BindView(R2.id.comment_count)
+    TextView mCommentCount;
+    @BindView(R2.id.attention)
+    TextView mAttention;
 
 
     private PostBean postBean;
@@ -96,6 +100,14 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
         mContent.setText(postBean.getContent());
         mLike.setText(String.valueOf(postBean.getLikeCount()));
         mComment.setText(String.valueOf(postBean.getCommentCount()));
+        mCommentCount.setText("全部评论（" + postBean.getCommentCount() + "）");
+        if (postBean.getStar() == 0) {
+            mAttention.setText("+关注");
+            mAttention.setBackgroundResource(R.drawable.shape_detail_attention);
+        } else {
+            mAttention.setText("已关注");
+            mAttention.setBackgroundResource(R.drawable.shape_detail_un_attention);
+        }
         if (postBean.getLikeFlag() == 0) {
             mLikeImg.setImageResource(R.mipmap.app_navigationbar_fabulous_unclicked);
         } else {
@@ -133,14 +145,16 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
         mTitle.setText("详情");
     }
 
-    @OnClick({R2.id.to_comment, R2.id.post_like, R2.id.post_comment})
+    @OnClick({R2.id.to_comment, R2.id.post_like, R2.id.post_comment, R2.id.attention})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.to_comment) {
-            CommentActivity.action(mContext,postBean.getId());
+            CommentActivity.action(mContext, postBean.getId());
         } else if (view.getId() == R.id.post_like) {
             mPresenter.likePost(postBean.getId());
         } else if (view.getId() == R.id.post_comment) {
-            CommentActivity.action(mContext,postBean.getId());
+            CommentActivity.action(mContext, postBean.getId());
+        } else if (view.getId() == R.id.attention) {
+            //mPresenter.likeSubject(postBean.getSubject());
         }
     }
 
@@ -155,8 +169,10 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     }
 
     @Override
-    public void onLikeSubject() {
-
+    public void onLikeSubject(boolean b) {
+        if (b) {
+            mPresenter.getPostDetail(postBean.getId());
+        }
     }
 
     @Override
@@ -167,7 +183,7 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==999){
+        if (requestCode == 999) {
             mPresenter.getCommentList(postBean.getId());
         }
     }

@@ -2,23 +2,28 @@ package com.js.shipper.ui.main.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.base.frame.view.BaseFragment;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.helpdesk.easeui.ui.BaseChatActivity;
-import com.js.shipper.R;
 import com.hyphenate.chat.EMConversation;
-import com.base.frame.view.BaseFragment;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.widget.EaseConversationList;
 import com.js.shipper.App;
+import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.InformationPresenter;
 import com.js.shipper.ui.main.presenter.contract.InformationContract;
 import com.js.shipper.ui.message.activity.MessageActivity;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.plugin.im.IMHelper;
 
 import java.util.ArrayList;
@@ -38,9 +43,11 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     @BindView(R.id.new_message)
     TextView mMessage;
-
+    @BindView(R.id.list)
+    EaseConversationList mList;
 
     protected boolean isConflict;
+    private static final String TAG = "InformationFragment";
 
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
     private final static int MSG_REFRESH = 2;
@@ -84,12 +91,12 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
-                    BaseChatActivity
-                    EaseChatActivity.action(getActivity(), conversation);
+                    EaseChatActivity.action(mContext, conversation);
                 }
             }
         });
 
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
         EMClient.getInstance().addConnectionListener(connectionListener);
     }
 
@@ -237,6 +244,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     public void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(connectionListener);
+        EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 
     @Override
@@ -246,5 +254,50 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
             outState.putBoolean("isConflict", true);
         }
     }
+
+    EMMessageListener msgListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            //收到消息
+            Log.d(TAG,"收到消息");
+            refresh();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //收到透传消息
+            Log.d(TAG,"收到透传消息");
+            refresh();
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+            //收到已读回执
+            Log.d(TAG,"收到已读回执");
+            refresh();
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+            //收到已送达回执
+            Log.d(TAG,"收到已送达回执");
+            refresh();
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> messages) {
+            //消息被撤回
+            Log.d(TAG,"消息被撤回");
+            refresh();
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {
+            //消息状态变动
+            Log.d(TAG,"消息状态变动");
+            refresh();
+        }
+    };
 
 }

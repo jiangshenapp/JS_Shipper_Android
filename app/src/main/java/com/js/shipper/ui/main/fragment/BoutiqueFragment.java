@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
@@ -21,11 +22,13 @@ import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
 import com.js.shipper.ui.main.presenter.BoutiquePresenter;
 import com.js.shipper.ui.main.presenter.contract.BoutiqueContract;
 import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.UserManager;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
 import com.js.shipper.widget.window.FilterWindow;
@@ -194,7 +197,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
                 break;
         }
     }

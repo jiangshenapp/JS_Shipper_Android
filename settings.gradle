@@ -1,1 +1,1 @@
-include ':app', ':lib.frame', ':app.community', ':lib.util', ':component', ':plugin.im', 'lib.http', ':driver'
+include ':app', ':lib.frame', ':app.community', ':lib.util', ':component', ':plugin.im', 'lib.http', ':driver', ':easeui'

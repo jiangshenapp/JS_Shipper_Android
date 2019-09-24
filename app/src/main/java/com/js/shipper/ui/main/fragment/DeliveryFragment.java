@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.baidu.mapapi.model.LatLng;
 import com.base.frame.view.BaseFragment;
+import com.hyphenate.easeui.EaseConstant;
 import com.js.shipper.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.ui.main.adapter.DeliveryAdapter;
 import com.js.shipper.ui.main.presenter.DeliveryPresenter;
 import com.js.shipper.ui.main.presenter.contract.DeliveryContract;
+import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;
@@ -213,7 +215,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 AppUtils.callPhone(mContext,parkBean.getContractPhone());
                 break;
             case R.id.item_chat:
-                toast("该功能暂未开放");
+                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
                 break;
         }
     }

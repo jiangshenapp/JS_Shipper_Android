@@ -90,4 +90,9 @@ public interface CircleApi {
     @POST("app/circle/existCircle")
     Observable<HttpResponse<Boolean>> existCircle(@Field("circleId") long circleId);
 
+
+    @FormUrlEncoded
+    @POST("app/circle/likeSubject")
+    Observable<HttpResponse<Boolean>> likeSubject(@Field("subject") String subject);
+
 }

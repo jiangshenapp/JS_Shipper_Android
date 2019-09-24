@@ -71,6 +71,7 @@ dependencies {
     implementation project(path: ':lib.http')
     implementation project(path: ':lib.util')
     implementation project(path: ':plugin.im')
+    implementation project(path: ':easeui')
     implementation project(path: ':app.community')
     implementation project(path: ':component')
     implementation 'com.hjq:xxpermissions:5.5'
@@ -97,7 +98,6 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
 
     implementation 'com.mylhyl:circleDialog:2.6.7'
-
 
     //di
     implementation rootProject.ext.dependencies.dagger
