@@ -6,7 +6,6 @@ package com.js.shipper.model.bean;
  */
 public class ParkBean {
 
-
     /**
      * id : 1
      * companyName : 1

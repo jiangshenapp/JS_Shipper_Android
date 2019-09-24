@@ -25,6 +25,10 @@ public class Const {
     public static final int UPLOAD_HEADIMG = 6;
     public static final int AUTH_CAR_LICENSE = 7;
     public static final int AUTH_CAR_HEAD = 8;
+    public static final int PARK_HEAD1 = 9;
+    public static final int PARK_HEAD2 = 10;
+    public static final int PARK_HEAD3 = 11;
+    public static final int PARK_HEAD4 = 12;
 
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_NUM = 1;

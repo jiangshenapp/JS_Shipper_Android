@@ -10,6 +10,7 @@ import com.js.driver.ui.center.activity.AddRouteActivity;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.center.activity.FeedBackActivity;
+import com.js.driver.ui.center.activity.ParkAddressActivity;
 import com.js.driver.ui.center.activity.RoutesActivity;
 import com.js.driver.ui.center.activity.RoutesDetailActivity;
 import com.js.driver.ui.main.activity.MainActivity;
@@ -88,5 +89,7 @@ public interface ActivityComponent {
     void inject(MessageActivity messageActivity);
 
     void inject(MessageDetailActivity messageDetailActivity);
+
+    void inject(ParkAddressActivity parkAddressActivity);
 }
 

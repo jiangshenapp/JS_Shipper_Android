@@ -34,6 +34,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
+import com.js.driver.ui.center.activity.ParkAddressActivity;
 import com.js.driver.util.UserManager;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
@@ -147,6 +148,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 UserVerifiedActivity.action(mContext);
                 break;
             case R.id.center_campus_layout://园区地址
+                ParkAddressActivity.action(this);
                 break;
             case R.id.center_feedback_layout://意见反馈
                 FeedBackActivity.action(this);
