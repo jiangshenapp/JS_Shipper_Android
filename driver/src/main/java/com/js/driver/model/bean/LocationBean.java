@@ -1,5 +1,8 @@
 package com.js.driver.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * author : hzb
  * e-mail : hanzhanbing@evcoming.com
@@ -7,11 +10,41 @@ package com.js.driver.model.bean;
  * desc   :
  * version: 3.0.0
  */
-public class LocationBean {
+public class LocationBean implements Parcelable {
 
     private String address;
-    private String longitude;
-    private String latitude;
+    private double longitude;
+    private double latitude;
+
+    protected LocationBean(Parcel in) {
+        address = in.readString();
+        longitude = in.readDouble();
+        latitude = in.readDouble();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(address);
+        dest.writeDouble(longitude);
+        dest.writeDouble(latitude);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<LocationBean> CREATOR = new Creator<LocationBean>() {
+        @Override
+        public LocationBean createFromParcel(Parcel in) {
+            return new LocationBean(in);
+        }
+
+        @Override
+        public LocationBean[] newArray(int size) {
+            return new LocationBean[size];
+        }
+    };
 
     public String getAddress() {
         return address;
@@ -21,19 +54,23 @@ public class LocationBean {
         this.address = address;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public LocationBean() {
+
     }
 }

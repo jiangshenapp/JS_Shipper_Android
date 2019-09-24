@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.base.frame.view.BaseActivity;
 import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
@@ -147,11 +148,14 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
 
     }
 
-    @OnClick({R.id.ll_address, R.id.img1, R.id.img2, R.id.img3, R.id.img4, R.id.submit})
+    @OnClick({R.id.ll_address, R.id.et_address, R.id.img1, R.id.img2, R.id.img3, R.id.img4, R.id.submit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_address:
-
+            case R.id.et_address:
+                Intent startIntent = new Intent(mContext, SelectAddressActivity.class);
+                startIntent.putExtra("location", mLocationBean);
+                startActivityForResult(startIntent, Const.CODE_REQ);
                 break;
             case R.id.img1:
                 getPhoto(Const.PARK_HEAD1);
@@ -196,8 +200,15 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        getTakePhoto().onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.CODE_REQ && resultCode == 888) {
+            if (data != null) {
+                mLocationBean = data.getParcelableExtra("location");
+                etAddress.setText(mLocationBean.getAddress());
+            }
+        } else {
+            getTakePhoto().onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

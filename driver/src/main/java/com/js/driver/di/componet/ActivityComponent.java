@@ -13,6 +13,8 @@ import com.js.driver.ui.center.activity.FeedBackActivity;
 import com.js.driver.ui.center.activity.ParkAddressActivity;
 import com.js.driver.ui.center.activity.RoutesActivity;
 import com.js.driver.ui.center.activity.RoutesDetailActivity;
+import com.js.driver.ui.center.activity.SelectAddressActivity;
+import com.js.driver.ui.center.activity.SelectCityActivity;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.message.activity.MessageActivity;
 import com.js.driver.ui.message.activity.MessageDetailActivity;
@@ -91,5 +93,9 @@ public interface ActivityComponent {
     void inject(MessageDetailActivity messageDetailActivity);
 
     void inject(ParkAddressActivity parkAddressActivity);
+
+    void inject(SelectAddressActivity selectAddressActivity);
+
+    void inject(SelectCityActivity selectCityActivity);
 }
 

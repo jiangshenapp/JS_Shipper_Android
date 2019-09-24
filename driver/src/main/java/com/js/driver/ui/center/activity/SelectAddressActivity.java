@@ -1,4 +1,4 @@
-package com.js.shipper.ui.ship.activity;
+package com.js.driver.ui.center.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -46,17 +46,16 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
-import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
-import com.js.shipper.App;
-import com.js.shipper.R;
-import com.js.shipper.di.componet.DaggerActivityComponent;
-import com.js.shipper.di.module.ActivityModule;
-import com.js.shipper.global.Const;
-import com.js.shipper.model.bean.LatLngBean;
-import com.js.shipper.model.bean.ShipBean;
-import com.js.shipper.ui.ship.presenter.SelectAddressPresenter;
-import com.js.shipper.ui.ship.presenter.contract.SelectAddressContrat;
+import com.google.gson.Gson;
+import com.js.driver.App;
+import com.js.driver.R;
+import com.js.driver.di.componet.DaggerActivityComponent;
+import com.js.driver.di.module.ActivityModule;
+import com.js.driver.global.Const;
+import com.js.driver.model.bean.LocationBean;
+import com.js.driver.ui.center.presenter.SelectAddressPresenter;
+import com.js.driver.ui.center.presenter.contract.SelectAddressContrat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +64,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by huyg on 2019/5/13.
+ * author : hzb
+ * e-mail : hanzhanbing@evcoming.com
+ * time   : 2019/09/23
+ * desc   : 地址选择【地图】
+ * version: 3.0.0
  */
 public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> implements SelectAddressContrat.View {
-
 
     @BindView(R.id.map)
     MapView mMapView;
@@ -80,8 +82,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     ImageView mLocation;
     @BindView(R.id.city)
     TextView mCity;
-    @BindView(R.id.receiver_info)
-    TextView receiverInfo;
     @BindView(R.id.confirm)
     TextView mConfirm;
     @BindView(R.id.search_address)
@@ -89,12 +89,10 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     @BindView(R.id.address_search_layout)
     LinearLayout mSearchLayout;
 
-
-    private int type;//0。发货；1.收货
     private BaiduMap mBaiduMap;
     private GeoCoder mCoder;
     private String city;
-    private ShipBean mShip = new ShipBean();
+    private LocationBean mLocationBean = new LocationBean();
     private SuggestionResult.SuggestionInfo mSugestion;
     private PoiSearch mPoiSearch;
     private ArrayAdapter<String> mAdapter;
@@ -136,44 +134,24 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     }
 
     private void initIntent() {
-        type = getIntent().getIntExtra("type", 0);
-        mShip = getIntent().getParcelableExtra("ship");
-        if (mShip == null) {
-            mShip = new ShipBean();
+        mLocationBean = getIntent().getParcelableExtra("location");
+        if (mLocationBean == null) {
+            mLocationBean = new LocationBean();
         }
-        mShip.setType(type);
     }
 
     private void initView() {
         initMap();
         initLocation();
-        if (mShip != null) {
-            if (!TextUtils.isEmpty(mShip.getPosition())) {
-                Gson gson = new Gson();
-                LatLngBean latLngBean = gson.fromJson(mShip.getPosition(), LatLngBean.class);
-                if (latLngBean != null) {
-                    setUserMapCenter(latLngBean.getLatitude(), latLngBean.getLongitude());
-                }
+        if (mLocationBean != null) {
+            if (mLocationBean.getLatitude()>0 && mLocationBean.getLongitude()>0) {
+                setUserMapCenter(mLocationBean.getLatitude(), mLocationBean.getLongitude());
             } else {
                 setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
             }
-            if (!TextUtils.isEmpty(mShip.getAddress())) {
-                mAddress.setText(mShip.getAddress());
+            if (!TextUtils.isEmpty(mLocationBean.getAddress())) {
+                mAddress.setText(mLocationBean.getAddress());
             }
-            if (!TextUtils.isEmpty(mShip.getAddressName())) {
-                mAddress.setText(mShip.getAddressName());
-            }
-        }
-
-        switch (type) {
-            case 0:
-                receiverInfo.setText("发货人信息");
-                mConfirm.setText("确认发货地址");
-                break;
-            case 1:
-                receiverInfo.setText("收货人信息");
-                mConfirm.setText("确认收货地址");
-                break;
         }
 
         mSearchAddress.addTextChangedListener(new TextWatcher() {
@@ -190,7 +168,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             @Override
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s)) {
-//
                     mSuggestionSearch.requestSuggestion(new SuggestionSearchOption()
                             .city(mCity.getText().toString())
                             .keyword(s.toString()));
@@ -200,7 +177,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         });
 
         initAdapter();
-
     }
 
     private void initAdapter() {
@@ -210,7 +186,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     private void initLocation() {
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setOnMapStatusChangeListener(listener);
-
     }
 
     private void initMap() {
@@ -257,31 +232,14 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             mPoiSearch.destroy();
         }
         super.onDestroy();
-
     }
 
-    @OnClick({R.id.receiver_info, R.id.confirm, R.id.city, R.id.back})
+    @OnClick({R.id.confirm, R.id.city, R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.receiver_info:
-                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(), mShip);
-                break;
             case R.id.confirm:
-                if (TextUtils.isEmpty(mShip.getName())) {
-                    switch (type) {
-                        case 0:
-                            toast("请填写发货人信息");
-                            break;
-                        case 1:
-                            toast("请填写收货人信息");
-                            break;
-                    }
-                    return;
-
-                }
-
                 Intent shipIntent = new Intent();
-                shipIntent.putExtra("ship", mShip);
+                shipIntent.putExtra("location", mLocationBean);
                 setResult(888, shipIntent);
                 finish();
                 break;
@@ -295,7 +253,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 break;
         }
     }
-
 
     OnGetSuggestionResultListener mSuggestionListener = new OnGetSuggestionResultListener() {
         @Override
@@ -320,7 +277,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             }
         }
     };
-
 
     /**
      * 设置中心点
@@ -416,12 +372,10 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 PoiInfo poiInfo = poiInfos.get(0);
                 mAddressName.setText(poiInfo.name);
                 mAddress.setText(poiInfo.address);
-                mShip.setAddress(poiInfo.address);
-                mShip.setAddressName(poiInfo.name);
-                mShip.setPosition(new Gson().toJson(new LatLngBean(poiInfo.location.latitude, poiInfo.location.longitude)));
-            }
-            if (address != null) {
-                mShip.setAddressCode(address.adcode);
+
+                mLocationBean.setAddress(poiInfo.address);
+                mLocationBean.setLatitude(poiInfo.location.latitude);
+                mLocationBean.setLongitude(poiInfo.location.longitude);
             }
         }
     };
@@ -435,14 +389,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                     city = data.getStringExtra("city");
                     mCity.setText(city);
                     updateMapCenter(city);
-                }
-                break;
-            case 888:
-                if (data != null) {
-                    ShipBean shipBean = data.getParcelableExtra("ship");
-                    mShip.setAddressDetail(shipBean.getAddressDetail());
-                    mShip.setName(shipBean.getName());
-                    mShip.setPhone(shipBean.getPhone());
                 }
                 break;
         }
@@ -466,9 +412,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             List<PoiDetailInfo> poiDetailInfos = poiDetailSearchResult.getPoiDetailInfoList();
             if (poiDetailInfos!=null&&poiDetailInfos.size()>0) {
                 PoiDetailInfo poiDetailInfo = poiDetailInfos.get(0);
-                mShip.setAddress(poiDetailInfo.getAddress());
-                mShip.setAddressName(poiDetailInfo.getName());
-                mShip.setPosition(new Gson().toJson(new LatLngBean(poiDetailInfo.getLocation().latitude, poiDetailInfo.getLocation().longitude)));
+                mLocationBean.setAddress(poiDetailInfo.getAddress());
+                mLocationBean.setLatitude(poiDetailInfo.getLocation().latitude);
+                mLocationBean.setLongitude(poiDetailInfo.getLocation().longitude);
 
                 mAddressName.setText(poiDetailInfo.getName());
                 mAddress.setText(poiDetailInfo.getAddress());
@@ -492,6 +438,4 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
 
         }
     };
-
-
 }
