@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -36,14 +37,18 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.LocationBean;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.center.presenter.ParkAddressPresenter;
 import com.js.driver.ui.center.presenter.contract.ParkAddressContract;
 import com.jph.takephoto.permission.InvokeListener;
+import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.ParkUserVerifiedContract;
 import com.js.driver.util.glide.CommonGlideImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -148,6 +153,12 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
 
     }
 
+    @Override
+    public void onSubmitParkAddress() {
+        toast("提交成功");
+        finish();
+    }
+
     @OnClick({R.id.ll_address, R.id.et_address, R.id.img1, R.id.img2, R.id.img3, R.id.img4, R.id.submit})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -170,9 +181,39 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
                 getPhoto(Const.PARK_HEAD4);
                 break;
             case R.id.submit:
-
+                submitAction();
                 break;
         }
+    }
+
+    /**
+     * 提交审核
+     */
+    public void submitAction() {
+
+        String name = etName.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
+        String detailAddress = etDetailAddress.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name)) {
+            toast("请输入联系人姓名");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            toast("请输入联系人手机号");
+            return;
+        }
+        if (TextUtils.isEmpty(address)) {
+            toast("请选择园区地址");
+            return;
+        }
+        if (TextUtils.isEmpty(detailAddress)) {
+            toast("请输入详细地址");
+            return;
+        }
+        mPresenter.submitParkAddress(name, phone, new Gson().toJson(mLocationBean), detailAddress,
+                mAuthInfo.getImage1(), mAuthInfo.getImage2(), mAuthInfo.getImage3(), mAuthInfo.getImage4());
     }
 
     @Override
@@ -297,7 +338,6 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
                     }
                 }).show();
     }
-
 
     public TakePhoto getTakePhoto() {
         if (takePhoto == null) {

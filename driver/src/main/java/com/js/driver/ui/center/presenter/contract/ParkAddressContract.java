@@ -13,10 +13,11 @@ import com.base.frame.mvp.IPresenter;
 public interface ParkAddressContract {
 
     interface View extends IBaseView {
-
+        void onSubmitParkAddress();
     }
 
     interface Presenter extends IPresenter<View> {
-
+        void submitParkAddress(String contactName, String contractPhone, String contactLocation, String contactAddress,
+                           String image1, String image2, String image3, String image4);
     }
 }
