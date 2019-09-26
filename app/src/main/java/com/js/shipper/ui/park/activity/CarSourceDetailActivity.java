@@ -167,7 +167,9 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
                 AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                }
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(), null);

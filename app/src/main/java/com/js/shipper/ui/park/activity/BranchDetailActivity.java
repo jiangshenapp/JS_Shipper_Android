@@ -173,7 +173,9 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
                 AppUtils.callPhone(mContext,mParkBean.getContractPhone());
                 break;
             case R.id.im:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mParkBean.getContractPhone());
+                if (!TextUtils.isEmpty( mParkBean.getContractPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mParkBean.getContractPhone());
+                }
                 break;
             case R.id.place_order:
                 SubmitOrderActivity.action(mContext, mParkBean.getSubscriberId(),null);

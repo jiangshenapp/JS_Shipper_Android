@@ -1,5 +1,6 @@
 package com.js.shipper.ui.park.fragment;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -143,7 +144,9 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
                 AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                }
                 break;
         }
     }

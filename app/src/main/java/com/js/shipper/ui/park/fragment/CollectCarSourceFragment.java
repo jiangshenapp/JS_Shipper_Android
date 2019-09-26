@@ -1,5 +1,6 @@
 package com.js.shipper.ui.park.fragment;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -100,7 +101,7 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemChildClickListener(this);
     }
@@ -134,7 +135,7 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
 
 
     private void getCarSource(int num) {
-        mPresenter.getCollectLines(num,Const.PAGE_SIZE);
+        mPresenter.getCollectLines(num, Const.PAGE_SIZE);
     }
 
     @Override
@@ -143,10 +144,12 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
         LineBean lineBean = lineBeans.get(position);
         switch (view.getId()) {
             case R.id.item_phone:
-                AppUtils.callPhone(mContext,lineBean.getDriverPhone());
+                AppUtils.callPhone(mContext, lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                }
                 break;
         }
     }

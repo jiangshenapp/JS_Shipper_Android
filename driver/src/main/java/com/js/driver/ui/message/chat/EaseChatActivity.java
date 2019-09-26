@@ -35,6 +35,14 @@ public class EaseChatActivity extends SimpleActivity {
         context.startActivity(intent);
     }
 
+    public static void action(Context context, int type,String userId) {
+        Intent intent = new Intent(context, EaseChatActivity.class);
+        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, type);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID, userId);
+        context.startActivity(intent);
+    }
+
+
     private EaseChatFragment mEaseChatFragment;
 
     @Override

@@ -212,10 +212,12 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 showSelectDialog(latLng, endLat, parkBean.getAddress());
                 break;
             case R.id.item_phone:
-                AppUtils.callPhone(mContext,parkBean.getContractPhone());
+                AppUtils.callPhone(mContext, parkBean.getContractPhone());
                 break;
             case R.id.item_chat:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
+                if (!TextUtils.isEmpty(parkBean.getContractPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
+                }
                 break;
         }
     }

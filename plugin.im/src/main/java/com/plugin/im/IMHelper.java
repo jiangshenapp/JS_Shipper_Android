@@ -8,6 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.base.frame.global.Const;
+import com.base.util.manager.CommonGlideImageLoader;
+import com.base.util.manager.SpManager;
+import com.bumptech.glide.Glide;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.chat.ChatManager;
@@ -73,8 +77,40 @@ public class IMHelper {
 
         EMOptions emOptions = new EMOptions();
         EaseUI.getInstance().init(context, emOptions);
+        //setEaseUIProvider(context);
     }
 
+
+    private void setEaseUIProvider(Context context) {
+        //设置头像和昵称 某些控件可能没有头像和昵称，需要注意
+        UIProvider.getInstance().setUserProfileProvider(new UIProvider.UserProfileProvider() {
+            @Override
+            public void setNickAndAvatar(Context context, Message message, ImageView userAvatarView, TextView usernickView) {
+                if (message.direct() == Message.Direct.RECEIVE) {
+                    String nickName = message.getStringAttribute("nickName",null);
+                    String avatar = message.getStringAttribute("avatar",null);
+
+                    if (!TextUtils.isEmpty(avatar)) {
+                        CommonGlideImageLoader.getInstance()
+                                .displayNetImageWithCircle(context,avatar,userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.ease_default_avatar));
+                    } else {
+                        Glide.with(context).load(com.hyphenate.easeui.R.drawable.ease_default_avatar).into(userAvatarView);
+                    }
+                    usernickView.setText(message.getStringAttribute("nickName",nickName));
+                    //设置接收方的昵称和头像
+//                    UserUtil.setAgentNickAndAvatar(context, message, userAvatarView, usernickView);
+                } else {
+                    //此处设置当前登录用户的头像，
+                    if (userAvatarView != null) {
+                        CommonGlideImageLoader.getInstance()
+                                .displayNetImageWithCircle(context, Const.IMG_URL+ SpManager.getInstance(context).getSP("avatar"),userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.hd_default_avatar));
+//                        Glide.with(context).load("http://oev49clxj.bkt.clouddn.com/7a8aed7bjw1f32d0cumhkj20ey0mitbx.png").diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.hd_default_avatar).into(userAvatarView);
+//                        如果用圆角，可以采用此方案：http://blog.csdn.net/weidongjian/article/details/47144549
+                    }
+                }
+            }
+        });
+    }
 
     public void register(final String userName, final String password) {
         ChatClient.getInstance().register("username", "password", new Callback() {

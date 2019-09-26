@@ -85,6 +85,7 @@ public class EaseConversationList extends ListView{
                 if (adapter != null) {
                     adapter.notifyDataSetChanged();
                 }
+
                 break;
             default:
                 break;

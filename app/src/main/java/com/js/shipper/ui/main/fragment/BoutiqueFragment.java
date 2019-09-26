@@ -1,6 +1,7 @@
 package com.js.shipper.ui.main.fragment;
 
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -197,7 +198,10 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                if (!TextUtils.isEmpty(lineBean.getDriverPhone())){
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                }
+
                 break;
         }
     }

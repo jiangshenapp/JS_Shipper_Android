@@ -531,10 +531,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.detail_call: //打电话
-                AppUtils.callPhone(mContext,mOrderBean.getDriverPhone());
+                AppUtils.callPhone(mContext, mOrderBean.getDriverPhone());
                 break;
             case R.id.detail_chat: //聊天
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
+                if (!TextUtils.isEmpty(mOrderBean.getDriverPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
+                }
                 break;
         }
     }

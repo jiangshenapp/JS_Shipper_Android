@@ -137,11 +137,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_send_phone://打电话
-                AppUtils.callPhone(mContext,mOrderBean.getSendMobile());
+                AppUtils.callPhone(mContext, mOrderBean.getSendMobile());
                 break;
             case R.id.detail_send_wechat://微信
-                toast("该功能暂未开放");
-
+                if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getSendMobile());
+                }
                 break;
             case R.id.detail_send_navigate:
                 if (App.getInstance().mLocation == null) {
@@ -207,7 +208,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.completeDistribution(orderId);
                         break;
                     case 7://上传回执
-                        if (TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img2Url) &&TextUtils.isEmpty(img2Url)) {
+                        if (TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img2Url)) {
                             toast("请上传图片");
                             return;
                         }
@@ -299,8 +300,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mSendIntroduce.setText(orderBean.getSendMobile());
             mOrderNumber.setText("订单编号：" + orderBean.getOrderNo());
             mOrderStatus.setText(orderBean.getStateName());
-            mSendAddress.setText(orderBean.getSendAddressCodeName());
-            mSendCity.setText(orderBean.getSendAddress());
+            mSendAddress.setText(orderBean.getSendAddress());
+            mSendCity.setText(orderBean.getSendAddressCodeName());
             mArriveAddress.setText(orderBean.getReceiveAddress());
             mArriveCity.setText(orderBean.getReceiveAddressCodeName());
             mLoadingTime.setText(orderBean.getLoadingTime());
@@ -311,11 +312,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             if (!TextUtils.isEmpty(orderBean.getCarLengthName())) {
                 info += orderBean.getCarLengthName();
             }
-            if (orderBean.getGoodsVolume()!=0) {
-                info += "/"+orderBean.getGoodsVolume()+"方";
+            if (orderBean.getGoodsVolume() != 0) {
+                info += "/" + orderBean.getGoodsVolume() + "方";
             }
-            if (orderBean.getGoodsWeight()!=0) {
-                info += "/"+orderBean.getGoodsWeight()+"吨";
+            if (orderBean.getGoodsWeight() != 0) {
+                info += "/" + orderBean.getGoodsWeight() + "吨";
             }
             mCarInfo.setText(info);
             mGoodsName.setText(orderBean.getGoodsName());
@@ -356,10 +357,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 mOrderRemark.setVisibility(View.GONE);
             }
             if (status <= 4) { //收货人信息加密
-                if (orderBean.getReceiveName().length()>0) {
+                if (orderBean.getReceiveName().length() > 0) {
                     mArriveName.setText(orderBean.getReceiveName().substring(0) + "xx");
                 }
-                if (orderBean.getReceiveMobile().length()==11) {
+                if (orderBean.getReceiveMobile().length() == 11) {
                     mArrivePhone.setText(MessageFormat.format("{0}****{1}", orderBean.getReceiveMobile().substring(0, 3), orderBean.getReceiveMobile().substring(orderBean.getReceiveMobile().length() - 4)));
                 }
             } else {

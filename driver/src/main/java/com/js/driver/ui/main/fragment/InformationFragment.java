@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMConversationListener;
 import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -81,6 +82,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     @Override
     protected void init() {
+
         conversationList.addAll(loadConversationList());
         mList.init(conversationList);
 
@@ -95,8 +97,8 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 }
             }
         });
-
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
+
         EMClient.getInstance().addConnectionListener(connectionListener);
     }
 
@@ -244,7 +246,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     public void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(connectionListener);
-        EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 
     @Override
@@ -254,6 +255,8 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
             outState.putBoolean("isConflict", true);
         }
     }
+
+
 
     EMMessageListener msgListener = new EMMessageListener() {
 
@@ -299,5 +302,4 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
             refresh();
         }
     };
-
 }

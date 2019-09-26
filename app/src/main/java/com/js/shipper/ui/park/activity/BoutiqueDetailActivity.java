@@ -2,6 +2,7 @@ package com.js.shipper.ui.park.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -134,17 +135,19 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
     }
 
 
-    @OnClick({R.id.phone, R.id.im,R.id.ship})
+    @OnClick({R.id.phone, R.id.im, R.id.ship})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.phone:
-                AppUtils.callPhone(mContext,mLineBean.getDriverPhone());
+                AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
-                EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
+                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                }
                 break;
             case R.id.ship:
-                SubmitOrderActivity.action(mContext,mLineBean.getSubscriberId(),null);
+                SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(), null);
                 break;
         }
     }
