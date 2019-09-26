@@ -224,7 +224,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
             }else {
                 mMileage.setText("总里程0公里");
             }
-
         }
     }
 

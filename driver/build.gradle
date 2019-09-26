@@ -99,6 +99,8 @@ dependencies {
 
     implementation 'com.meituan.android.walle:library:1.1.6'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    implementation 'com.github.mcxtzhang:SuspensionIndexBar:V1.0.0'
+//    implementation files('libs/BaiduLBS_Android.jar')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'

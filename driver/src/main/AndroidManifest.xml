@@ -169,6 +169,18 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name="com.js.driver.ui.center.activity.ParkAddressActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.driver.ui.center.activity.SelectAddressActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.driver.ui.center.activity.SelectCityActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.driver.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
