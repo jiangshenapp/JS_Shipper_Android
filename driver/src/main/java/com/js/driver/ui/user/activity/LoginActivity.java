@@ -54,11 +54,6 @@ public class LoginActivity extends SimpleActivity {
     @Override
     protected void init() {
         initView();
-        initIm();
-    }
-
-    private void initIm() {
-        IMHelper.getInstance().logout();
     }
 
 
