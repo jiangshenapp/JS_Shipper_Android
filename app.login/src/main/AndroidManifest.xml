@@ -1,0 +1,32 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.js.login">
+
+    <application android:allowBackup="true">
+        <meta-data
+            android:name="com.js.login.LoginApp"
+            android:value="IModuleConfig" />
+
+
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.ForgetPwdActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.ResetPwdActivity"
+            android:launchMode="singleTop" />
+
+    </application>
+
+</manifest>
+
+
+
+

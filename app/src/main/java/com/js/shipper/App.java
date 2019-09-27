@@ -5,6 +5,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
+import com.js.login.LoginApp;
 import com.js.shipper.di.componet.AppComponent;
 import com.js.shipper.di.componet.DaggerAppComponent;
 import com.js.shipper.di.module.AppModule;
@@ -39,6 +40,7 @@ public class App extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         getUserInfo();
+        LoginApp.getInstance().appType = BuildConfig.appType;
     }
 
     /**
@@ -73,14 +75,7 @@ public class App extends BaseApplication {
         getUserInfo();
     }
 
-    /**
-     * 存储token
-     */
-    public void putToken(String token) {
-        HttpApp.getApp().token = token;
-        SpManager.getInstance(this).putSP("token",token);
-        this.token = token;
-    }
+
 
     /**
      * 清空用户信息

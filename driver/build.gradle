@@ -49,11 +49,13 @@ android {
             minifyEnabled true
             signingConfig signingConfigs.releaseConfigs
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'appType', "\"driver\""
         }
         debug {
             signingConfig signingConfigs.debugConfigs
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'appType', "\"driver\""
 
         }
     }
@@ -79,6 +81,7 @@ dependencies {
     implementation project(path: ':plugin.im')
     implementation project(path: ':easeui')
     implementation project(path: ':component')
+    implementation project(path: ':app.login')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
     //di

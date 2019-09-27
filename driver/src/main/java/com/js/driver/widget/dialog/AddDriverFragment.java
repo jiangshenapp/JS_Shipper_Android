@@ -22,7 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import com.js.driver.R;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.event.AddDriverEvent;
-import com.js.driver.util.RegexUtils;
+import com.base.util.RegexUtils;
 import com.js.driver.util.UIUtil;
 
 import org.greenrobot.eventbus.EventBus;

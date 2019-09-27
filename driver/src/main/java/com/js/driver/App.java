@@ -11,6 +11,7 @@ import com.js.driver.util.SpManager;
 import com.js.driver.model.bean.UserInfo;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
+import com.js.login.LoginApp;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -38,6 +39,7 @@ public class App extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         getUserInfo();
+        LoginApp.getInstance().appType = BuildConfig.appType;
     }
 
 

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.SimpleWebActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
@@ -33,7 +34,6 @@ import com.js.shipper.ui.main.presenter.MinePresenter;
 import com.js.shipper.ui.main.presenter.contract.MineContract;
 import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.park.activity.CollectActivity;
-import com.js.shipper.ui.user.activity.LoginActivity;
 import com.js.shipper.ui.user.activity.UserCenterActivity;
 import com.js.shipper.ui.user.activity.VerifiedActivity;
 import com.js.shipper.ui.wallet.activity.WalletActivity;
@@ -170,7 +170,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void onViewClicked(View view) {
 
         if (App.getInstance().token.isEmpty()) {
-            LoginActivity.action(mContext);
+            ARouter.getInstance().build("/user/login").navigation();
             return;
         }
         switch (view.getId()) {

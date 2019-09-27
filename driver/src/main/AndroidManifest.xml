@@ -61,22 +61,6 @@
             />
 
         <activity
-            android:name="com.js.driver.ui.user.activity.LoginActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name="com.js.driver.ui.user.activity.RegisterActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.driver.ui.user.activity.ForgetPwdActivity"
-            android:launchMode="singleTop" />
-
-        <activity
-            android:name="com.js.driver.ui.user.activity.ResetPwdActivity"
-            android:launchMode="singleTop" />
-
-        <activity
             android:name="com.js.driver.ui.user.activity.UserCenterActivity"
             android:launchMode="singleTop" />
 

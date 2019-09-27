@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="white">#FFFFFF</color>
+    <color name="_FFFFFF">#FFFFFF</color>
+    <color name="_000000">#000000</color>
+    <color name="_7ED321">#7ED321</color>
+    <color name="_ECA73F">#ECA73F</color>
+    <color name="_4A90E2">#4A90E2</color>
+    <color name="_f2f2f2">#f2f2f2</color>
+    <color name="_969696">#969696</color>
+    <color name="_B4B4B4">#B4B4B4</color>
+    <color name="_F0F0F0">#F0F0F0</color>
+    <color name="_F5F5F5">#F5F5F5</color>
+    <color name="_69BC0D">#69BC0D</color>
+    <color name="_FAFAFA">#FAFAFA</color>
+    <color name="_666666">#666666</color>
+    <color name="_B8B8B8">#B8B8B8</color>
+    <color name="_646464">#646464</color>
+    <color name="_787878">#787878</color>
+    <color name="_6E6E6E">#6E6E6E</color>
+    <color name="_D0021B">#D0021B</color>
+    <color name="_F0F3F6">#F0F3F6</color>
+    <color name="_7FFFFFFF">#7FFFFFFF</color>
+    <color name="_DCDCDC">#DCDCDC</color>
+    <color name="_C8C8C8">#C8C8C8</color>
+    <color name="_DEDEDE">#DEDEDE</color>
+    <color name="_EB534D">#EB534D</color>
+    <color name="_39000000">#39000000</color>
+    <color name="_E02020">#E02020</color>
+</resources>

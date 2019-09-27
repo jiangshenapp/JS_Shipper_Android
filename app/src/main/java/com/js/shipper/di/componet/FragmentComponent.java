@@ -16,10 +16,8 @@ import com.js.shipper.ui.order.fragment.OrderFragment;
 import com.js.shipper.ui.park.fragment.CollectBoutiqueFragment;
 import com.js.shipper.ui.park.fragment.CollectBranchFragment;
 import com.js.shipper.ui.park.fragment.CollectCarSourceFragment;
-import com.js.shipper.ui.user.fragment.CodeLoginFragment;
 import com.js.shipper.ui.user.fragment.CompanyVerifiedFragment;
 import com.js.shipper.ui.user.fragment.PersonVerifiedFragment;
-import com.js.shipper.ui.user.fragment.PwdLoginFragment;
 import com.js.shipper.ui.wallet.fragment.BillFragment;
 
 import dagger.Component;
@@ -35,9 +33,6 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
-    void inject(CodeLoginFragment codeLoginFragment);
-
-    void inject(PwdLoginFragment pwdLoginFragment);
 
     void inject(CommunityFragment communityFragment);
 

@@ -24,6 +24,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
     }
 
     signingConfigs {
@@ -46,11 +47,13 @@ android {
             minifyEnabled true
             signingConfig signingConfigs.releaseConfigs
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'appType', "\"shipper\""
         }
         debug {
             signingConfig signingConfigs.debugConfigs
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'appType', "\"shipper\""
         }
     }
 
@@ -74,6 +77,7 @@ dependencies {
     implementation project(path: ':easeui')
     implementation project(path: ':app.community')
     implementation project(path: ':component')
+    implementation project(path: ':app.login')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
 

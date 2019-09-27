@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.BaseFragment;
 import com.base.frame.view.SimpleWebActivity;
 import com.base.http.global.Const;
@@ -34,7 +35,6 @@ import com.js.driver.ui.main.adapter.MineMenuAdapter;
 import com.js.driver.ui.main.presenter.MinePresenter;
 import com.js.driver.ui.main.presenter.contract.MineContract;
 import com.js.driver.ui.order.activity.OrdersActivity;
-import com.js.driver.ui.user.activity.LoginActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.user.activity.UserVerifiedActivity;
 import com.js.driver.ui.wallet.activity.WalletActivity;
@@ -51,7 +51,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -181,7 +180,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void onViewClicked(View view) {
 
         if (App.getInstance().token.isEmpty()) {
-            LoginActivity.action(mContext);
+            ARouter.getInstance().build("/user/login").navigation();
             return;
         }
         switch (view.getId()) {

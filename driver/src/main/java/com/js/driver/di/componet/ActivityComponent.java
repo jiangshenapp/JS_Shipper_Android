@@ -21,10 +21,7 @@ import com.js.driver.ui.message.activity.MessageDetailActivity;
 import com.js.driver.ui.order.activity.DistributionActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
-import com.js.driver.ui.user.activity.ForgetPwdActivity;
 import com.js.driver.ui.user.activity.ParkUserVerifiedActivity;
-import com.js.driver.ui.user.activity.RegisterActivity;
-import com.js.driver.ui.user.activity.ResetPwdActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.wallet.activity.BailActivity;
 import com.js.driver.ui.wallet.activity.RechargeActivity;
@@ -60,7 +57,6 @@ public interface ActivityComponent {
 
     void inject(WithdrawActivity withdrawActivity);
 
-    void inject(RegisterActivity registerActivity);
 
     void inject(DriverVerifiedActivity driverVerifiedActivity);
 
@@ -74,9 +70,6 @@ public interface ActivityComponent {
 
     void inject(AddCarActivity addCarActivity);
 
-    void inject(ForgetPwdActivity addCarActivity);
-
-    void inject(ResetPwdActivity addCarActivity);
 
     void inject(FeedBackActivity feedBackActivity);
 
