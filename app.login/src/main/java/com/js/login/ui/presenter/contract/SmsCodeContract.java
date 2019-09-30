@@ -18,5 +18,6 @@ public interface SmsCodeContract {
 
     interface Presenter extends IPresenter<View> {
         void sendSmsCode(String phone);
+
     }
 }

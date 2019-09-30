@@ -1,10 +1,13 @@
 package com.js.login.ui.fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.BaseFragment;
 import com.base.frame.view.SimpleWebActivity;
 import com.base.util.RegexUtils;
@@ -15,15 +18,20 @@ import com.js.login.R2;
 import com.js.login.di.componet.DaggerFragmentComponent;
 import com.js.login.di.module.FragmentModule;
 import com.js.login.global.Const;
+import com.js.login.model.bean.WxLogin;
 import com.js.login.model.event.LoginChangeEvent;
 import com.js.login.model.event.UserStatusChangeEvent;
+import com.js.login.model.event.WxCodeEvent;
 import com.js.login.ui.activity.ForgetPwdActivity;
 import com.js.login.ui.activity.RegisterActivity;
+import com.js.login.ui.activity.WxBindActivity;
 import com.js.login.ui.presenter.PwdLoginPresenter;
 import com.js.login.ui.presenter.contract.PwdLoginContract;
 import com.plugin.im.IMHelper;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,9 +47,12 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     EditText mPhone;
     @BindView(R2.id.edit_pwd)
     EditText mPwd;
+    @BindView(R2.id.wechat_img)
+    ImageView mWechatImg;
 
     private String phone;
     private String pwd;
+    private String wxCode;
 
     public static PwdLoginFragment newInstance() {
         return new PwdLoginFragment();
@@ -58,7 +69,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_login_password;
+        return R.layout.login_fragment_password;
     }
 
     @Override
@@ -66,7 +77,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
         mPhone.setText(SpManager.getInstance(mContext).getSP("loginPhone"));
     }
 
-    @OnClick({R2.id.tv_register, R2.id.tv_forget_pwd, R2.id.tv_protocal, R2.id.btn_login, R2.id.tv_login_phonecode})
+    @OnClick({R2.id.tv_register, R2.id.tv_forget_pwd, R2.id.tv_protocal,
+            R2.id.btn_login, R2.id.tv_login_phonecode,R2.id.wechat_img})
     public void onViewClicked(View view) {
         if (view.getId()==R.id.tv_register){
             RegisterActivity.action(getActivity());
@@ -94,15 +106,49 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
             EventBus.getDefault().post(new LoginChangeEvent(1));
         }
 
+        else if (view.getId() == R.id.wechat_img) {
+            if (!LoginApp.getInstance().getApi().isWXAppInstalled()) {
+                toast("请先安装微信客户端。");
+                return;
+            }
+            wechatAuth();
+        }
     }
 
     @Override
     public void onLogin(String token) {
         toast("登录成功");
+        if (TextUtils.isEmpty(phone)) {
+            phone = SpManager.getInstance(mContext).getSP("loginPhone");
+        }
         IMHelper.getInstance().login(phone,phone);
         LoginApp.getInstance().putToken(token);
         SpManager.getInstance(mContext).putSP("loginPhone",phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
+        ARouter.getInstance().build("/app/main").navigation();
         getActivity().finish();
     }
+
+    @Override
+    public void onWxBind(WxLogin wxLogin) {
+        WxBindActivity.action(mContext,wxLogin,wxCode);
+    }
+
+    private void wechatAuth() {
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wx_login";
+        LoginApp.getInstance().getApi().sendReq(req);
+    }
+
+    @Subscribe(sticky = true)
+    public void onEvent(WxCodeEvent event) {
+        wxCode = event.code;
+        if (!TextUtils.isEmpty(wxCode) && "wx_login".equals(event.status)) {
+            Log.d(getClass().getSimpleName(), "wxCode--->" + wxCode);
+            mPresenter.wxBind(wxCode);
+        }
+        EventBus.getDefault().removeStickyEvent(event);
+    }
+
 }

@@ -93,6 +93,11 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
+                    int authState = App.getInstance().personConsignorVerified;
+                    if (authState != 0 || authState != 3) { //0:未认证
+                        toast("未认证");
+                        return;
+                    }
                     EaseChatActivity.action(mContext, conversation);
                 }
             }

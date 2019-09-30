@@ -2,6 +2,7 @@ package com.js.login.ui.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
+import com.js.login.model.bean.WxLogin;
 
 /**
  * Created by huyg on 2019/4/21.
@@ -10,9 +11,15 @@ public interface PwdLoginContract {
 
     interface View extends IBaseView {
         void onLogin(String token);
+
+        void onWxBind(WxLogin wxLogin);
+
     }
 
     interface Presenter extends IPresenter<View> {
         void login(String phone, String pwd);
+
+        void wxBind(String code);
+
     }
 }

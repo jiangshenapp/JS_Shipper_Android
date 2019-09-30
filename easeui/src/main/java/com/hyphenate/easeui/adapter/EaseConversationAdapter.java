@@ -133,9 +133,9 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                     Glide.with(getContext()).load(R.drawable.ease_default_avatar).into(holder.avatar);
                 }
             } else {
-                EaseUserUtils.setUserNick(username, holder.name);
+                Glide.with(getContext()).load(R.drawable.ease_default_avatar).into(holder.avatar);
             }
-
+            EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 

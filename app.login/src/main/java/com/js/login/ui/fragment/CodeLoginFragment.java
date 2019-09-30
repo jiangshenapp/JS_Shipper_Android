@@ -1,8 +1,10 @@
 package com.js.login.ui.fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -16,16 +18,21 @@ import com.js.login.R2;
 import com.js.login.di.componet.DaggerFragmentComponent;
 import com.js.login.di.module.FragmentModule;
 import com.js.login.global.Const;
+import com.js.login.model.bean.WxLogin;
 import com.js.login.model.event.LoginChangeEvent;
 import com.js.login.model.event.UserStatusChangeEvent;
+import com.js.login.model.event.WxCodeEvent;
 import com.js.login.ui.activity.RegisterActivity;
+import com.js.login.ui.activity.WxBindActivity;
 import com.js.login.ui.presenter.CodeLoginPresenter;
 import com.js.login.ui.presenter.SmsCodePresenter;
 import com.js.login.ui.presenter.contract.CodeLoginContract;
 import com.js.login.ui.presenter.contract.SmsCodeContract;
 import com.plugin.im.IMHelper;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.concurrent.TimeUnit;
 
@@ -52,10 +59,13 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     TextView tvProtocal;
     @BindView(R2.id.tv_get_code)
     TextView mGetCode;
+    @BindView(R2.id.wechat_img)
+    ImageView mWechatImg;
 
     private String phone;
     private String code;
     private Disposable mDisposable;
+    private String wxCode;
 
     @Inject
     SmsCodePresenter mCodePresenter;
@@ -75,7 +85,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_login_phonecode;
+        return R.layout.login_fragment_phonecode;
     }
 
     @Override
@@ -85,12 +95,13 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         mCodePresenter.attachView(this);
     }
 
-    @OnClick({R2.id.tv_register, R2.id.tv_get_code, R2.id.tv_protocal, R2.id.btn_login, R2.id.tv_login_password})
+    @OnClick({R2.id.tv_register, R2.id.tv_get_code, R2.id.tv_protocal,
+            R2.id.btn_login, R2.id.tv_login_password, R2.id.wechat_img})
     public void onViewClicked(View view) {
 
-        if (view.getId()==R.id.tv_register){
+        if (view.getId() == R.id.tv_register) {
             RegisterActivity.action(getActivity());
-        }else if (view.getId()==R.id.tv_get_code){
+        } else if (view.getId() == R.id.tv_get_code) {
             phone = mPhone.getText().toString().trim();
             if (TextUtils.isEmpty(phone)) {
                 toast("请输入手机号");
@@ -101,9 +112,9 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                 return;
             }
             mCodePresenter.sendSmsCode(phone);
-        }else if (view.getId()==R.id.tv_protocal){
+        } else if (view.getId() == R.id.tv_protocal) {
             SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal, "用户协议");
-        }else if (view.getId()==R.id.btn_login){
+        } else if (view.getId() == R.id.btn_login) {
             phone = mPhone.getText().toString().trim();
             code = mCode.getText().toString().trim();
             if (TextUtils.isEmpty(phone)) {
@@ -119,10 +130,23 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                 return;
             }
             mPresenter.login(phone, code);
-        }else if (view.getId()==R.id.tv_login_password){
+        } else if (view.getId() == R.id.tv_login_password) {
             EventBus.getDefault().post(new LoginChangeEvent(0));
+        } else if (view.getId() == R.id.wechat_img) {
+            if (!LoginApp.getInstance().getApi().isWXAppInstalled()) {
+                toast("请先安装微信客户端。");
+                return;
+            }
+            wechatAuth();
         }
 
+    }
+
+    private void wechatAuth() {
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wx_login";
+        LoginApp.getInstance().getApi().sendReq(req);
     }
 
     @Override
@@ -150,11 +174,19 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     }
 
     @Override
+    public void onWxBind(WxLogin wxLogin) {
+        WxBindActivity.action(mContext, wxLogin, wxCode);
+    }
+
+    @Override
     public void onLogin(String token) {
         toast("登录成功");
-        IMHelper.getInstance().login(phone,phone);
+        if (TextUtils.isEmpty(phone)) {
+            phone = SpManager.getInstance(mContext).getSP("loginPhone");
+        }
+        IMHelper.getInstance().login(phone, phone);
         LoginApp.getInstance().putToken(token);
-        SpManager.getInstance(mContext).putSP("loginPhone",phone);
+        SpManager.getInstance(mContext).putSP("loginPhone", phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         ARouter.getInstance().build("/app/main").navigation();
     }
@@ -166,4 +198,15 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
             mDisposable.dispose();
         }
     }
+
+    @Subscribe(sticky = true)
+    public void onEvent(WxCodeEvent event) {
+        wxCode = event.code;
+        if (!TextUtils.isEmpty(wxCode) && "wx_login".equals(event.status)) {
+            Log.d(getClass().getSimpleName(), "wxCode--->" + wxCode);
+            mPresenter.wxBind(wxCode);
+        }
+        EventBus.getDefault().removeStickyEvent(event);
+    }
+
 }

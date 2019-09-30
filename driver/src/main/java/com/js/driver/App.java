@@ -7,11 +7,14 @@ import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
+import com.js.driver.global.Const;
 import com.js.driver.util.SpManager;
 import com.js.driver.model.bean.UserInfo;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
 import com.js.login.LoginApp;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -30,6 +33,7 @@ public class App extends BaseApplication {
     public int companyConsignorVerified;
     public int personConsignorVerified;
     public BDLocation mLocation;
+    private IWXAPI api;
 
     @Override
     public void onCreate() {
@@ -40,6 +44,7 @@ public class App extends BaseApplication {
         initDaggerComponent();
         getUserInfo();
         LoginApp.getInstance().appType = BuildConfig.appType;
+        registerWx();
     }
 
 
@@ -118,6 +123,16 @@ public class App extends BaseApplication {
 
     public String gsonFormat(Object clazz) {
         return mGson.toJson(clazz);
+    }
+
+    private void registerWx() {
+        api = WXAPIFactory.createWXAPI(this, Const.APP_ID, false);
+        api.registerApp(Const.APP_ID);
+        LoginApp.getInstance().api = api;
+    }
+
+    public IWXAPI getApi() {
+        return api;
     }
 
 

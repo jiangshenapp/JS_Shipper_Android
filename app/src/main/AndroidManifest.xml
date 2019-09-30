@@ -172,6 +172,14 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat"
+            />
+
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

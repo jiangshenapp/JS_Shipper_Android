@@ -12,7 +12,10 @@ import com.js.shipper.di.module.AppModule;
 import com.base.util.manager.SpManager;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
+import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.UserInfo;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -31,6 +34,7 @@ public class App extends BaseApplication {
     public int parkVerified;
     public int companyConsignorVerified;
     public int personConsignorVerified;
+    private IWXAPI api;
 
     @Override
     public void onCreate() {
@@ -41,6 +45,7 @@ public class App extends BaseApplication {
         initDaggerComponent();
         getUserInfo();
         LoginApp.getInstance().appType = BuildConfig.appType;
+        registerWx();
     }
 
     /**
@@ -63,18 +68,17 @@ public class App extends BaseApplication {
      * 存储用户信息
      */
     public void putUserInfo(UserInfo userInfo) {
-        SpManager.getInstance(this).putSP("avatar",userInfo.getAvatar());
-        SpManager.getInstance(this).putSP("mobile",userInfo.getMobile());
-        SpManager.getInstance(this).putSP("nickName",userInfo.getNickName());
-        SpManager.getInstance(this).putIntSP("driverVerified",userInfo.getDriverVerified());
-        SpManager.getInstance(this).putIntSP("parkVerified",userInfo.getParkVerified());
-        SpManager.getInstance(this).putIntSP("companyConsignorVerified",userInfo.getCompanyConsignorVerified());
-        SpManager.getInstance(this).putIntSP("personConsignorVerified",userInfo.getPersonConsignorVerified());
-        SpManager.getInstance(this).putIntSP("id",userInfo.getId());
+        SpManager.getInstance(this).putSP("avatar", userInfo.getAvatar());
+        SpManager.getInstance(this).putSP("mobile", userInfo.getMobile());
+        SpManager.getInstance(this).putSP("nickName", userInfo.getNickName());
+        SpManager.getInstance(this).putIntSP("driverVerified", userInfo.getDriverVerified());
+        SpManager.getInstance(this).putIntSP("parkVerified", userInfo.getParkVerified());
+        SpManager.getInstance(this).putIntSP("companyConsignorVerified", userInfo.getCompanyConsignorVerified());
+        SpManager.getInstance(this).putIntSP("personConsignorVerified", userInfo.getPersonConsignorVerified());
+        SpManager.getInstance(this).putIntSP("id", userInfo.getId());
 
         getUserInfo();
     }
-
 
 
     /**
@@ -83,7 +87,7 @@ public class App extends BaseApplication {
     public void clearUserInfo() {
         String loginPhone = SpManager.getInstance(App.getInstance()).getSP("loginPhone");
         SpManager.getInstance(App.getInstance()).clear();
-        SpManager.getInstance(App.getInstance()).putSP("loginPhone",loginPhone); //登录手机号不清空
+        SpManager.getInstance(App.getInstance()).putSP("loginPhone", loginPhone); //登录手机号不清空
         getUserInfo();
     }
 
@@ -112,6 +116,16 @@ public class App extends BaseApplication {
 
     public String gsonFormat(Object clazz) {
         return mGson.toJson(clazz);
+    }
+
+    private void registerWx() {
+        api = WXAPIFactory.createWXAPI(this, Const.APP_ID, false);
+        api.registerApp(Const.APP_ID);
+        LoginApp.getInstance().api = api;
+    }
+
+    public IWXAPI getApi() {
+        return api;
     }
 
 }

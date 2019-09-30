@@ -8,6 +8,7 @@ import com.js.login.di.module.ActivityModule;
 import com.js.login.ui.activity.ForgetPwdActivity;
 import com.js.login.ui.activity.RegisterActivity;
 import com.js.login.ui.activity.ResetPwdActivity;
+import com.js.login.ui.activity.WxBindActivity;
 
 import dagger.Component;
 
@@ -26,6 +27,9 @@ public interface ActivityComponent {
     void inject(RegisterActivity registerActivity);
 
     void inject(ResetPwdActivity resetPwdActivity);
+
+    void inject(WxBindActivity wxBindActivity);
+
 
 }
 

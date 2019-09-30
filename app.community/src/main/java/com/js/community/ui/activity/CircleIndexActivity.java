@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseActivity;
+import com.base.util.manager.SpManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.community.CommunityApp;
 import com.js.community.R;
@@ -50,6 +51,11 @@ public class CircleIndexActivity extends BaseActivity<CircleIndexPresenter> impl
 
     @OnClick(R2.id.post)
     public void onClick() {
+        int authState = SpManager.getInstance(this).getIntSP("personConsignorVerified");
+        if (authState != 0 || authState != 3) { //0:未认证
+            toast("未认证");
+            return;
+        }
         PublishPostActivity.action(mContext, mCircle);
     }
 
