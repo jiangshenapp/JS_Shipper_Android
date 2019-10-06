@@ -25,6 +25,7 @@ import com.js.driver.ui.main.presenter.InformationPresenter;
 import com.js.driver.ui.main.presenter.contract.InformationContract;
 import com.js.driver.ui.message.activity.MessageActivity;
 import com.js.driver.ui.message.chat.EaseChatActivity;
+import com.js.driver.util.UserManager;
 import com.plugin.im.IMHelper;
 
 import java.util.ArrayList;
@@ -93,12 +94,11 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
-                    int authState = App.getInstance().personConsignorVerified;
-                    if (authState != 0 || authState != 3) { //0:未认证
+                    if (UserManager.getUserManager().isVerified()) {
+                        EaseChatActivity.action(mContext, conversation);
+                    } else {
                         toast("未认证");
-                        return;
                     }
-                    EaseChatActivity.action(mContext, conversation);
                 }
             }
         });
@@ -262,48 +262,47 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     }
 
 
-
     EMMessageListener msgListener = new EMMessageListener() {
 
         @Override
         public void onMessageReceived(List<EMMessage> messages) {
             //收到消息
-            Log.d(TAG,"收到消息");
+            Log.d(TAG, "收到消息");
             refresh();
         }
 
         @Override
         public void onCmdMessageReceived(List<EMMessage> messages) {
             //收到透传消息
-            Log.d(TAG,"收到透传消息");
+            Log.d(TAG, "收到透传消息");
             refresh();
         }
 
         @Override
         public void onMessageRead(List<EMMessage> messages) {
             //收到已读回执
-            Log.d(TAG,"收到已读回执");
+            Log.d(TAG, "收到已读回执");
             refresh();
         }
 
         @Override
         public void onMessageDelivered(List<EMMessage> message) {
             //收到已送达回执
-            Log.d(TAG,"收到已送达回执");
+            Log.d(TAG, "收到已送达回执");
             refresh();
         }
 
         @Override
         public void onMessageRecalled(List<EMMessage> messages) {
             //消息被撤回
-            Log.d(TAG,"消息被撤回");
+            Log.d(TAG, "消息被撤回");
             refresh();
         }
 
         @Override
         public void onMessageChanged(EMMessage message, Object change) {
             //消息状态变动
-            Log.d(TAG,"消息状态变动");
+            Log.d(TAG, "消息状态变动");
             refresh();
         }
     };

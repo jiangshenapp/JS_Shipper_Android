@@ -23,6 +23,7 @@ import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.park.presenter.CollectBoutiquePresenter;
 import com.js.shipper.ui.park.presenter.contract.CollectBoutiqueContract;
 import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.UserManager;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -82,7 +83,7 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
         mAdapter = new BoutiqueAdapter(R.layout.item_boutique, mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemChildClickListener(this);
@@ -141,16 +142,15 @@ public class CollectBoutiqueFragment extends BaseFragment<CollectBoutiquePresent
         LineBean lineBean = lineBeans.get(position);
         switch (view.getId()) {
             case R.id.item_phone:
-                AppUtils.callPhone(mContext,lineBean.getDriverPhone());
+                AppUtils.callPhone(mContext, lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                int authState = App.getInstance().personConsignorVerified;
-                if (authState != 0 || authState != 3) { //0:未认证
+                if (UserManager.getUserManager().isVerified()) {
+                    if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                    }
+                }else {
                     toast("未认证");
-                    return;
-                }
-                if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
                 }
                 break;
         }

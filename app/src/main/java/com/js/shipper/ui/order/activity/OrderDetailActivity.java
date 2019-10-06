@@ -25,6 +25,7 @@ import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
 import com.js.shipper.ui.message.chat.EaseChatActivity;
+import com.js.shipper.util.UserManager;
 import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.event.CommentEvent;
@@ -534,9 +535,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 AppUtils.callPhone(mContext, mOrderBean.getDriverPhone());
                 break;
             case R.id.detail_chat: //聊天
-                if (!TextUtils.isEmpty(mOrderBean.getDriverPhone())) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
+                if (UserManager.getUserManager().isVerified()){
+                    if (!TextUtils.isEmpty(mOrderBean.getDriverPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
+                    }
+                }else {
+                    toast("未认证");
                 }
+
                 break;
         }
     }

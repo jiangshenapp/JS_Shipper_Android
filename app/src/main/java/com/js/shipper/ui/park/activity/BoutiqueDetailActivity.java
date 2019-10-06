@@ -21,6 +21,7 @@ import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.ui.park.presenter.BoutiqueDetailPresenter;
 import com.js.shipper.ui.park.presenter.contract.BoutiqueDetailContract;
 import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.UserManager;
 import com.youth.banner.Banner;
 
 import butterknife.BindView;
@@ -142,14 +143,14 @@ public class BoutiqueDetailActivity extends BaseActivity<BoutiqueDetailPresenter
                 AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
-                int authState = App.getInstance().personConsignorVerified;
-                if (authState != 0 || authState != 3) { //0:未认证
+                if (UserManager.getUserManager().isVerified()) {
+                    if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                    }
+                } else {
                     toast("未认证");
-                    return;
                 }
-                if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
-                }
+
                 break;
             case R.id.ship:
                 SubmitOrderActivity.action(mContext, mLineBean.getSubscriberId(), null);

@@ -44,6 +44,7 @@ import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
 import com.js.driver.util.AppUtils;
 import com.js.driver.util.MapUtils;
+import com.js.driver.util.UserManager;
 import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
@@ -140,14 +141,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 AppUtils.callPhone(mContext, mOrderBean.getSendMobile());
                 break;
             case R.id.detail_send_wechat://微信
-                int authState = App.getInstance().personConsignorVerified;
-                if (authState != 0 || authState != 3) { //0:未认证
+                if (UserManager.getUserManager().isVerified()) {
+                    if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getSendMobile());
+                    }
+                }else {
                     toast("未认证");
-                    return;
-                }
-
-                if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getSendMobile());
                 }
                 break;
             case R.id.detail_send_navigate:

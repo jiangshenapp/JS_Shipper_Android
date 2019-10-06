@@ -34,6 +34,7 @@ import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;
+import com.js.shipper.util.UserManager;
 import com.js.shipper.widget.adapter.Divider;
 import com.js.shipper.widget.window.CityWindow;
 import com.js.shipper.widget.window.CompanyWindow;
@@ -215,16 +216,15 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 AppUtils.callPhone(mContext, parkBean.getContractPhone());
                 break;
             case R.id.item_chat:
-                int authState = App.getInstance().personConsignorVerified;
-                if (authState != 0 || authState != 3) { //0:未认证
+                if (UserManager.getUserManager().isVerified()) {
+                    if (!TextUtils.isEmpty(parkBean.getContractPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
+                    }
+                } else {
                     toast("未认证");
-                    return;
                 }
 
-                if (!TextUtils.isEmpty(parkBean.getContractPhone())) {
 
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
-                }
                 break;
         }
     }

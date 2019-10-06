@@ -199,14 +199,12 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 break;
             case R.id.item_chat:
                 if (!TextUtils.isEmpty(lineBean.getDriverPhone())){
-                    int authState = App.getInstance().personConsignorVerified;
-                    if (authState != 0 || authState != 3) { //0:未认证
+                    if (UserManager.getUserManager().isVerified()) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                    }else {
                         toast("未认证");
-                        return;
                     }
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
                 }
-
                 break;
         }
     }

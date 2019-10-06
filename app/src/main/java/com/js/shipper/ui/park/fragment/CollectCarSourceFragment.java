@@ -23,6 +23,7 @@ import com.js.shipper.ui.park.activity.CarSourceDetailActivity;
 import com.js.shipper.ui.park.presenter.CollectCarSourcePresenter;
 import com.js.shipper.ui.park.presenter.contract.CollectCarSourceContract;
 import com.js.shipper.util.AppUtils;
+import com.js.shipper.util.UserManager;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -147,14 +148,14 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
                 AppUtils.callPhone(mContext, lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                int authState = App.getInstance().personConsignorVerified;
-                if (authState != 0 || authState != 3) { //0:未认证
+                if (UserManager.getUserManager().isVerified()) {
+                    if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                    }
+                } else {
                     toast("未认证");
-                    return;
                 }
-                if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
-                }
+
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.js.shipper.ui.main.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.widget.EaseConversationList;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -91,12 +93,12 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
-                    int authState = App.getInstance().personConsignorVerified;
-                    if (authState != 0 || authState != 3) { //0:未认证
+                    if (App.getInstance().personConsignorVerified == 2 || App.getInstance().companyConsignorVerified == 2) {
+                        EaseChatActivity.action(mContext, conversation);
+                    } else {
                         toast("未认证");
-                        return;
                     }
-                    EaseChatActivity.action(mContext, conversation);
+
                 }
             }
         });
