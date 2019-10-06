@@ -173,6 +173,11 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
                 AppUtils.callPhone(mContext,mParkBean.getContractPhone());
                 break;
             case R.id.im:
+                int authState = App.getInstance().personConsignorVerified;
+                if (authState != 0 || authState != 3) { //0:未认证
+                    toast("未认证");
+                    return;
+                }
                 if (!TextUtils.isEmpty( mParkBean.getContractPhone())) {
                     EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mParkBean.getContractPhone());
                 }

@@ -215,7 +215,14 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
                 AppUtils.callPhone(mContext, parkBean.getContractPhone());
                 break;
             case R.id.item_chat:
+                int authState = App.getInstance().personConsignorVerified;
+                if (authState != 0 || authState != 3) { //0:未认证
+                    toast("未认证");
+                    return;
+                }
+
                 if (!TextUtils.isEmpty(parkBean.getContractPhone())) {
+
                     EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
                 }
                 break;

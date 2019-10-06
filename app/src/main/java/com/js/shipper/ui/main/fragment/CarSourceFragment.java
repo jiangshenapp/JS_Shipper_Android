@@ -176,6 +176,11 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 AppUtils.callPhone(mContext,lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
+                int authState = App.getInstance().personConsignorVerified;
+                if (authState != 0 || authState != 3) { //0:未认证
+                    toast("未认证");
+                    return;
+                }
                 EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
                 break;
         }

@@ -140,6 +140,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 AppUtils.callPhone(mContext, mOrderBean.getSendMobile());
                 break;
             case R.id.detail_send_wechat://微信
+                int authState = App.getInstance().personConsignorVerified;
+                if (authState != 0 || authState != 3) { //0:未认证
+                    toast("未认证");
+                    return;
+                }
+
                 if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
                     EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getSendMobile());
                 }

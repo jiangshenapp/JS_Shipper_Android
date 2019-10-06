@@ -1,6 +1,7 @@
 package com.js.login.ui.presenter;
 
 import com.base.frame.bean.BaseHttpResponse;
+import com.base.frame.bean.HttpResponse;
 import com.base.frame.mvp.RxPresenter;
 import com.base.frame.rx.RxException;
 import com.base.frame.rx.RxResult;
@@ -12,6 +13,7 @@ import com.js.login.ui.presenter.contract.WxBindContract;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
@@ -31,49 +33,34 @@ public class WxBindPresenter extends RxPresenter<WxBindContract.View> implements
 
     @Override
     public void wxLogin(String code, String headimgurl, String mobile, String nickname, String openid, String unionid) {
+        Observable<HttpResponse<String>> observable ;
         if ("shipper".equals(LoginApp.getInstance().appType)) {
-            Disposable disposable = mApiFactory.getApi(WxApi.class)
-                    .wxLogin(code, headimgurl, mobile, nickname, openid, unionid)
-                    .compose(RxSchedulers.io_main())
-                    .compose(RxResult.handleResult())
-                    .doOnSubscribe(new Consumer<Disposable>() {
-                        @Override
-                        public void accept(Disposable disposable) throws Exception {
-                            mView.showProgress();
-                        }
-                    })
-                    .subscribe(new Consumer<String>() {
-                        @Override
-                        public void accept(String s) throws Exception {
-                            mView.closeProgress();
-                            mView.onWxLogin(s);
-                        }
-                    }, new RxException<>(e -> {
-                        mView.closeProgress();
-                        mView.toast(e.getMessage());
-                    }));
-            addDispose(disposable);
-        } else {
-            Disposable disposable = mApiFactory.getApi(WxApi.class)
-                    .wxLoginDriver(code, headimgurl, mobile, nickname, openid, unionid)
-                    .compose(RxSchedulers.io_main())
-                    .doOnSubscribe(new Consumer<Disposable>() {
-                        @Override
-                        public void accept(Disposable disposable) throws Exception {
-                            mView.showProgress();
-                        }
-                    })
-                    .subscribe(new Consumer<BaseHttpResponse>() {
-                        @Override
-                        public void accept(BaseHttpResponse baseHttpResponse) throws Exception {
-
-                        }
-                    }, new RxException<>(e -> {
-                        mView.closeProgress();
-                        mView.toast(e.getMessage());
-                    }));
-            addDispose(disposable);
+            observable = mApiFactory.getApi(WxApi.class)
+                    .wxLogin(code, headimgurl, mobile, nickname, openid, unionid);
+        }else {
+            observable = mApiFactory.getApi(WxApi.class)
+                    .wxLoginDriver(code, headimgurl, mobile, nickname, openid, unionid);
         }
+        Disposable disposable = observable
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        mView.closeProgress();
+                        mView.onWxLogin(s);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
     }
 
     @Override

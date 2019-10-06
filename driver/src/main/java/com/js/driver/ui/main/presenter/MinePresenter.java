@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.base.frame.rx.RxException;
 import com.base.frame.rx.RxResult;
 import com.base.frame.rx.RxSchedulers;
+import com.base.util.manager.SpManager;
 import com.js.driver.App;
 import com.js.driver.api.PayApi;
 import com.js.driver.api.UserApi;
@@ -33,23 +34,21 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
 
     @Override
     public void getUserInfo() {
-        if (!TextUtils.isEmpty(App.getInstance().token)) {
-            Disposable disposable = mApiFactory.getApi(UserApi.class)
-                    .profile()
-                    .compose(RxSchedulers.io_main())
-                    .compose(RxResult.handleResult())
-                    .subscribe(new Consumer<UserInfo>() {
-                        @Override
-                        public void accept(UserInfo userInfo) throws Exception {
-                            mView.finishRefresh();
-                            mView.onUserInfo(userInfo);
-                        }
-                    }, new RxException<>(e -> {
+        Disposable disposable = mApiFactory.getApi(UserApi.class)
+                .profile()
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<UserInfo>() {
+                    @Override
+                    public void accept(UserInfo userInfo) throws Exception {
                         mView.finishRefresh();
-                        mView.toast(e.getMessage());
-                    }));
-            addDispose(disposable);
-        }
+                        mView.onUserInfo(userInfo);
+                    }
+                }, new RxException<>(e -> {
+                    mView.finishRefresh();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
     }
 
     @Override

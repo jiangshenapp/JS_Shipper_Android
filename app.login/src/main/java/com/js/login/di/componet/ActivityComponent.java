@@ -5,6 +5,7 @@ import android.app.Activity;
 
 import com.js.login.di.ActivityScope;
 import com.js.login.di.module.ActivityModule;
+import com.js.login.ui.activity.BindStatusActivity;
 import com.js.login.ui.activity.ForgetPwdActivity;
 import com.js.login.ui.activity.RegisterActivity;
 import com.js.login.ui.activity.ResetPwdActivity;
@@ -29,6 +30,8 @@ public interface ActivityComponent {
     void inject(ResetPwdActivity resetPwdActivity);
 
     void inject(WxBindActivity wxBindActivity);
+
+    void inject(BindStatusActivity bindStatusActivity);
 
 
 }

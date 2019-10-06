@@ -2,6 +2,7 @@ package com.js.login.ui.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
+import com.js.login.model.bean.UserInfo;
 import com.js.login.model.bean.WxLogin;
 
 /**
@@ -14,6 +15,7 @@ public interface PwdLoginContract {
 
         void onWxBind(WxLogin wxLogin);
 
+        void onUserInfo(UserInfo userInfo);
     }
 
     interface Presenter extends IPresenter<View> {
@@ -21,5 +23,6 @@ public interface PwdLoginContract {
 
         void wxBind(String code);
 
+        void getUserInfo();
     }
 }

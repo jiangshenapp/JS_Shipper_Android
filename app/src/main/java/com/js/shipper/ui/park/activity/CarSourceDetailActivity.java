@@ -167,6 +167,11 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
                 AppUtils.callPhone(mContext, mLineBean.getDriverPhone());
                 break;
             case R.id.im:
+                int authState = App.getInstance().personConsignorVerified;
+                if (authState != 0 || authState != 3) { //0:未认证
+                    toast("未认证");
+                    return;
+                }
                 if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
                     EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
                 }

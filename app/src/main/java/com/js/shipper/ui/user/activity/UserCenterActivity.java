@@ -30,6 +30,7 @@ import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.base.frame.view.BaseActivity;
+import com.js.login.ui.activity.BindStatusActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
@@ -81,7 +82,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     private TakePhoto takePhoto;
     private String avatar;
     private String nickname;
-    private String[] items = {"拍摄","从相册选择"};
+    private String[] items = {"拍摄", "从相册选择"};
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, UserCenterActivity.class));
@@ -156,7 +157,11 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
 
-    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout, R.id.center_verified_layout, R.id.center_feedback_layout, R.id.center_version_layout, R.id.center_about_layout, R.id.center_cache_layout, R.id.logout})
+    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout,
+            R.id.center_verified_layout, R.id.center_feedback_layout,
+            R.id.center_version_layout, R.id.center_about_layout,
+            R.id.center_cache_layout, R.id.logout,
+            R.id.bind_status_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.center_avatar_layout://头像
@@ -185,23 +190,26 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 UserManager.getUserManager().logout(mContext);
                 finish();
                 break;
+            case R.id.bind_status_layout:
+                BindStatusActivity.action(mContext);
+                break;
         }
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new MaterialDialog.Builder(mContext)
                 .items(items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        if (position==0){
+                        if (position == 0) {
                             File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
                             if (!file.getParentFile().exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             Uri imageUri = Uri.fromFile(file);
                             getTakePhoto().onPickFromCapture(imageUri);
-                        }else {
+                        } else {
                             getTakePhoto().onPickFromGallery();
                         }
                     }

@@ -112,6 +112,43 @@
                     android:src="@mipmap/ic_list_arrow_black" />
             </LinearLayout>
 
+
+
+
+            <LinearLayout
+                android:id="@+id/bind_status_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="12dp"
+                    android:text="第三方账号绑定"
+                    android:textColor="@color/_000000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@mipmap/ic_list_arrow_black" />
+            </LinearLayout>
+
             <FrameLayout
                 android:id="@+id/center_feedback_layout"
                 android:layout_width="match_parent"

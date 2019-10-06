@@ -47,6 +47,7 @@ import com.js.driver.util.DataCleanManager;
 import com.js.driver.util.glide.CommonGlideImageLoader;
 import com.js.driver.widget.dialog.AppDialogFragment;
 import com.base.frame.view.BaseActivity;
+import com.js.login.ui.activity.BindStatusActivity;
 import com.plugin.im.IMHelper;
 
 import org.greenrobot.eventbus.EventBus;
@@ -136,7 +137,11 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
 
-    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout, R.id.center_verified_layout, R.id.center_campus_layout, R.id.center_feedback_layout, R.id.center_version_layout, R.id.center_about_layout, R.id.center_cache_layout, R.id.logout})
+    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout,
+            R.id.center_verified_layout, R.id.center_campus_layout,
+            R.id.center_feedback_layout, R.id.center_version_layout,
+            R.id.center_about_layout, R.id.center_cache_layout,
+            R.id.logout,R.id.bind_status_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.center_avatar_layout://头像
@@ -166,6 +171,10 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 IMHelper.getInstance().logout();
                 UserManager.getUserManager().logout(mContext);
                 finish();
+                break;
+
+            case R.id.bind_status_layout:
+                BindStatusActivity.action(mContext);
                 break;
         }
     }

@@ -18,6 +18,7 @@ import com.js.login.R2;
 import com.js.login.di.componet.DaggerFragmentComponent;
 import com.js.login.di.module.FragmentModule;
 import com.js.login.global.Const;
+import com.js.login.model.bean.UserInfo;
 import com.js.login.model.bean.WxLogin;
 import com.js.login.model.event.LoginChangeEvent;
 import com.js.login.model.event.UserStatusChangeEvent;
@@ -179,16 +180,17 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
     }
 
     @Override
-    public void onLogin(String token) {
-        toast("登录成功");
-        if (TextUtils.isEmpty(phone)) {
-            phone = SpManager.getInstance(mContext).getSP("loginPhone");
-        }
-        IMHelper.getInstance().login(phone, phone);
-        LoginApp.getInstance().putToken(token);
-        SpManager.getInstance(mContext).putSP("loginPhone", phone);
+    public void onUserInfo(UserInfo userInfo) {
+        SpManager.getInstance(mContext).putSP("loginPhone",userInfo.getMobile());
+        IMHelper.getInstance().login(userInfo.getMobile(), userInfo.getMobile());
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         ARouter.getInstance().build("/app/main").navigation();
+    }
+
+    @Override
+    public void onLogin(String token) {
+        LoginApp.getInstance().putToken(token);
+        mPresenter.getUserInfo();
     }
 
     @Override

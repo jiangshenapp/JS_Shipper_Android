@@ -2,6 +2,8 @@ package com.js.login.api;
 
 import com.base.frame.bean.BaseHttpResponse;
 import com.base.frame.bean.HttpResponse;
+import com.js.login.model.bean.BindStatus;
+import com.js.login.model.bean.UserInfo;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -123,6 +125,20 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("app/subscriber/setPwd")
     Observable<BaseHttpResponse> setPwd(@Field("password") String password);
+
+
+
+    /**
+     * 获取当前登录人信息
+     *
+     * @return
+     */
+    @GET("app/subscriber/profile")
+    Observable<HttpResponse<UserInfo>> profile();
+
+
+    @POST("app/wx/getWxBindingInfo")
+    Observable<HttpResponse<BindStatus>> getWxBindInfo();
 
 
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.SimpleWebActivity;
+import com.base.util.manager.SpManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
 import com.base.http.global.Const;
@@ -117,9 +118,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         initConfig();
         initRecycler();
         initRefresh();
-        if (App.getInstance().token.isEmpty()) {
-            authState.setText("请先登录");
-        }
     }
 
     private void initConfig() {
@@ -169,10 +167,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             R.id.mine_draft_layout, R.id.mine_wallet_money_layout, R.id.mine_wallet_integral_layout})
     public void onViewClicked(View view) {
 
-        if (App.getInstance().token.isEmpty()) {
+        if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
             ARouter.getInstance().build("/user/login").navigation();
             return;
         }
+
         switch (view.getId()) {
             case R.id.user_info_layout://用户详情
                 UserCenterActivity.action(mContext);
@@ -265,6 +264,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             authState.setText("未提交");
             return;
         }
+        authState.setVisibility(View.GONE);
     }
 
     @Override
@@ -299,9 +299,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 IMHelper.getInstance().goIm(mContext);
                 break;
         }
-        if (position>1) { //服务配置H5
-            ServiceBean serviceBean = mServiceBeans.get(position-2);
-            SimpleWebActivity.action(getActivity(),serviceBean.getUrl(),serviceBean.getTitle());
+        if (position > 1) { //服务配置H5
+            ServiceBean serviceBean = mServiceBeans.get(position - 2);
+            SimpleWebActivity.action(getActivity(), serviceBean.getUrl(), serviceBean.getTitle());
         }
     }
 
