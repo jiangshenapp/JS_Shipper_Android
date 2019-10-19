@@ -143,7 +143,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             case R.id.detail_send_wechat://微信
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getSendMobile());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "shipper"+mOrderBean.getSendMobile());
                     }
                 }else {
                     toast("未认证");
@@ -401,7 +401,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     break;
                 case 5:
                     mOrderPosition.setText("开始配送");
-                    mOrderNavigate.setText("拒绝配送");
+                    mOrderNavigate.setVisibility(View.GONE);
                     break;
                 case 6:
                     mOrderNavigate.setVisibility(View.GONE);

@@ -150,7 +150,7 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
             case R.id.item_chat:
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver"+lineBean.getDriverPhone());
                     }
                 } else {
                     toast("未认证");

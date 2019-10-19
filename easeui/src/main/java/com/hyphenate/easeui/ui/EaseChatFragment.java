@@ -294,7 +294,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     protected void setUpView() {
-        titleBar.setTitle(toChatUsername);
+        String title = "";
+        if (toChatUsername.contains("shipper")) {
+            title = toChatUsername.substring(7);
+        } else if (toChatUsername.contains("driver")) {
+            title = toChatUsername.substring(6);
+        } else {
+            title = toChatUsername;
+        }
+        titleBar.setTitle(title);
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             // set title
             if (EaseUserUtils.getUserInfo(toChatUsername) != null) {

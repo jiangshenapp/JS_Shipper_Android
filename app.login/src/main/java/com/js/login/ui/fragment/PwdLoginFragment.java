@@ -129,7 +129,13 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onUserInfo(UserInfo userInfo) {
-        IMHelper.getInstance().login(userInfo.getMobile(),userInfo.getMobile());
+        String typeStr = "";
+        if ("shipper".equals(LoginApp.getInstance().appType)) {
+            typeStr = "shipper";
+        } else {
+            typeStr = "driver";
+        }
+        IMHelper.getInstance().login(typeStr + userInfo.getMobile(), typeStr + userInfo.getMobile());
         SpManager.getInstance(mContext).putSP("loginPhone",userInfo.getMobile());
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         ARouter.getInstance().build("/app/main").navigation();

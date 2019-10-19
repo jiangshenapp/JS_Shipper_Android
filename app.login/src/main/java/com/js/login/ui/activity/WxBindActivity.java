@@ -185,7 +185,13 @@ public class WxBindActivity extends BaseActivity<WxBindPresenter> implements WxB
     @Override
     public void onWxLogin(String token) {
         toast("登录成功");
-        IMHelper.getInstance().login(phone, phone);
+        String typeStr = "";
+        if ("shipper".equals(LoginApp.getInstance().appType)) {
+            typeStr = "shipper";
+        } else {
+            typeStr = "driver";
+        }
+        IMHelper.getInstance().login(typeStr + phone, typeStr + phone);
         LoginApp.getInstance().putToken(token);
         SpManager.getInstance(mContext).putSP("loginPhone", phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));

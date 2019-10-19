@@ -170,7 +170,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
             case R.id.im:
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty(mLineBean.getDriverPhone())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mLineBean.getDriverPhone());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + mLineBean.getDriverPhone());
                     }
                 } else {
                     toast("未认证");

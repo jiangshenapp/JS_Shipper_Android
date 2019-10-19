@@ -113,7 +113,7 @@ public class IMHelper {
     }
 
     public void register(final String userName, final String password) {
-        ChatClient.getInstance().register("username", "password", new Callback() {
+        ChatClient.getInstance().register(userName, password, new Callback() {
             @Override
             public void onSuccess() {
                 login(userName, password);

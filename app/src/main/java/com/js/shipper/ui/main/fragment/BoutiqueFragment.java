@@ -157,7 +157,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         mAdapter = new BoutiqueAdapter(R.layout.item_boutique, mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemChildClickListener(this);
@@ -195,13 +195,13 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
         LineBean lineBean = lineBeans.get(position);
         switch (view.getId()) {
             case R.id.item_phone:
-                AppUtils.callPhone(mContext,lineBean.getDriverPhone());
+                AppUtils.callPhone(mContext, lineBean.getDriverPhone());
                 break;
             case R.id.item_chat:
-                if (!TextUtils.isEmpty(lineBean.getDriverPhone())){
+                if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
                     if (UserManager.getUserManager().isVerified()) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, lineBean.getDriverPhone());
-                    }else {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + lineBean.getDriverPhone());
+                    } else {
                         toast("未认证");
                     }
                 }
@@ -297,7 +297,7 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
     }
 
     @Subscribe
-    public void onEvent(FilterEvent event){
+    public void onEvent(FilterEvent event) {
         lengthStr = event.lengthStr;
         typeStr = event.typeStr;
         getCarSource(Const.PAGE_NUM);

@@ -176,7 +176,7 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
             case R.id.im:
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty( mParkBean.getContractPhone())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mParkBean.getContractPhone());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + mParkBean.getContractPhone());
                     }
                 } else {
                     toast("未认证");

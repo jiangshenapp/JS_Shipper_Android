@@ -380,6 +380,7 @@ public class CompanyVerifiedFragment extends BaseFragment<CompanyVerifiedPresent
         if (result.getImage() == null) {
             return;
         }
+
         mFilePresenter.uploadFile(new File(result.getImage().getOriginalPath()));
     }
 

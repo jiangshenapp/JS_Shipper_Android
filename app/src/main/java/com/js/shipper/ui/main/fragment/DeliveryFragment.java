@@ -218,7 +218,7 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
             case R.id.item_chat:
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty(parkBean.getContractPhone())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, parkBean.getContractPhone());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + parkBean.getContractPhone());
                     }
                 } else {
                     toast("未认证");

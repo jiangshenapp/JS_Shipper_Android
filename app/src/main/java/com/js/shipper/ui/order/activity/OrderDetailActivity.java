@@ -537,7 +537,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             case R.id.detail_chat: //聊天
                 if (UserManager.getUserManager().isVerified()){
                     if (!TextUtils.isEmpty(mOrderBean.getDriverPhone())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, mOrderBean.getDriverPhone());
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + mOrderBean.getDriverPhone());
                     }
                 }else {
                     toast("未认证");
