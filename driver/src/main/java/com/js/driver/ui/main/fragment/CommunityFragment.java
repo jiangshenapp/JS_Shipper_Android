@@ -19,6 +19,7 @@ import com.js.driver.ui.main.adapter.CircleAdapter;
 import com.js.driver.ui.main.presenter.CommunityPresenter;
 import com.js.driver.ui.main.presenter.contract.CommunityContract;
 import com.base.frame.view.BaseFragment;
+import com.js.driver.util.UserManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -97,9 +98,17 @@ public class CommunityFragment extends BaseFragment<CommunityPresenter> implemen
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.favorite://我的喜欢
+                if (!UserManager.getUserManager().isVerified()) {
+                    toast("未认证");
+                    return;
+                }
                 PostListActivity.action(mContext,1);
                 break;
             case R.id.comment://评论
+                if (!UserManager.getUserManager().isVerified()) {
+                    toast("未认证");
+                    return;
+                }
                 PostListActivity.action(mContext,2);
                 break;
             case R.id.find://找圈子

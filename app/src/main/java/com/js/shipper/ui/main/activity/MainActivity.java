@@ -28,6 +28,7 @@ import com.js.shipper.ui.main.fragment.ParkFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;
 import com.js.shipper.ui.main.presenter.MainPresenter;
 import com.js.shipper.ui.main.presenter.contract.MainContract;
+import com.js.shipper.util.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +122,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 3) {
+                    if (!UserManager.getUserManager().isVerified()) {
+                        toast("未认证");
+                        mViewpager.setCurrentItem(0);
+                        mNavigation.getMenu().getItem(0).setChecked(true);
+                        return;
+                    }
+                }
                 mNavigation.getMenu().getItem(position).setChecked(true);
             }
 
@@ -163,6 +172,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mViewpager.setCurrentItem(2);
                 break;
             case R.id.navigation_community:
+                if (!UserManager.getUserManager().isVerified()) {
+                    toast("未认证");
+                    mNavigation.getMenu().getItem(0).setChecked(true);
+                    mViewpager.setCurrentItem(0);
+                    return true;
+                }
                 mViewpager.setCurrentItem(3);
                 break;
             case R.id.navigation_mine:

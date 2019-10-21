@@ -31,7 +31,7 @@ public class AllCircleAdapter extends BaseQuickAdapter<CircleBean, BaseViewHolde
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL+item.getImage(),imageView);
         TextView apply = helper.getView(R.id.item_circle_apply);
         TextView status  = helper.getView(R.id.item_circle_status);
-        switch (item.getStatus()) {
+        switch (item.getApplyStatus()) {
             case "0"://已申请
                 apply.setVisibility(View.GONE);
                 status.setVisibility(View.VISIBLE);

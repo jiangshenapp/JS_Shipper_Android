@@ -85,6 +85,7 @@ public class OrderBean {
     private boolean requireDeposit;
     private double deposit;
     private String goodsName;
+    private String consignorMobile;
     /**
      * id : 57
      * receiveName : null
@@ -534,5 +535,14 @@ public class OrderBean {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+
+    public String getConsignorMobile() {
+        return consignorMobile;
+    }
+
+    public void setConsignorMobile(String consignorMobile) {
+        this.consignorMobile = consignorMobile;
     }
 }

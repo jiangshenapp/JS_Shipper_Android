@@ -174,7 +174,7 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         CircleBean circleBean = (CircleBean) adapter.getItem(position);
-        if (TextUtils.isEmpty(circleBean.getStatus()) || "3".equals(circleBean.getStatus())) {
+        if (TextUtils.isEmpty(circleBean.getApplyStatus()) || "3".equals(circleBean.getApplyStatus())) {
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);

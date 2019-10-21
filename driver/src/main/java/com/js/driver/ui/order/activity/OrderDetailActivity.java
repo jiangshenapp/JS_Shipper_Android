@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -138,14 +139,20 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_send_phone://打电话
-                AppUtils.callPhone(mContext, mOrderBean.getSendMobile());
+                if (!TextUtils.isEmpty(mOrderBean.getConsignorMobile())) {
+                    AppUtils.callPhone(mContext, mOrderBean.getConsignorMobile());
+                }else {
+                    toast("手机号码为空");
+                }
                 break;
             case R.id.detail_send_wechat://微信
                 if (UserManager.getUserManager().isVerified()) {
-                    if (!TextUtils.isEmpty(mOrderBean.getSendMobile())) {
-                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "shipper"+mOrderBean.getSendMobile());
+                    if (!TextUtils.isEmpty(mOrderBean.getConsignorMobile())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "shipper" + mOrderBean.getConsignorMobile());
+                    }else {
+                        toast("手机号码为空");
                     }
-                }else {
+                } else {
                     toast("未认证");
                 }
                 break;
@@ -213,7 +220,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.completeDistribution(orderId);
                         break;
                     case 7://上传回执
-                        if (TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img2Url)) {
+                        if (TextUtils.isEmpty(img1Url) && TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img3Url)) {
                             toast("请上传图片");
                             return;
                         }
@@ -427,6 +434,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     mImg3.setClickable(false);
                     break;
                 case 11:
+                    mOrderNavigate.setVisibility(View.GONE);
+                    mOrderPosition.setVisibility(View.GONE);
+                    break;
+                default:
+                    mOrderNavigate.setVisibility(View.GONE);
+                    mOrderPosition.setVisibility(View.GONE);
                     break;
             }
         }
