@@ -293,6 +293,8 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mBranch.setText(event.content);
         if (!"全部".equals(event.content)) {
             companyType = String.valueOf(event.position);
+        }else {
+            companyType ="";
         }
         getParkList(Const.PAGE_NUM);
     }

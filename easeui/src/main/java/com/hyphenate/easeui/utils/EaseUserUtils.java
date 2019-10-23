@@ -62,12 +62,29 @@ public class EaseUserUtils {
      * set user's nickname
      */
     public static void setUserNick(String username,TextView textView){
+        String title = "";
         if(textView != null){
         	EaseUser user = getUserInfo(username);
         	if(user != null && user.getNickname() != null){
-        		textView.setText(user.getNickname());
+
+
+                if (user.getNickname().contains("shipper")) {
+                    title = user.getNickname().substring(7);
+                } else if (user.getNickname().contains("driver")) {
+                    title = user.getNickname().substring(6);
+                } else {
+                    title = user.getNickname();
+                }
+        		textView.setText(title);
         	}else{
-        		textView.setText(username);
+                if (username.contains("shipper")) {
+                    title = username.substring(7);
+                } else if (username.contains("driver")) {
+                    title = username.substring(6);
+                } else {
+                    title = username;
+                }
+                textView.setText(title);
         	}
         }
     }

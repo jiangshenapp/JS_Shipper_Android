@@ -151,6 +151,8 @@ public class CollectCarSourceFragment extends BaseFragment<CollectCarSourcePrese
                 if (UserManager.getUserManager().isVerified()) {
                     if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
                         EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver"+lineBean.getDriverPhone());
+                    }else {
+                        toast("手机号码为空");
                     }
                 } else {
                     toast("未认证");

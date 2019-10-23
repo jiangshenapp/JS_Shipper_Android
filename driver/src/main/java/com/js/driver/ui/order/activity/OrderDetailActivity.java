@@ -220,6 +220,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.completeDistribution(orderId);
                         break;
                     case 7://上传回执
+                    case 8:
                         if (TextUtils.isEmpty(img1Url) && TextUtils.isEmpty(img2Url) && TextUtils.isEmpty(img3Url)) {
                             toast("请上传图片");
                             return;

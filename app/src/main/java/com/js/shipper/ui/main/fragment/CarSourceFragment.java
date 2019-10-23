@@ -178,7 +178,11 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 break;
             case R.id.item_chat:
                 if (UserManager.getUserManager().isVerified()) {
-                    EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + lineBean.getDriverPhone());
+                    if (!TextUtils.isEmpty(lineBean.getDriverPhone())) {
+                        EaseChatActivity.action(mContext, EaseConstant.CHATTYPE_SINGLE, "driver" + lineBean.getDriverPhone());
+                    }else {
+                        toast("手机号码为空");
+                    }
                 } else {
                     toast("未认证");
                 }
