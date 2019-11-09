@@ -5,8 +5,7 @@ package com.base.frame.global;
  */
 public class Const {
 
-
-    public static final String BUGLY_APP_ID = "3503d19ff3";
+    public static final String BUGLY_APP_ID = "625c09c5ae";
 
     public static String IMG_URL = "http://gateway.jiangshen56.com/admin/file/download?fileName=";
 

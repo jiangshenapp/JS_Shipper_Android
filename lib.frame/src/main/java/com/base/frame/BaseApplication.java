@@ -17,7 +17,6 @@ import androidx.multidex.MultiDexApplication;
  */
 public class BaseApplication extends MultiDexApplication {
 
-
     static {
         //初始化上拉刷新及上拉加载
         //设置全局的Header构建器
@@ -25,8 +24,6 @@ public class BaseApplication extends MultiDexApplication {
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((Context context, RefreshLayout layout) -> new ClassicsFooter(context));
     }
-
-
 
     private static BaseApplication instance;
     public static synchronized BaseApplication getInstance() {
@@ -58,9 +55,6 @@ public class BaseApplication extends MultiDexApplication {
         ARouter.init(this);
     }
 
-
-
-
     @Override
     public void onTerminate() {
         super.onTerminate();
@@ -75,6 +69,5 @@ public class BaseApplication extends MultiDexApplication {
             CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, true);
         }
     }
-
 
 }
