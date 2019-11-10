@@ -13,6 +13,7 @@ import com.js.driver.model.bean.UserInfo;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
 import com.js.login.LoginApp;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -50,6 +51,7 @@ public class App extends BaseApplication {
         LoginApp.getInstance().appType = BuildConfig.appType;
         registerWx();
         closeAndroidPDialog();
+        initCrash();
     }
 
 
@@ -160,5 +162,10 @@ public class App extends BaseApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void initCrash() {
+        CrashReport.initCrashReport(getApplicationContext(), com.base.frame.global.Const.BUGLY_APP_DRIVER_ID, true);
     }
 }

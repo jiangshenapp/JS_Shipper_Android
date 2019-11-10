@@ -14,6 +14,7 @@ import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
 import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.UserInfo;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -51,6 +52,7 @@ public class App extends BaseApplication {
         LoginApp.getInstance().appType = BuildConfig.appType;
         registerWx();
         closeAndroidPDialog();
+        initCrash();
     }
 
     /**
@@ -152,6 +154,11 @@ public class App extends BaseApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void initCrash() {
+        CrashReport.initCrashReport(getApplicationContext(), com.base.frame.global.Const.BUGLY_APP_SHIPPER_ID, true);
     }
 
 }

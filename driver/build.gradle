@@ -56,7 +56,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'appType', "\"driver\""
-
         }
     }
 
@@ -111,5 +110,9 @@ dependencies {
     implementation 'com.mylhyl:circleDialog:2.6.7'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'liji.library.dev:citypickerview:0.7.0'
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:2.6.6'
+    implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
 
 }
