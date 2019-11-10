@@ -87,6 +87,8 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     private int sort = 1;
     private String lengthStr;
     private String typeStr;
+    private double latitude;
+    private double longitude;
 
     public static CarSourceFragment newInstance() {
         return new CarSourceFragment();
@@ -255,6 +257,16 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        if (sort == 1) {
+            latitude = 0;
+            longitude = 0;
+        } else {
+            if (App.getInstance().mLocation==null){
+                return;
+            }
+            latitude = App.getInstance().mLocation.getLatitude();
+            longitude = App.getInstance().mLocation.getLongitude();
+        }
         getCarSource(Const.PAGE_NUM);
     }
 
@@ -285,6 +297,8 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         if (!TextUtils.isEmpty(typeStr)) {
             lineAppFind.setCarModel(typeStr);
         }
+        lineAppFind.setLongitude(longitude);
+        lineAppFind.setLatitude(latitude);
         mPresenter.getCarSource(num, lineAppFind, Const.PAGE_SIZE);
     }
 

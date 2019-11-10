@@ -13,22 +13,29 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/send_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="发货地"
-            android:textColor="@color/_000000"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/send_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="发货地"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="6dp"
-            android:src="@mipmap/ic_tab_arrow_down" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:src="@mipmap/ic_tab_arrow_down" />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,21 +45,29 @@
             android:layout_marginEnd="16dp"
             android:src="@mipmap/ic_find_go" />
 
-        <TextView
-            android:id="@+id/end_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="收货地"
-            android:textColor="@color/_000000"
-            android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="6dp"
-            android:src="@mipmap/ic_tab_arrow_down" />
+            <TextView
+                android:id="@+id/end_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="收货地"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:src="@mipmap/ic_tab_arrow_down" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/sort"
@@ -62,31 +77,41 @@
             android:layout_marginStart="40dp"
             android:text="默认排序"
             android:textColor="@color/_000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
-            android:src="@mipmap/ic_tab_arrow_down" />
+            android:src="@mipmap/ic_tab_arrow_down"
+            android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="40dp"
-            android:text="筛选"
-            android:textColor="@color/_000000"
-            android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="6dp"
-            android:src="@mipmap/ic_tab_arrow_down" />
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:text="筛选"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:src="@mipmap/ic_tab_arrow_down" />
+        </LinearLayout>
     </LinearLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout

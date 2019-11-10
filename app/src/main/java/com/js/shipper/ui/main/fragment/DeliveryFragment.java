@@ -78,6 +78,8 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     private int sort = 1;
     private String areaCode = "0";
     private String companyType;
+    private double latitude;
+    private double longitude;
 
     private CityWindow mAreaWindow;
     private SortWindow mSortWindow;
@@ -154,13 +156,13 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
             type = Const.MORE;
         }
         ParkList mPark = new ParkList();
-//        if (areaCode.length() == 6) {
-//            mPark.setAddressCode(areaCode);
-//        }
         if (!TextUtils.isEmpty(companyType)) {
             mPark.setCompanyType(companyType);
         }
         mPark.setSort(sort);
+        mPark.setLatitude(latitude);
+        mPark.setLongitude(longitude);
+
         mPresenter.getParkList(num, Const.PAGE_SIZE, mPark);
     }
 
@@ -270,6 +272,16 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        if (sort == 1) {
+            latitude = 0;
+            longitude = 0;
+        } else {
+            if (App.getInstance().mLocation==null){
+                return;
+            }
+            latitude = App.getInstance().mLocation.getLatitude();
+            longitude = App.getInstance().mLocation.getLongitude();
+        }
         getParkList(Const.PAGE_NUM);
     }
 
@@ -293,8 +305,8 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         mBranch.setText(event.content);
         if (!"全部".equals(event.content)) {
             companyType = String.valueOf(event.position);
-        }else {
-            companyType ="";
+        } else {
+            companyType = "";
         }
         getParkList(Const.PAGE_NUM);
     }

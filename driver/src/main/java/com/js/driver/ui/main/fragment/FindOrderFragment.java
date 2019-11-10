@@ -106,6 +106,8 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private String carTypeStr;
     private String lengthStr;
     private String typeStr;
+    private double longitude;
+    private double latitude;
 
     @Inject
     DictPresenter mDictPresenter;
@@ -276,6 +278,8 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         if (!TextUtils.isEmpty(typeStr)) {
             lineAppFind.setCarModel(typeStr);
         }
+        lineAppFind.setLongitude(longitude);
+        lineAppFind.setLatitude(latitude);
         mPresenter.findOrders(num, (int) Const.PAGE_SIZE, lineAppFind);
     }
 
@@ -283,6 +287,16 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     public void onEvent(SortEvent sortEvent) {
         sort = sortEvent.type;
         mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        if (sort == 1) {
+            latitude = 0;
+            longitude = 0;
+        } else {
+            if (App.getInstance().mLocation == null) {
+                return;
+            }
+            latitude = App.getInstance().mLocation.getLatitude();
+            longitude = App.getInstance().mLocation.getLongitude();
+        }
         getOrders(Const.PAGE_NUM);
     }
 
