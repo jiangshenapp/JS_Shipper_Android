@@ -16,7 +16,7 @@ public interface FileApi {
 
 
     @Multipart
-    @POST("https://testway.jiangshen56.com/admin/file/upload")
+    @POST("http://testway.jiangshen56.com/admin/file/upload")
     Observable<HttpResponse<String>> upload(@Part("resourceId") RequestBody body,
                                             @Part MultipartBody.Part file);
 
