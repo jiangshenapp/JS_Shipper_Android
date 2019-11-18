@@ -130,7 +130,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     }
                 }
                 mNavigation.getMenu().getItem(position).setChecked(true);
-
             }
 
             @Override

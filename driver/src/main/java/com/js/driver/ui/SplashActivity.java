@@ -69,7 +69,8 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
                 .permission(Permission.ACCESS_COARSE_LOCATION,
                         Permission.ACCESS_FINE_LOCATION,
                         Permission.READ_EXTERNAL_STORAGE,
-                        Permission.WRITE_EXTERNAL_STORAGE)
+                        Permission.WRITE_EXTERNAL_STORAGE,
+                        Permission.CAMERA)
                 .request(new OnPermission() {
 
                     @Override
