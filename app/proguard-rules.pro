@@ -195,3 +195,19 @@
 #环信客服
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
+
+
+
+          # App
+-keep class com.js.shipper.model.bean.** {*;}
+-keep class com.js.shipper.model.response.** {*;}
+-keep class com.js.shipper.model.request.** {*;}
+-keep class com.js.login.LoginApp {*;}
+-keep class com.js.login.model.** {*;}
+-keep class com.js.component.ComponentApp {*;}
+-keep class com.js.component.city.bean.** {*;}
+-keep class com.js.community.CommunityApp {*;}
+-keep class com.js.community.model.** {*;}
+-keep class com.plugin.im.ImApp {*;}
+-keep class com.base.http.** {*;}
+-keep class com.base.frame.bean.** {*;}
