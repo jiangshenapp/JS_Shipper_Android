@@ -26,6 +26,9 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -516,7 +519,24 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        showDialog();
+        XXPermissions.with(this)
+                //.constantRequest() //可设置被拒绝后继续申请，直到用户授权或者永久拒绝
+                .permission(
+                        Permission.CAMERA)
+                .request(new OnPermission() {
+
+                    @Override
+                    public void hasPermission(List<String> granted, boolean isAll) {
+                        if (isAll) {
+                            showDialog();
+                        }
+                    }
+
+                    @Override
+                    public void noPermission(List<String> denied, boolean quick) {
+                        toast("无权限");
+                    }
+                });
     }
 
     private void showDialog(){

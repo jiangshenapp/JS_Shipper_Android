@@ -22,6 +22,9 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.base.frame.view.BaseActivity;
 import com.google.gson.Gson;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -51,6 +54,7 @@ import com.js.driver.util.glide.CommonGlideImageLoader;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -316,7 +320,24 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        showDialog();
+        XXPermissions.with(this)
+                //.constantRequest() //可设置被拒绝后继续申请，直到用户授权或者永久拒绝
+                .permission(
+                        Permission.CAMERA)
+                .request(new OnPermission() {
+
+                    @Override
+                    public void hasPermission(List<String> granted, boolean isAll) {
+                        if (isAll) {
+                            showDialog();
+                        }
+                    }
+
+                    @Override
+                    public void noPermission(List<String> denied, boolean quick) {
+                        toast("无权限");
+                    }
+                });
     }
 
     private void showDialog(){
