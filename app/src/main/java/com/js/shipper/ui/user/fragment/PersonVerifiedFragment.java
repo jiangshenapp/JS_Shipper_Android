@@ -413,7 +413,7 @@ public class PersonVerifiedFragment extends BaseFragment<PersonVerifiedPresenter
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        XXPermissions.with(this)
+        XXPermissions.with(getActivity())
                 //.constantRequest() //可设置被拒绝后继续申请，直到用户授权或者永久拒绝
                 .permission(
                         Permission.CAMERA)
