@@ -113,6 +113,9 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
                 SimpleWebActivity.action(this,mBannerBean.getUrl(),mBannerBean.getTitle());
                 break;
             case R.id.tv_skip: //跳过
+                if (mServicePresenter != null) {
+                    mServicePresenter.detachView();
+                }
                 MainActivity.action(mContext);
                 finish();
                 break;

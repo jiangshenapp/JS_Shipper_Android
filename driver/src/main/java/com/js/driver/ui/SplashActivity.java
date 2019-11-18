@@ -110,9 +110,12 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_ad: //广告点击
-                SimpleWebActivity.action(this,mBannerBean.getUrl(),mBannerBean.getTitle());
+                SimpleWebActivity.action(this, mBannerBean.getUrl(), mBannerBean.getTitle());
                 break;
             case R.id.tv_skip: //跳过
+                if (mServicePresenter != null) {
+                    mServicePresenter.detachView();
+                }
                 MainActivity.action(mContext);
                 finish();
                 break;
