@@ -1,5 +1,7 @@
 package com.base.http;
 
+import androidx.annotation.MainThread;
+
 import java.util.HashMap;
 import java.util.Map;
 
