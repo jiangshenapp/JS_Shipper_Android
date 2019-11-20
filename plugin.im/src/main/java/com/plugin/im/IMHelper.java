@@ -201,7 +201,7 @@ public class IMHelper {
     public void goIm(Context context) {
 
         if (ChatClient.getInstance().isLoggedInBefore()) {
-            Intent intent = new IntentBuilder(context).setServiceIMNumber(
+            Intent intent = new IntentBuilder(context).setTitleName("在线客服").setServiceIMNumber(
                     "kefuchannelimid_484880") //获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
                     .build();
             context.startActivity(intent);
