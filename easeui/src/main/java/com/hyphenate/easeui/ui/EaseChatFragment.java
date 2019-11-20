@@ -299,6 +299,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             title = toChatUsername.substring(7);
         } else if (toChatUsername.contains("driver")) {
             title = toChatUsername.substring(6);
+        } else if (toChatUsername.contains("kefu")) {
+            title = "在线客服";
         } else {
             title = toChatUsername;
         }
