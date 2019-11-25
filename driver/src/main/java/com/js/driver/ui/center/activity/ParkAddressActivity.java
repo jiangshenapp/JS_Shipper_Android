@@ -146,10 +146,10 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
         etPhone.setText(mAuthInfo.getContractPhone());
         etAddress.setText(mLocationBean.getAddress());
         etDetailAddress.setText(mAuthInfo.getContactAddress());
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mAuthInfo.getImage1(), img1);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mAuthInfo.getImage2(), img2);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mAuthInfo.getImage3(), img3);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mAuthInfo.getImage4(), img4);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage1(), img1);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage2(), img2);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage3(), img3);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage4(), img4);
     }
 
     @Override
@@ -226,19 +226,19 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
         switch (choseCode) {
             case Const.PARK_HEAD1:
                 mAuthInfo.setImage1(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, img1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img1);
                 break;
             case Const.PARK_HEAD2:
                 mAuthInfo.setImage2(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, img2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img2);
                 break;
             case Const.PARK_HEAD3:
                 mAuthInfo.setImage3(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, img3);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img3);
                 break;
             case Const.PARK_HEAD4:
                 mAuthInfo.setImage4(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, img4);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img4);
                 break;
         }
     }

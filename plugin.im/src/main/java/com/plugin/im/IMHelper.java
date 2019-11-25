@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.base.frame.global.Const;
+import com.base.http.global.Const;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.base.util.manager.SpManager;
 import com.bumptech.glide.Glide;
@@ -103,7 +103,7 @@ public class IMHelper {
                     //此处设置当前登录用户的头像，
                     if (userAvatarView != null) {
                         CommonGlideImageLoader.getInstance()
-                                .displayNetImageWithCircle(context, Const.IMG_URL+ SpManager.getInstance(context).getSP("avatar"),userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.hd_default_avatar));
+                                .displayNetImageWithCircle(context, Const.IMG_URL()+ SpManager.getInstance(context).getSP("avatar"),userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.hd_default_avatar));
 //                        Glide.with(context).load("http://oev49clxj.bkt.clouddn.com/7a8aed7bjw1f32d0cumhkj20ey0mitbx.png").diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.hd_default_avatar).into(userAvatarView);
 //                        如果用圆角，可以采用此方案：http://blog.csdn.net/weidongjian/article/details/47144549
                     }

@@ -50,6 +50,7 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     implementation project(path: ':lib.frame')
+    implementation project(path: ':lib.util')
 
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'

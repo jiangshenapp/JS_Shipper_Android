@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.base.http.global.Const;
 import com.google.gson.Gson;
 import com.base.frame.view.BaseActivity;
 import com.hyphenate.easeui.EaseConstant;
@@ -128,7 +129,7 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
             mBanner.setVisibility(View.GONE);
         } else {
             imgPaths = new ArrayList<>();
-            imgPaths.add(com.base.http.global.Const.IMG_URL+parkBean.getBusinessLicenceImage());
+            imgPaths.add(Const.IMG_URL() +parkBean.getBusinessLicenceImage());
             mBanner.setVisibility(View.VISIBLE);
             mBanner.setImages(imgPaths);
             mBanner.start();

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.frame.view.BaseActivity;
+import com.base.http.global.Const;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
@@ -84,7 +85,7 @@ public class MessageDetailActivity extends BaseActivity<MessageDetailPresenter> 
         mTvContent.setText(messageBean.getContent());
         if (!TextUtils.isEmpty(messageBean.getImage())) {
             mIvImage.setVisibility(View.VISIBLE);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + messageBean.getImage(), mIvImage);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + messageBean.getImage(), mIvImage);
         } else {
             mIvImage.setVisibility(View.GONE);
         }

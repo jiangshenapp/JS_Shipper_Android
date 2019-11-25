@@ -175,7 +175,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         etAddress.setText(authInfo.getAddress());
         etDetailAddress.setText(authInfo.getDetailAddress());
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + authInfo.getBusinessLicenceImage()
                 , authBusinessLicense, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
     }
 
@@ -447,7 +447,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         switch (choseCode) {
             case Const.AUTH_BUSINESS_LICENSE:
                 mAuthInfo.setBusinessLicenceImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, authBusinessLicense);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, authBusinessLicense);
                 break;
         }
     }

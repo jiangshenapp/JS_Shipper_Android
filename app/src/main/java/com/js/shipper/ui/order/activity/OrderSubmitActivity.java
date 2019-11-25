@@ -557,11 +557,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg2);
                 break;
         }
     }

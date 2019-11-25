@@ -31,7 +31,7 @@ public class CarsAdapter extends BaseQuickAdapter<CarBean, BaseViewHolder> {
                         +item.getCapacityTonnage()+"吨");
 
         helper.setTextColor(R.id.item_car_state,Color.parseColor(com.js.driver.global.Const.CarStateColor[item.getState()]));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + item.getImage2()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + item.getImage2()
                 , helper.getView(R.id.item_car_img));
     }
 }

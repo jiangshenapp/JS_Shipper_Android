@@ -202,9 +202,9 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         etCarLength.setText(carBean.getCarLengthName());
         etCarWeight.setText(String.valueOf(carBean.getCapacityTonnage()));
         etCarVolume.setText(String.valueOf(carBean.getCapacityVolume()));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + carBean.getImage1()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + carBean.getImage1()
                 , ivCarLicense);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + carBean.getImage2()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + carBean.getImage2()
                 , ivCarHead);
     }
 
@@ -390,11 +390,11 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         switch (choseCode) {
             case Const.AUTH_CAR_LICENSE:
                 mCarBean.setImage1(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, ivCarLicense);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, ivCarLicense);
                 break;
             case Const.AUTH_CAR_HEAD:
                 mCarBean.setImage2(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, ivCarHead);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, ivCarHead);
                 break;
         }
     }

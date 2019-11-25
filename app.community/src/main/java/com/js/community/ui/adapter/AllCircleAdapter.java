@@ -28,7 +28,7 @@ public class AllCircleAdapter extends BaseQuickAdapter<CircleBean, BaseViewHolde
     protected void convert(BaseViewHolder helper, CircleBean item) {
         helper.setText(R.id.item_circle_name, item.getName());
         ImageView imageView  = helper.getView(R.id.item_circle_img);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL+item.getImage(),imageView);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL() +item.getImage(),imageView);
         TextView apply = helper.getView(R.id.item_circle_apply);
         TextView status  = helper.getView(R.id.item_circle_status);
         switch (item.getApplyStatus()) {

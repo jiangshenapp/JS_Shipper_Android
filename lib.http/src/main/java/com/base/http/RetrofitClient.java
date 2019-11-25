@@ -2,6 +2,7 @@ package com.base.http;
 
 import android.content.Context;
 
+import com.base.http.interceptor.LoggingInterceptor;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.base.http.converter.StringConverterFactory;
 import com.base.http.global.Const;
@@ -48,11 +49,10 @@ public class RetrofitClient {
                 .addInterceptor(new AuthInterceptor())
                 ;
         if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            clientBuild.addInterceptor(logging);
+            clientBuild.addInterceptor(new LoggingInterceptor());
         }
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(Const.API_URL)
+                .baseUrl(Const.API_URL())
                 .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

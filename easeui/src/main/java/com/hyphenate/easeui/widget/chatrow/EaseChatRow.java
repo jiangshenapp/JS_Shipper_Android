@@ -11,13 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.base.frame.global.Const;
+import com.base.http.global.Const;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.base.util.manager.SpManager;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.Direct;
@@ -26,7 +23,6 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.adapter.EaseMessageAdapter;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.model.styles.EaseMessageListItemStyle;
-import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
 import com.hyphenate.easeui.widget.EaseImageView;
@@ -155,7 +151,7 @@ public abstract class EaseChatRow extends LinearLayout {
             //set nickname and avatar
             if (message.direct() == Direct.SEND) {
                 CommonGlideImageLoader.getInstance()
-                        .displayNetImageWithCircle(context, Const.IMG_URL+ SpManager.getInstance(context).getSP("avatar"),userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.hd_default_avatar));
+                        .displayNetImageWithCircle(context, Const.IMG_URL()+ SpManager.getInstance(context).getSP("avatar"),userAvatarView,context.getResources().getDrawable(com.hyphenate.easeui.R.drawable.hd_default_avatar));
 //                EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
             } else {
                 String avatar = message.getStringAttribute("avatar", null);

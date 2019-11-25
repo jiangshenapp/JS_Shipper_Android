@@ -168,11 +168,11 @@ public class PersonVerifiedFragment extends BaseFragment<PersonVerifiedPresenter
 
         mAuthInfo = authInfo;
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + authInfo.getIdImage()
                 , mAuthCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_idpositive));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdBackImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + authInfo.getIdBackImage()
                 , mAuthBehindCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + authInfo.getIdHandImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + authInfo.getIdHandImage()
                 , mAuthBody, mContext.getResources().getDrawable(R.mipmap.img_authentication_body));
         etName.setText(authInfo.getPersonName());
         etIdcard.setText(authInfo.getIdCode());
@@ -333,15 +333,15 @@ public class PersonVerifiedFragment extends BaseFragment<PersonVerifiedPresenter
         switch (choseCode) {
             case Const.AUTH_CARD:
                 mAuthInfo.setIdImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mAuthCard);
                 break;
             case Const.AUTH_BEHIND_CARD:
                 mAuthInfo.setIdBackImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthBehindCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mAuthBehindCard);
                 break;
             case Const.AUTH_BODY:
                 mAuthInfo.setIdHandImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mAuthBody);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, mAuthBody);
                 break;
         }
     }

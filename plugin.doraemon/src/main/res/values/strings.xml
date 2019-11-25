@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">doraemon</string>
+    <string name="api_switch">接口切换</string>
+    <string name="http_logger">接口日志</string>
+    <string name="whole_control">整租控车</string>
+    <string name="group_control">企业控车</string>
+</resources>

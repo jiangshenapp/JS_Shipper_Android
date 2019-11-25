@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.base.http.global.Const;
 import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -37,7 +38,7 @@ public class MessageAdapter extends BaseQuickAdapter<MessageBean, BaseViewHolder
         ImageView mIvImage = helper.getView(R.id.iv_image);
         if (!TextUtils.isEmpty(item.getImage())) {
             mIvImage.setVisibility(View.VISIBLE);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + item.getImage(), mIvImage);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + item.getImage(), mIvImage);
         } else {
             mIvImage.setVisibility(View.GONE);
         }

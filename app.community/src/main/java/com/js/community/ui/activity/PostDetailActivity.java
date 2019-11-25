@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseActivity;
+import com.base.http.global.Const;
 import com.base.util.TimeUtils;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.js.community.CommunityApp;
@@ -118,7 +119,7 @@ public class PostDetailActivity extends BaseActivity<PostDetailPresenter> implem
         } else {
             mCommentImg.setImageResource(R.mipmap.app_navigationbar_comment);
         }
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + postBean.getImage(), mPostAvatar);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL()  + postBean.getImage(), mPostAvatar);
 
     }
 

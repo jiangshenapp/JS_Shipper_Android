@@ -390,13 +390,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mReceiptLayout.setVisibility(View.GONE);
             mReceiptTitle.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())) {
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getCommentImage1(), mImg1);
             }
             if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())) {
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getCommentImage2(), mImg2);
             }
             if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())) {
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getCommentImage3(), mImg3);
             }
             switch (status) {
                 case 2:
@@ -640,15 +640,15 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg2);
                 break;
             case 3:
                 img3Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mImg3);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg3);
                 break;
         }
     }

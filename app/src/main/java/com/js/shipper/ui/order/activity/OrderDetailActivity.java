@@ -257,7 +257,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         } else {
             mIngLayout.setVisibility(View.GONE);
             mDriverInfoLayout.setVisibility(View.VISIBLE);
-            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + orderBean.getDriverAvatar()
+            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL()  + orderBean.getDriverAvatar()
                     , mDetailAvatar, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
             if (!TextUtils.isEmpty(orderBean.getDotName())) { //网点接单
                 mDetailPhone.setVisibility(View.GONE);
@@ -325,13 +325,13 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())) {
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getCommentImage1(), mImg1);
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())) {
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getCommentImage2(), mImg2);
         }
         if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())) {
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mOrderBean.getCommentImage3(), mImg3);
         }
         if (state > 7) {
             mReceiptTitle.setVisibility(View.VISIBLE);

@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.base.frame.global.Const;
+import com.base.http.global.Const;
 import com.base.util.manager.SpManager;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
@@ -907,7 +907,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (message == null) {
             return;
         }
-        message.setAttribute("avatar", Const.IMG_URL + SpManager.getInstance(getContext()).getSP("avatar"));
+        message.setAttribute("avatar", Const.IMG_URL() + SpManager.getInstance(getContext()).getSP("avatar"));
         message.setAttribute("nickName", SpManager.getInstance(getContext()).getSP("nickName"));
         if (chatFragmentHelper != null) {
             //set extension

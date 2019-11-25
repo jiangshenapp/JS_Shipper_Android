@@ -230,7 +230,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
         App.getInstance().putUserInfo(userInfo); //存储用户信息
 
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL + userInfo.getAvatar()
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL()  + userInfo.getAvatar()
                 , mUserImg, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
 
         if (!TextUtils.isEmpty(userInfo.getMobile())) {

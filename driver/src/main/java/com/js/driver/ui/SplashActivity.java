@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.frame.view.SimpleWebActivity;
+import com.base.http.global.Const;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -134,7 +135,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             mBannerBean = mBannerBeans.get(0);
             mIvAd.setVisibility(View.VISIBLE);
             mTvSkip.setVisibility(View.VISIBLE);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + mBannerBean.getImage(), mIvAd);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + mBannerBean.getImage(), mIvAd);
             Observable.timer(3, TimeUnit.SECONDS)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

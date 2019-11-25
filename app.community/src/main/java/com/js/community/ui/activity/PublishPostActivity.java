@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.base.frame.view.BaseActivity;
+import com.base.http.global.Const;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jph.takephoto.app.TakePhoto;
@@ -244,7 +245,7 @@ public class PublishPostActivity extends BaseActivity<PublishPostPresenter> impl
     @Override
     public void onUploadFile(String data) {
         imgUrl = data;
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + data, mPostImg);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + data, mPostImg);
     }
 
     @Override

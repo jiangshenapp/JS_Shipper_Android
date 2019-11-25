@@ -2,6 +2,7 @@ package com.js.driver.ui.main.adapter;
 
 import android.widget.ImageView;
 
+import com.base.http.global.Const;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.R;
@@ -29,7 +30,7 @@ public class MineMenuAdapter extends BaseQuickAdapter<MineMenu, BaseViewHolder> 
             helper.setImageResource(R.id.item_mine_img, (int)resource);
         } else if (resource instanceof String) {
             ImageView mIvImage = helper.getView(R.id.item_mine_img);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL + resource, mIvImage);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + resource, mIvImage);
         }
     }
 }

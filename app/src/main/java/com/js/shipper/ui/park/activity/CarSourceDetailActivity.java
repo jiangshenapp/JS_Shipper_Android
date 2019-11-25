@@ -117,7 +117,7 @@ public class CarSourceDetailActivity extends BaseActivity<CarSourceDetailPresent
             mBanner.setVisibility(View.GONE);
         } else {
             imgPaths = new ArrayList<>();
-            imgPaths.add(Const.IMG_URL + lineBean.getImage2());
+            imgPaths.add(Const.IMG_URL()  + lineBean.getImage2());
             mBanner.setVisibility(View.VISIBLE);
             mBanner.setImages(imgPaths);
             mBanner.start();

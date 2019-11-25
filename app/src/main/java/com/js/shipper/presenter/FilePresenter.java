@@ -1,5 +1,6 @@
 package com.js.shipper.presenter;
 
+import com.base.http.global.Const;
 import com.js.shipper.api.FileApi;
 import com.js.shipper.presenter.contract.FileContract;
 import com.base.frame.mvp.RxPresenter;
@@ -39,7 +40,7 @@ public class FilePresenter extends RxPresenter<FileContract.View> implements Fil
         MultipartBody.Part part =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
         RequestBody resourceId = RequestBody.create(MediaType.parse("multipart/form-data"), "pigx");
-        Disposable disposable = mApiFactory.getApi(FileApi.class).upload(resourceId,part)
+        Disposable disposable = mApiFactory.getApi(FileApi.class).upload(Const.UPLOAD_URL(), resourceId, part)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {

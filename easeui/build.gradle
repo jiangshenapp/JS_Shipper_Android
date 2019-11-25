@@ -41,4 +41,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':lib.frame')
     implementation project(path: ':lib.util')
+    implementation project(path: ':lib.http')
 }

@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import com.base.http.global.Const;
 import com.base.util.manager.CommonGlideImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -28,7 +29,7 @@ public class CommentAdapter extends BaseQuickAdapter<Comment, BaseViewHolder> {
                 .setText(R.id.item_comment_content, item.getComment())
                 .setText(R.id.item_comment_time, item.getCreateTime());
         ImageView avatar = helper.getView(R.id.item_comment_avatar);
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + item.getAvatar(), avatar);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL() + item.getAvatar(), avatar);
 
     }
 }

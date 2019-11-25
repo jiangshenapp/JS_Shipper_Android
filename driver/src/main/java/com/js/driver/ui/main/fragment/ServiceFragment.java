@@ -150,7 +150,7 @@ public class ServiceFragment extends BaseFragment<ServicePresenter> implements S
             imgPaths = new ArrayList<>();
             for (int i = 0; i < mBannerBeans.size(); i++) {
                 BannerBean bannerBean = mBannerBeans.get(i);
-                imgPaths.add(Const.IMG_URL + bannerBean.getImage());
+                imgPaths.add(Const.IMG_URL()  + bannerBean.getImage());
             }
             mBanner.setImages(imgPaths);
             mBanner.start();
@@ -164,40 +164,40 @@ public class ServiceFragment extends BaseFragment<ServicePresenter> implements S
         if (count > 0) {
             llItem0.setVisibility(View.VISIBLE);
             ServiceBean serviceBean = mServiceBeans.get(0);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem1);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem1);
             tvItem1.setText(serviceBean.getTitle());
         }
         if (count > 1) {
             ServiceBean serviceBean = mServiceBeans.get(1);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem2);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem2);
             tvItem2.setText(serviceBean.getTitle());
         }
         if (count > 2) {
             ServiceBean serviceBean = mServiceBeans.get(2);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem3);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem3);
             tvItem3.setText(serviceBean.getTitle());
         }
         if (count > 3) {
             ServiceBean serviceBean = mServiceBeans.get(3);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem4);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem4);
             tvItem4.setText(serviceBean.getTitle());
         }
         if (count > 4) {
             llItem5.setVisibility(View.VISIBLE);
             ServiceBean serviceBean = mServiceBeans.get(4);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem5);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem5);
             tvItem5.setText(serviceBean.getTitle());
         }
         if (count > 5) {
             llItem6.setVisibility(View.VISIBLE);
             ServiceBean serviceBean = mServiceBeans.get(5);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem6);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem6);
             tvItem6.setText(serviceBean.getTitle());
         }
         if (count > 6) {
             llItem7.setVisibility(View.VISIBLE);
             ServiceBean serviceBean = mServiceBeans.get(6);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + serviceBean.getIcon(), ivItem7);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + serviceBean.getIcon(), ivItem7);
             tvItem7.setText(serviceBean.getTitle());
         }
     }

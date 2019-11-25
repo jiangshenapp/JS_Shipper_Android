@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xlgcx.doraemon">
+
+
+    <application android:allowBackup="true">
+
+        <meta-data
+            android:name="com.xlgcx.doraemon.DoraemonApp"
+            android:value="IModuleConfig" />
+
+
+        <activity android:name=".activity.ApiSwitchActivity"/>
+
+    </application>
+</manifest>

@@ -279,7 +279,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
             imgPaths = new ArrayList<>();
             for (int i = 0; i < mBannerBeans.size(); i++) {
                 BannerBean bannerBean = mBannerBeans.get(i);
-                imgPaths.add(com.base.http.global.Const.IMG_URL + bannerBean.getImage());
+                imgPaths.add(com.base.http.global.Const.IMG_URL()  + bannerBean.getImage());
             }
             mBanner.setImages(imgPaths);
             mBanner.start();

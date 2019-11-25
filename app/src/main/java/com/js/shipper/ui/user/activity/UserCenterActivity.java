@@ -99,7 +99,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
     private void initView() {
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + App.getInstance().avatar
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL()  + App.getInstance().avatar
                 , ivHead, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
         tvNick.setText(App.getInstance().nickName);
         try {
@@ -367,7 +367,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     public void onChangeAvatar() {
         toast("头像修改成功");
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL + avatar, ivHead);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.base.http.global.Const.IMG_URL()  + avatar, ivHead);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 
