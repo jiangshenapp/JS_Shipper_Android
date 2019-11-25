@@ -174,9 +174,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case R.id.navigation_community:
                 if (!UserManager.getUserManager().isVerified()) {
                     toast("未认证");
-                    mNavigation.getMenu().getItem(0).setChecked(true);
                     mViewpager.setCurrentItem(0);
-                    return true;
+                    menuItem = mNavigation.getMenu().getItem(0);
+                    menuItem.setChecked(true);
+                    return false;
                 }
                 mViewpager.setCurrentItem(3);
                 break;
@@ -184,7 +185,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mViewpager.setCurrentItem(4);
                 break;
         }
-        return true;
+        return false;
     }
 
     private long exitTime = 0;

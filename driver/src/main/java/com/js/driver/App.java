@@ -100,8 +100,10 @@ public class App extends BaseApplication {
      */
     public void clearUserInfo() {
         String loginPhone = SpManager.getInstance(App.getInstance()).getSP("loginPhone");
+        String host = SpManager.getInstance(App.getInstance()).getSP("host");
         SpManager.getInstance(App.getInstance()).clear();
         SpManager.getInstance(App.getInstance()).putSP("loginPhone",loginPhone); //登录手机号不清空
+        SpManager.getInstance(App.getInstance()).putSP("host",host); //host
         getUserInfo();
     }
 

@@ -175,7 +175,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     toast("未认证");
                     mNavigation.getMenu().getItem(0).setChecked(true);
                     mViewpager.setCurrentItem(0);
-                    return true;
+                    return false;
                 }
                 mViewpager.setCurrentItem(3);
 
@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mViewpager.setCurrentItem(4);
                 break;
         }
-        return true;
+        return false;
     }
 
     private long exitTime = 0;
