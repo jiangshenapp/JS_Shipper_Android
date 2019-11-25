@@ -1,5 +1,6 @@
 package com.xlgcx.doraemon.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -50,6 +51,9 @@ public class ApiSwitchActivity extends SimpleActivity {
 
     private void initData() {
         defaultHost = SpManager.getInstance(mContext).getSP("host");
+        if (TextUtils.isEmpty(defaultHost)){
+            defaultHost = "http://testway.jiangshen56.com/logistic-biz/";
+        }
         list = new ArrayList<Server>();
         Collections.addAll(list, servers);
     }

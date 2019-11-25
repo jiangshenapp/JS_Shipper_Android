@@ -19,7 +19,7 @@ public class Const {
         }
         String host = SpManager.getInstance(HttpApp.getInstance()).getSP("host");
         if (TextUtils.isEmpty(host)){
-            host = "https://testway.jiangshen56.com/logistic-biz/";
+            host = "http://testway.jiangshen56.com/logistic-biz/";
         }
         return host;
     }
