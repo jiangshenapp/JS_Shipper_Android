@@ -21,6 +21,7 @@ import com.js.shipper.model.bean.DictBean;
 import com.js.shipper.model.bean.ServiceBean;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.model.event.DictSelectEvent;
+import com.js.shipper.model.event.RemoveUserEvent;
 import com.js.shipper.model.request.AddStepOne;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
@@ -191,7 +192,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 addStepOne.setSendName(mSendShip.getName());
                 addStepOne.setSendPosition(mSendShip.getPosition());
                 mPresenter.addStepOne(addStepOne);
-
                 break;
         }
     }
@@ -199,6 +199,18 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     @Override
     public void onStepOne(long orderId) {
         OrderSubmitActivity.action(mContext, orderId);
+    }
+
+    @Subscribe(sticky = true)
+    public void onEvent(RemoveUserEvent event){
+        mSendShip = new ShipBean();
+        mEndShip = new ShipBean();
+        if (mStartAddress!=null){
+            mStartAddress.setText("");
+        }
+        if (mEndAddress!=null){
+            mEndAddress.setText("");
+        }
     }
 
     @Override
@@ -290,4 +302,6 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     public void onServiceList(List<ServiceBean> mServiceBeans) {
 
     }
+
+
 }

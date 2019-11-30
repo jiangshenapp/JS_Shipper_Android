@@ -3,10 +3,12 @@ package com.js.shipper.ui.ship.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.base.frame.view.SimpleActivity;
+import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.util.RegexUtils;
@@ -79,8 +81,18 @@ public class ShipUserInfoActivity extends SimpleActivity {
         }
         if (mShipBean != null) {
             mAddressDetail.setText(mShipBean.getAddressDetail());
-            mName.setText(mShipBean.getName());
-            mPhone.setText(mShipBean.getPhone());
+            if (TextUtils.isEmpty(mShipBean.getName())) {
+                mName.setText(App.getInstance().nickName);
+            } else {
+                mName.setText(mShipBean.getName());
+            }
+            if (TextUtils.isEmpty(mShipBean.getPhone())) {
+                mName.setText(App.getInstance().mobile);
+            } else {
+                mPhone.setText(mShipBean.getPhone());
+            }
+
+
         }
     }
 
