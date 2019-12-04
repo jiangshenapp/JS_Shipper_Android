@@ -102,7 +102,7 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
-    private String[] items = {"拍摄","从相册选择"};
+    private String[] items = {"拍摄", "从相册选择"};
     private AuthInfo mAuthInfo;
     private LocationBean mLocationBean;
 
@@ -144,12 +144,15 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
         mLocationBean = new Gson().fromJson(mAuthInfo.getContactLocation(), LocationBean.class);
         etName.setText(mAuthInfo.getContactName());
         etPhone.setText(mAuthInfo.getContractPhone());
-        etAddress.setText(mLocationBean.getAddress());
+        if (mLocationBean != null) {
+            etAddress.setText(mLocationBean.getAddress());
+        }
+
         etDetailAddress.setText(mAuthInfo.getContactAddress());
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage1(), img1);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage2(), img2);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage3(), img3);
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mAuthInfo.getImage4(), img4);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mAuthInfo.getImage1(), img1);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mAuthInfo.getImage2(), img2);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mAuthInfo.getImage3(), img3);
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mAuthInfo.getImage4(), img4);
     }
 
     @Override
@@ -226,19 +229,19 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
         switch (choseCode) {
             case Const.PARK_HEAD1:
                 mAuthInfo.setImage1(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, img1);
                 break;
             case Const.PARK_HEAD2:
                 mAuthInfo.setImage2(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, img2);
                 break;
             case Const.PARK_HEAD3:
                 mAuthInfo.setImage3(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img3);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, img3);
                 break;
             case Const.PARK_HEAD4:
                 mAuthInfo.setImage4(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, img4);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, img4);
                 break;
         }
     }
@@ -340,20 +343,20 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
                 });
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new MaterialDialog.Builder(mContext)
                 .items(items)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        if (position==0){
+                        if (position == 0) {
                             File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
                             if (!file.getParentFile().exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             Uri imageUri = Uri.fromFile(file);
                             getTakePhoto().onPickFromCapture(imageUri);
-                        }else {
+                        } else {
                             getTakePhoto().onPickFromGallery();
                         }
                     }

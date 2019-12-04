@@ -78,31 +78,6 @@
             </LinearLayout>
 
 
-            <FrameLayout
-                android:id="@+id/center_verified_layout"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|start"
-                    android:layout_marginStart="12dp"
-                    android:text="实名认证"
-                    android:textColor="@color/_000000"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@mipmap/ic_list_arrow_black" />
-            </FrameLayout>
 
 
             <LinearLayout

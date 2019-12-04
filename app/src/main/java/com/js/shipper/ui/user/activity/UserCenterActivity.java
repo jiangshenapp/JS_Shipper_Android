@@ -75,8 +75,6 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     TextView tvVersion;
     @BindView(R.id.tv_cache)
     TextView tvCache;
-    @BindView(R.id.tv_verified)
-    TextView tvVerified;
 
     @Inject
     FilePresenter mFilePresenter;
@@ -108,25 +106,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
 
         }
         initVersion();
-        if (App.getInstance().personConsignorVerified == 3 || App.getInstance().companyConsignorVerified == 3) {
-            tvVerified.setText("认证失败");
-            return;
-        }
 
-        if (App.getInstance().personConsignorVerified == 2 || App.getInstance().companyConsignorVerified == 2) {
-            tvVerified.setText("已认证");
-            return;
-        }
-
-        if (App.getInstance().personConsignorVerified == 1 || App.getInstance().companyConsignorVerified == 1) {
-            tvVerified.setText("认证中");
-            return;
-        }
-
-        if (App.getInstance().personConsignorVerified == 0 && App.getInstance().companyConsignorVerified == 0) {
-            tvVerified.setText("未提交");
-            return;
-        }
     }
 
     private void initVersion() {
@@ -161,8 +141,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
 
-    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout,
-            R.id.center_verified_layout, R.id.center_feedback_layout,
+    @OnClick({R.id.center_avatar_layout, R.id.center_name_layout, R.id.center_feedback_layout,
             R.id.center_version_layout, R.id.center_about_layout,
             R.id.center_cache_layout, R.id.logout,
             R.id.bind_status_layout})
@@ -191,9 +170,6 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 break;
             case R.id.center_name_layout://昵称
                 changeNickname();
-                break;
-            case R.id.center_verified_layout://认证管理
-                VerifiedActivity.action(mContext);
                 break;
             case R.id.center_feedback_layout://意见反馈
                 FeedBackActivity.action(this);

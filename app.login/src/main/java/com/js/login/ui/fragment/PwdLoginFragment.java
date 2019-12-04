@@ -86,7 +86,11 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
         }else if (view.getId()==R.id.tv_forget_pwd){
             ForgetPwdActivity.action(getActivity());
         }else if (view.getId()==R.id.tv_protocal){
-            SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal, "用户协议");
+            if ("shipper".equals(LoginApp.getInstance().appType)) {
+                SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal_SHIPPER, "用户协议");
+            } else {
+                SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal_DRIVER, "用户协议");
+            }
         }else if (view.getId()==R.id.btn_login){
             phone = mPhone.getText().toString().trim();
             pwd = mPwd.getText().toString().trim();

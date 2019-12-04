@@ -134,7 +134,11 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
             }
             mPresenter.register(phone, pwd, code);
         }else if (view.getId()==R.id.tv_protocal){
-            SimpleWebActivity.action(this, Const.H5_RegisterProtocal, "用户协议");
+            if ("shipper".equals(LoginApp.getInstance().appType)) {
+                SimpleWebActivity.action(mContext, Const.H5_RegisterProtocal_SHIPPER, "用户协议");
+            } else {
+                SimpleWebActivity.action(mContext, Const.H5_RegisterProtocal_DRIVER, "用户协议");
+            }
         }
     }
 

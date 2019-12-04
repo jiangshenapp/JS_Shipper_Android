@@ -17,6 +17,6 @@
         android:layout_marginTop="34dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="8dp"
-        android:text="AntV 是蚂蚁金服全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。"
+        android:text="@string/app_about"
         android:textColor="@color/_000000" />
 </LinearLayout>

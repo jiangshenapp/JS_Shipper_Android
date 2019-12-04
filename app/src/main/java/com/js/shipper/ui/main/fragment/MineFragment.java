@@ -113,8 +113,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         mResources = new ArrayList<>();
         mTitles.add("我的园区");
         mTitles.add("我的客服");
+        mTitles.add("认证管理");
         mResources.add(R.mipmap.ic_center_park);
         mResources.add(R.mipmap.ic_center_service);
+        mResources.add(R.mipmap.ic_authentication);
         initConfig();
         initRecycler();
         initRefresh();
@@ -230,7 +232,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
         App.getInstance().putUserInfo(userInfo); //存储用户信息
 
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL()  + userInfo.getAvatar()
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL() + userInfo.getAvatar()
                 , mUserImg, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
 
         if (!TextUtils.isEmpty(userInfo.getMobile())) {
@@ -298,11 +300,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case 1://我的客服
                 IMHelper.getInstance().goIm(mContext);
                 break;
+            case 2:
+                VerifiedActivity.action(mContext);
+                break;
+            default:
+                ServiceBean serviceBean = mServiceBeans.get(position - 3);
+                SimpleWebActivity.action(getActivity(), serviceBean.getUrl(), serviceBean.getTitle());
+                break;
         }
-        if (position > 1) { //服务配置H5
-            ServiceBean serviceBean = mServiceBeans.get(position - 2);
-            SimpleWebActivity.action(getActivity(), serviceBean.getUrl(), serviceBean.getTitle());
-        }
+
     }
 
     @Override

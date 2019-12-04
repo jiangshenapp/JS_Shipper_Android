@@ -7,11 +7,11 @@
         android:icon="@mipmap/ic_menubar_cargoods_black"
         />
 
-    <item
-        android:id="@+id/navigation_service"
-        android:title="服务"
-        android:icon="@mipmap/ic_menubar_service_black"
-        />
+<!--    <item-->
+<!--        android:id="@+id/navigation_service"-->
+<!--        android:title="服务"-->
+<!--        android:icon="@mipmap/ic_menubar_service_black"-->
+<!--        />-->
 
     <item
         android:id="@+id/navigation_information"

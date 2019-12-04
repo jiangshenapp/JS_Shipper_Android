@@ -142,10 +142,9 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
 
 
     @OnClick({R.id.center_avatar_layout, R.id.center_name_layout,
-            R.id.center_verified_layout, R.id.center_campus_layout,
-            R.id.center_feedback_layout, R.id.center_version_layout,
-            R.id.center_about_layout, R.id.center_cache_layout,
-            R.id.logout,R.id.bind_status_layout})
+            R.id.center_campus_layout, R.id.center_feedback_layout,
+            R.id.center_version_layout, R.id.center_about_layout,
+            R.id.center_cache_layout, R.id.logout,R.id.bind_status_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.center_avatar_layout://头像
@@ -153,9 +152,6 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 break;
             case R.id.center_name_layout://昵称
                 changeNickname();
-                break;
-            case R.id.center_verified_layout://实名认证
-                UserVerifiedActivity.action(mContext);
                 break;
             case R.id.center_campus_layout://园区地址
                 ParkAddressActivity.action(this);

@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mCommunityFragment = CommunityFragment.newInstance();
         mMineFragment = MineFragment.newInstance();
         mFragments.add(mFindOrderFragment);
-        mFragments.add(mServiceFragment);
+        //mFragments.add(mServiceFragment);
         mFragments.add(mInformationFragment);
         mFragments.add(mCommunityFragment);
         mFragments.add(mMineFragment);
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 3) {
+                if (position == 2) {
                     if (!UserManager.getUserManager().isVerified()) {
                         toast("未认证");
                         mViewpager.setCurrentItem(0);
@@ -164,11 +164,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case R.id.navigation_find:
                 mViewpager.setCurrentItem(0);
                 break;
-            case R.id.navigation_service:
-                mViewpager.setCurrentItem(1);
-                break;
+//            case R.id.navigation_service:
+//                mViewpager.setCurrentItem(1);
+//                break;
             case R.id.navigation_information:
-                mViewpager.setCurrentItem(2);
+                mViewpager.setCurrentItem(1);
                 break;
             case R.id.navigation_community:
                 if (!UserManager.getUserManager().isVerified()) {
@@ -177,11 +177,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     mViewpager.setCurrentItem(0);
                     return false;
                 }
-                mViewpager.setCurrentItem(3);
+                mViewpager.setCurrentItem(2);
 
                 break;
             case R.id.navigation_mine:
-                mViewpager.setCurrentItem(4);
+                mViewpager.setCurrentItem(3);
                 break;
         }
         return false;
