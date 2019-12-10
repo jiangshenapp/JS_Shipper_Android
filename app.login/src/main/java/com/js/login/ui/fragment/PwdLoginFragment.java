@@ -79,19 +79,25 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     }
 
     @OnClick({R2.id.tv_register, R2.id.tv_forget_pwd, R2.id.tv_protocal,
-            R2.id.btn_login, R2.id.tv_login_phonecode,R2.id.wechat_img})
+            R2.id.btn_login, R2.id.tv_login_phonecode, R2.id.wechat_img, R2.id.tv_privacy})
     public void onViewClicked(View view) {
-        if (view.getId()==R.id.tv_register){
+        if (view.getId() == R.id.tv_register) {
             RegisterActivity.action(getActivity());
-        }else if (view.getId()==R.id.tv_forget_pwd){
+        } else if (view.getId() == R.id.tv_forget_pwd) {
             ForgetPwdActivity.action(getActivity());
-        }else if (view.getId()==R.id.tv_protocal){
+        } else if (view.getId() == R.id.tv_protocal) {
             if ("shipper".equals(LoginApp.getInstance().appType)) {
                 SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal_SHIPPER, "用户协议");
             } else {
                 SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal_DRIVER, "用户协议");
             }
-        }else if (view.getId()==R.id.btn_login){
+        } else if (view.getId() == R.id.tv_privacy) {
+            if ("shipper".equals(LoginApp.getInstance().appType)) {
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+            } else {
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+            }
+        } else if (view.getId() == R.id.btn_login) {
             phone = mPhone.getText().toString().trim();
             pwd = mPwd.getText().toString().trim();
             if (TextUtils.isEmpty(phone)) {
@@ -107,11 +113,9 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
                 return;
             }
             mPresenter.login(phone, pwd);
-        }else if (view.getId()==R.id.tv_login_phonecode){
+        } else if (view.getId() == R.id.tv_login_phonecode) {
             EventBus.getDefault().post(new LoginChangeEvent(1));
-        }
-
-        else if (view.getId() == R.id.wechat_img) {
+        } else if (view.getId() == R.id.wechat_img) {
             if (!LoginApp.getInstance().getApi().isWXAppInstalled()) {
                 toast("请先安装微信客户端。");
                 return;
@@ -128,7 +132,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onWxBind(WxLogin wxLogin) {
-        WxBindActivity.action(mContext,wxLogin,wxCode);
+        WxBindActivity.action(mContext, wxLogin, wxCode);
     }
 
     @Override
@@ -140,7 +144,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
             typeStr = "driver";
         }
         IMHelper.getInstance().login(typeStr + userInfo.getMobile(), typeStr + userInfo.getMobile());
-        SpManager.getInstance(mContext).putSP("loginPhone",userInfo.getMobile());
+        SpManager.getInstance(mContext).putSP("loginPhone", userInfo.getMobile());
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         ARouter.getInstance().build("/app/main").navigation();
     }

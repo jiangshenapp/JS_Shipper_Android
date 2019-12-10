@@ -2,6 +2,7 @@ package com.base.frame.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.base.frame.mvp.IBaseView;
@@ -44,6 +45,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
             mPresenter.attachView(this);
         }
         init();
+        Log.d(getClass().getSimpleName(),"onCreate");
     }
 
 
@@ -59,6 +61,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
 //            refWatcher.watch(this);
 //        }
         super.onDestroy();
+        Log.d(getClass().getSimpleName(),"onDestroy");
     }
 
 
@@ -83,6 +86,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(getClass().getSimpleName(),"onStart");
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
@@ -91,6 +95,7 @@ public abstract class BaseActivity<T extends IPresenter> extends ToolbarActivity
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(getClass().getSimpleName(),"onStop");
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }

@@ -96,10 +96,9 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         mCodePresenter.attachView(this);
     }
 
-    @OnClick({R2.id.tv_register, R2.id.tv_get_code, R2.id.tv_protocal,
+    @OnClick({R2.id.tv_register, R2.id.tv_get_code, R2.id.tv_protocal,R2.id.tv_privacy,
             R2.id.btn_login, R2.id.tv_login_password, R2.id.wechat_img})
     public void onViewClicked(View view) {
-
         if (view.getId() == R.id.tv_register) {
             RegisterActivity.action(getActivity());
         } else if (view.getId() == R.id.tv_get_code) {
@@ -119,7 +118,15 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
             } else {
                 SimpleWebActivity.action(getActivity(), Const.H5_RegisterProtocal_DRIVER, "用户协议");
             }
-        } else if (view.getId() == R.id.btn_login) {
+        }else if (view.getId() == R.id.tv_privacy) {
+            if ("shipper".equals(LoginApp.getInstance().appType)) {
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+            } else {
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+            }
+        }
+
+        else if (view.getId() == R.id.btn_login) {
             phone = mPhone.getText().toString().trim();
             code = mCode.getText().toString().trim();
             if (TextUtils.isEmpty(phone)) {

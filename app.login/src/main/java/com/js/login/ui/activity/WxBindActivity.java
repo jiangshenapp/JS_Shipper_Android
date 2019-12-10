@@ -109,7 +109,7 @@ public class WxBindActivity extends BaseActivity<WxBindPresenter> implements WxB
         mCodePresenter.attachView(this);
     }
 
-    @OnClick({R2.id.tv_get_code, R2.id.tv_protocal, R2.id.btn_login})
+    @OnClick({R2.id.tv_get_code, R2.id.tv_protocal, R2.id.btn_login,R2.id.tv_privacy})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.tv_get_code) {
             phone = mPhone.getText().toString().trim();
@@ -128,7 +128,15 @@ public class WxBindActivity extends BaseActivity<WxBindPresenter> implements WxB
             } else {
                 SimpleWebActivity.action(mContext, Const.H5_RegisterProtocal_DRIVER, "用户协议");
             }
-        } else if (view.getId() == R.id.btn_login) {
+        } else if (view.getId() == R.id.tv_privacy) {
+            if ("shipper".equals(LoginApp.getInstance().appType)) {
+                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+            } else {
+                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+            }
+        }
+
+        else if (view.getId() == R.id.btn_login) {
             phone = mPhone.getText().toString().trim();
             code = mCode.getText().toString().trim();
             if (TextUtils.isEmpty(phone)) {

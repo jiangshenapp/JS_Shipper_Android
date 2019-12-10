@@ -113,6 +113,22 @@
             android:text="《用户协议》"
             android:textColor="@color/_ECA73F"
             android:textSize="12sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="和"
+            android:textColor="@color/_B4B4B4"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="《隐私协议》"
+            android:textColor="@color/_ECA73F"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView
