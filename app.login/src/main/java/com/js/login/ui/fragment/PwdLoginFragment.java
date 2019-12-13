@@ -93,9 +93,9 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
             }
         } else if (view.getId() == R.id.tv_privacy) {
             if ("shipper".equals(LoginApp.getInstance().appType)) {
-                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私政策");
             } else {
-                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私政策");
             }
         } else if (view.getId() == R.id.btn_login) {
             phone = mPhone.getText().toString().trim();

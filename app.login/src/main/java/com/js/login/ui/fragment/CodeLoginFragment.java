@@ -120,9 +120,9 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
             }
         }else if (view.getId() == R.id.tv_privacy) {
             if ("shipper".equals(LoginApp.getInstance().appType)) {
-                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_SHIPPER, "隐私政策");
             } else {
-                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+                SimpleWebActivity.action(getActivity(), Const.H5_PrivacyProtocal_DRIVER, "隐私政策");
             }
         }
 
@@ -160,6 +160,8 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         req.state = "wx_login";
         LoginApp.getInstance().getApi().sendReq(req);
     }
+
+
 
     @Override
     public void onSmsCode() {

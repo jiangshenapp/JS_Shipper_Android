@@ -10,9 +10,7 @@ import com.base.util.manager.SpManager;
 import com.js.login.di.componet.AppComponent;
 import com.js.login.di.componet.DaggerAppComponent;
 import com.js.login.di.module.AppModule;
-import com.js.login.global.Const;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
  * Created by huyg on 2019/1/31.
