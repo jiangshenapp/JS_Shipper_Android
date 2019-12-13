@@ -130,9 +130,9 @@ public class WxBindActivity extends BaseActivity<WxBindPresenter> implements WxB
             }
         } else if (view.getId() == R.id.tv_privacy) {
             if ("shipper".equals(LoginApp.getInstance().appType)) {
-                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_SHIPPER, "隐私协议");
+                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_SHIPPER, "隐私政策");
             } else {
-                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_DRIVER, "隐私协议");
+                SimpleWebActivity.action(mContext, Const.H5_PrivacyProtocal_DRIVER, "隐私政策");
             }
         }
 

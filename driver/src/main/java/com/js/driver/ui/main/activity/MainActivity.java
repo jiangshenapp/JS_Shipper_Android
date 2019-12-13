@@ -3,6 +3,7 @@ package com.js.driver.ui.main.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.js.driver.App;
 import com.js.driver.R;
@@ -27,6 +29,7 @@ import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.main.presenter.MainPresenter;
 import com.js.driver.ui.main.presenter.contract.MainContract;
 import com.base.frame.view.BaseActivity;
+import com.js.driver.util.SpManager;
 import com.js.driver.util.UserManager;
 
 import java.util.ArrayList;
@@ -121,6 +124,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 1 || position == 2 || position == 3) {
+                    if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+                        ARouter.getInstance().build("/user/login").navigation();
+                        return;
+                    }
+                }
                 if (position == 2) {
                     if (!UserManager.getUserManager().isVerified()) {
                         toast("未认证");
@@ -168,9 +177,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 //                mViewpager.setCurrentItem(1);
 //                break;
             case R.id.navigation_information:
+                if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+                    ARouter.getInstance().build("/user/login").navigation();
+                    return false;
+                }
                 mViewpager.setCurrentItem(1);
                 break;
             case R.id.navigation_community:
+                if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+                    ARouter.getInstance().build("/user/login").navigation();
+                    return false;
+                }
                 if (!UserManager.getUserManager().isVerified()) {
                     toast("未认证");
                     mNavigation.getMenu().getItem(0).setChecked(true);
@@ -181,6 +198,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
                 break;
             case R.id.navigation_mine:
+                if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+                    ARouter.getInstance().build("/user/login").navigation();
+                    return false;
+                }
                 mViewpager.setCurrentItem(3);
                 break;
         }

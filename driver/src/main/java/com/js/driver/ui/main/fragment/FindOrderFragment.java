@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.global.Const;
+import com.js.driver.util.SpManager;
 import com.js.driver.util.UserManager;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
@@ -185,6 +187,10 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+            ARouter.getInstance().build("/user/login").navigation();
+            return;
+        }
         if (!UserManager.getUserManager().isVerified()) {
             AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
             appDialogFragment.setTitle("温馨提示");
