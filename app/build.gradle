@@ -62,7 +62,6 @@ android {
             jniLibs.srcDir 'libs'
         }
     }
-
 }
 
 dependencies {
@@ -86,13 +85,11 @@ dependencies {
     implementation rootProject.ext.dependencies.constraintlayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4'
 
-
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
-
 
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
@@ -112,10 +109,7 @@ dependencies {
     implementation rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknife_annotation
 
-
     //bugly
     implementation 'com.tencent.bugly:crashreport:2.6.6'
     implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
-
-
 }
