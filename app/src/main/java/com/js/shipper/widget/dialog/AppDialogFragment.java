@@ -1,10 +1,12 @@
 package com.js.shipper.widget.dialog;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,6 +113,19 @@ public class AppDialogFragment extends DialogFragment {
             }
         });
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            DisplayMetrics dm = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+            dialog.getWindow().setLayout((int) (dm.widthPixels * 0.75), ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+    }
+
 
     @Override
     public void onDestroyView() {
