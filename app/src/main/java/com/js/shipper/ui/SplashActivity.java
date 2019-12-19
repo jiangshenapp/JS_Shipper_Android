@@ -1,6 +1,8 @@
 package com.js.shipper.ui;
 
 import android.content.Intent;
+import android.os.Build;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import com.base.frame.view.BaseActivity;
 import com.base.frame.view.SimpleWebActivity;
 import com.base.http.global.Const;
+import com.base.util.manager.SpManager;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -23,7 +26,9 @@ import com.js.shipper.service.LocationService;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.main.presenter.ServicePresenter;
 import com.js.shipper.ui.main.presenter.contract.ServiceContract;
+import com.js.shipper.ui.user.activity.VerifiedActivity;
 import com.js.shipper.util.glide.CommonGlideImageLoader;
+import com.js.shipper.widget.dialog.AppDialogFragment;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -55,8 +60,44 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @Override
     protected void init() {
         mServicePresenter.attachView(this);
-        initPermission();
-        initLocation();
+        initProtocal();
+
+    }
+
+    private void initProtocal() {
+        StringBuilder content = new StringBuilder();
+        content.append("感谢您使用匠神来拉！为了帮助您安全使用产品和服务，在您同意并授权的基础上，我们可能会收集您的身份信息、联系信息、交易信息、位置信息等。请您务必仔细阅读并透彻理解");
+        content.append("<font color=\"#FE6026\"><a href=\"https://www.jiangshen56.com/privacyProtocal-shipper.html\">《隐私政策》</a></font>");
+        content.append("和<font color=\"#FE6026\"><a href=\"https://www.jiangshen56.com/registerProtocal-shipper.html\">《用户协议》</a></font>");
+        if (SpManager.getInstance(mContext).getIntSP("protocal") == 0) {
+            AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+            appDialogFragment.setTitle("用户协议与隐私保护声明");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                appDialogFragment.setMessage(Html.fromHtml(content.toString(), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                appDialogFragment.setMessage(Html.fromHtml(content.toString()));
+            }
+
+            appDialogFragment.setPositiveButton("同意并继续", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SpManager.getInstance(mContext).putIntSP("protocal",1);
+                    initPermission();
+                    initLocation();
+                }
+            });
+            appDialogFragment.setNegativeButton("不同意", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            appDialogFragment.setCancel(false);
+            appDialogFragment.show(getSupportFragmentManager(), "appDialog");
+        } else {
+            initPermission();
+            initLocation();
+        }
     }
 
     private void initLocation() {
@@ -111,7 +152,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_ad: //广告点击
-                SimpleWebActivity.action(this,mBannerBean.getUrl(),mBannerBean.getTitle());
+                SimpleWebActivity.action(this, mBannerBean.getUrl(), mBannerBean.getTitle());
                 break;
             case R.id.tv_skip: //跳过
                 if (mServicePresenter != null) {
@@ -135,7 +176,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             mBannerBean = mBannerBeans.get(0);
             mIvAd.setVisibility(View.VISIBLE);
             mTvSkip.setVisibility(View.VISIBLE);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + mBannerBean.getImage(), mIvAd);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL() + mBannerBean.getImage(), mIvAd);
             Observable.timer(3, TimeUnit.SECONDS)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

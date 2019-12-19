@@ -1,9 +1,11 @@
 package com.js.driver.widget.dialog;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,8 @@ public class AppDialogFragment extends DialogFragment {
     @BindView(R.id.dialog_positive)
     TextView mPositive;
 
+
+
     @OnClick({R.id.dialog_negative, R.id.dialog_positive})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -54,9 +58,11 @@ public class AppDialogFragment extends DialogFragment {
 
     private Unbinder unbinder;
     private String title;
-    private String message;
+    private CharSequence message;
     private String positive;
     private String negative;
+    private boolean isCancel;
+
     private View.OnClickListener mNegativeButtonListener;
     private View.OnClickListener mPositiveButtonListener;
 
@@ -90,6 +96,23 @@ public class AppDialogFragment extends DialogFragment {
         if (!TextUtils.isEmpty(negative)) {
             mNegative.setText(negative);
         }
+
+        getDialog().setCancelable(isCancel);
+        getDialog().setCanceledOnTouchOutside(isCancel);
+        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (!isCancel){
+                        return true;
+                    }else {
+                        return false;
+                    }
+
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -118,11 +141,11 @@ public class AppDialogFragment extends DialogFragment {
         this.title = title;
     }
 
-    public String getMessage() {
+    public CharSequence getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(CharSequence message) {
         this.message = message;
     }
 
@@ -134,5 +157,9 @@ public class AppDialogFragment extends DialogFragment {
     public void setPositiveButton(String positive, View.OnClickListener listener) {
         this.positive = positive;
         this.mPositiveButtonListener = listener;
+    }
+
+    public void setCancel(boolean cancel) {
+        isCancel = cancel;
     }
 }

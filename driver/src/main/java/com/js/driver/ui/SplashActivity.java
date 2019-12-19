@@ -1,12 +1,15 @@
 package com.js.driver.ui;
 
 import android.content.Intent;
+import android.os.Build;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.frame.view.SimpleWebActivity;
 import com.base.http.global.Const;
+import com.base.util.manager.SpManager;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -24,6 +27,7 @@ import com.base.frame.view.BaseActivity;
 import com.js.driver.ui.main.presenter.ServicePresenter;
 import com.js.driver.ui.main.presenter.contract.ServiceContract;
 import com.js.driver.util.glide.CommonGlideImageLoader;
+import com.js.driver.widget.dialog.AppDialogFragment;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -55,8 +59,44 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @Override
     protected void init() {
         mServicePresenter.attachView(this);
-        initPermission();
-        initLocation();
+        initProtocal();
+    }
+
+
+    private void initProtocal() {
+        StringBuilder content = new StringBuilder();
+        content.append("感谢您使用匠神来运！为了帮助您安全使用产品和服务，在您同意并授权的基础上，我们可能会收集您的身份信息、联系信息、交易信息、位置信息等。请您务必仔细阅读并透彻理解\n");
+        content.append("<font color=\"#FE6026\"><a href=\"https://www.jiangshen56.com/privacyProtocal-driver.html\">《隐私政策》</a></font>");
+        content.append("和<font color=\"#FE6026\"><a href=\"https://www.jiangshen56.com/registerProtocal-driver.html\">《用户协议》</a></font>");
+        if (SpManager.getInstance(mContext).getIntSP("protocal") == 0) {
+            AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+            appDialogFragment.setTitle("用户协议与隐私保护声明");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                appDialogFragment.setMessage(Html.fromHtml(content.toString(), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                appDialogFragment.setMessage(Html.fromHtml(content.toString()));
+            }
+
+            appDialogFragment.setPositiveButton("同意并继续", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SpManager.getInstance(mContext).putIntSP("protocal",1);
+                    initPermission();
+                    initLocation();
+                }
+            });
+            appDialogFragment.setNegativeButton("不同意", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            appDialogFragment.setCancel(false);
+            appDialogFragment.show(getSupportFragmentManager(), "appDialog");
+        } else {
+            initPermission();
+            initLocation();
+        }
     }
 
     private void initLocation() {
