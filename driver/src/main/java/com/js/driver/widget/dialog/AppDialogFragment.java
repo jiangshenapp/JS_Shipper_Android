@@ -114,18 +114,17 @@ public class AppDialogFragment extends DialogFragment {
             }
         });
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            DisplayMetrics dm = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-            dialog.getWindow().setLayout((int) (dm.widthPixels * 0.75), ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-    }
+    
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Dialog dialog = getDialog();
+//        if (dialog != null) {
+//            DisplayMetrics dm = new DisplayMetrics();
+//            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+//            dialog.getWindow().setLayout((int) (dm.widthPixels * 0.75), ViewGroup.LayoutParams.WRAP_CONTENT);
+//        }
+//    }
 
     @Override
     public void onDestroyView() {
