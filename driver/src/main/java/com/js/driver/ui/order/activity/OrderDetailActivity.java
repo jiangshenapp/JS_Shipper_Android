@@ -72,7 +72,6 @@ import butterknife.OnClick;
  */
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener {
 
-
     @BindView(R.id.detail_avatar)
     ImageView mAvatar;
     @BindView(R.id.detail_send_name)

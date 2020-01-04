@@ -152,7 +152,6 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
             }
             wechatAuth();
         }
-
     }
 
     private void wechatAuth() {
@@ -161,8 +160,6 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         req.state = "wx_login";
         LoginApp.getInstance().getApi().sendReq(req);
     }
-
-
 
     @Override
     public void onSmsCode() {

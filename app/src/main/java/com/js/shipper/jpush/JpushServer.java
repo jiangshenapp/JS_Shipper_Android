@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-
 import androidx.appcompat.app.AlertDialog;
-
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.stetho.common.LogUtil;
 import com.google.gson.Gson;
+import com.js.login.LoginApp;
+import com.js.shipper.ui.order.activity.OrderDetailActivity;
+import com.js.shipper.util.SpManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Iterator;
@@ -81,19 +83,16 @@ public class JpushServer extends BroadcastReceiver {
 
     // 处理推送消息
     private void handlePushMsg(Context context, String type, String value) {
-//        if (type.equals("h5_myteacher")) {
-//            if (TextUtils.isEmpty(App.getInstance().getToken())) {
-//                Intent loginIntent = new Intent(context, LoginActivity.class);
-//                loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(loginIntent);
-//            } else {
-//                Intent webIntent = new Intent(context, WebDetailActivity.class);
-//                webIntent.putExtra("url", value+"?token="+App.getInstance().getToken());
-//                webIntent.putExtra("title", "我的班主任");
-//                webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(webIntent);
-//            }
-//        }
+        if (type.equals("orderDetail")) {
+            if (TextUtils.isEmpty(SpManager.getInstance(context).getSP("token"))) {
+                ARouter.getInstance().build("/user/login").navigation();
+            } else {
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("orderId", value);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        }
     }
 
     // 打印所有的 intent extra 数据
