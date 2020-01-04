@@ -62,6 +62,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by huyg on 2019/4/24.
@@ -168,6 +169,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 clearCache();
                 break;
             case R.id.logout://登出
+                JPushInterface.deleteAlias(App.getInstance(), 0);
                 IMHelper.getInstance().logout();
                 UserManager.getUserManager().logout(mContext);
                 finish();

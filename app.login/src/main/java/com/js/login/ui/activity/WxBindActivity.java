@@ -40,6 +40,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -203,6 +204,7 @@ public class WxBindActivity extends BaseActivity<WxBindPresenter> implements WxB
         } else {
             typeStr = "driver";
         }
+        JPushInterface.setAlias(mContext, 0, phone);
         IMHelper.getInstance().login(typeStr + phone, typeStr + phone);
         LoginApp.getInstance().putToken(token);
         SpManager.getInstance(mContext).putSP("loginPhone", phone);

@@ -20,6 +20,11 @@ android {
         multiDexEnabled true
         ndk { abiFilters "armeabi", "armeabi-v7a", "x86","arm64-v8a","x86_64"}
 
+        manifestPlaceholders = [
+                JPUSH_APPKEY : "a5c60bbad6d9199cd975cd01",
+                JPUSH_PKGNAME:"com.js.driver",
+                JPUSH_CHANNEL: "developer-default"
+        ]
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -42,7 +47,6 @@ android {
             keyPassword "jsdriver"
         }
     }
-
 
     buildTypes {
         release {
@@ -116,4 +120,7 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:2.6.6'
     implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
 
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.2.0'
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'
 }

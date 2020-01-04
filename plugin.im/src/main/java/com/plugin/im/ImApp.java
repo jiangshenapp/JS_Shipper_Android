@@ -34,7 +34,6 @@ public class ImApp implements IAppLife {
         mImApp = application;
         mApp = this;
         IMHelper.getInstance().init(mImApp);
-
     }
 
     @Override

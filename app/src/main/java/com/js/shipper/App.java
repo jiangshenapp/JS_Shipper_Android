@@ -22,6 +22,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by huyg on 2019/4/1.
  */
@@ -53,6 +55,9 @@ public class App extends BaseApplication {
         registerWx();
         closeAndroidPDialog();
         initCrash();
+        //极光推送初始化
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);
+        JPushInterface.init(getApplicationContext());
     }
 
     /**

@@ -163,7 +163,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
-                    android:text="V1.0.0"
+                    android:text="V1.5.0"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
             </LinearLayout>

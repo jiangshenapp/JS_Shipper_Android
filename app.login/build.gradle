@@ -19,13 +19,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-
     }
 
     buildTypes {
@@ -34,7 +32,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -50,7 +47,6 @@ dependencies {
     implementation project(path: ':lib.util')
     implementation project(path: ':plugin.im')
 
-
     //di
     implementation rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies.dagger_annotation
@@ -64,4 +60,7 @@ dependencies {
 
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
 
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.2.0'
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'
 }

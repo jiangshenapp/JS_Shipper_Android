@@ -41,6 +41,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -200,9 +201,9 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
         } else {
             typeStr = "driver";
         }
+        JPushInterface.setAlias(mContext, 0, userInfo.getMobile());
         IMHelper.getInstance().login(typeStr + userInfo.getMobile(), typeStr + userInfo.getMobile());
         SpManager.getInstance(mContext).putSP("loginPhone", userInfo.getMobile());
-
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         ARouter.getInstance().build("/app/main").navigation();
     }

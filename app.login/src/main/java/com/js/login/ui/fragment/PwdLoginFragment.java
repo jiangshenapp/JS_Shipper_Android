@@ -36,6 +36,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by huyg on 2019/4/21.
@@ -143,6 +144,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
         } else {
             typeStr = "driver";
         }
+        JPushInterface.setAlias(mContext, 0, userInfo.getMobile());
         IMHelper.getInstance().login(typeStr + userInfo.getMobile(), typeStr + userInfo.getMobile());
         SpManager.getInstance(mContext).putSP("loginPhone", userInfo.getMobile());
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
