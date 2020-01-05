@@ -179,14 +179,19 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_waybill_phone" />
+                android:background="#FFFFFF"
+                android:drawablePadding="12dp"
+                android:drawableLeft="@mipmap/ic_waybill_phone"
+                android:textColor="@color/_333333"
+                android:text="联系我们" />
 
             <ImageView
                 android:id="@+id/im"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"

@@ -10,14 +10,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
-
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"
@@ -31,7 +29,6 @@
                 app:indicator_drawable_unselected="@drawable/shape_banner_un_selected"
                 app:indicator_height="10dp"
                 app:indicator_width="10dp" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +46,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -84,7 +80,6 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,7 +102,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,14 +140,12 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="车主："
                             android:textColor="@color/_B4B4B4"
                             android:textSize="14sp" />
-
 
                         <TextView
                             android:id="@+id/car_driver_name"
@@ -163,7 +155,6 @@
                             android:textSize="14sp" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -263,7 +254,6 @@
                 android:orientation="vertical"
                 android:padding="6dp">
 
-
                 <TextView
                     android:id="@+id/remark"
                     android:layout_width="match_parent"
@@ -277,7 +267,6 @@
         </LinearLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:id="@+id/order_layout"
         android:layout_width="match_parent"
@@ -286,7 +275,6 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -294,22 +282,25 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_waybill_phone" />
+                android:background="#FFFFFF"
+                android:drawablePadding="12dp"
+                android:drawableLeft="@mipmap/ic_waybill_phone"
+                android:textColor="@color/_333333"
+                android:text="联系我们" />
 
             <ImageView
                 android:id="@+id/im"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:src="@mipmap/ic_home_chat" />
 
-
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/place_order"
@@ -321,7 +312,6 @@
             android:text="立即下单"
             android:textColor="@color/white"
             android:textSize="17sp" />
-
 
     </LinearLayout>
 

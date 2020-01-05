@@ -26,7 +26,6 @@ import butterknife.BindView;
  */
 public class CollectActivity extends SimpleActivity {
 
-
     @BindView(R.id.rb_carsource)
     RadioButton mCarsource;
     @BindView(R.id.rb_delivery)

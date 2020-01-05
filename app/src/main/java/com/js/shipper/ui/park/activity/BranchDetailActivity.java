@@ -41,7 +41,6 @@ import butterknife.OnClick;
  */
 public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> implements BranchDetailContract.View {
 
-
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.remark)
@@ -190,30 +189,29 @@ public class BranchDetailActivity extends BaseActivity<BranchDetailPresenter> im
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        moreItem = menu.add(Menu.NONE, R.id.collection, Menu.FIRST, null);
-        moreItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        if (isCollection) {
-            moreItem.setIcon(R.mipmap.ic_navigationbar_collection_selected);
-        } else {
-            moreItem.setIcon(R.mipmap.ic_navigationbar_collection_default);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.collection:
-                if (isCollection) {
-                    mPresenter.removeCollect(new CollectPark(mParkBean.getParkId()));
-                } else {
-                    mPresenter.addCollect(new CollectPark(mParkBean.getParkId()));
-                }
-                break;
-        }
-        return true;
-    }
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        moreItem = menu.add(Menu.NONE, R.id.collection, Menu.FIRST, null);
+//        moreItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        if (isCollection) {
+//            moreItem.setIcon(R.mipmap.ic_navigationbar_collection_selected);
+//        } else {
+//            moreItem.setIcon(R.mipmap.ic_navigationbar_collection_default);
+//        }
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.collection:
+//                if (isCollection) {
+//                    mPresenter.removeCollect(new CollectPark(mParkBean.getParkId()));
+//                } else {
+//                    mPresenter.addCollect(new CollectPark(mParkBean.getParkId()));
+//                }
+//                break;
+//        }
+//        return true;
+//    }
 }
