@@ -92,7 +92,7 @@ public class JpushServer extends BroadcastReceiver {
                 ARouter.getInstance().build("/user/login").navigation();
             } else {
                 Intent intent = new Intent(context, OrderDetailActivity.class);
-                intent.putExtra("orderId", value);
+                intent.putExtra("orderId", Long.valueOf(value));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
