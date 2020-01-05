@@ -95,6 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="12dp"
                         android:src="@mipmap/ic_home_phone" />
 
                     <ImageView
