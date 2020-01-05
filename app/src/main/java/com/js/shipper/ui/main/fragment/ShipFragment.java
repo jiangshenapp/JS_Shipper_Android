@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.base.frame.view.SimpleWebActivity;
@@ -32,6 +33,7 @@ import com.js.shipper.ui.main.presenter.contract.ShipContract;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
 import com.js.shipper.ui.order.activity.OrdersActivity;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
+import com.js.shipper.util.SpManager;
 import com.js.shipper.util.glide.GlideImageLoader;
 import com.js.shipper.widget.window.ItemWindow;
 import com.youth.banner.Banner;
@@ -167,6 +169,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 OrdersActivity.action(mContext, 0);
                 break;
             case R.id.ship_submit://发货
+
+                if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
+                    ARouter.getInstance().build("/user/login").navigation();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(mStartAddress.getText().toString())) {
                     toast("请输入发货地址");
