@@ -2,6 +2,7 @@ package com.base.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -20,7 +21,6 @@ public class TimeUtils {
     private static final String ONE_DAY_AGO = "天前";
     private static final String ONE_MONTH_AGO = "月前";
     private static final String ONE_YEAR_AGO = "年前";
-
 
     public static String formatYYMMDDHHMMSS(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -88,5 +88,15 @@ public class TimeUtils {
 
     private static long toYears(long date) {
         return toMonths(date) / 365L;
+    }
+
+    /**
+     * 获取当前时间
+     */
+    public static String getCurrentTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+        return str;
     }
 }

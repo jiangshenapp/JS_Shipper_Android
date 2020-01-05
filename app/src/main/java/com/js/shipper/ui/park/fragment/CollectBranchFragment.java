@@ -30,7 +30,7 @@ import butterknife.BindView;
 
 /**
  * Created by huyg on 2019/4/30.
- * 城市配送
+ * 附近网点
  */
 public class CollectBranchFragment extends BaseFragment<CollectDeliveryPresenter> implements CollectDeliveryContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 

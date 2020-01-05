@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.model.LatLng;
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.easeui.EaseConstant;
+import com.js.community.CommunityApp;
 import com.js.shipper.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -55,7 +57,7 @@ import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/30.
- * 城市配送
+ * 附近网点
  */
 public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements DeliveryContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
@@ -90,7 +92,6 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         return new DeliveryFragment();
     }
 
-
     @Override
     protected void initInject() {
         DaggerFragmentComponent.builder()
@@ -107,8 +108,18 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
 
     @Override
     protected void init() {
+        initData();
         initView();
+    }
 
+    private void initData() {
+        BDLocation mLocation = App.getInstance().mLocation;
+        if (mLocation != null
+                && !TextUtils.isEmpty(mLocation.getAdCode()) && mLocation.getAdCode().length() == 6) {
+            mArea.setText(mLocation.getCity());
+            areaCode = mLocation.getAdCode();
+            areaCode = areaCode.substring(0, 4) + "00";
+        }
     }
 
     private void initCityWindow() {
@@ -159,10 +170,12 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
         if (!TextUtils.isEmpty(companyType)) {
             mPark.setCompanyType(companyType);
         }
+        if (areaCode.length() == 6) {
+            mPark.setAddressCode(areaCode);
+        }
         mPark.setSort(sort);
         mPark.setLatitude(latitude);
         mPark.setLongitude(longitude);
-
         mPresenter.getParkList(num, Const.PAGE_SIZE, mPark);
     }
 

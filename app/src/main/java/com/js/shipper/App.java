@@ -92,7 +92,6 @@ public class App extends BaseApplication {
         getUserInfo();
     }
 
-
     /**
      * 清空用户信息
      */
@@ -160,7 +159,6 @@ public class App extends BaseApplication {
             e.printStackTrace();
         }
     }
-
 
     private void initCrash() {
         CrashReport.initCrashReport(getApplicationContext(), com.base.frame.global.Const.BUGLY_APP_SHIPPER_ID, true);

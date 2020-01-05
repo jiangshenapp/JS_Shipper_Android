@@ -2,6 +2,12 @@ package com.base.http.interceptor;
 
 import android.util.Log;
 
+import com.base.http.HttpApp;
+import com.base.http.exception.NoNetworkException;
+import com.base.util.AppUtils;
+import com.base.util.SharePreferenceUtils;
+import com.base.util.TimeUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +30,9 @@ public class LoggingInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        if (!AppUtils.isNetworkAvailable(HttpApp.getInstance().getApplicationContext())) {
+            throw new NoNetworkException();
+        }
         String content;
         try {
             Request request = chain.request()
@@ -32,7 +41,7 @@ public class LoggingInterceptor implements Interceptor {
                     .addHeader("Connection", "keep-alive")
                     .build();
             long startTime = System.currentTimeMillis();
-            Response response = chain.proceed(chain.request());
+            okhttp3.Response response = chain.proceed(chain.request());
 
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
@@ -55,17 +64,22 @@ public class LoggingInterceptor implements Interceptor {
                     }
                     sb.delete(sb.length() - 1, sb.length());
                 }
+                logStr = "时间：" + TimeUtils.getCurrentTime() + "  " + duration + "毫秒" + "\n地址：" + request.url() + "\n参数：" + printJson("RequestParams", sb.toString()) + "\n结果：" + printJson("Response", content) + "\n\n\n";
             } else {
+                logStr = "时间：" + TimeUtils.getCurrentTime() + "  " + duration + "毫秒" + "\n地址：" + request.url() + "\n结果：" + printJson("Response", content) + "\n\n\n";
             }
 
+            logStr = logStr + SharePreferenceUtils.getInterfaceLog(HttpApp.getInstance().getApplicationContext());
+            SharePreferenceUtils.setInterfaceLog(HttpApp.getInstance().getApplicationContext(), logStr);
             Log.d(TAG, "----------End:" + duration + "毫秒----------");
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new NoNetworkException();
         }
+
 
     }
 

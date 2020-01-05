@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.location.BDLocation;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.easeui.EaseConstant;
@@ -55,7 +56,6 @@ import butterknife.OnClick;
  * 车源
  */
 public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implements CarSourceContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, DictContract.View {
-
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
@@ -110,6 +110,13 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
 
     @Override
     protected void init() {
+        BDLocation mLocation = App.getInstance().mLocation;
+        if (mLocation != null
+                && !TextUtils.isEmpty(mLocation.getAdCode()) && mLocation.getAdCode().length() == 6) {
+            mSendAddress.setText(mLocation.getCity());
+            startAddressCode = mLocation.getAdCode();
+            startAddressCode = startAddressCode.substring(0, 4) + "00";
+        }
         initView();
         initData();
     }
@@ -119,7 +126,6 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
         mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
         mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
-
 
     private void initView() {
         mDictPresenter.attachView(this);

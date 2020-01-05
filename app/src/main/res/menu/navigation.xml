@@ -2,16 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_park"
-        android:title="园区"
-
-        android:icon="@mipmap/ic_menubar_searchcar_black"
-        />
-
-    <item
         android:id="@+id/navigation_ship"
         android:title="发货"
         android:icon="@mipmap/ic_menubar_goods_black"
+        />
+
+    <item
+        android:id="@+id/navigation_park"
+        android:title="园区"
+        android:icon="@mipmap/ic_menubar_searchcar_black"
         />
 
     <item

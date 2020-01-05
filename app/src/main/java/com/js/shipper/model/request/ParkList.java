@@ -18,7 +18,6 @@ public class ParkList {
     private double longitude;
     private double latitude;
 
-
     public String getAddressCode() {
         return addressCode;
     }

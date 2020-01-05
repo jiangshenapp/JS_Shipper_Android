@@ -93,13 +93,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mParkFragment = ParkFragment.newInstance();
         mShipFragment = ShipFragment.newInstance();
+        mParkFragment = ParkFragment.newInstance();
         mInformationFragment = InformationFragment.newInstance();
         mCommunityFragment = CommunityFragment.newInstance();
         mMineFragment = MineFragment.newInstance();
-        mFragments.add(mParkFragment);
         mFragments.add(mShipFragment);
+        mFragments.add(mParkFragment);
         mFragments.add(mInformationFragment);
         mFragments.add(mCommunityFragment);
         mFragments.add(mMineFragment);
@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1 || position == 2 || position == 3 || position == 4) {
+                if (position == 2 || position == 3 || position == 4) {
                     if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
                         ARouter.getInstance().build("/user/login").navigation();
                         return;
@@ -171,14 +171,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.navigation_park:
+            case R.id.navigation_ship:
                 mViewpager.setCurrentItem(0);
                 break;
-            case R.id.navigation_ship:
-                if (TextUtils.isEmpty(SpManager.getInstance(mContext).getSP("token"))) {
-                    ARouter.getInstance().build("/user/login").navigation();
-                    return false;
-                }
+            case R.id.navigation_park:
                 mViewpager.setCurrentItem(1);
                 break;
             case R.id.navigation_information:

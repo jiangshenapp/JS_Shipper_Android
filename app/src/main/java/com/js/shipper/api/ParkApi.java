@@ -26,7 +26,7 @@ public interface ParkApi {
 
 
     /**
-     * 找城市配送
+     * 找附近网点
      * @param current
      * @param size
      * @return
