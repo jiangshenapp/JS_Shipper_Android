@@ -96,6 +96,7 @@ public class ParkAddressActivity extends BaseActivity<ParkAddressPresenter> impl
 
     @Inject
     FilePresenter mFilePresenter;
+
     @Inject
     ParkUserVerifiedPresenter mParkUserVerifiedPresenter;
 
