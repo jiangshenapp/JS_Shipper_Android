@@ -26,6 +26,8 @@ import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by huyg on 2019/4/1.
+ * 接口地址【文档：http://testway.jiangshen56.com/swagger-ui.html?urls.primaryName=logistic-biz、
+ * https://gateway.jiangshen56.com/swagger-ui.html?urls.primaryName=logistic-biz】
  */
 public class App extends BaseApplication {
 

@@ -43,8 +43,6 @@ import butterknife.OnClick;
  */
 public class InformationFragment extends BaseFragment<InformationPresenter> implements InformationContract.View {
 
-    @BindView(R.id.new_message)
-    TextView mMessage;
     @BindView(R.id.list)
     EaseConversationList mList;
 
@@ -107,10 +105,13 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
         EMClient.getInstance().addConnectionListener(connectionListener);
     }
 
-    @OnClick({R.id.message_layout, R.id.customer_service_layout})
+    @OnClick({R.id.message_layout, R.id.push_layout, R.id.customer_service_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.message_layout:
+                MessageActivity.action(getActivity());
+                break;
+            case R.id.push_layout:
                 MessageActivity.action(getActivity());
                 break;
             case R.id.customer_service_layout:
@@ -118,7 +119,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 break;
         }
     }
-
 
     protected EMConnectionListener connectionListener = new EMConnectionListener() {
 

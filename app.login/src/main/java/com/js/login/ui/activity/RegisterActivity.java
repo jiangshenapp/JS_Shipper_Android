@@ -8,19 +8,26 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.base.frame.view.BaseActivity;
 import com.base.frame.view.SimpleWebActivity;
 import com.base.util.RegexUtils;
+import com.base.util.manager.SpManager;
 import com.js.login.LoginApp;
 import com.js.login.R;
 import com.js.login.R2;
 import com.js.login.di.componet.DaggerActivityComponent;
 import com.js.login.di.module.ActivityModule;
 import com.js.login.global.Const;
+import com.js.login.model.bean.UserInfo;
+import com.js.login.model.event.UserStatusChangeEvent;
 import com.js.login.ui.presenter.RegisterPresenter;
 import com.js.login.ui.presenter.SmsCodePresenter;
 import com.js.login.ui.presenter.contract.RegisterContract;
 import com.js.login.ui.presenter.contract.SmsCodeContract;
+import com.plugin.im.IMHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +35,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -163,9 +171,26 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     }
 
     @Override
-    public void onRegister() {
-        LoginActivity.action(this);
-        finish();
+    public void onRegister(String token) {
+//        LoginActivity.action(this);
+//        finish();
+        LoginApp.getInstance().putToken(token);
+        mPresenter.getUserInfo();
+    }
+
+    @Override
+    public void onUserInfo(UserInfo userInfo) {
+        String typeStr = "";
+        if ("shipper".equals(LoginApp.getInstance().appType)) {
+            typeStr = "shipper";
+        } else {
+            typeStr = "driver";
+        }
+        JPushInterface.setAlias(mContext, 0, userInfo.getMobile());
+        IMHelper.getInstance().login(typeStr + userInfo.getMobile(), typeStr + userInfo.getMobile());
+        SpManager.getInstance(mContext).putSP("loginPhone", userInfo.getMobile());
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
+        ARouter.getInstance().build("/app/main").navigation();
     }
 
     @Override

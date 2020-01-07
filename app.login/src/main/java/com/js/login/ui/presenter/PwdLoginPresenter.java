@@ -119,6 +119,5 @@ public class PwdLoginPresenter extends RxPresenter<PwdLoginContract.View> implem
                     mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
-
     }
 }

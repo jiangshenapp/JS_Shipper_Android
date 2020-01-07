@@ -2,6 +2,7 @@ package com.js.login.ui.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
+import com.js.login.model.bean.UserInfo;
 
 /**
  * author : hzb
@@ -13,11 +14,15 @@ import com.base.frame.mvp.IPresenter;
 public interface RegisterContract {
 
     interface View extends IBaseView {
-        void onRegister();
+        void onRegister(String token);
+
+        void onUserInfo(UserInfo userInfo);
     }
 
     interface Presenter extends IPresenter<View> {
 
         void register(String phone, String password, String code);
+
+        void getUserInfo();
     }
 }

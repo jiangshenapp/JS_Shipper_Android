@@ -65,7 +65,6 @@ public interface UserApi {
     Observable<BaseHttpResponse> logout(@Field("token") String token);
 
 
-
     /**
      * 会员注册
      *
@@ -76,7 +75,7 @@ public interface UserApi {
      */
     @FormUrlEncoded
     @POST("app/subscriber/registry")
-    Observable<BaseHttpResponse> registry(@Field("mobile") String mobile,
+    Observable<HttpResponse<String>> registry(@Field("mobile") String mobile,
                                           @Field("password") String password,
                                           @Field("code") String code);
 

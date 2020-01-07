@@ -3,9 +3,11 @@ package com.js.login.ui.presenter;
 import com.base.frame.bean.BaseHttpResponse;
 import com.base.frame.mvp.RxPresenter;
 import com.base.frame.rx.RxException;
+import com.base.frame.rx.RxResult;
 import com.base.frame.rx.RxSchedulers;
 import com.base.http.ApiFactory;
 import com.js.login.api.UserApi;
+import com.js.login.model.bean.UserInfo;
 import com.js.login.ui.presenter.contract.RegisterContract;
 
 import javax.inject.Inject;
@@ -34,23 +36,38 @@ public class RegisterPresenter extends RxPresenter<RegisterContract.View> implem
         Disposable disposable = mApiFactory.getApi(UserApi.class)
                 .registry(phone, password, code)
                 .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         mView.showProgress();
                     }
                 })
-                .subscribe(new Consumer<BaseHttpResponse>() {
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
+                    public void accept(String s) throws Exception {
                         mView.closeProgress();
-                        mView.toast(response.getMsg());
-                        if (response.isSuccess()){
-                            mView.onRegister();
-                        }
+                        mView.onRegister(s);
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void getUserInfo() {
+        Disposable disposable = mApiFactory.getApi(UserApi.class)
+                .profile()
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<UserInfo>() {
+                    @Override
+                    public void accept(UserInfo userInfo) throws Exception {
+                        mView.onUserInfo(userInfo);
+                    }
+                }, new RxException<>(e -> {
                     mView.toast(e.getMessage());
                 }));
         addDispose(disposable);

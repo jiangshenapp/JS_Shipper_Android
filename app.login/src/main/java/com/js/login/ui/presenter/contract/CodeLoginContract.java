@@ -26,6 +26,5 @@ public interface CodeLoginContract {
         void wxBind(String code);
 
         void getUserInfo();
-
     }
 }
