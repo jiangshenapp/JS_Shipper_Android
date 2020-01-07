@@ -25,6 +25,7 @@ import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.InformationPresenter;
 import com.js.shipper.ui.main.presenter.contract.InformationContract;
 import com.js.shipper.ui.message.activity.MessageActivity;
+import com.js.shipper.ui.message.activity.PushActivity;
 import com.js.shipper.ui.message.chat.EaseChatActivity;
 import com.plugin.im.IMHelper;
 
@@ -112,7 +113,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 MessageActivity.action(getActivity());
                 break;
             case R.id.push_layout:
-                MessageActivity.action(getActivity());
+                PushActivity.action(getActivity());
                 break;
             case R.id.customer_service_layout:
                 IMHelper.getInstance().goIm(mContext);

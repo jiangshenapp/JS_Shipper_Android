@@ -9,6 +9,7 @@ import com.js.shipper.ui.center.activity.FeedBackActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.message.activity.MessageActivity;
 import com.js.shipper.ui.message.activity.MessageDetailActivity;
+import com.js.shipper.ui.message.activity.PushActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.ui.order.activity.OrderEditActivity;
 import com.js.shipper.ui.order.activity.OrderSubmitActivity;
@@ -50,7 +51,6 @@ public interface ActivityComponent {
 
     void inject(WithdrawActivity withdrawActivity);
 
-
     void inject(OrderDetailActivity orderDetailActivity);
 
     void inject(OrderSubmitActivity orderSubmitActivity);
@@ -62,7 +62,6 @@ public interface ActivityComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(FeedBackActivity feedBackActivity);
-
 
     void inject(PayActivity payActivity);
 
@@ -76,11 +75,12 @@ public interface ActivityComponent {
 
     void inject(BranchDetailActivity branchDetailActivity);
 
-
     void inject(TypeInputActivity typeInputActivity);
 
     void inject(MessageActivity messageActivity);
 
     void inject(MessageDetailActivity messageDetailActivity);
+
+    void inject(PushActivity pushActivity);
 }
 

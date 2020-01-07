@@ -18,6 +18,7 @@ import com.js.driver.ui.center.activity.SelectCityActivity;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.message.activity.MessageActivity;
 import com.js.driver.ui.message.activity.MessageDetailActivity;
+import com.js.driver.ui.message.activity.PushActivity;
 import com.js.driver.ui.order.activity.DistributionActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
@@ -57,7 +58,6 @@ public interface ActivityComponent {
 
     void inject(WithdrawActivity withdrawActivity);
 
-
     void inject(DriverVerifiedActivity driverVerifiedActivity);
 
     void inject(ParkUserVerifiedActivity parkUserVerifiedActivity);
@@ -69,7 +69,6 @@ public interface ActivityComponent {
     void inject(CarsActivity carsActivity);
 
     void inject(AddCarActivity addCarActivity);
-
 
     void inject(FeedBackActivity feedBackActivity);
 
@@ -90,5 +89,7 @@ public interface ActivityComponent {
     void inject(SelectAddressActivity selectAddressActivity);
 
     void inject(SelectCityActivity selectCityActivity);
+
+    void inject(PushActivity pushActivity);
 }
 

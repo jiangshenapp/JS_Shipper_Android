@@ -24,6 +24,7 @@ import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.InformationPresenter;
 import com.js.driver.ui.main.presenter.contract.InformationContract;
 import com.js.driver.ui.message.activity.MessageActivity;
+import com.js.driver.ui.message.activity.PushActivity;
 import com.js.driver.ui.message.chat.EaseChatActivity;
 import com.js.driver.util.UserManager;
 import com.plugin.im.IMHelper;
@@ -112,7 +113,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 MessageActivity.action(getActivity());
                 break;
             case R.id.push_layout:
-                MessageActivity.action(getActivity());
+                PushActivity.action(getActivity());
                 break;
             case R.id.customer_service_layout:
                 IMHelper.getInstance().goIm(mContext);
