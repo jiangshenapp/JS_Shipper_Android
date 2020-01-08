@@ -102,7 +102,7 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
         List<PushBean> pushBeans = adapter.getData();
         PushBean pushBean = pushBeans.get(position);
         if (pushBean != null) {
-            mPresenter.readPushLog(pushBean.getId());
+            mPresenter.readPushLog(pushBean.getId(), 2);
             PushDetailActivity.action(mContext, pushBean);
         }
     }

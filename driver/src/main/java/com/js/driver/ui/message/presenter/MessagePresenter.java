@@ -49,4 +49,52 @@ public class MessagePresenter extends RxPresenter<MessageContract.View> implemen
                 }));
         addDispose(disposable);
     }
+
+    @Override
+    public void readMessage(long id, int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readMessage(id, pushSide)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onReadMessage(aBoolean);
+                    }
+                },new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void readAllMessage(int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readAllMessage(pushSide)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onReadAllMessage(aBoolean);
+                    }
+                },new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
 }

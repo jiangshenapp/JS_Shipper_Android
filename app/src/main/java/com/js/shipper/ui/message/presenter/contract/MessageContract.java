@@ -26,7 +26,7 @@ public interface MessageContract {
 
     interface Presenter extends IPresenter<View> {
         void getMessage(int type, int current, int size);
-        void readMessage(long id);
-        void readAllMessage();
+        void readMessage(long id, int pushSide);
+        void readAllMessage(int pushSide);
     }
 }

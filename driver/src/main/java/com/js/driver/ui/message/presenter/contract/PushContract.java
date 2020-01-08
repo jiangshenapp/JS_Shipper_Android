@@ -16,11 +16,15 @@ import java.util.List;
 public interface PushContract {
 
     interface View extends IBaseView {
-        void onPushMessage(List<PushBean> mPushBeans);
         void finishRefreshAndLoadMore();
+        void onPushMessage(List<PushBean> mPushBeans);
+        void onReadPushLog(boolean isOk);
+        void onReadAllPushLog(boolean isOk);
     }
 
     interface Presenter extends IPresenter<View> {
         void getPushMessage(int pushSide);
+        void readPushLog(long id, int pushSide);
+        void readAllPushLog(int pushSide);
     }
 }

@@ -24,7 +24,7 @@ public interface PushContract {
 
     interface Presenter extends IPresenter<View> {
         void getPushMessage(int pushSide);
-        void readPushLog(long id);
-        void readAllPushLog();
+        void readPushLog(long id, int pushSide);
+        void readAllPushLog(int pushSide);
     }
 }

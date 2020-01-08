@@ -102,7 +102,8 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
         List<PushBean> pushBeans = adapter.getData();
         PushBean pushBean = pushBeans.get(position);
         if (pushBean != null) {
-            MessageDetailActivity.action(mContext, pushBean.getId());
+            mPresenter.readPushLog(pushBean.getId(), 1);
+            PushDetailActivity.action(mContext, pushBean);
         }
     }
 
@@ -110,6 +111,20 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
     public void onPushMessage(List<PushBean> mPushBeans) {
         mList = mPushBeans;
         mAdapter.setNewData(mList);
+    }
+
+    @Override
+    public void onReadPushLog(boolean isOk) {
+        if (isOk) {
+            mPresenter.getPushMessage(1);
+        }
+    }
+
+    @Override
+    public void onReadAllPushLog(boolean isOk) {
+        if (isOk) {
+            mPresenter.getPushMessage(1);
+        }
     }
 
     @Override

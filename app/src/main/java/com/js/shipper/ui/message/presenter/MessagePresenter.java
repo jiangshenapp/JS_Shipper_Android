@@ -51,8 +51,8 @@ public class MessagePresenter extends RxPresenter<MessageContract.View> implemen
     }
 
     @Override
-    public void readMessage(long id) {
-        Disposable disposable = mApiFactory.getApi(MessageApi.class).readMessage(id)
+    public void readMessage(long id, int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readMessage(id, pushSide)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -75,8 +75,8 @@ public class MessagePresenter extends RxPresenter<MessageContract.View> implemen
     }
 
     @Override
-    public void readAllMessage() {
-        Disposable disposable = mApiFactory.getApi(MessageApi.class).readAllMessage()
+    public void readAllMessage(int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readAllMessage(pushSide)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {

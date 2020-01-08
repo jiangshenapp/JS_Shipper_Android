@@ -53,8 +53,8 @@ public class PushPresenter extends RxPresenter<PushContract.View> implements Pus
     }
 
     @Override
-    public void readPushLog(long id) {
-        Disposable disposable = mApiFactory.getApi(MessageApi.class).readPushLog(id)
+    public void readPushLog(long id, int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readPushLog(id, pushSide)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -77,8 +77,8 @@ public class PushPresenter extends RxPresenter<PushContract.View> implements Pus
     }
 
     @Override
-    public void readAllPushLog() {
-        Disposable disposable = mApiFactory.getApi(MessageApi.class).readAllPushLog()
+    public void readAllPushLog(int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).readAllPushLog(pushSide)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {

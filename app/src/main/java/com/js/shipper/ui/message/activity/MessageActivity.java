@@ -111,7 +111,7 @@ public class MessageActivity extends BaseActivity<MessagePresenter> implements M
         List<MessageBean> messageBeans = adapter.getData();
         MessageBean messageBean = messageBeans.get(position);
         if (messageBean != null) {
-            mPresenter.readMessage(messageBean.getId());
+            mPresenter.readMessage(messageBean.getId(), 2);
             MessageDetailActivity.action(mContext, messageBean.getId());
         }
     }

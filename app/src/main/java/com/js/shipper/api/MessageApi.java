@@ -61,48 +61,54 @@ public interface MessageApi {
      * 标记推送消息为已读
      *
      * @param id the id
+     * @param pushSide 推送来源，1运力，2货主
      * @return the observable
      */
     @POST("app/message/readPushLog")
-    Observable<HttpResponse<Boolean>> readPushLog(@Query("Id") long id);
+    Observable<HttpResponse<Boolean>> readPushLog(@Query("id") long id,
+                                                  @Query("pushSide") int pushSide);
 
 
     /**
      * 标记全部推送消息为已读
      *
+     * @param pushSide 推送来源，1运力，2货主
      * @return the observable
      */
     @POST("app/message/readAllPushLog")
-    Observable<HttpResponse<Boolean>> readAllPushLog();
+    Observable<HttpResponse<Boolean>> readAllPushLog(@Query("pushSide") int pushSide);
 
 
     /**
      * 标记系统消息为已读
      *
      * @param id the id
+     * @param pushSide 推送来源，1运力，2货主
      * @return the observable
      */
     @POST("app/message/readMessage")
-    Observable<HttpResponse<Boolean>> readMessage(@Query("messageId") long id);
+    Observable<HttpResponse<Boolean>> readMessage(@Query("messageId") long id,
+                                                  @Query("pushSide") int pushSide);
 
 
     /**
      * 标记全部系统消息为已读
      *
+     * @param pushSide 推送来源，1运力，2货主
      * @return the observable
      */
     @POST("app/message/readAllMessage")
-    Observable<HttpResponse<Boolean>> readAllMessage();
+    Observable<HttpResponse<Boolean>> readAllMessage(@Query("pushSide") int pushSide);
 
 
     /**
      * 获取系统消息未读数
      *
-     * @param type 类型 1所有 2司机 3货主
+     * @param pushSide 推送来源，1运力，2货主
      * @return the unread message count
      */
     @GET("app/message/getUnreadMessageCount")
-    Observable<HttpResponse<String>> getUnreadMessageCount(@Query("type") int type);
+    Observable<HttpResponse<String>> getUnreadMessageCount(@Query("pushSide") int pushSide);
 
 
     /**
