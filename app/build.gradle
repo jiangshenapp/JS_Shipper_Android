@@ -83,6 +83,7 @@ dependencies {
     implementation project(path: ':app.community')
     implementation project(path: ':component')
     implementation project(path: ':app.login')
+    implementation project(path: ':app.message')
     debugImplementation project(path: ':plugin.doraemon')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'

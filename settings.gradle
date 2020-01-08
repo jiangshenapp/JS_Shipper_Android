@@ -1,1 +1,1 @@
-include ':app', ':lib.frame', ':app.community', ':lib.util', ':component', ':plugin.im', ':app.login', 'lib.http', ':driver', ':easeui',  ':plugin.doraemon'
+include ':app', ':lib.frame', ':app.community', ':lib.util', ':component', ':plugin.im', ':app.login', ':app.message', 'lib.http', ':driver', ':easeui',  ':plugin.doraemon'
