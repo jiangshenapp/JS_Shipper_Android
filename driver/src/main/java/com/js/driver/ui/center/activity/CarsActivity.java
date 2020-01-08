@@ -51,7 +51,6 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
         context.startActivity(intent);
     }
 
-
     public static void action(Activity context, boolean isJump) {
         Intent intent = new Intent(context, CarsActivity.class);
         intent.putExtra("isJump", isJump);
@@ -115,7 +114,6 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
         return R.layout.activity_mine_car;
     }
 
-
     @Override
     public void setActionBar() {
         mTitle.setText("我的车辆");
@@ -161,6 +159,5 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
             setResult(Const.CODE_RESULT, intent);
             finish();
         }
-
     }
 }

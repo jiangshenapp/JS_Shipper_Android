@@ -2,6 +2,8 @@ package com.js.driver.ui.message.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.model.bean.MessageBean;
 import com.js.driver.model.response.ListResponse;
+import com.js.driver.ui.center.activity.AddCarActivity;
 import com.js.driver.ui.message.adapter.MessageAdapter;
 import com.js.driver.ui.message.presenter.MessagePresenter;
 import com.js.driver.ui.message.presenter.contract.MessageContract;
@@ -139,21 +142,33 @@ public class MessageActivity extends BaseActivity<MessagePresenter> implements M
 
     @Override
     public void onReadMessage(boolean isOk) {
-        if (isOk) {
-            getMessage(Const.PAGE_NUM);
-        }
+        getMessage(Const.PAGE_NUM);
     }
 
     @Override
     public void onReadAllMessage(boolean isOk) {
-        if (isOk) {
-            getMessage(Const.PAGE_NUM);
-        }
+        getMessage(Const.PAGE_NUM);
     }
 
     @Override
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
         mRefresh.finishLoadMore();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_message_read, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.message_all_read:
+                mPresenter.readAllMessage(1);
+                break;
+        }
+        return true;
     }
 }

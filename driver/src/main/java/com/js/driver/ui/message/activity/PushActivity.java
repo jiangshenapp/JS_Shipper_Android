@@ -2,6 +2,8 @@ package com.js.driver.ui.message.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -130,5 +132,21 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
     @Override
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_message_read, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.message_all_read:
+                mPresenter.readAllPushLog(1);
+                break;
+        }
+        return true;
     }
 }
