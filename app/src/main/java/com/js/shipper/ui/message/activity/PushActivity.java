@@ -117,16 +117,12 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
 
     @Override
     public void onReadPushLog(boolean isOk) {
-        if (isOk) {
-            mPresenter.getPushMessage(2);
-        }
+        mPresenter.getPushMessage(2);
     }
 
     @Override
     public void onReadAllPushLog(boolean isOk) {
-        if (isOk) {
-            mPresenter.getPushMessage(2);
-        }
+        mPresenter.getPushMessage(2);
     }
 
     @Override
