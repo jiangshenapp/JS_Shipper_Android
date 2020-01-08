@@ -2,25 +2,21 @@ package com.js.driver.ui.message.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
-import com.js.driver.model.bean.PushBean;
-
-import java.util.List;
 
 /**
  * author : hzb
  * e-mail : hanzhanbing@evcoming.com
- * time   : 2020/01/07
+ * time   : 2020/01/08
  * desc   :
  * version: 3.0.0
  */
-public interface PushContract {
+public interface PushDetailContract {
 
     interface View extends IBaseView {
-        void onPushMessage(List<PushBean> mPushBeans);
-        void finishRefreshAndLoadMore();
+
     }
 
     interface Presenter extends IPresenter<View> {
-        void getPushMessage(int pushSide);
+
     }
 }

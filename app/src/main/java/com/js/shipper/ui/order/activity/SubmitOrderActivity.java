@@ -81,7 +81,6 @@ import butterknife.OnClick;
  */
 public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> implements SubmitOrderContract.View, FileContract.View, DictContract.View, InvokeListener, TakePhoto.TakeResultListener {
 
-
     @BindView(R.id.good_weight)
     EditText mGoodWeight;
     @BindView(R.id.good_volume)

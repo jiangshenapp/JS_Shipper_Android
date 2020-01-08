@@ -62,8 +62,6 @@
             android:name="com.js.shipper.ui.main.activity.MainActivity"
             android:launchMode="singleTask" />
 
-
-
         <activity
             android:name="com.js.shipper.ui.user.activity.UserCenterActivity"
             android:launchMode="singleTop" />
@@ -116,7 +114,6 @@
             android:name="com.js.shipper.ui.user.activity.VerifiedActivity"
             android:launchMode="singleTop" />
 
-
         <activity
             android:name="com.js.shipper.ui.ship.activity.ShipUserInfoActivity"
             android:launchMode="singleTop" />
@@ -163,7 +160,15 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name="com.js.shipper.ui.message.activity.PushActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.shipper.ui.message.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.shipper.ui.message.activity.PushDetailActivity"
             android:launchMode="singleTop" />
 
         <activity android:name="com.base.frame.view.SimpleWebActivity"

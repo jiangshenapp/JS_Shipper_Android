@@ -2,8 +2,9 @@ package com.js.shipper.ui.message.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
-import com.js.shipper.model.bean.MessageBean;
-import com.js.shipper.model.response.ListResponse;
+import com.js.shipper.model.bean.PushBean;
+
+import java.util.List;
 
 /**
  * author : hzb
@@ -15,11 +16,15 @@ import com.js.shipper.model.response.ListResponse;
 public interface PushContract {
 
     interface View extends IBaseView {
-        void onMessage(ListResponse<MessageBean> mMessageBeans);
         void finishRefreshAndLoadMore();
+        void onPushMessage(List<PushBean> mPushBeans);
+        void onReadPushLog(boolean isOk);
+        void onReadAllPushLog(boolean isOk);
     }
 
     interface Presenter extends IPresenter<View> {
-        void getMessage(int type, int current, int size);
+        void getPushMessage(int pushSide);
+        void readPushLog(long id);
+        void readAllPushLog();
     }
 }

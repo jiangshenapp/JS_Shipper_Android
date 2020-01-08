@@ -20,7 +20,6 @@ import butterknife.BindView;
  */
 public class EaseChatActivity extends SimpleActivity {
 
-
     @BindView(R.id.frame)
     FrameLayout frame;
 
@@ -34,7 +33,6 @@ public class EaseChatActivity extends SimpleActivity {
         intent.putExtra(EaseConstant.EXTRA_USER_ID, emConversation.conversationId());
         context.startActivity(intent);
     }
-
 
     public static void action(Context context, int type,String userId) {
         Intent intent = new Intent(context, EaseChatActivity.class);
@@ -74,6 +72,4 @@ public class EaseChatActivity extends SimpleActivity {
     public void setActionBar() {
         mToolbar.setVisibility(View.GONE);
     }
-
-
 }

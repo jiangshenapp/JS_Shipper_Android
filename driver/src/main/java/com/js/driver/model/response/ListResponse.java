@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ListResponse<T>{
 
-
     /**
      * current : 0
      * pages : 0

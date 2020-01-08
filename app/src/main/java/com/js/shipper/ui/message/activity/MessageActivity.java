@@ -111,6 +111,7 @@ public class MessageActivity extends BaseActivity<MessagePresenter> implements M
         List<MessageBean> messageBeans = adapter.getData();
         MessageBean messageBean = messageBeans.get(position);
         if (messageBean != null) {
+            mPresenter.readMessage(messageBean.getId());
             MessageDetailActivity.action(mContext, messageBean.getId());
         }
     }
@@ -133,6 +134,20 @@ public class MessageActivity extends BaseActivity<MessagePresenter> implements M
             case Const.MORE:
                 mAdapter.addData(mMessageBeans.getRecords());
                 break;
+        }
+    }
+
+    @Override
+    public void onReadMessage(boolean isOk) {
+        if (isOk) {
+            getMessage(Const.PAGE_NUM);
+        }
+    }
+
+    @Override
+    public void onReadAllMessage(boolean isOk) {
+        if (isOk) {
+            getMessage(Const.PAGE_NUM);
         }
     }
 

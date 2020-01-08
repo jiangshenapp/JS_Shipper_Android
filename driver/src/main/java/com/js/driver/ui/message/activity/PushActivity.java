@@ -14,16 +14,14 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
-import com.js.driver.global.Const;
-import com.js.driver.model.bean.MessageBean;
-import com.js.driver.model.response.ListResponse;
-import com.js.driver.ui.message.adapter.MessageAdapter;
-import com.js.driver.ui.message.presenter.MessagePresenter;
-import com.js.driver.ui.message.presenter.contract.MessageContract;
+import com.js.driver.model.bean.PushBean;
+import com.js.driver.ui.message.adapter.PushAdapter;
+import com.js.driver.ui.message.presenter.PushPresenter;
+import com.js.driver.ui.message.presenter.contract.PushContract;
 import com.js.driver.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -36,19 +34,18 @@ import butterknife.BindView;
  * desc   : 推送通知列表
  * version: 3.0.0
  */
-public class PushActivity extends BaseActivity<MessagePresenter> implements MessageContract.View, BaseQuickAdapter.OnItemClickListener {
+public class PushActivity extends BaseActivity<PushPresenter> implements PushContract.View, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
 
-    private MessageAdapter mAdapter;
-    private List<MessageBean> mList;
-    private int type;
+    private PushAdapter mAdapter;
+    private List<PushBean> mList;
 
     public static void action(Context context) {
-        Intent intent = new Intent(context, MessageActivity.class);
+        Intent intent = new Intent(context, PushActivity.class);
         context.startActivity(intent);
     }
 
@@ -83,22 +80,16 @@ public class PushActivity extends BaseActivity<MessagePresenter> implements Mess
 
     private void initRefresh() {
         mRefresh.autoRefresh();
-        mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
-                getMessage(num);
-            }
-
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                getMessage(Const.PAGE_NUM);
+                mPresenter.getPushMessage(1);
             }
         });
     }
 
     private void initRecycler() {
-        mAdapter = new MessageAdapter(R.layout.item_message, mList);
+        mAdapter = new PushAdapter(R.layout.item_message, mList);
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
@@ -108,37 +99,21 @@ public class PushActivity extends BaseActivity<MessagePresenter> implements Mess
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        List<MessageBean> messageBeans = adapter.getData();
-        MessageBean messageBean = messageBeans.get(position);
-        if (messageBean != null) {
-            MessageDetailActivity.action(mContext, messageBean.getId());
+        List<PushBean> pushBeans = adapter.getData();
+        PushBean pushBean = pushBeans.get(position);
+        if (pushBean != null) {
+            MessageDetailActivity.action(mContext, pushBean.getId());
         }
-    }
-
-    private void getMessage(int num) {
-        if (num == Const.PAGE_NUM) {
-            type = Const.REFRESH;
-        } else {
-            type = Const.MORE;
-        }
-        mPresenter.getMessage(3, num, Const.PAGE_SIZE);
     }
 
     @Override
-    public void onMessage(ListResponse<MessageBean> mMessageBeans) {
-        switch (type) {
-            case Const.REFRESH:
-                mAdapter.setNewData(mMessageBeans.getRecords());
-                break;
-            case Const.MORE:
-                mAdapter.addData(mMessageBeans.getRecords());
-                break;
-        }
+    public void onPushMessage(List<PushBean> mPushBeans) {
+        mList = mPushBeans;
+        mAdapter.setNewData(mList);
     }
 
     @Override
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
-        mRefresh.finishLoadMore();
     }
 }

@@ -18,11 +18,15 @@ import com.js.shipper.ui.main.presenter.contract.CarSourceContract;
 public interface MessageContract {
 
     interface View extends IBaseView {
-        void onMessage(ListResponse<MessageBean> mMessageBeans);
         void finishRefreshAndLoadMore();
+        void onMessage(ListResponse<MessageBean> mMessageBeans);
+        void onReadMessage(boolean isOk);
+        void onReadAllMessage(boolean isOk);
     }
 
     interface Presenter extends IPresenter<View> {
         void getMessage(int type, int current, int size);
+        void readMessage(long id);
+        void readAllMessage();
     }
 }

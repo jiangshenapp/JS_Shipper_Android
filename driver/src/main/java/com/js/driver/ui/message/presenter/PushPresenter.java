@@ -7,8 +7,11 @@ import com.base.frame.rx.RxSchedulers;
 import com.base.http.ApiFactory;
 import com.js.driver.api.MessageApi;
 import com.js.driver.model.bean.MessageBean;
+import com.js.driver.model.bean.PushBean;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.ui.message.presenter.contract.PushContract;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,21 +35,19 @@ public class PushPresenter extends RxPresenter<PushContract.View> implements Pus
     }
 
     @Override
-    public void getMessage(int type, int current, int size) {
-        Disposable disposable = mApiFactory.getApi(MessageApi.class).getMessage(type, current,
-                size)
+    public void getPushMessage(int pushSide) {
+        Disposable disposable = mApiFactory.getApi(MessageApi.class).getPushMessage(pushSide)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
-                .subscribe(new Consumer<ListResponse<MessageBean>>() {
+                .subscribe(new Consumer<List<PushBean>>() {
                     @Override
-                    public void accept(ListResponse<MessageBean> response) throws Exception {
-
+                    public void accept(List<PushBean> response) throws Exception {
                         mView.finishRefreshAndLoadMore();
-                        mView.onMessage(response);
+                        mView.onPushMessage(response);
                     }
                 },new RxException<>(e->{
-                    mView.toast(e.getMessage());
                     mView.finishRefreshAndLoadMore();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }

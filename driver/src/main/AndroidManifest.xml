@@ -148,7 +148,15 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name="com.js.driver.ui.message.activity.PushActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.driver.ui.message.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.driver.ui.message.activity.PushDetailActivity"
             android:launchMode="singleTop" />
 
         <activity

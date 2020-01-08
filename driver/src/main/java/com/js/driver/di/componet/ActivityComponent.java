@@ -19,6 +19,7 @@ import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.message.activity.MessageActivity;
 import com.js.driver.ui.message.activity.MessageDetailActivity;
 import com.js.driver.ui.message.activity.PushActivity;
+import com.js.driver.ui.message.activity.PushDetailActivity;
 import com.js.driver.ui.order.activity.DistributionActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
@@ -91,5 +92,7 @@ public interface ActivityComponent {
     void inject(SelectCityActivity selectCityActivity);
 
     void inject(PushActivity pushActivity);
+
+    void inject(PushDetailActivity pushDetailActivity);
 }
 
