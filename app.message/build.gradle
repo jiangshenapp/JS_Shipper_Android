@@ -58,4 +58,7 @@ dependencies {
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    //未读消息圆点
+    implementation 'q.rorbin:badgeview:1.1.2'
 }

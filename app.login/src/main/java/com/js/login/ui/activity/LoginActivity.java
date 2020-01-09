@@ -57,7 +57,6 @@ public class LoginActivity extends SimpleActivity {
         initView();
     }
 
-
     private void initView() {
         initFragment();
         showFragment();

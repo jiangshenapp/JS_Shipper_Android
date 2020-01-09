@@ -18,6 +18,7 @@ import com.js.message.R2;
 import com.js.message.di.componet.DaggerActivityComponent;
 import com.js.message.di.module.ActivityModule;
 import com.js.message.model.bean.PushBean;
+import com.js.message.model.event.MessageEvent;
 import com.js.message.ui.adapter.PushAdapter;
 import com.js.message.ui.presenter.PushPresenter;
 import com.js.message.ui.presenter.contract.PushContract;
@@ -25,6 +26,8 @@ import com.js.message.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -130,11 +133,15 @@ public class PushActivity extends BaseActivity<PushPresenter> implements PushCon
 
     @Override
     public void onReadPushLog(boolean isOk) {
+        EventBus.getDefault().post(new MessageEvent
+                (MessageEvent.PUSH_COUNT_CHANGE));
         getPushMessage();
     }
 
     @Override
     public void onReadAllPushLog(boolean isOk) {
+        EventBus.getDefault().post(new MessageEvent
+                (MessageEvent.PUSH_COUNT_CHANGE));
         getPushMessage();
     }
 

@@ -20,6 +20,7 @@ import com.js.message.di.componet.DaggerActivityComponent;
 import com.js.message.di.module.ActivityModule;
 import com.js.message.global.Const;
 import com.js.message.model.bean.MessageBean;
+import com.js.message.model.event.MessageEvent;
 import com.js.message.model.response.ListResponse;
 import com.js.message.ui.adapter.MessageAdapter;
 import com.js.message.ui.presenter.MessagePresenter;
@@ -28,6 +29,8 @@ import com.js.message.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -151,11 +154,15 @@ public class MessageActivity extends BaseActivity<MessagePresenter> implements M
 
     @Override
     public void onReadMessage(boolean isOk) {
+        EventBus.getDefault().post(new MessageEvent
+                (MessageEvent.MESSAGE_COUNT_CHANGE));
         getMessage(Const.PAGE_NUM);
     }
 
     @Override
     public void onReadAllMessage(boolean isOk) {
+        EventBus.getDefault().post(new MessageEvent
+                (MessageEvent.MESSAGE_COUNT_CHANGE));
         getMessage(Const.PAGE_NUM);
     }
 

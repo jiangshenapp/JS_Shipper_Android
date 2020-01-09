@@ -63,7 +63,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mViewpager.setCurrentItem(0);
     }
 
-
     @Override
     protected void init() {
         initView();

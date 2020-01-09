@@ -2,10 +2,13 @@ package com.js.message.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
+
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
@@ -14,24 +17,30 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.widget.EaseConversationList;
-import com.js.message.ui.activity.MessageActivity;
-import com.js.message.ui.activity.PushActivity;
-import com.js.message.ui.chat.EaseChatActivity;
 import com.js.message.MessageApp;
 import com.js.message.R;
 import com.js.message.R2;
 import com.js.message.di.componet.DaggerFragmentComponent;
 import com.js.message.di.module.FragmentModule;
+import com.js.message.model.event.MessageEvent;
+import com.js.message.ui.activity.MessageActivity;
+import com.js.message.ui.activity.PushActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.js.message.ui.presenter.InformationPresenter;
 import com.js.message.ui.presenter.contract.InformationContract;
 import com.plugin.im.IMHelper;
+
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * Created by huyg on 2019/4/1.
@@ -41,6 +50,10 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     @BindView(R2.id.list)
     EaseConversationList mList;
+    @BindView(R2.id.tv_message_count)
+    TextView mTvMessageCount;
+    @BindView(R2.id.tv_push_count)
+    TextView mTvPushCount;
 
     protected boolean isConflict;
     private static final String TAG = "InformationFragment";
@@ -75,6 +88,13 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     @Override
     protected void init() {
+        if ("shipper".equals(MessageApp.getInstance().appType)) {
+            mPresenter.getUnreadMessageCount(2);
+            mPresenter.getUnreadPushLogCount(2);
+        } else {
+            mPresenter.getUnreadMessageCount(1);
+            mPresenter.getUnreadPushLogCount(1);
+        }
         conversationList.addAll(loadConversationList());
         mList.init(conversationList);
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,14 +106,14 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 if (conversation != null) {
                     if ("shipper".equals(MessageApp.getInstance().appType)) {
                         if (MessageApp.getInstance().personConsignorVerified == 2
-                                || MessageApp.getInstance().companyConsignorVerified == 2 ) {
+                                || MessageApp.getInstance().companyConsignorVerified == 2) {
                             EaseChatActivity.action(mContext, conversation);
                         } else {
                             toast("未认证");
                         }
                     } else {
                         if (MessageApp.getInstance().driverVerified == 2
-                                || MessageApp.getInstance().parkVerified == 2 ) {
+                                || MessageApp.getInstance().parkVerified == 2) {
                             EaseChatActivity.action(mContext, conversation);
                         } else {
                             toast("未认证");
@@ -102,7 +122,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 }
             }
         });
-
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
         EMClient.getInstance().addConnectionListener(connectionListener);
     }
@@ -116,6 +135,36 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
         } else if (view.getId() == R.id.customer_service_layout) {
             IMHelper.getInstance().goIm(mContext);
         }
+    }
+
+    @Subscribe
+    public void onEvent(MessageEvent event) {
+        switch (event.index) {
+            case MessageEvent.MESSAGE_COUNT_CHANGE: //消息数量改变
+                if ("shipper".equals(MessageApp.getInstance().appType)) {
+                    mPresenter.getUnreadMessageCount(2);
+                } else {
+                    mPresenter.getUnreadMessageCount(1);
+                }
+                break;
+            case MessageEvent.PUSH_COUNT_CHANGE: //推送数量改变
+                if ("shipper".equals(MessageApp.getInstance().appType)) {
+                    mPresenter.getUnreadPushLogCount(2);
+                } else {
+                    mPresenter.getUnreadPushLogCount(1);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onGetUnreadMessageCount(String count) {
+        new QBadgeView(getActivity()).bindTarget(mTvMessageCount).setBadgeNumber(Integer.valueOf(count));
+    }
+
+    @Override
+    public void onGetUnreadPushLogCount(String count) {
+        new QBadgeView(getActivity()).bindTarget(mTvPushCount).setBadgeNumber(Integer.valueOf(count));
     }
 
     protected EMConnectionListener connectionListener = new EMConnectionListener() {
@@ -137,7 +186,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     };
 
     protected Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
                     onConnectionDisconnected();
