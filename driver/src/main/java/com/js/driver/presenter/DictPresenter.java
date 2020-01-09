@@ -28,7 +28,6 @@ public class DictPresenter extends RxPresenter<DictContract.View> implements Dic
         this.mApiFactory = apiFactory;
     }
 
-
     @Override
     public void getDictByType(String type) {
         Disposable disposable = mApiFactory.getApi(DictApi.class)
@@ -39,6 +38,23 @@ public class DictPresenter extends RxPresenter<DictContract.View> implements Dic
                     @Override
                     public void accept(List<DictBean> dictBeans) throws Exception {
                         mView.onDictByType(type,dictBeans);
+                    }
+                }, new RxException<>(e -> {
+
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void getFirstDictByType(String type) {
+        Disposable disposable = mApiFactory.getApi(DictApi.class)
+                .getFirstDict(type)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<DictBean>() {
+                    @Override
+                    public void accept(DictBean dictBean) throws Exception {
+                        mView.onFirstDictByType(type,dictBean);
                     }
                 }, new RxException<>(e -> {
 

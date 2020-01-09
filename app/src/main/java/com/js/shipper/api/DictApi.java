@@ -14,11 +14,9 @@ import retrofit2.http.Query;
  */
 public interface DictApi {
 
-
     @POST("app/dict/getDictByType")
     Observable<HttpResponse<List<DictBean>>> getDictList(@Query("type") String type);
 
-
-
-
+    @POST("app/dict/getFirstDictByType")
+    Observable<HttpResponse<DictBean>> getFirstDict(@Query("type") String type);
 }

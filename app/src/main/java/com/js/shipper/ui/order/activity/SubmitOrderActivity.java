@@ -834,6 +834,10 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         }
     }
 
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
+    }
 
     @Override
     public void onSubmitOrder(Boolean isOk) {

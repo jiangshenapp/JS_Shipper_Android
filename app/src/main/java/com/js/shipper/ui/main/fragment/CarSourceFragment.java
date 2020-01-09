@@ -322,4 +322,9 @@ public class CarSourceFragment extends BaseFragment<CarSourcePresenter> implemen
                 break;
         }
     }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
+    }
 }

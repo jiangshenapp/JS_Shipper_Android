@@ -15,12 +15,12 @@ public interface DictContract {
     interface View extends IBaseView {
 
         void onDictByType(String type, List<DictBean> dictBeans);
-
+        void onFirstDictByType(String type, DictBean dictBean);
     }
 
     interface Presenter extends IPresenter<View> {
 
         void getDictByType(String type);
-
+        void getFirstDictByType(String type);
     }
 }

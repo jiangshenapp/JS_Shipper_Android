@@ -31,10 +31,8 @@ public class Const {
     public static final String AuthStateStr[] = {"未提交", "认证中", "已认证", "认证失败"};
     public static final String AuthStateColor[] = {"#B4B4B4", "#0091FF", "#ECA73F", "#E02020"};
 
-
     public static final int CODE_REQ = 999;
     public static final int CODE_RESULT = 888;
-
 
     public static final int DICT_LENGTH = 1;
     public static final String DICT_LENGTH_NAME = "carLength";
@@ -46,6 +44,6 @@ public class Const {
     public static final String DICT_PICK_TYPE_NAME  ="packType ";//包装类型
     public static final int DICT_GOODS_NAME = 5;
     public static final String DICT_GOODS_NAME_  ="goodsName";
-
-
+    public static final int DICT_SERVICE_FEE = 6;
+    public static final String DICT_SERVICE_FEE_NAME  ="servicefee";
 }

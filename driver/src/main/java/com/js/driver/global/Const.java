@@ -46,7 +46,8 @@ public class Const {
     public static final String DICT_LENGTH_NAME = "carLength";
     public static final int DICT_CAR_TYPE = 2;
     public static final String DICT_CAR_TYPE_NAME ="carModel";
-
     public static final int DICT_USE_CAR = 3;
     public static final String DICT_USE_CAR_TYPE_NAME ="useCarType";
+    public static final int DICT_SERVICE_FEE = 4;
+    public static final String DICT_SERVICE_FEE_NAME  ="servicefee";
 }

@@ -75,7 +75,6 @@ import butterknife.OnClick;
  */
 public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> implements OrderSubmitContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener, DictContract.View {
 
-
     @BindView(R.id.good_weight)
     EditText mGoodWeight;
     @BindView(R.id.good_volume)
@@ -604,6 +603,9 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         if (mFilePresenter != null) {
             mFilePresenter.detachView();
         }
+        if (mDictPresenter != null) {
+            mDictPresenter.detachView();
+        }
     }
 
     @Override
@@ -648,5 +650,10 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             list.add(dictBean.getLabel());
         }
         pvOptions.setPicker(list);
+    }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
     }
 }

@@ -57,7 +57,6 @@ import butterknife.OnClick;
  */
 public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements BoutiqueContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, DictContract.View {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -242,6 +241,11 @@ public class BoutiqueFragment extends BaseFragment<BoutiquePresenter> implements
                 mFilterWindow.setCarTypes(dictBeans);
                 break;
         }
+    }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
     }
 
     private void getCarSource(int num) {

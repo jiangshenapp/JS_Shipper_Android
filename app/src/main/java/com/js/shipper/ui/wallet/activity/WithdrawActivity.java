@@ -13,9 +13,17 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
+import com.js.shipper.global.Const;
+import com.js.shipper.model.bean.DictBean;
+import com.js.shipper.presenter.DictPresenter;
+import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.ui.wallet.presenter.WithdrawPresenter;
 import com.js.shipper.ui.wallet.presenter.contract.WithdrawContract;
 import com.base.frame.view.BaseActivity;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,12 +31,14 @@ import butterknife.OnClick;
 /**
  * Created by huyg on 2019/4/24.
  */
-public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements WithdrawContract.View {
+public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements WithdrawContract.View, DictContract.View {
 
     @BindView(R.id.withdraw_money)
     EditText mMoney;
     @BindView(R.id.withdraw_money_max)
     TextView mMoneyMax;
+    @BindView(R.id.withdraw_poundage)
+    TextView mPoundage;
     @BindView(R.id.bank_number)
     EditText mBankNumber;
     @BindView(R.id.bank_opening)
@@ -54,6 +64,9 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     private double moneyMax; //最大提现金额
     private int mWithdrawChannel; //1、支付宝 2、银行卡
 
+    @Inject
+    DictPresenter mDictPresenter;
+
     public static void action(Context context, int withdrawType, double money) {
         Intent intent = new Intent(context, WithdrawActivity.class);
         intent.putExtra("withdrawType", withdrawType);
@@ -69,6 +82,8 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
         mMoney.setEnabled(false);
         mMoney.setText(String.valueOf(moneyMax));
         mMoneyMax.setText("当前最大提现金额："+ moneyMax +"元");
+        mDictPresenter.attachView(this);
+        mDictPresenter.getFirstDictByType(Const.DICT_SERVICE_FEE_NAME);
     }
 
     private void initIntent() {
@@ -153,5 +168,27 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     public void onBalanceWithdraw() {
         toast("申请提现成功");
         finish();
+    }
+
+    @Override
+    public void onDictByType(String type, List<DictBean> dictBeans) {
+
+    }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+        switch (type) {
+            case Const.DICT_SERVICE_FEE_NAME:
+                mPoundage.setText("提现手续费："+dictBean.getValue()+"%");
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDictPresenter != null) {
+            mDictPresenter.detachView();
+        }
     }
 }

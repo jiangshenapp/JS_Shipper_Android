@@ -284,6 +284,11 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
     }
 
     @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
+    }
+
+    @Override
     public void onBannerListFail() {
 
     }
