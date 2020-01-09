@@ -131,7 +131,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
 
     // 园区属性
     private List<String> companyTypeItems = new ArrayList<String>(Arrays.asList("专线","落地配","网点"));
-    
+
     public static void action(Context context) {
         context.startActivity(new Intent(context, ParkUserVerifiedActivity.class));
     }

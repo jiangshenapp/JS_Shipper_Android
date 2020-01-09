@@ -167,9 +167,10 @@ public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements
             type = Const.MORE;
         }
         ParkList mPark = new ParkList();
-        if (!TextUtils.isEmpty(companyType)) {
-            mPark.setCompanyType(companyType);
-        }
+//        if (!TextUtils.isEmpty(companyType)) {
+//            mPark.setCompanyType(companyType);
+//        }
+        mPark.setCompanyType("1");
         if (areaCode.length() == 6) {
             mPark.setAddressCode(areaCode);
         }
