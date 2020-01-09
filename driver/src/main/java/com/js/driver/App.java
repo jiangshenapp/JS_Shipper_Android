@@ -74,6 +74,11 @@ public class App extends BaseApplication {
         this.companyConsignorVerified = SpManager.getInstance(this).getIntSP("companyConsignorVerified");
         this.personConsignorVerified = SpManager.getInstance(this).getIntSP("personConsignorVerified");
 
+        MessageApp.getInstance().driverVerified = this.driverVerified;
+        MessageApp.getInstance().parkVerified = this.parkVerified;
+        MessageApp.getInstance().companyConsignorVerified = this.companyConsignorVerified;
+        MessageApp.getInstance().personConsignorVerified = this.personConsignorVerified;
+
         HttpApp.getApp().token = this.token;
     }
 

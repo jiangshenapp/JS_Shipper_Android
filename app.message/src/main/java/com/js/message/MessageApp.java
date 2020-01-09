@@ -21,6 +21,10 @@ public class MessageApp implements IAppLife {
     private static MessageApp mApp;
     private AppComponent mAppComponent;
     public String appType;
+    public int driverVerified;
+    public int parkVerified;
+    public int companyConsignorVerified;
+    public int personConsignorVerified;
     
     public static MessageApp getInstance() {
         return mApp;

@@ -1,4 +1,4 @@
-package com.js.driver.ui.main.fragment;
+package com.js.message.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,16 +14,16 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.widget.EaseConversationList;
-import com.js.driver.App;
-import com.js.driver.R;
-import com.js.driver.di.componet.DaggerFragmentComponent;
-import com.js.driver.di.module.FragmentModule;
-import com.js.driver.ui.main.presenter.InformationPresenter;
-import com.js.driver.ui.main.presenter.contract.InformationContract;
 import com.js.message.ui.activity.MessageActivity;
 import com.js.message.ui.activity.PushActivity;
 import com.js.message.ui.chat.EaseChatActivity;
-import com.js.driver.util.UserManager;
+import com.js.message.MessageApp;
+import com.js.message.R;
+import com.js.message.R2;
+import com.js.message.di.componet.DaggerFragmentComponent;
+import com.js.message.di.module.FragmentModule;
+import com.js.message.ui.presenter.InformationPresenter;
+import com.js.message.ui.presenter.contract.InformationContract;
 import com.plugin.im.IMHelper;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +39,7 @@ import butterknife.OnClick;
  */
 public class InformationFragment extends BaseFragment<InformationPresenter> implements InformationContract.View {
 
-    @BindView(R.id.list)
+    @BindView(R2.id.list)
     EaseConversationList mList;
 
     protected boolean isConflict;
@@ -56,7 +56,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     protected void initInject() {
         DaggerFragmentComponent.builder()
                 .fragmentModule(new FragmentModule(this))
-                .appComponent(App.getInstance().getAppComponent())
+                .appComponent(MessageApp.getInstance().getAppComponent())
                 .build()
                 .inject(this);
     }
@@ -84,10 +84,20 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
-                    if (UserManager.getUserManager().isVerified()) {
-                        EaseChatActivity.action(mContext, conversation);
+                    if ("shipper".equals(MessageApp.getInstance().appType)) {
+                        if (MessageApp.getInstance().personConsignorVerified == 2
+                                || MessageApp.getInstance().companyConsignorVerified == 2 ) {
+                            EaseChatActivity.action(mContext, conversation);
+                        } else {
+                            toast("未认证");
+                        }
                     } else {
-                        toast("未认证");
+                        if (MessageApp.getInstance().driverVerified == 2
+                                || MessageApp.getInstance().parkVerified == 2 ) {
+                            EaseChatActivity.action(mContext, conversation);
+                        } else {
+                            toast("未认证");
+                        }
                     }
                 }
             }
@@ -97,18 +107,14 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
         EMClient.getInstance().addConnectionListener(connectionListener);
     }
 
-    @OnClick({R.id.message_layout, R.id.push_layout, R.id.customer_service_layout})
+    @OnClick({R2.id.message_layout, R2.id.push_layout, R2.id.customer_service_layout})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.message_layout:
-                MessageActivity.action(getActivity());
-                break;
-            case R.id.push_layout:
-                PushActivity.action(getActivity());
-                break;
-            case R.id.customer_service_layout:
-                IMHelper.getInstance().goIm(mContext);
-                break;
+        if (view.getId() == R.id.message_layout) {
+            MessageActivity.action(getActivity());
+        } else if (view.getId() == R.id.push_layout) {
+            PushActivity.action(getActivity());
+        } else if (view.getId() == R.id.customer_service_layout) {
+            IMHelper.getInstance().goIm(mContext);
         }
     }
 
@@ -139,7 +145,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 case 1:
                     onConnectionConnected();
                     break;
-
                 case MSG_REFRESH: {
                     conversationList.clear();
                     conversationList.addAll(loadConversationList());
@@ -241,6 +246,7 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     public void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().removeConnectionListener(connectionListener);
+        EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 
     @Override

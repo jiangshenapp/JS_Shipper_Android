@@ -6,12 +6,10 @@ import com.js.driver.di.FragmentScope;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.fragment.CommunityFragment;
 import com.js.driver.ui.main.fragment.FindOrderFragment;
-import com.js.driver.ui.main.fragment.InformationFragment;
 import com.js.driver.ui.main.fragment.MineFragment;
 import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.order.fragment.OrderFragment;
 import com.js.driver.ui.wallet.fragment.BillFragment;
-
 import dagger.Component;
 
 /**
@@ -25,12 +23,9 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
-
     void inject(CommunityFragment communityFragment);
 
     void inject(FindOrderFragment findOrderFragment);
-
-    void inject(InformationFragment informationFragment);
 
     void inject(ServiceFragment serviceFragment);
 
@@ -39,6 +34,4 @@ public interface FragmentComponent {
     void inject(BillFragment billFragment);
 
     void inject(OrderFragment orderFragment);
-
-
 }

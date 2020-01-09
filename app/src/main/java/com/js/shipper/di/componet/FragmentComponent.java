@@ -8,7 +8,6 @@ import com.js.shipper.ui.main.fragment.BoutiqueFragment;
 import com.js.shipper.ui.main.fragment.CarSourceFragment;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
 import com.js.shipper.ui.main.fragment.DeliveryFragment;
-import com.js.shipper.ui.main.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;
 import com.js.shipper.ui.main.fragment.ServiceFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;
@@ -33,11 +32,7 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
-
     void inject(CommunityFragment communityFragment);
-
-
-    void inject(InformationFragment informationFragment);
 
     void inject(ServiceFragment serviceFragment);
 

@@ -1,4 +1,4 @@
-package com.js.driver.ui.main.presenter.contract;
+package com.js.message.ui.presenter.contract;
 
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;

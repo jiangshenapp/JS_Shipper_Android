@@ -24,7 +24,7 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
-import com.js.shipper.ui.main.fragment.InformationFragment;
+import com.js.message.ui.fragment.InformationFragment;
 import com.js.shipper.ui.main.fragment.MineFragment;
 import com.js.shipper.ui.main.fragment.ParkFragment;
 import com.js.shipper.ui.main.fragment.ShipFragment;

@@ -23,7 +23,7 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.main.fragment.CommunityFragment;
 import com.js.driver.ui.main.fragment.FindOrderFragment;
-import com.js.driver.ui.main.fragment.InformationFragment;
+import com.js.message.ui.fragment.InformationFragment;
 import com.js.driver.ui.main.fragment.MineFragment;
 import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.main.presenter.MainPresenter;

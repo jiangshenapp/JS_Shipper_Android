@@ -1,8 +1,7 @@
-package com.js.shipper.ui.main.presenter;
+package com.js.message.ui.presenter;
 
-import com.js.shipper.ui.main.presenter.contract.InformationContract;
 import com.base.frame.mvp.RxPresenter;
-
+import com.js.message.ui.presenter.contract.InformationContract;
 import javax.inject.Inject;
 
 /**

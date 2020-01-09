@@ -3,6 +3,8 @@ package com.js.message.di.componet;
 import android.app.Activity;
 import com.js.message.di.FragmentScope;
 import com.js.message.di.module.FragmentModule;
+import com.js.message.ui.fragment.InformationFragment;
+
 import dagger.Component;
 
 /**
@@ -15,4 +17,5 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
+    void inject(InformationFragment informationFragment);
 }
