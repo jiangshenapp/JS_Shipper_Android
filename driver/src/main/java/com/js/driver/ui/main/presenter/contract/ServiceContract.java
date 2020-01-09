@@ -3,9 +3,7 @@ package com.js.driver.ui.main.presenter.contract;
 import com.base.frame.mvp.IBaseView;
 import com.base.frame.mvp.IPresenter;
 import com.js.driver.model.bean.BannerBean;
-import com.js.driver.model.bean.MessageBean;
 import com.js.driver.model.bean.ServiceBean;
-import com.js.driver.model.response.ListResponse;
 
 import java.util.List;
 

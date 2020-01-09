@@ -1,2 +1,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.js.message" />
+    package="com.js.message">
+
+    <application android:allowBackup="true">
+        <meta-data
+            android:name="com.js.message.MessageApp"
+            android:value="IModuleConfig" />
+
+        <activity
+            android:name=".ui.activity.MessageActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.PushActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.PushDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.chat.EaseChatActivity"
+            android:launchMode="singleTop" />
+    </application>
+</manifest>

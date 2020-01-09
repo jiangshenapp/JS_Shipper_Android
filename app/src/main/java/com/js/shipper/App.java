@@ -6,6 +6,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.login.LoginApp;
+import com.js.message.MessageApp;
 import com.js.shipper.di.componet.AppComponent;
 import com.js.shipper.di.componet.DaggerAppComponent;
 import com.js.shipper.di.module.AppModule;
@@ -54,6 +55,7 @@ public class App extends BaseApplication {
         initDaggerComponent();
         getUserInfo();
         LoginApp.getInstance().appType = BuildConfig.appType;
+        MessageApp.getInstance().appType = BuildConfig.appType;
         registerWx();
         closeAndroidPDialog();
         initCrash();

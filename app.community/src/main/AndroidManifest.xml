@@ -7,8 +7,6 @@
             android:name="com.js.community.CommunityApp"
             android:value="IModuleConfig" />
 
-
-
         <activity android:name=".ui.activity.FindCircleActivity"
             android:launchMode="singleTop"
             />

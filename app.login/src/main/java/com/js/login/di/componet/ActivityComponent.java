@@ -32,7 +32,5 @@ public interface ActivityComponent {
     void inject(WxBindActivity wxBindActivity);
 
     void inject(BindStatusActivity bindStatusActivity);
-
-
 }
 

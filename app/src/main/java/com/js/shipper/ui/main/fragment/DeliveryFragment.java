@@ -32,7 +32,7 @@ import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.ui.main.adapter.DeliveryAdapter;
 import com.js.shipper.ui.main.presenter.DeliveryPresenter;
 import com.js.shipper.ui.main.presenter.contract.DeliveryContract;
-import com.js.shipper.ui.message.chat.EaseChatActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BranchDetailActivity;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.util.MapUtils;

@@ -23,7 +23,7 @@ import com.js.shipper.model.request.LineAppFind;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.contract.DictContract;
-import com.js.shipper.ui.message.chat.EaseChatActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
 import com.js.shipper.ui.main.presenter.BoutiquePresenter;

@@ -18,7 +18,7 @@ import com.js.shipper.global.Const;
 import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.model.response.ListResponse;
 import com.js.shipper.ui.main.adapter.BoutiqueAdapter;
-import com.js.shipper.ui.message.chat.EaseChatActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.js.shipper.ui.park.activity.BoutiqueDetailActivity;
 import com.js.shipper.ui.park.presenter.CollectBoutiquePresenter;
 import com.js.shipper.ui.park.presenter.contract.CollectBoutiqueContract;

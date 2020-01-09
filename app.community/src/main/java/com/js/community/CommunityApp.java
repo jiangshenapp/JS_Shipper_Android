@@ -64,5 +64,4 @@ public class CommunityApp implements IAppLife {
                 .appModule(new AppModule())
                 .build();
     }
-
 }

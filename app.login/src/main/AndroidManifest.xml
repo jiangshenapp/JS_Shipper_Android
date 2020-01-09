@@ -6,7 +6,6 @@
             android:name="com.js.login.LoginApp"
             android:value="IModuleConfig" />
 
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:launchMode="singleTask" />
@@ -24,7 +23,6 @@
             android:launchMode="singleTop" />
 
         <activity android:name=".ui.activity.WxBindActivity" />
-
 
         <activity android:name=".ui.activity.BindStatusActivity"/>
     </application>

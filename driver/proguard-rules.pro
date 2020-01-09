@@ -97,6 +97,8 @@
 -keep class com.js.driver.model.** {*;}
 -keep class com.js.login.LoginApp
 -keep class com.js.login.model.**{*;}
+-keep class com.js.message.MessageApp {*;}
+-keep class com.js.message.model.** {*;}
 -keep class com.js.component.ComponentApp
 -keep class com.js.component.city.bean.**{*;}
 -keep class com.js.community.CommunityApp

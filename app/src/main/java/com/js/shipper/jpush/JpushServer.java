@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.stetho.common.LogUtil;
 import com.google.gson.Gson;
-import com.js.login.LoginApp;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
 import com.js.shipper.util.SpManager;
 import org.json.JSONException;

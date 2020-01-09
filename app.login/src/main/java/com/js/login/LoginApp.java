@@ -58,7 +58,6 @@ public class LoginApp implements IAppLife {
         return mAppComponent;
     }
 
-
     /**
      * 初始化Dagger所使用的连接器
      */
@@ -77,8 +76,6 @@ public class LoginApp implements IAppLife {
         SpManager.getInstance(mLoginApp).putSP("token",token);
         this.token = token;
     }
-
-
 
     public IWXAPI getApi() {
         return api;

@@ -46,7 +46,6 @@ import butterknife.BindView;
  */
 public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implements FindCircleContract.View, BaseQuickAdapter.OnItemClickListener {
 
-
     @BindView(R2.id.recycler)
     RecyclerView mRecycler;
     @BindView(R2.id.refresh)

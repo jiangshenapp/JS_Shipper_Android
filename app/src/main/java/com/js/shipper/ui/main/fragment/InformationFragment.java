@@ -24,9 +24,9 @@ import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.ui.main.presenter.InformationPresenter;
 import com.js.shipper.ui.main.presenter.contract.InformationContract;
-import com.js.shipper.ui.message.activity.MessageActivity;
-import com.js.shipper.ui.message.activity.PushActivity;
-import com.js.shipper.ui.message.chat.EaseChatActivity;
+import com.js.message.ui.activity.MessageActivity;
+import com.js.message.ui.activity.PushActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.plugin.im.IMHelper;
 
 import java.util.ArrayList;

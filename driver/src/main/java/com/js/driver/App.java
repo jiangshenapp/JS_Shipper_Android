@@ -13,6 +13,7 @@ import com.js.driver.model.bean.UserInfo;
 import com.base.frame.BaseApplication;
 import com.base.http.HttpApp;
 import com.js.login.LoginApp;
+import com.js.message.MessageApp;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -51,6 +52,7 @@ public class App extends BaseApplication {
         initDaggerComponent();
         getUserInfo();
         LoginApp.getInstance().appType = BuildConfig.appType;
+        MessageApp.getInstance().appType = BuildConfig.appType;
         registerWx();
         closeAndroidPDialog();
         initCrash();

@@ -46,14 +46,12 @@ import butterknife.OnClick;
  */
 public class MemberManageActivity extends BaseActivity<MemberManagePresenter> implements MemberManageContract.View, BaseQuickAdapter.OnItemChildClickListener {
 
-
     @BindView(R2.id.recycler)
     RecyclerView mRecycler;
     @BindView(R2.id.refresh)
     SmartRefreshLayout mRefresh;
     @BindView(R2.id.et_search_no)
     EditText mSearch;
-
 
     @OnClick({R2.id.member_quit})
     public void onClick(View view) {

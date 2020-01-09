@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.EMConnectionListener;
-import com.hyphenate.EMConversationListener;
 import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -23,9 +22,9 @@ import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.InformationPresenter;
 import com.js.driver.ui.main.presenter.contract.InformationContract;
-import com.js.driver.ui.message.activity.MessageActivity;
-import com.js.driver.ui.message.activity.PushActivity;
-import com.js.driver.ui.message.chat.EaseChatActivity;
+import com.js.message.ui.activity.MessageActivity;
+import com.js.message.ui.activity.PushActivity;
+import com.js.message.ui.chat.EaseChatActivity;
 import com.js.driver.util.UserManager;
 import com.plugin.im.IMHelper;
 
