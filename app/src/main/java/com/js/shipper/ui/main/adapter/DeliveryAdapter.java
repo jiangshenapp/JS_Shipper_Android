@@ -33,10 +33,10 @@ public class DeliveryAdapter extends BaseQuickAdapter<ParkBean, BaseViewHolder> 
     protected void convert(BaseViewHolder helper, ParkBean item) {
         switch (item.getCompanyType()) {
             case 1:
-                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[服务中心]");
+                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[专线]");
                 break;
             case 2:
-                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[车代点]");
+                helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[落地配]");
                 break;
             case 3:
                 helper.setText(R.id.item_delivery_branch, item.getCompanyName()+"[网点]");

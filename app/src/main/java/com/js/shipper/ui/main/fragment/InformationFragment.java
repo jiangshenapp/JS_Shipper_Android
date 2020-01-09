@@ -2,13 +2,10 @@ package com.js.shipper.ui.main.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
-
 import com.base.frame.view.BaseFragment;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
@@ -16,7 +13,6 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.widget.EaseConversationList;
 import com.js.shipper.App;
 import com.js.shipper.R;
@@ -27,14 +23,13 @@ import com.js.shipper.ui.main.presenter.contract.InformationContract;
 import com.js.message.ui.activity.MessageActivity;
 import com.js.message.ui.activity.PushActivity;
 import com.js.message.ui.chat.EaseChatActivity;
+import com.js.shipper.util.UserManager;
 import com.plugin.im.IMHelper;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -57,7 +52,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
         return new InformationFragment();
     }
 
-
     @Override
     protected void initInject() {
         DaggerFragmentComponent.builder()
@@ -72,7 +66,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
         return R.layout.fragment_information;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
@@ -84,7 +77,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
     protected void init() {
         conversationList.addAll(loadConversationList());
         mList.init(conversationList);
-
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -92,12 +84,11 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                 EMConversation conversation = mList.getItem(position);
                 //点击跳转
                 if (conversation != null) {
-                    if (App.getInstance().personConsignorVerified == 2 || App.getInstance().companyConsignorVerified == 2) {
+                    if (UserManager.getUserManager().isVerified()) {
                         EaseChatActivity.action(mContext, conversation);
                     } else {
                         toast("未认证");
                     }
-
                 }
             }
         });
@@ -175,7 +166,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
 
     }
 
-
     /**
      * refresh ui
      */
@@ -236,7 +226,6 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
                     return -1;
                 }
             }
-
         });
     }
 
@@ -307,5 +296,4 @@ public class InformationFragment extends BaseFragment<InformationPresenter> impl
             refresh();
         }
     };
-
 }

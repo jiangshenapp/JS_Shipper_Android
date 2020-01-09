@@ -26,7 +26,7 @@ public interface ParkApi {
 
 
     /**
-     * 找附近网点
+     * 找专线
      * @param current
      * @param size
      * @return

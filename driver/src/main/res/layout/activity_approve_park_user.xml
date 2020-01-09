@@ -57,7 +57,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="机构类型"
+                    android:text="园区属性"
                     android:textColor="@color/_000000"
                     android:textSize="12sp"
                     android:gravity="center_vertical"
@@ -68,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="服务中心/车代点/网点"
+                    android:text="专线/落地配/网点"
                     android:textColor="@color/_B4B4B4"
                     android:textSize="14sp"
                     android:background="@null"

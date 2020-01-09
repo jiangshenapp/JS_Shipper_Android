@@ -30,7 +30,7 @@ public class CompanyWindow extends PopupWindow implements BaseQuickAdapter.OnIte
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     private Context mContext;
-    private static final String[] company = {"全部", "服务中心", "车代点", "网点"};
+    private static final String[] company = {"全部", "专线", "落地配", "网点"};
     private CompanyAdapter mAdapter;
 
     public CompanyWindow(Context context) {

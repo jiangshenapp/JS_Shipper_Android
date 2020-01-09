@@ -129,10 +129,9 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
     // 区
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
-    // 机构类型
-    private List<String> companyTypeItems = new ArrayList<String>(Arrays.asList("服务中心","车代点","网点"));
-
-
+    // 园区属性
+    private List<String> companyTypeItems = new ArrayList<String>(Arrays.asList("专线","落地配","网点"));
+    
     public static void action(Context context) {
         context.startActivity(new Intent(context, ParkUserVerifiedActivity.class));
     }
@@ -227,7 +226,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         switch (view.getId()) {
             case R.id.ll_company_type:
             case R.id.et_company_type:
-                // 展示机构类型选择器
+                // 展示园区属性选择器
                 showCompanyTypePickerView();
                 break;
             case R.id.cb_business_license_have:
@@ -262,7 +261,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
     }
 
     /**
-     * 展示机构类型选择器
+     * 展示园区属性选择器
      */
     public void showCompanyTypePickerView() {
         //条件选择器
@@ -403,7 +402,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
             return;
         }
         if (TextUtils.isEmpty(companyType)) {
-            toast("请选择机构类型");
+            toast("请选择园区属性");
             return;
         }
         if (TextUtils.isEmpty(idcard)) {
@@ -429,10 +428,10 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         }
 
         String type = "1";
-        if (companyType.equals("服务中心")) {
+        if (companyType.equals("专线")) {
             type = "1";
         }
-        if (companyType.equals("车代点")) {
+        if (companyType.equals("落地配")) {
             type = "2";
         }
         if (companyType.equals("网点")) {

@@ -57,7 +57,7 @@ import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/30.
- * 附近网点
+ * 专线
  */
 public class DeliveryFragment extends BaseFragment<DeliveryPresenter> implements DeliveryContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
