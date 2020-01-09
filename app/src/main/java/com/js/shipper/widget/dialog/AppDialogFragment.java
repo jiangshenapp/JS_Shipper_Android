@@ -111,9 +111,6 @@ public class AppDialogFragment extends DialogFragment {
         });
     }
 
-
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

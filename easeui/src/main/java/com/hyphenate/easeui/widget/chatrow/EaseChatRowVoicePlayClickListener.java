@@ -38,7 +38,6 @@ import android.widget.Toast;
  * 语音row播放点击事件监听
  *
  */
-@Deprecated
 public class EaseChatRowVoicePlayClickListener implements View.OnClickListener {
 	private static final String TAG = "VoicePlayClickListener";
 	EMMessage message;

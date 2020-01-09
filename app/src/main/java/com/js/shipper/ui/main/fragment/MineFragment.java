@@ -108,7 +108,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @Override
     protected void init() {
         mServicePresenter.attachView(this);
-        mServicePresenter.getServiceList();
+//        mServicePresenter.getServiceList();
         mTitles = new ArrayList<>();
         mResources = new ArrayList<>();
         mTitles.add("我的园区");
