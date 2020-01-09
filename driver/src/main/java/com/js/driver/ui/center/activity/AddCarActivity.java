@@ -338,6 +338,11 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         }
     }
 
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+        
+    }
+
     /**
      * 展示车型选择器
      */

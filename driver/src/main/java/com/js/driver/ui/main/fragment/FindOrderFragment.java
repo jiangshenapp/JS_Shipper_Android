@@ -56,7 +56,6 @@ import butterknife.OnClick;
  */
 public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implements FindOrderContract.View, BaseQuickAdapter.OnItemClickListener, DictContract.View {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -319,5 +318,10 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
                 mFilterWindow.setCarTypes(dictBeans);
                 break;
         }
+    }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
     }
 }

@@ -274,4 +274,9 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
                 break;
         }
     }
+
+    @Override
+    public void onFirstDictByType(String type, DictBean dictBean) {
+
+    }
 }
