@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.js.shipper.di.ActivityScope;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.ui.SplashActivity;
+import com.js.shipper.ui.car.activity.AddCarActivity;
 import com.js.shipper.ui.center.activity.FeedBackActivity;
 import com.js.shipper.ui.main.activity.MainActivity;
 import com.js.shipper.ui.order.activity.OrderDetailActivity;
@@ -73,5 +74,7 @@ public interface ActivityComponent {
     void inject(BranchDetailActivity branchDetailActivity);
 
     void inject(TypeInputActivity typeInputActivity);
+
+    void inject(AddCarActivity addCarActivity);
 }
 

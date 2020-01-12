@@ -1,26 +1,30 @@
-package com.js.driver.ui.wallet.activity;
+package com.js.shipper.ui.car.activity;
 
 import android.content.Context;
 import android.content.Intent;
-
-import com.google.android.material.tabs.TabLayout;
-import com.js.driver.R;
-import com.js.driver.ui.wallet.fragment.BillFragment;
-import com.base.frame.view.SimpleActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import com.base.frame.view.SimpleActivity;
+import com.google.android.material.tabs.TabLayout;
+import com.js.shipper.R;
+import com.js.shipper.ui.car.fragment.CarFragment;
+import java.util.ArrayList;
+import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by huyg on 2019/4/24.
+ * author : hzb
+ * e-mail : hanzhanbing@evcoming.com
+ * time   : 2020/01/12
+ * desc   : 我的运力
+ * version: 3.0.0
  */
-public class BillActivity extends SimpleActivity {
+public class CarActivity extends SimpleActivity {
 
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
@@ -28,11 +32,11 @@ public class BillActivity extends SimpleActivity {
     ViewPager mViewpager;
 
     private List<Fragment> mFragments;
-    private String[] titles = {"全部", "余额", "保证金"};
-    private int type;//0:全部,1余额,2保证金
+    private String[] titles = {"全部", "自有车辆", "外调车辆"};
+    private int type;//类型，0全部，1自由车辆，2外调车辆
 
     public static void action(Context context, int type) {
-        Intent intent = new Intent(context, BillActivity.class);
+        Intent intent = new Intent(context, CarActivity.class);
         intent.putExtra("type", type);
         context.startActivity(intent);
     }
@@ -60,9 +64,9 @@ public class BillActivity extends SimpleActivity {
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(BillFragment.newInstance(0));
-        mFragments.add(BillFragment.newInstance(1));
-        mFragments.add(BillFragment.newInstance(2));
+        mFragments.add(CarFragment.newInstance(0));
+        mFragments.add(CarFragment.newInstance(1));
+        mFragments.add(CarFragment.newInstance(2));
     }
 
     private void initViewPager() {
@@ -88,7 +92,22 @@ public class BillActivity extends SimpleActivity {
 
     @Override
     public void setActionBar() {
-        mTitle.setText("账单明细");
+        mTitle.setText("我的运力");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_center_car, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_car:
+                AddCarActivity.action(mContext);
+                break;
+        }
+        return true;
+    }
 }

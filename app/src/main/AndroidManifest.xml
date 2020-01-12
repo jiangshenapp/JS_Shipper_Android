@@ -119,6 +119,14 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name="com.js.shipper.ui.car.activity.CarActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.js.shipper.ui.car.activity.AddCarActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.js.shipper.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"></activity>

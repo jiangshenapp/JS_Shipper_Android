@@ -22,7 +22,6 @@ import butterknife.OnClick;
  */
 public class BailActivity extends BaseActivity<BailPresenter> implements BailContract.View {
 
-
     @BindView(R.id.bail_money)
     TextView mMoney;
 

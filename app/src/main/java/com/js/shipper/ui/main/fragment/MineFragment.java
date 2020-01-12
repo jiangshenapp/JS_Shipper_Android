@@ -20,6 +20,7 @@ import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.ui.car.activity.CarActivity;
 import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.BannerBean;
 import com.js.shipper.model.bean.ServiceBean;
@@ -111,10 +112,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 //        mServicePresenter.getServiceList();
         mTitles = new ArrayList<>();
         mResources = new ArrayList<>();
-        mTitles.add("我的园区");
+        mTitles.add("我的运力");
         mTitles.add("我的客服");
         mTitles.add("认证管理");
-        mResources.add(R.mipmap.ic_center_park);
+        mResources.add(R.mipmap.personalcenter_icon_park);
         mResources.add(R.mipmap.ic_center_service);
         mResources.add(R.mipmap.ic_authentication);
         initConfig();
@@ -294,8 +295,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position) {
-            case 0://我的园区
-                CollectActivity.action(mContext, 0);
+            case 0://我的运力
+                CarActivity.action(mContext, 0);
                 break;
             case 1://我的客服
                 IMHelper.getInstance().goIm(mContext);

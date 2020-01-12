@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.js.shipper.di.FragmentScope;
 import com.js.shipper.di.module.FragmentModule;
+import com.js.shipper.ui.car.fragment.CarFragment;
 import com.js.shipper.ui.main.fragment.BoutiqueFragment;
 import com.js.shipper.ui.main.fragment.CarSourceFragment;
 import com.js.shipper.ui.main.fragment.CommunityFragment;
@@ -59,4 +60,6 @@ public interface FragmentComponent {
     void inject(CollectBoutiqueFragment collectBoutiqueFragment);
 
     void inject(CollectBranchFragment collectBranchFragment);
+
+    void inject(CarFragment carFragment);
 }

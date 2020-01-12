@@ -24,31 +24,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/item_send_address"
-                android:layout_width="wrap_content"
+                android:id="@+id/item_car_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="浙B766811（北京到宁波）"
                 android:textColor="@color/_000000"
                 android:textSize="17sp"
                 android:fontFamily="sans-serif-medium"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/home_lite_icon_going"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_gravity="center_vertical"
                 />
 
             <TextView
-                android:id="@+id/item_arrive_address"
+                android:id="@+id/item_cooperation"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/_000000"
-                android:textSize="17sp"
+                android:layout_marginRight="12dp"
                 android:fontFamily="sans-serif-medium"
-                />
+                android:text="合作过"
+                android:textColor="@color/_ECA73F"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -56,46 +51,33 @@
             android:id="@+id/item_driver_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="张女士 13306618199"
+            android:textColor="@color/_666666"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_car_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="车型：板车  车长：5.0-9.6米"
+            android:textColor="@color/_666666"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注：长沙到宁波"
             android:textColor="@color/_000000"
             android:textSize="14sp"
             android:layout_marginTop="10dp"
             />
 
-        <com.js.shipper.widget.view.RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:starEmpty="@mipmap/ic_star_normal"
-            app:starFill="@mipmap/ic_star_select"
-            app:starImageSize="12dp"
-            app:starPadding="2dp"
-            app:starCount="5"
-            app:starStep="0">
-        </com.js.shipper.widget.view.RatingBar>
-
-        <TextView
-            android:id="@+id/item_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_ECA73F"
-            android:textSize="14sp"
-            android:layout_marginTop="18dp"
-            android:fontFamily="sans-serif-medium"
-            />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/item_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/_B4B4B4"
-        android:textSize="12sp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -113,13 +95,20 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_home_phone" />
 
-        <ImageView
-            android:id="@+id/item_chat"
-            android:visibility="gone"
+        <TextView
+            android:id="@+id/item_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@mipmap/ic_home_chat" />
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/shape_wallet_info_control"
+            android:paddingStart="20dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="6dp"
+            android:text="下单"
+            android:textColor="@color/_000000"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

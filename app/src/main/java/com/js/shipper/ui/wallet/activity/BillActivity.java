@@ -22,7 +22,6 @@ import butterknife.BindView;
  */
 public class BillActivity extends SimpleActivity {
 
-
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
@@ -31,7 +30,6 @@ public class BillActivity extends SimpleActivity {
     private List<Fragment> mFragments;
     private String[] titles = {"全部", "余额"};
     private int type;//0:全部,1余额,2保证金
-
 
     public static void action(Context context, int type) {
         Intent intent = new Intent(context, BillActivity.class);
@@ -87,10 +85,8 @@ public class BillActivity extends SimpleActivity {
         mTabLayout.setupWithViewPager(mViewpager);
     }
 
-
     @Override
     public void setActionBar() {
         mTitle.setText("账单明细");
     }
-
 }
