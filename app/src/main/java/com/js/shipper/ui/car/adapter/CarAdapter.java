@@ -48,7 +48,8 @@ public class CarAdapter extends BaseQuickAdapter<CarBean, BaseViewHolder> {
             helper.getView(R.id.item_cooperation).setVisibility(View.GONE);
         }
 
-        helper.addOnClickListener(R.id.phone);
-        helper.addOnClickListener(R.id.submit);
+        helper.addOnClickListener(R.id.item_phone);
+        helper.addOnClickListener(R.id.item_submit);
+        helper.addOnClickListener(R.id.item_car_delete);
     }
 }

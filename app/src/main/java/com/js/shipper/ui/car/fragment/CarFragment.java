@@ -1,7 +1,6 @@
 package com.js.shipper.ui.car.fragment;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,22 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hyphenate.easeui.EaseConstant;
-import com.js.message.ui.chat.EaseChatActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
-import com.js.shipper.model.bean.BillBean;
 import com.js.shipper.model.bean.CarBean;
-import com.js.shipper.model.bean.LineBean;
 import com.js.shipper.ui.car.adapter.CarAdapter;
 import com.js.shipper.ui.car.presenter.CarPresenter;
 import com.js.shipper.ui.car.presenter.contract.CarContract;
-import com.js.shipper.ui.wallet.adapter.BillAdapter;
-import com.js.shipper.ui.wallet.fragment.BillFragment;
 import com.js.shipper.util.AppUtils;
-import com.js.shipper.util.UserManager;
+import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -101,8 +94,10 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
 
     private void iniRecycler() {
         mAdapter = new CarAdapter(R.layout.item_car, mCars);
+        mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mAdapter.setOnItemClickListener(this);
         mAdapter.setOnItemChildClickListener(this);
     }
@@ -128,6 +123,7 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
 
     @Override
     public void onRemoveCar(boolean isOk) {
+        toast("删除成功");
         mPresenter.getCarList(type);
     }
 
@@ -139,8 +135,11 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
             case R.id.item_phone:
                 AppUtils.callPhone(mContext,carBean.getMobile());
                 break;
-            case R.id.submit:
+            case R.id.item_submit:
                 toast("下单");
+                break;
+            case R.id.item_car_delete:
+                mPresenter.removeCar(carBean.getCarId());
                 break;
         }
     }

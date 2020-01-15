@@ -33,7 +33,7 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
     }
 
     @Override
-    public void queryCarList(long input) {
+    public void queryCarList(String input) {
         Disposable disposable = mApiFactory.getApi(CarApi.class)
                 .queryCarList(input)
                 .compose(RxSchedulers.io_main())

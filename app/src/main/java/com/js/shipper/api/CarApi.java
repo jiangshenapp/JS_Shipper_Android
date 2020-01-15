@@ -40,7 +40,7 @@ public interface CarApi {
      * @return the my car list
      */
     @GET("app/consignorcar/carList")
-    Observable<HttpResponse<List<CarBean>>> queryCarList(@Query("input") long input);
+    Observable<HttpResponse<List<CarBean>>> queryCarList(@Query("input") String input);
 
 
     /**

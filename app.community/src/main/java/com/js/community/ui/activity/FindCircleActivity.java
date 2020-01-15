@@ -77,7 +77,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         showSide = getIntent().getIntExtra("showSide", 1);
     }
 
-
     private void initView() {
         initRecycler();
         initRefresh();
@@ -128,7 +127,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         mAdapter.setOnItemClickListener(this);
     }
 
-
     @Override
     protected void initInject() {
         DaggerActivityComponent.builder()
@@ -147,7 +145,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
     public void setActionBar() {
         mTitle.setText("找圈子");
     }
-
 
     @Override
     public void onAllCircle(List<CircleBean> circleBeans) {
@@ -175,7 +172,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         CircleBean circleBean = (CircleBean) adapter.getItem(position);
         if (TextUtils.isEmpty(circleBean.getApplyStatus()) || "3".equals(circleBean.getApplyStatus())) {
 
-
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle("加入圈子");
             builder.setMessage("是否加入？");
@@ -196,7 +192,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -212,7 +207,6 @@ public class FindCircleActivity extends BaseActivity<FindCirclePresenter> implem
 
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

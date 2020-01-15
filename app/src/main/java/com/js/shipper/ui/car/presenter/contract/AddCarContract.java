@@ -22,7 +22,7 @@ public interface AddCarContract {
     }
 
     interface Presenter extends IPresenter<View> {
-        void queryCarList(long input);
+        void queryCarList(String input);
 
         void addCar(long carId, String remark, long type);
     }

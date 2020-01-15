@@ -13,6 +13,8 @@ import com.base.frame.view.SimpleActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.js.shipper.R;
 import com.js.shipper.ui.car.fragment.CarFragment;
+import com.js.shipper.widget.view.NoScrollViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -29,7 +31,7 @@ public class CarActivity extends SimpleActivity {
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
-    ViewPager mViewpager;
+    NoScrollViewPager mViewpager;
 
     private List<Fragment> mFragments;
     private String[] titles = {"全部", "自有车辆", "外调车辆"};
@@ -43,7 +45,7 @@ public class CarActivity extends SimpleActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_wallet_bill;
+        return R.layout.activity_car;
     }
 
     @Override
@@ -87,6 +89,7 @@ public class CarActivity extends SimpleActivity {
                 return titles[position];
             }
         });
+        mViewpager.setNoScroll(true);
         mTabLayout.setupWithViewPager(mViewpager);
     }
 
