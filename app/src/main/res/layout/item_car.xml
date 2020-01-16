@@ -93,6 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:src="@mipmap/ic_home_phone" />
 
             <TextView
