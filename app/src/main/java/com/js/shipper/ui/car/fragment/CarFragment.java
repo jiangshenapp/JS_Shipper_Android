@@ -14,9 +14,11 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerFragmentComponent;
 import com.js.shipper.di.module.FragmentModule;
 import com.js.shipper.model.bean.CarBean;
+import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.ui.car.adapter.CarAdapter;
 import com.js.shipper.ui.car.presenter.CarPresenter;
 import com.js.shipper.ui.car.presenter.contract.CarContract;
+import com.js.shipper.ui.order.activity.SubmitOrderActivity;
 import com.js.shipper.util.AppUtils;
 import com.js.shipper.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -68,10 +70,15 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     protected void init() {
         initArgument();
         initView();
-        initData();
     }
 
     private void initData() {
@@ -136,10 +143,15 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
                 AppUtils.callPhone(mContext,carBean.getMobile());
                 break;
             case R.id.item_submit:
-                toast("下单");
+                OrderBean orderBean = new OrderBean();
+                orderBean.setCarLength(carBean.getCarLengthId());
+                orderBean.setCarLengthName(carBean.getCarLengthName());
+                orderBean.setCarModel(carBean.getCarModelId());
+                orderBean.setCarModelName(carBean.getCarModelName());
+                SubmitOrderActivity.action(mContext, carBean.getSubscriberId(), orderBean);
                 break;
             case R.id.item_car_delete:
-                mPresenter.removeCar(carBean.getCarId());
+                mPresenter.removeCar(carBean.getId());
                 break;
         }
     }

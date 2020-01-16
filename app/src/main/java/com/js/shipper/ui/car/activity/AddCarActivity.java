@@ -19,11 +19,17 @@ import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.model.bean.CarBean;
+import com.js.shipper.model.event.AddCarEvent;
+import com.js.shipper.model.event.CommentEvent;
+import com.js.shipper.model.request.OrderComment;
 import com.js.shipper.ui.car.adapter.AddCarAdapter;
 import com.js.shipper.ui.car.presenter.AddCarPresenter;
 import com.js.shipper.ui.car.presenter.contract.AddCarContract;
 import com.js.shipper.widget.adapter.Divider;
+import com.js.shipper.widget.dialog.AddCarFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -121,40 +127,20 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
 
     @Override
     public void onAddCar(boolean isOk) {
-        if (isOk) {
-            toast("添加成功");
-            finish();
-        } else {
-            toast("添加失败");
-        }
+        toast("添加成功");
+        finish();
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        toast("添加");
-//        List<CarBean> carBeans = adapter.getData();
-//        CarBean carBean = carBeans.get(position);
-//        switch (view.getId()) {
-//            case R.id.item_submit:
-//                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-//                builder.setTitle("添加运力");
-//                builder.setMessage("是否添加？");
-//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        mPresenter.addCar(carBean.getCarId(), "北京到宁波", 1);
-//                    }
-//                });
-//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                builder.show();
-//                break;
-//        }
+        List<CarBean> carBeans = adapter.getData();
+        CarBean carBean = carBeans.get(position);
+        switch (view.getId()) {
+            case R.id.item_submit:
+                AddCarFragment carFragment = new AddCarFragment(carBean);
+                carFragment.show(getSupportFragmentManager(),"Add");
+                break;
+        }
     }
 
     @Override
@@ -165,5 +151,10 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     @OnClick(R.id.tv_search)
     public void onClick() {
         mPresenter.queryCarList(mSearch.getText().toString());
+    }
+
+    @Subscribe
+    public void onEvent(AddCarEvent carEvent) {
+        mPresenter.addCar(carEvent.carId, carEvent.remark, carEvent.type);
     }
 }

@@ -204,9 +204,11 @@ public class OrderEditActivity extends BaseActivity<OrderEditPresenter> implemen
                 orderEdit.setFee(mOrderBean.getFee());
                 orderEdit.setReceiveName(mOrderBean.getReceiveName());
                 orderEdit.setReceiveMobile(mOrderBean.getReceiveMobile());
-                orderEdit.setFeeType(2);
-                orderEdit.setPayType(mOrderBean.getPayType());
-                orderEdit.setPayWay(mOrderBean.getPayWay());
+                orderEdit.setFeeType(2); //电议
+//                orderEdit.setPayType(mOrderBean.getPayType());
+//                orderEdit.setPayWay(mOrderBean.getPayWay());
+                orderEdit.setPayType(2); //现付
+                orderEdit.setPayWay(1); //线上支付
                 mPresenter.editOrder(orderEdit, mOrderBean.getId());
                 break;
         }

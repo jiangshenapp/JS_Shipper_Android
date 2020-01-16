@@ -212,7 +212,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         return R.layout.activity_submit_order;
     }
 
-
     private void initView() {
 
         if (matchId != 0) {
@@ -367,8 +366,88 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 if (s.toString().startsWith("0")
                         && s.toString().trim().length() > 1) {
                     if (!s.toString().substring(1, 2).equals(".")) {
-                        mBailNumber.setText(s.subSequence(0, 1));
-                        mBailNumber.setSelection(1);
+                        mFee.setText(s.subSequence(0, 1));
+                        mFee.setSelection(1);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mGoodVolume.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 2 + 1);
+                        mGoodVolume.setText(s);
+                        mGoodVolume.setSelection(s.length()); //光标移到最后
+                    }
+                }
+                //如果"."在起始位置,则起始位置自动补0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    mGoodVolume.setText(s);
+                    mGoodVolume.setSelection(2);
+                }
+
+                //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        mGoodVolume.setText(s.subSequence(0, 1));
+                        mGoodVolume.setSelection(1);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mGoodWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 2 + 1);
+                        mGoodWeight.setText(s);
+                        mGoodWeight.setSelection(s.length()); //光标移到最后
+                    }
+                }
+                //如果"."在起始位置,则起始位置自动补0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    mGoodWeight.setText(s);
+                    mGoodWeight.setSelection(2);
+                }
+
+                //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        mGoodWeight.setText(s.subSequence(0, 1));
+                        mGoodWeight.setSelection(1);
                         return;
                     }
                 }
@@ -652,7 +731,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
         mPresenter.submitOrder(addOrder);
     }
-
 
     /**
      * 获取TakePhoto实例

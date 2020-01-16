@@ -129,6 +129,10 @@ public class OrderBean implements Parcelable {
     private String dotName;
     private int score;
 
+    public OrderBean() {
+
+    }
+
     protected OrderBean(Parcel in) {
         carLength = in.readString();
         carModel = in.readString();

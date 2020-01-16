@@ -4,12 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,14 +18,11 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal"
-
                 >
-
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -47,7 +42,6 @@
                         android:textColorHint="@color/_B4B4B4"
                         android:textSize="14sp" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,7 +52,6 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="0.5dp"
@@ -85,7 +78,6 @@
                         android:textColorHint="@color/_B4B4B4"
                         android:textSize="14sp" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,6 +87,7 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -116,7 +109,6 @@
                     android:textColor="#FF000000"
                     android:textSize="14sp" />
 
-
                 <TextView
                     android:id="@+id/good_name"
                     android:layout_width="0dp"
@@ -135,15 +127,12 @@
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_list_arrow_black" />
 
-
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/_F0F0F0" />
-
 
             <LinearLayout
                 android:id="@+id/ship_package_layout"
@@ -158,7 +147,6 @@
                     android:text="包装类型"
                     android:textColor="#FF000000"
                     android:textSize="14sp" />
-
 
                 <TextView
                     android:id="@+id/good_package"
@@ -178,9 +166,7 @@
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_list_arrow_black" />
 
-
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
@@ -201,7 +187,6 @@
                     android:textColor="#FF000000"
                     android:textSize="14sp" />
 
-
                 <TextView
                     android:id="@+id/ship_time"
                     android:layout_width="0dp"
@@ -220,9 +205,7 @@
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_list_arrow_black" />
 
-
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
@@ -242,7 +225,6 @@
                     android:text="用车类型"
                     android:textColor="#FF000000"
                     android:textSize="14sp" />
-
 
                 <TextView
                     android:id="@+id/car_type"
@@ -265,7 +247,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -326,7 +307,6 @@
 
                 </FrameLayout>
 
-
                 <FrameLayout
                     android:id="@+id/image_2"
                     android:layout_width="110dp"
@@ -354,6 +334,7 @@
                             android:text="上传"
                             android:textColor="@color/_B4B4B4"
                             android:textSize="14sp" />
+
                     </LinearLayout>
 
                     <ImageView
@@ -362,9 +343,10 @@
                         android:layout_height="match_parent" />
 
                 </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
 
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -399,7 +381,6 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -430,7 +411,6 @@
                 android:textSize="14sp" />
         </FrameLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -448,7 +428,6 @@
                 android:text="运费"
                 android:textColor="@color/_000000"
                 android:textSize="14sp" />
-
 
             <View
                 android:layout_width="match_parent"
@@ -472,7 +451,6 @@
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
-
                 <EditText
                     android:id="@+id/fee"
                     android:layout_width="0dp"
@@ -495,7 +473,6 @@
                     android:src="@mipmap/ic_checkbox_selected" />
 
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
@@ -528,22 +505,17 @@
                     android:layout_marginEnd="12dp"
                     android:src="@mipmap/ic_checkbox_default" />
 
-
             </LinearLayout>
 
-
-
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -583,7 +555,6 @@
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
-
                 <RadioButton
                     android:id="@+id/pay_way_offline"
                     android:layout_width="wrap_content"
@@ -596,16 +567,16 @@
                     android:textSize="14sp" />
 
             </RadioGroup>
-        </LinearLayout>
 
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -614,7 +585,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="支付方式"
+                android:text="付款方式"
                 android:textColor="@color/_000000"
                 android:textSize="14sp" />
 
@@ -645,7 +616,6 @@
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
-
                 <RadioButton
                     android:id="@+id/pay_type_cash"
                     android:layout_width="wrap_content"
@@ -657,7 +627,9 @@
                     android:text="现付"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
+
             </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout
@@ -676,7 +648,6 @@
                 android:layout_marginStart="12dp"
                 android:button="@drawable/selector_checkbox"
                 />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -708,7 +679,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -738,7 +708,8 @@
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
-
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>

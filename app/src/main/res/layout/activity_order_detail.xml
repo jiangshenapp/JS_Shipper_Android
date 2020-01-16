@@ -7,11 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -24,7 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
 
                 <LinearLayout
                     android:id="@+id/driver_info_layout"
@@ -75,6 +72,7 @@
                                 app:starCount="5"
                                 app:starStep="0">
                             </com.js.shipper.widget.view.RatingBar>
+
                         </LinearLayout>
 
                         <TextView
@@ -88,7 +86,6 @@
                             android:visibility="visible" />
 
                     </LinearLayout>
-
 
                     <ImageView
                         android:id="@+id/detail_call"
@@ -109,7 +106,6 @@
                         android:src="@mipmap/ic_home_chat" />
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/status_ing_layout"
@@ -137,9 +133,7 @@
                         android:textColor="#FF000000"
                         android:textSize="17sp" />
 
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -160,7 +154,6 @@
                         android:textColor="@color/_B4B4B4"
                         android:textSize="12sp" />
 
-
                     <TextView
                         android:id="@+id/detail_order_status"
                         android:layout_width="wrap_content"
@@ -172,10 +165,7 @@
                         android:textColor="@color/_ECA73F"
                         android:textSize="12sp" />
 
-
                 </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -218,7 +208,6 @@
 
                     </LinearLayout>
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -260,14 +249,12 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:orientation="vertical">
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -296,12 +283,10 @@
 
                     </LinearLayout>
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/_F0F0F0" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -329,12 +314,10 @@
 
                     </LinearLayout>
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/_F0F0F0" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -404,13 +387,10 @@
 
                     </LinearLayout>
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/_F0F0F0" />
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -480,11 +460,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/_F0F0F0" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -495,25 +475,26 @@
                             android:layout_width="0dp"
                             android:layout_height="44dp"
                             android:layout_weight="1"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            >
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
-                                android:text="支付方式"
+                                android:text="保证金"
                                 android:textColor="@color/_000000"
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/pay_way"
+                                android:id="@+id/bail"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginEnd="12dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:lines="1"
-                                android:textColor="@color/_666666"
+                                android:textColor="@color/_E02020"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -555,12 +536,13 @@
                     </LinearLayout>
 
                     <View
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/_F0F0F0" />
 
-
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:orientation="horizontal">
@@ -592,40 +574,36 @@
 
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="44dp"
                             android:layout_weight="1"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
-                                android:text="保证金"
+                                android:text="支付方式"
                                 android:textColor="@color/_000000"
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/bail"
+                                android:id="@+id/pay_way"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginEnd="12dp"
+                                android:layout_marginEnd="8dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:lines="1"
-                                android:textColor="@color/_E02020"
+                                android:textColor="@color/_666666"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-
 
                 <TextView
                     android:id="@+id/remark"
@@ -711,7 +689,6 @@
 
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/receipt_title"
                     android:layout_width="wrap_content"
@@ -722,7 +699,6 @@
                     android:textColor="@color/_B4B4B4"
                     android:textSize="12sp"
                     android:visibility="gone" />
-
 
                 <LinearLayout
                     android:id="@+id/receipt_layout"
@@ -760,13 +736,11 @@
                         android:layout_gravity="center_horizontal"
                         android:src="@mipmap/ic_upload_photo" />
 
-
                 </LinearLayout>
 
             </LinearLayout>
 
         </ScrollView>
-
 
         <LinearLayout
             android:id="@+id/control_layout"
@@ -795,8 +769,8 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-        </LinearLayout>
 
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

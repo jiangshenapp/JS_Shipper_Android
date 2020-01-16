@@ -29,14 +29,14 @@ public class AddCarAdapter extends BaseQuickAdapter<CarBean, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, CarBean item) {
         helper.setText(R.id.item_car_name,item.getCphm())
                 .setText(R.id.item_driver_info,item.getNickName()+" "+item.getMobile())
-                .setText(R.id.item_car_info,"车型："+item.getCarModelName()+"  车长："+item.getCarLengthName());
+                .setText(R.id.item_car_info,"车型："+item.getCarModelName()+"  车长："+item.getCarLengthName())
+                .setText(R.id.item_remark,"");
 
         if (item.getCooperated() > 0) {
             helper.getView(R.id.item_cooperation).setVisibility(View.VISIBLE);
         } else {
             helper.getView(R.id.item_cooperation).setVisibility(View.GONE);
         }
-        helper.getView(R.id.item_remark).setVisibility(View.GONE);
         helper.getView(R.id.item_phone).setVisibility(View.GONE);
 
         if (item.getAdded() > 0) { //已添加
