@@ -529,13 +529,17 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
             mSendShip.setPosition(mOrderBean.getSendPosition());
             mSendShip.setAddress(mOrderBean.getSendAddress());
-            mSendShip.setAddressCode(Integer.parseInt(mOrderBean.getSendAddressCode()));
+            if (!TextUtils.isEmpty(mOrderBean.getSendAddressCode())) {
+                mSendShip.setAddressCode(Integer.parseInt(mOrderBean.getSendAddressCode()));
+            }
             mSendShip.setPhone(mOrderBean.getSendMobile());
             mSendShip.setName(mOrderBean.getSendName());
 
             mEndShip.setPosition(mOrderBean.getReceivePosition());
             mEndShip.setAddress(mOrderBean.getReceiveAddress());
-            mEndShip.setAddressCode(Integer.parseInt(mOrderBean.getReceiveAddressCode()));
+            if (!TextUtils.isEmpty(mOrderBean.getReceiveAddressCode())) {
+                mEndShip.setAddressCode(Integer.parseInt(mOrderBean.getReceiveAddressCode()));
+            }
             mEndShip.setPhone(mOrderBean.getReceiveMobile());
             mEndShip.setName(mOrderBean.getReceiveName());
 
@@ -891,7 +895,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 break;
         }
     }
-
 
     @Override
     public void onDictByType(String type, List<DictBean> dictBeans) {
