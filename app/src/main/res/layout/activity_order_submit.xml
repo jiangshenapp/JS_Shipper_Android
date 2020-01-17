@@ -412,6 +412,8 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/ll_whole_fee"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -460,8 +462,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="输入价格"
-                    android:inputType="numberDecimal"
                     android:textColorHint="@color/_B8B8B8"
+                    android:inputType="numberDecimal"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -504,6 +506,62 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="12dp"
                     android:src="@mipmap/ic_checkbox_default" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_line_fee"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="运费"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@color/_F0F0F0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:text="专线运输费用"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/line_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:text=""
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

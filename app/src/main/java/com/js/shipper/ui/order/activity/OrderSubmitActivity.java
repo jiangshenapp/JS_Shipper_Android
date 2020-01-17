@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.base.frame.view.BaseActivity;
+import com.base.util.TimeUtils;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -39,15 +42,14 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.model.event.RemoveUserEvent;
-import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.DictBean;
+import com.js.shipper.model.bean.FeeBean;
+import com.js.shipper.model.event.RemoveUserEvent;
 import com.js.shipper.model.request.AddStepTwo;
 import com.js.shipper.presenter.DictPresenter;
 import com.js.shipper.presenter.FilePresenter;
@@ -55,7 +57,7 @@ import com.js.shipper.presenter.contract.DictContract;
 import com.js.shipper.presenter.contract.FileContract;
 import com.js.shipper.ui.order.presenter.OrderSubmitPresenter;
 import com.js.shipper.ui.order.presenter.contract.OrderSubmitContract;
-import com.base.util.TimeUtils;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -72,6 +74,7 @@ import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/5/6.
+ * 发货第二步下单
  */
 public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> implements OrderSubmitContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener, DictContract.View {
 
@@ -84,7 +87,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     @BindView(R.id.ship_time)
     TextView mShipTime;
     @BindView(R.id.car_type)
-    TextView mCarType;
+    TextView mUseCarType;
     @BindView(R.id.remark)
     EditText mRemark;
     @BindView(R.id.fee)
@@ -119,7 +122,16 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     CheckBox mBanhuo;
     @BindView(R.id.cb_xiehuo)
     CheckBox mXiehuo;
+    @BindView(R.id.ll_whole_fee)
+    LinearLayout llWholeFee;
+    @BindView(R.id.line_fee)
+    TextView lineFee;
+    @BindView(R.id.ll_line_fee)
+    LinearLayout llLineFee;
 
+    String startCode = "";
+    String arriveCode = "";
+    private String calculateNo = "";
     private long orderId;
     private String img1Url;
     private String img2Url;
@@ -139,8 +151,10 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     private OptionsPickerView pvOptions;
     private List<String> list;
 
-    public static void action(Context context, long orderId) {
+    public static void action(Context context, String startCode, String arriveCode, long orderId) {
         Intent intent = new Intent(context, OrderSubmitActivity.class);
+        intent.putExtra("startCode", startCode);
+        intent.putExtra("arriveCode", arriveCode);
         intent.putExtra("orderId", orderId);
         context.startActivity(intent);
     }
@@ -354,7 +368,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                getOrderFee();
             }
         });
 
@@ -394,7 +408,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                getOrderFee();
             }
         });
 
@@ -403,7 +417,15 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 if (list != null && list.size() > 0) {
-                    mCarType.setText(list.get(options1));
+                    mUseCarType.setText(list.get(options1));
+                    if (mUseCarType.getText().toString().trim().equals("零担")) {
+                        llLineFee.setVisibility(View.VISIBLE);
+                        llWholeFee.setVisibility(View.GONE);
+                        getOrderFee();
+                    } else { //整车
+                        llLineFee.setVisibility(View.GONE);
+                        llWholeFee.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }).build();
@@ -412,6 +434,8 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
 
     private void initIntent() {
         orderId = getIntent().getLongExtra("orderId", 0);
+        startCode = getIntent().getStringExtra("startCode");
+        arriveCode = getIntent().getStringExtra("arriveCode");
     }
 
     @Override
@@ -492,7 +516,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                if (date.before(new Date())){
+                if (date.before(new Date())) {
                     toast("装货时间必须大于当前时间");
                     return;
                 }
@@ -505,14 +529,13 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         pvTime.show();
     }
 
-
     public void confirm() {
         String weight = mGoodWeight.getText().toString().trim();
         String volume = mGoodVolume.getText().toString().trim();
         String remark = mRemark.getText().toString().trim();
         String name = mGoodName.getText().toString().trim();
         String time = mShipTime.getText().toString().trim();
-        String carType = mCarType.getText().toString().trim();
+        String useCarType = mUseCarType.getText().toString().trim();
         String packType = mPackType.getText().toString().trim();
 
         if (TextUtils.isEmpty(weight)) {
@@ -530,13 +553,37 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             return;
         }
 
-        if (TextUtils.isEmpty(carType)) {
+        if (TextUtils.isEmpty(useCarType)) {
             toast("请选择用车类型");
             return;
         }
+
         if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
             toast("请输入价格");
             return;
+        }
+
+        AddStepTwo addStepTwo = new AddStepTwo();
+
+        if (useCarType.equals("零担")) {
+            if (TextUtils.isEmpty(startCode)) {
+                toast("请完善发货地址信息");
+                return;
+            }
+            if (TextUtils.isEmpty(arriveCode)) {
+                toast("请完善收货地址信息");
+                return;
+            }
+            addStepTwo.setCalculateNo(calculateNo);
+        } else { //整车
+            if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
+                toast("请输入价格");
+                return;
+            }
+            addStepTwo.setFeeType(feeWay);
+            if (feeWay == 1) {
+                addStepTwo.setFee(Double.parseDouble(mFee.getText().toString()));
+            }
         }
 
         if (isBail && TextUtils.isEmpty(mBailNumber.getText().toString())) {
@@ -544,26 +591,21 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             return;
         }
 
-
-        AddStepTwo addStepTwo = new AddStepTwo();
         addStepTwo.setId(orderId);
         addStepTwo.setGoodsWeight(Double.parseDouble(weight));
         addStepTwo.setGoodsVolume(Double.parseDouble(volume));
         addStepTwo.setGoodsName(name);
         addStepTwo.setPackType(packType);
-        addStepTwo.setUseCarType(carType);
+        addStepTwo.setUseCarType(useCarType);
         addStepTwo.setLoadingTime(time);
         addStepTwo.setImage1(img1Url);
         addStepTwo.setImage2(img2Url);
         addStepTwo.setRemark(remark);
-        addStepTwo.setFeeType(feeWay);
         addStepTwo.setPayWay(payWay);
         addStepTwo.setPayType(payType);
         addStepTwo.setRequireDeposit(isBail);
         addStepTwo.setDeposit(TextUtils.isEmpty(mBailNumber.getText().toString()) ? 0 : Double.parseDouble(mBailNumber.getText().toString()));
-        if (feeWay == 1) {
-            addStepTwo.setFee(Double.parseDouble(mFee.getText().toString()));
-        }
+
         mPresenter.submit(addStepTwo);
     }
 
@@ -576,9 +618,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         } else {
             toast("下单失败");
         }
-
     }
-
 
     /**
      * 获取TakePhoto实例
@@ -640,11 +680,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, mImg2);
                 break;
         }
     }
@@ -735,5 +775,31 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     @Override
     public void onFirstDictByType(String type, DictBean dictBean) {
 
+    }
+
+    /**
+     * 获取专线费用
+     */
+    private void getOrderFee() {
+        String useCarType = mUseCarType.getText().toString().trim();
+        String weight = mGoodWeight.getText().toString().trim();
+        String volume = mGoodVolume.getText().toString().trim();
+
+        if (!useCarType.equals("零担")) {
+            return;
+        }
+        if (TextUtils.isEmpty(startCode)
+                || TextUtils.isEmpty(arriveCode)
+                || TextUtils.isEmpty(weight)
+                || TextUtils.isEmpty(volume)) {
+            return;
+        }
+        mPresenter.getOrderFee(startCode, arriveCode, Double.parseDouble(weight), Double.parseDouble(volume));
+    }
+
+    @Override
+    public void onOrderFee(FeeBean feeBean) {
+        calculateNo = feeBean.getCalculateNo();
+        lineFee.setText(String.format("%.2f", feeBean.getTotalFee())+"元");
     }
 }

@@ -176,12 +176,12 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
                 }
 
                 if (TextUtils.isEmpty(mStartAddress.getText().toString())) {
-                    toast("请输入发货地址");
+                    toast("请选择发货地址");
                     return;
                 }
 
                 if (TextUtils.isEmpty(mEndAddress.getText().toString())) {
-                    toast("请输入收货地址");
+                    toast("请选择收货地址");
                     return;
                 }
 
@@ -205,7 +205,7 @@ public class ShipFragment extends BaseFragment<ShipPresenter> implements ShipCon
 
     @Override
     public void onStepOne(long orderId) {
-        OrderSubmitActivity.action(mContext, orderId);
+        OrderSubmitActivity.action(mContext, mSendShip.getStreetCode(), mEndShip.getStreetCode(), orderId);
     }
 
     @Subscribe(sticky = true)

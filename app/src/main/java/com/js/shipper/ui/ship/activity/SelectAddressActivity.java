@@ -72,7 +72,6 @@ import butterknife.OnClick;
  */
 public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> implements SelectAddressContrat.View {
 
-
     @BindView(R.id.map)
     MapView mMapView;
     @BindView(R.id.ship_address_name)
@@ -91,7 +90,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     AutoCompleteTextView mSearchAddress;
     @BindView(R.id.address_search_layout)
     LinearLayout mSearchLayout;
-
 
     private int type;//0。发货；1.收货
     private BaiduMap mBaiduMap;
@@ -270,19 +268,20 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(), mShip);
                 break;
             case R.id.confirm:
-                if (TextUtils.isEmpty(mShip.getName())) {
+                if (TextUtils.isEmpty(mShip.getName())
+                    || TextUtils.isEmpty(mShip.getPhone())
+                    || TextUtils.isEmpty(mShip.getStreetCode())) {
                     switch (type) {
                         case 0:
-                            toast("请填写发货人信息");
+                            toast("请完善发货人信息");
                             break;
                         case 1:
-                            toast("请填写收货人信息");
+                            toast("请完善收货人信息");
                             break;
                     }
                     return;
 
                 }
-
                 Intent shipIntent = new Intent();
                 shipIntent.putExtra("ship", mShip);
                 setResult(888, shipIntent);
@@ -444,6 +443,8 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                     mShip.setAddressDetail(shipBean.getAddressDetail());
                     mShip.setName(shipBean.getName());
                     mShip.setPhone(shipBean.getPhone());
+                    mShip.setStreetName(shipBean.getStreetName());
+                    mShip.setStreetCode(shipBean.getStreetCode());
                 }
                 break;
         }

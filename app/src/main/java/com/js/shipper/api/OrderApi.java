@@ -1,6 +1,7 @@
 package com.js.shipper.api;
 
 import com.base.frame.bean.HttpResponse;
+import com.js.shipper.model.bean.FeeBean;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.request.AddOrder;
 import com.js.shipper.model.request.AddStepOne;
@@ -12,6 +13,7 @@ import com.js.shipper.model.response.ListResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -67,19 +69,22 @@ public interface OrderApi {
     Observable<HttpResponse<OrderBean>> getOrderDetail(@Path("id") long id);
 
 
-
     @POST("app/order/list")
     Observable<HttpResponse<ListResponse<OrderBean>>> getOrderList(@Query("current") int current,
                                                                    @Body OrderList data,
                                                                    @Query("size") int size);
 
 
-
-
     @POST("app/order/edit/{id}")
     Observable<HttpResponse<Boolean>> editOrder(@Body OrderEdit orderEdit,
                                                 @Path("id") long id);
 
+
+    @GET("app/order/getFee")
+    Observable<HttpResponse<FeeBean>> getOrderFee(@Query("startAddressCode") String startAddressCode,
+                                                  @Query("arriveAddressCode") String arriveAddressCode,
+                                                  @Query("goodsWeight") Number goodsWeight,
+                                                  @Query("goodsVolume") Number goodsVolume);
 
 
     @POST("app/order/addOrder")
@@ -89,9 +94,11 @@ public interface OrderApi {
     @POST("app/order/confirm/{id}")
     Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
 
+
     //确认收到回执
     @POST("app/order/receipt/{id}")
     Observable<HttpResponse<Boolean>> receiptOrder(@Path("id") long id);
+
 
     //评价
     @POST("app/order/score/{id}")

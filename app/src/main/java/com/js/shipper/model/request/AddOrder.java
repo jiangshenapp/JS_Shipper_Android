@@ -63,6 +63,7 @@ public class AddOrder {
     private boolean requireDeposit;//是否开启保证金
     private String goodsName;//货物名称
     private String packType;//包装类型
+    private String calculateNo;//专线费用No
 
     public void setCarLength(String carLength) {
         this.carLength = carLength;
@@ -178,5 +179,9 @@ public class AddOrder {
 
     public void setPackType(String packType) {
         this.packType = packType;
+    }
+
+    public void setCalculateNo(String calculateNo) {
+        this.calculateNo = calculateNo;
     }
 }

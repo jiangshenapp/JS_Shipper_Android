@@ -4,17 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +29,6 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 >
-
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -71,7 +63,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
-
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -113,7 +104,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,14 +113,11 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
-
-
             <LinearLayout
                 android:id="@+id/ship_car_extent_layout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -140,14 +127,13 @@
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
-
                 <TextView
                     android:id="@+id/ship_car_extent"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
+                    android:layout_weight="1"
                     android:hint="请选择车长"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
@@ -157,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_list_arrow_black" />
+
             </LinearLayout>
 
             <View
@@ -170,7 +157,6 @@
                 android:layout_height="44dp"
                 android:orientation="horizontal">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,14 +165,13 @@
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 
-
                 <TextView
                     android:id="@+id/ship_car_type"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="6dp"
+                    android:layout_weight="1"
                     android:hint="请选择车型"
                     android:textColor="@color/_ECA73F"
                     android:textSize="14sp" />
@@ -196,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_list_arrow_black" />
+
             </LinearLayout>
 
             <View
@@ -206,9 +192,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:orientation="horizontal"
-                >
-
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -601,6 +585,8 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/ll_whole_fee"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -693,6 +679,62 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="12dp"
                     android:src="@mipmap/ic_checkbox_default" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_line_fee"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="运费"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@color/_F0F0F0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:text="专线运输费用"
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/line_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:text=""
+                    android:textColor="@color/_000000"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

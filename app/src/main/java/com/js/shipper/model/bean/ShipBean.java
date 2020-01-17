@@ -16,17 +16,20 @@ public class ShipBean implements Parcelable {
     private String name;
     private String phone;
     private String addressDetail;
+    private String streetName;
+    private String streetCode;
 
     public ShipBean(){
 
     }
 
-    public ShipBean(String phone, String name, String addressDetail) {
+    public ShipBean(String phone, String name, String addressDetail, String streetName, String streetCode) {
         this.phone = phone;
         this.name = name;
         this.addressDetail = addressDetail;
+        this.streetName = streetName;
+        this.streetCode = streetCode;
     }
-
 
     protected ShipBean(Parcel in) {
         address = in.readString();
@@ -37,6 +40,8 @@ public class ShipBean implements Parcelable {
         phone = in.readString();
         addressDetail = in.readString();
         type = in.readInt();
+        streetName = in.readString();
+        streetCode = in.readString();
     }
 
     @Override
@@ -49,6 +54,8 @@ public class ShipBean implements Parcelable {
         dest.writeString(phone);
         dest.writeString(addressDetail);
         dest.writeInt(type);
+        dest.writeString(streetName);
+        dest.writeString(streetCode);
     }
 
     @Override
@@ -130,6 +137,22 @@ public class ShipBean implements Parcelable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getStreetCode() {
+        return streetCode;
+    }
+
+    public void setStreetCode(String streetCode) {
+        this.streetCode = streetCode;
     }
 
 }

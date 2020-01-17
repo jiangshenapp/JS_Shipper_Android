@@ -37,11 +37,11 @@ public class AddStepTwo {
     private boolean requireDeposit;//是否开启保证金
     private String goodsName;//货物名称
     private String packType;//包装类型
+    private String calculateNo;//专线费用No
 
     public AddStepTwo(){
 
     }
-
 
     public double getFee() {
         return fee;
@@ -170,5 +170,13 @@ public class AddStepTwo {
 
     public void setPackType(String packType) {
         this.packType = packType;
+    }
+
+    public String getCalculateNo() {
+        return calculateNo;
+    }
+
+    public void setCalculateNo(String calculateNo) {
+        this.calculateNo = calculateNo;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import androidx.annotation.Nullable;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.base.frame.view.BaseActivity;
+import com.base.util.TimeUtils;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -39,14 +42,13 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.base.frame.view.BaseActivity;
 import com.js.shipper.App;
 import com.js.shipper.R;
 import com.js.shipper.di.componet.DaggerActivityComponent;
 import com.js.shipper.di.module.ActivityModule;
 import com.js.shipper.global.Const;
-import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.model.bean.DictBean;
+import com.js.shipper.model.bean.FeeBean;
 import com.js.shipper.model.bean.OrderBean;
 import com.js.shipper.model.bean.ShipBean;
 import com.js.shipper.model.event.DictSelectEvent;
@@ -58,7 +60,7 @@ import com.js.shipper.presenter.contract.FileContract;
 import com.js.shipper.ui.order.presenter.SubmitOrderPresenter;
 import com.js.shipper.ui.order.presenter.contract.SubmitOrderContract;
 import com.js.shipper.ui.ship.activity.SelectAddressActivity;
-import com.base.util.TimeUtils;
+import com.js.shipper.util.glide.CommonGlideImageLoader;
 import com.js.shipper.widget.window.ItemWindow;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -107,7 +109,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     ImageView mImg1;
     @BindView(R.id.img2)
     ImageView mImg2;
-
     @BindView(R.id.ship_start_address)
     TextView mStartAddress;
     @BindView(R.id.ship_end_address)
@@ -138,7 +139,14 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     CheckBox mBanhuo;
     @BindView(R.id.cb_xiehuo)
     CheckBox mXiehuo;
+    @BindView(R.id.ll_whole_fee)
+    LinearLayout llWholeFee;
+    @BindView(R.id.line_fee)
+    TextView lineFee;
+    @BindView(R.id.ll_line_fee)
+    LinearLayout llLineFee;
 
+    private String calculateNo = "";
     private long matchId;
     private String img1Url;
     private String img2Url;
@@ -237,6 +245,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 }
             }
         });
+
         mXiehuo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -269,6 +278,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 }
             }
         });
+
         mPayWay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -286,6 +296,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 }
             }
         });
+
         mBail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -415,7 +426,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                getOrderFee();
             }
         });
 
@@ -455,7 +466,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                getOrderFee();
             }
         });
 
@@ -464,11 +475,18 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 mUseCarType.setText(list.get(options1));
+                if (mUseCarType.getText().toString().trim().equals("零担")) {
+                    llLineFee.setVisibility(View.VISIBLE);
+                    llWholeFee.setVisibility(View.GONE);
+                    getOrderFee();
+                } else { //整车
+                    llLineFee.setVisibility(View.GONE);
+                    llWholeFee.setVisibility(View.VISIBLE);
+                }
             }
         }).build();
 
         initDetail();
-
     }
 
     private void initDetail() {
@@ -503,16 +521,25 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                     break;
             }
 
-            switch (mOrderBean.getFeeType()) {
-                case 1:
-                    feeWay = 1;
-                    mFee.setText(String.valueOf(mOrderBean.getFee()));
-                    break;
-                case 2:
-                    payWay = 2;
-                    mFee.setText("电议");
-                    break;
+            if (mOrderBean.getUseCarType().equals("零担")) {
+                llLineFee.setVisibility(View.VISIBLE);
+                llWholeFee.setVisibility(View.GONE);
+                getOrderFee();
+            } else { //整车
+                llLineFee.setVisibility(View.GONE);
+                llWholeFee.setVisibility(View.VISIBLE);
+                switch (mOrderBean.getFeeType()) {
+                    case 1:
+                        feeWay = 1;
+                        mFee.setText(String.valueOf(mOrderBean.getFee()));
+                        break;
+                    case 2:
+                        feeWay = 2;
+                        mFee.setText("电议");
+                        break;
+                }
             }
+
             if (!TextUtils.isEmpty(mOrderBean.getRemark())) {
                 mRemark.setVisibility(View.VISIBLE);
                 mRemark.setText(mOrderBean.getRemark());
@@ -543,8 +570,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             mEndShip.setPhone(mOrderBean.getReceiveMobile());
             mEndShip.setName(mOrderBean.getReceiveName());
 
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getImage1(), mImg1);
-            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + mOrderBean.getImage2(), mImg2);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mOrderBean.getImage1(), mImg1);
+            CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + mOrderBean.getImage2(), mImg2);
 
             if (mSendShip != null && mEndShip != null) {
                 double distance = DistanceUtil.getDistance(mGson.fromJson(mSendShip.getPosition(), LatLng.class), mGson.fromJson(mEndShip.getPosition(), LatLng.class));
@@ -648,15 +675,16 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         pvTime.show();
     }
 
-
     public void confirm() {
         String weight = mGoodWeight.getText().toString().trim();
         String volume = mGoodVolume.getText().toString().trim();
         String goodName = mGoodName.getText().toString().trim();
         String remark = mRemark.getText().toString().trim();
         String time = mShipTime.getText().toString().trim();
-        String carType = mUseCarType.getText().toString().trim();
+        String useCarType = mUseCarType.getText().toString().trim();
         String pickType = mPackType.getText().toString().trim();
+        String startCode = mSendShip.getStreetCode();
+        String arriveCode = mEndShip.getStreetCode();
 
         if (TextUtils.isEmpty(mStartAddress.getText().toString())) {
             toast("请输入发货地址");
@@ -678,36 +706,53 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             return;
         }
 
-
         if (TextUtils.isEmpty(time)) {
             toast("请选择时间");
             return;
         }
 
-        if (TextUtils.isEmpty(carType)) {
+        if (TextUtils.isEmpty(useCarType)) {
             toast("请选择用车类型");
             return;
         }
-        if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
-            toast("请输入价格");
-            return;
+
+        AddOrder addOrder = new AddOrder();
+
+        if (useCarType.equals("零担")) {
+            if (TextUtils.isEmpty(startCode)) {
+                toast("请完善发货地址信息");
+                return;
+            }
+            if (TextUtils.isEmpty(arriveCode)) {
+                toast("请完善收货地址信息");
+                return;
+            }
+            addOrder.setCalculateNo(calculateNo);
+        } else { //整车
+            if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
+                toast("请输入价格");
+                return;
+            }
+            addOrder.setFeeType(feeWay);
+            if (feeWay == 1) {
+                addOrder.setFee(Double.parseDouble(mFee.getText().toString()));
+            }
         }
+
         if (isBail && TextUtils.isEmpty(mBailNumber.getText().toString())) {
             toast("请输入保证金");
             return;
         }
 
-        AddOrder addOrder = new AddOrder();
         addOrder.setGoodsWeight(Double.parseDouble(weight));
         addOrder.setGoodsVolume(Double.parseDouble(volume));
         addOrder.setGoodsName(goodName);
-        addOrder.setUseCarType(carType);
+        addOrder.setUseCarType(useCarType);
         addOrder.setLoadingTime(time);
         addOrder.setPackType(pickType);
         addOrder.setImage1(img1Url);
         addOrder.setImage2(img2Url);
         addOrder.setRemark(remark);
-        addOrder.setFeeType(feeWay);
         addOrder.setPayWay(payWay);
         addOrder.setPayType(payType);
         addOrder.setCarLength(lengthStr);
@@ -728,9 +773,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             addOrder.setMatchId("");
         } else {
             addOrder.setMatchId(String.valueOf(matchId));
-        }
-        if (feeWay == 1) {
-            addOrder.setFee(Double.parseDouble(mFee.getText().toString()));
         }
 
         mPresenter.submitOrder(addOrder);
@@ -779,11 +821,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         switch (choseCode) {
             case 1:
                 img1Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg1);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, mImg1);
                 break;
             case 2:
                 img2Url = data;
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL()  + data, mImg2);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.base.http.global.Const.IMG_URL() + data, mImg2);
                 break;
         }
     }
@@ -856,10 +898,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                     case 0:
                         mSendShip = shipBean;
                         mStartAddress.setText(shipBean.getAddress());
+                        getOrderFee();
                         break;
                     case 1:
                         mEndShip = shipBean;
                         mEndAddress.setText(shipBean.getAddress());
+                        getOrderFee();
                         break;
                 }
             }
@@ -928,5 +972,33 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         } else {
             toast("下单失败");
         }
+    }
+
+    /**
+     * 获取专线费用
+     */
+    private void getOrderFee() {
+        String useCarType = mUseCarType.getText().toString().trim();
+        String startCode = mSendShip.getStreetCode();
+        String arriveCode = mEndShip.getStreetCode();
+        String weight = mGoodWeight.getText().toString().trim();
+        String volume = mGoodVolume.getText().toString().trim();
+
+        if (!useCarType.equals("零担")) {
+            return;
+        }
+        if (TextUtils.isEmpty(startCode)
+                || TextUtils.isEmpty(arriveCode)
+                || TextUtils.isEmpty(weight)
+                || TextUtils.isEmpty(volume)) {
+            return;
+        }
+        mPresenter.getOrderFee(startCode, arriveCode, Double.parseDouble(weight), Double.parseDouble(volume));
+    }
+
+    @Override
+    public void onOrderFee(FeeBean feeBean) {
+        calculateNo = feeBean.getCalculateNo();
+        lineFee.setText(String.format("%.2f", feeBean.getTotalFee())+"元");
     }
 }

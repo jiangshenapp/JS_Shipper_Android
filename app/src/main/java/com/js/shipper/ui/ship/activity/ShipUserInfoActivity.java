@@ -83,8 +83,6 @@ public class ShipUserInfoActivity extends SimpleActivity {
         address = getIntent().getStringExtra("address");
         addressName = getIntent().getStringExtra("addressName");
         mShipBean = getIntent().getParcelableExtra("ship");
-        mAddress.setText(address);
-        mAddressName.setText(addressName);
     }
 
     private void initData() {
@@ -112,30 +110,31 @@ public class ShipUserInfoActivity extends SimpleActivity {
     }
 
     private void initView() {
+        mAddress.setText(address);
+        mAddressName.setText(addressName);
+        mStreet.setText(mShipBean.getStreetName());
+        if (mShipBean != null) {
+            mAddressDetail.setText(mShipBean.getAddressDetail());
+            mName.setText(mShipBean.getName());
+            mPhone.setText(mShipBean.getPhone());
+        }
         switch (type) {
             case 0:
                 mTitle.setText("发货人");
                 mName.setHint("发货人姓名");
                 mPhone.setHint("发货人手机号");
+                if (TextUtils.isEmpty(mShipBean.getName())) {
+                    mName.setText(App.getInstance().nickName);
+                }
+                if (TextUtils.isEmpty(mShipBean.getPhone())) {
+                    mPhone.setText(App.getInstance().mobile);
+                }
                 break;
             case 1:
                 mTitle.setText("收货人");
                 mName.setHint("收货人姓名");
                 mPhone.setHint("收货人手机号");
                 break;
-        }
-        if (mShipBean != null) {
-            mAddressDetail.setText(mShipBean.getAddressDetail());
-            if (TextUtils.isEmpty(mShipBean.getName())) {
-                mName.setText(App.getInstance().nickName);
-            } else {
-                mName.setText(mShipBean.getName());
-            }
-            if (TextUtils.isEmpty(mShipBean.getPhone())) {
-                mPhone.setText(App.getInstance().mobile);
-            } else {
-                mPhone.setText(mShipBean.getPhone());
-            }
         }
     }
 
@@ -156,6 +155,11 @@ public class ShipUserInfoActivity extends SimpleActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(name)) {
+            toast("请输入姓名");
+            return;
+        }
+
         if (TextUtils.isEmpty(phone)) {
             toast("请输入手机号");
             return;
@@ -166,13 +170,8 @@ public class ShipUserInfoActivity extends SimpleActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(name)) {
-            toast("请输入姓名");
-            return;
-        }
-
         Intent intent = new Intent();
-        ShipBean shipBean = new ShipBean(phone, name, address);
+        ShipBean shipBean = new ShipBean(phone, name, address, mStreetChildsBean.getName(), mStreetChildsBean.getCode());
         intent.putExtra("ship", shipBean);
         setResult(999, intent);
         finish();

@@ -3,6 +3,7 @@ package com.js.shipper.ui.order.presenter;
 import com.base.frame.mvp.RxPresenter;
 import com.base.http.ApiFactory;
 import com.js.shipper.api.OrderApi;
+import com.js.shipper.model.bean.FeeBean;
 import com.js.shipper.model.request.AddOrder;
 import com.base.frame.rx.RxException;
 import com.base.frame.rx.RxResult;
@@ -26,7 +27,6 @@ public class SubmitOrderPresenter extends RxPresenter<SubmitOrderContract.View> 
         this.mApiFactory = apiFactory;
     }
 
-
     @Override
     public void submitOrder(AddOrder addOrder) {
         Disposable disposable = mApiFactory.getApi(OrderApi.class).submitOrder(addOrder)
@@ -47,6 +47,25 @@ public class SubmitOrderPresenter extends RxPresenter<SubmitOrderContract.View> 
                 }, new RxException<>(e -> {
                     mView.toast(e.getMessage());
                     mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void getOrderFee(String startAddressCode, String arriveAddressCode, Number goodsWeight, Number goodsVolume) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class)
+                .getOrderFee(startAddressCode, arriveAddressCode, goodsWeight, goodsVolume)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<FeeBean>() {
+                    @Override
+                    public void accept(FeeBean feeBean) throws Exception {
+                        mView.closeProgress();
+                        mView.onOrderFee(feeBean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }
