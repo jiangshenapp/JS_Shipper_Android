@@ -727,6 +727,10 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 toast("请完善收货地址信息");
                 return;
             }
+            if (TextUtils.isEmpty(calculateNo)) {
+                toast("线路未开通，请联系客服或选择整车");
+                return;
+            }
             addOrder.setCalculateNo(calculateNo);
         } else { //整车
             if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
