@@ -521,22 +521,24 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                     break;
             }
 
-            if (mOrderBean.getUseCarType().equals("零担")) {
-                llLineFee.setVisibility(View.VISIBLE);
-                llWholeFee.setVisibility(View.GONE);
-                getOrderFee();
-            } else { //整车
-                llLineFee.setVisibility(View.GONE);
-                llWholeFee.setVisibility(View.VISIBLE);
-                switch (mOrderBean.getFeeType()) {
-                    case 1:
-                        feeWay = 1;
-                        mFee.setText(String.valueOf(mOrderBean.getFee()));
-                        break;
-                    case 2:
-                        feeWay = 2;
-                        mFee.setText("电议");
-                        break;
+            if (!TextUtils.isEmpty(mOrderBean.getUseCarType())) {
+                if (mOrderBean.getUseCarType().equals("零担")) {
+                    llLineFee.setVisibility(View.VISIBLE);
+                    llWholeFee.setVisibility(View.GONE);
+                    getOrderFee();
+                } else { //整车
+                    llLineFee.setVisibility(View.GONE);
+                    llWholeFee.setVisibility(View.VISIBLE);
+                    switch (mOrderBean.getFeeType()) {
+                        case 1:
+                            feeWay = 1;
+                            mFee.setText(String.valueOf(mOrderBean.getFee()));
+                            break;
+                        case 2:
+                            feeWay = 2;
+                            mFee.setText("电议");
+                            break;
+                    }
                 }
             }
 
