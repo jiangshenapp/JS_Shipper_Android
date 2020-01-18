@@ -88,6 +88,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             appDialogFragment.setNegativeButton("不同意", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    MainActivity.action(mContext);
                     finish();
                 }
             });
@@ -123,6 +124,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
                     @Override
                     public void noPermission(List<String> denied, boolean quick) {
+                        MainActivity.action(mContext);
                         finish();
                     }
                 });

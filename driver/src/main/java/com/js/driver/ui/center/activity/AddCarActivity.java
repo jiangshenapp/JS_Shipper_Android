@@ -485,7 +485,7 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
 
                     @Override
                     public void noPermission(List<String> denied, boolean quick) {
-                        toast("请同意权限");
+                        toast("请同意拍照或录像权限");
                     }
                 });
     }
