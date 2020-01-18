@@ -23,8 +23,8 @@ public class ParkFragment extends SimpleFragment {
     RadioButton mCarsource;
     @BindView(R.id.rb_delivery)
     RadioButton mDelivery;
-    @BindView(R.id.rb_boutique)
-    RadioButton mBoutique;
+//    @BindView(R.id.rb_boutique)
+//    RadioButton mBoutique;
     @BindView(R.id.radio)
     RadioGroup mRadio;
     @BindView(R.id.frame)
@@ -32,7 +32,7 @@ public class ParkFragment extends SimpleFragment {
 
     private CarSourceFragment mCarSourceFragment;
     private DeliveryFragment mDeliveryFragment;
-    private BoutiqueFragment mBoutiqueFragment;
+//    private BoutiqueFragment mBoutiqueFragment;
     private List<Fragment> mFragments;
     private Fragment mCurrentFragment;
 
@@ -70,10 +70,10 @@ public class ParkFragment extends SimpleFragment {
         mFragments = new ArrayList<>();
         mCarSourceFragment = CarSourceFragment.newInstance();
         mDeliveryFragment = DeliveryFragment.newInstance();
-        mBoutiqueFragment = BoutiqueFragment.newInstance();
+//        mBoutiqueFragment = BoutiqueFragment.newInstance();
         mFragments.add(mCarSourceFragment);
         mFragments.add(mDeliveryFragment);
-        mFragments.add(mBoutiqueFragment);
+//        mFragments.add(mBoutiqueFragment);
     }
 
 
@@ -93,20 +93,20 @@ public class ParkFragment extends SimpleFragment {
                 fragment = mCarSourceFragment;
                 mCarsource.setTextColor(getResources().getColor(R.color.white));
                 mDelivery.setTextColor(getResources().getColor(R.color._000000));
-                mBoutique.setTextColor(getResources().getColor(R.color._000000));
+//                mBoutique.setTextColor(getResources().getColor(R.color._000000));
                 break;
             case R.id.rb_delivery:
                 fragment = mDeliveryFragment;
                 mCarsource.setTextColor(getResources().getColor(R.color._000000));
                 mDelivery.setTextColor(getResources().getColor(R.color.white));
-                mBoutique.setTextColor(getResources().getColor(R.color._000000));
+//                mBoutique.setTextColor(getResources().getColor(R.color._000000));
                 break;
-            case R.id.rb_boutique:
-                fragment = mBoutiqueFragment;
-                mCarsource.setTextColor(getResources().getColor(R.color._000000));
-                mDelivery.setTextColor(getResources().getColor(R.color._000000));
-                mBoutique.setTextColor(getResources().getColor(R.color.white));
-                break;
+//            case R.id.rb_boutique:
+//                fragment = mBoutiqueFragment;
+//                mCarsource.setTextColor(getResources().getColor(R.color._000000));
+//                mDelivery.setTextColor(getResources().getColor(R.color._000000));
+//                mBoutique.setTextColor(getResources().getColor(R.color.white));
+//                break;
         }
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.hide(mCurrentFragment);
