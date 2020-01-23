@@ -3,6 +3,7 @@ package com.js.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.location.BDLocation;
 import com.base.frame.module.IAppLife;
 import com.js.component.di.componet.AppComponent;
 import com.js.component.di.componet.DaggerAppComponent;
@@ -17,7 +18,7 @@ public class ComponentApp implements IAppLife {
     public String token;
     private static ComponentApp mApp;
     private AppComponent mAppComponent;
-
+    public BDLocation mLocation;
 
     public static Application getInstance() {
         return mComponentApp;

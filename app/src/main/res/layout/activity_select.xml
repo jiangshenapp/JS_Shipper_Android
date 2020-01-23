@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:text="当前定位城市：宁波市"
+        android:text="当前定位城市："
         android:textColor="@color/_000000"
         android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"

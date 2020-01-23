@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.base.frame.view.BaseActivity;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.component.ComponentApp;
 import com.js.component.R;
 import com.js.component.R2;
@@ -40,7 +40,8 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     IndexBar mIndexBar;
     @BindView(R2.id.tvSideBarHint)
     TextView mSideBarHint;
-
+    @BindView(R2.id.location)
+    TextView mLocationCity;
 
     private CityAdapter mAdapter;
     private List<CityBean> mList;
@@ -48,15 +49,16 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     private LinearLayoutManager mManager;
     private SuspensionDecoration mDecoration;
 
-
     @Override
     protected void init() {
         initView();
         initData();
-
     }
 
     private void initData() {
+        if (ComponentApp.getApp().mLocation != null) {
+            mLocationCity.setText("当前定位城市："+ComponentApp.getApp().mLocation.getCity());
+        }
         mPresenter.getCityList();
     }
 
@@ -68,7 +70,7 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
                 holder.setText(R.id.tvCity, (String) o);
             }
         };
-        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
+//        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
         mRecycler.setAdapter(mHeaderAdapter);
         mDecoration = new SuspensionDecoration(this, mList).setHeaderViewCount(mHeaderAdapter.getHeaderViewCount());
         mRecycler.addItemDecoration(mDecoration);
@@ -79,11 +81,9 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
-
         mIndexBar.setmPressedShowTextView(mSideBarHint)//设置HintTextView
                 .setNeedRealIndex(true)//设置需要真实的索引
                 .setmLayoutManager(mManager);//设置RecyclerView的LayoutManager
-
     }
 
     @Override
@@ -99,7 +99,6 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     protected int getLayoutId() {
         return R.layout.activity_city_select;
     }
-
 
     @Override
     public void setActionBar() {

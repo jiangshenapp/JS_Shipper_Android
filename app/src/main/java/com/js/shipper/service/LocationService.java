@@ -130,6 +130,7 @@ public class LocationService extends Service {
                         Log.d(TAG, "longitude--->" + location.getLatitude());
                         App.getInstance().mLocation = location;
                         CommunityApp.getApp().mLocation = location;
+                        ComponentApp.getApp().mLocation = location;
                         break;
 
                     case 63:

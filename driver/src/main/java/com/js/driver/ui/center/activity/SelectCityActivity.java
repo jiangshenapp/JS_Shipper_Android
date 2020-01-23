@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.frame.view.BaseActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.js.component.ComponentApp;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
@@ -40,7 +41,8 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     IndexBar mIndexBar;
     @BindView(R.id.tvSideBarHint)
     TextView mSideBarHint;
-
+    @BindView(R.id.location)
+    TextView mLocationCity;
 
     private CityAdapter mAdapter;
     private List<CityBean> mList;
@@ -48,15 +50,16 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     private LinearLayoutManager mManager;
     private SuspensionDecoration mDecoration;
 
-
     @Override
     protected void init() {
         initView();
         initData();
-
     }
 
     private void initData() {
+        if (App.getInstance().mLocation != null) {
+            mLocationCity.setText("当前定位城市："+App.getInstance().mLocation.getCity());
+        }
         mPresenter.getCityList();
     }
 
@@ -68,7 +71,7 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
                 holder.setText(R.id.tvCity, (String) o);
             }
         };
-        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
+//        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
         mRecycler.setAdapter(mHeaderAdapter);
         mDecoration = new SuspensionDecoration(this, mList).setHeaderViewCount(mHeaderAdapter.getHeaderViewCount());
         mRecycler.addItemDecoration(mDecoration);
@@ -79,11 +82,9 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
         mRecycler.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
-
         mIndexBar.setmPressedShowTextView(mSideBarHint)//设置HintTextView
                 .setNeedRealIndex(true)//设置需要真实的索引
                 .setmLayoutManager(mManager);//设置RecyclerView的LayoutManager
-
     }
 
     @Override
@@ -99,7 +100,6 @@ public class SelectCityActivity extends BaseActivity<SelectCityPresenter> implem
     protected int getLayoutId() {
         return R.layout.activity_city_select;
     }
-
 
     @Override
     public void setActionBar() {

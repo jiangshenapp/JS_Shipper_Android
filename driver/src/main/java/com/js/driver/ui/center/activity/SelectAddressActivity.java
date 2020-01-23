@@ -131,6 +131,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(mPoiListener);
+        if (App.getInstance().mLocation != null) {
+            mCity.setText(App.getInstance().mLocation.getCity());
+        }
     }
 
     private void initIntent() {

@@ -13,6 +13,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.js.community.CommunityApp;
+import com.js.component.ComponentApp;
 import com.js.driver.App;
 
 
@@ -130,6 +131,7 @@ public class LocationService extends Service {
                         Log.d(TAG, "longitude--->" + location.getLatitude());
                         App.getInstance().mLocation = location;
                         CommunityApp.getApp().mLocation = location;
+                        ComponentApp.getApp().mLocation = location;
                         break;
 
                     case 63:

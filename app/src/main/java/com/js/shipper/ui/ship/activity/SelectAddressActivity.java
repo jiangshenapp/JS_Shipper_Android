@@ -134,6 +134,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(mPoiListener);
+        if (App.getInstance().mLocation != null) {
+            mCity.setText(App.getInstance().mLocation.getCity());
+        }
     }
 
     private void initIntent() {
@@ -191,7 +194,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             @Override
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s)) {
-//
                     mSuggestionSearch.requestSuggestion(new SuggestionSearchOption()
                             .city(mCity.getText().toString())
                             .keyword(s.toString()));
