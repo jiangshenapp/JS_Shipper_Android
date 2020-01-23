@@ -549,7 +549,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
         }
 
         if (TextUtils.isEmpty(time)) {
-            toast("请选择时间");
+            toast("请选择装货时间");
             return;
         }
 

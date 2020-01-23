@@ -195,7 +195,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请选择货物时间"
+                    android:hint="请选择装货时间"
                     android:textColorHint="@color/_B8B8B8"
                     android:textSize="14sp" />
 

@@ -689,12 +689,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         String arriveCode = mEndShip.getStreetCode();
 
         if (TextUtils.isEmpty(mStartAddress.getText().toString())) {
-            toast("请输入发货地址");
+            toast("请选择发货地址");
             return;
         }
 
         if (TextUtils.isEmpty(mEndAddress.getText().toString())) {
-            toast("请输入收货地址");
+            toast("请选择收货地址");
             return;
         }
 
@@ -709,7 +709,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         }
 
         if (TextUtils.isEmpty(time)) {
-            toast("请选择时间");
+            toast("请选择装货时间");
             return;
         }
 
