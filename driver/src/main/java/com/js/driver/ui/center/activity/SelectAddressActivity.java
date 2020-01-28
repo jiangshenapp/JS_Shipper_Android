@@ -150,7 +150,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
             if (mLocationBean.getLatitude()>0 && mLocationBean.getLongitude()>0) {
                 setUserMapCenter(mLocationBean.getLatitude(), mLocationBean.getLongitude());
             } else {
-                setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                if (App.getInstance().mLocation != null) {
+                    setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                }
             }
             if (!TextUtils.isEmpty(mLocationBean.getAddress())) {
                 mAddress.setText(mLocationBean.getAddress());

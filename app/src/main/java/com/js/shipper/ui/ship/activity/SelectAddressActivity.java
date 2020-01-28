@@ -159,7 +159,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                     setUserMapCenter(latLngBean.getLatitude(), latLngBean.getLongitude());
                 }
             } else {
-                setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                if (App.getInstance().mLocation != null) {
+                    setUserMapCenter(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                }
             }
             if (!TextUtils.isEmpty(mShip.getAddress())) {
                 mAddress.setText(mShip.getAddress());
@@ -297,7 +299,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 break;
         }
     }
-
 
     OnGetSuggestionResultListener mSuggestionListener = new OnGetSuggestionResultListener() {
         @Override
