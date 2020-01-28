@@ -60,118 +60,144 @@
 
         <activity
             android:name="com.js.shipper.ui.main.activity.MainActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
 
         <activity
             android:name="com.js.shipper.ui.user.activity.UserCenterActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.WalletActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.BailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.RechargeActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.WithdrawActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.BillActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrdersActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrderDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.ship.activity.SelectAddressActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrderSubmitActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.center.activity.AboutActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.center.activity.FeedBackActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.user.activity.VerifiedActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.ship.activity.ShipUserInfoActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.car.activity.CarActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.car.activity.AddCarActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.wxapi.WXPayEntryActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTop"></activity>
 
         <activity
             android:name="com.js.shipper.ui.wallet.activity.PayActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.park.activity.CarSourceDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.park.activity.BoutiqueDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.park.activity.CollectActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.OrderEditActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.SubmitOrderActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.park.activity.BranchDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name="com.js.shipper.ui.order.activity.TypeInputActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity android:name="com.base.frame.view.SimpleWebActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat"
-            />
+            android:theme="@style/Theme.AppCompat" />
 
         <service
             android:name="com.baidu.location.f"

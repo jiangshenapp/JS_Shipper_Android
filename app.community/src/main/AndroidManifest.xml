@@ -8,28 +8,36 @@
             android:value="IModuleConfig" />
 
         <activity android:name=".ui.activity.FindCircleActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
 
         <activity android:name=".ui.activity.CircleIndexActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"/>
 
         <activity android:name=".ui.activity.PublishPostActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
 
         <activity android:name=".ui.activity.MemberManageActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
 
         <activity android:name=".ui.activity.PostListActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
+
         <activity android:name=".ui.activity.PostDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
 
         <activity android:name=".ui.activity.CommentActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             />
 

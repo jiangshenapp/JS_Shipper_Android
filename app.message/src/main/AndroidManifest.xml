@@ -8,21 +8,27 @@
 
         <activity
             android:name=".ui.activity.MessageActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.activity.PushActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.activity.MessageDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.activity.PushDetailActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity android:name=".ui.chat.EaseChatActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
+
     </application>
 </manifest>

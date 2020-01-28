@@ -8,23 +8,30 @@
 
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
 
         <activity
             android:name=".ui.activity.RegisterActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.activity.ForgetPwdActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.activity.ResetPwdActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop" />
 
-        <activity android:name=".ui.activity.WxBindActivity" />
+        <activity android:name=".ui.activity.WxBindActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.BindStatusActivity"/>
+        <activity android:name=".ui.activity.BindStatusActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
