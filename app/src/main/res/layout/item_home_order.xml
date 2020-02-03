@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="6dp"
-                android:text="普货 高栏货车4.2米/1.3方/1.0吨"
+                android:text="普货 高栏货车4.2米/1.3方/1.0千克"
                 android:textColor="@color/_6E6E6E"
                 android:textSize="12sp" />
 

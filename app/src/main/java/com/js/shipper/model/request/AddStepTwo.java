@@ -24,7 +24,7 @@ public class AddStepTwo {
     private double fee;//运费
     private int feeType;//运费类型，1自己出价，2电议
     private double goodsVolume;//货物体积，单位立方米
-    private double goodsWeight;//货物重量、吨
+    private double goodsWeight;//货物重量、千克
     private long id;//订单号
     private String image1;//图片1
     private String image2;//图片2

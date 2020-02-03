@@ -34,7 +34,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
             info += "/"+item.getGoodsVolume()+"方";
         }
         if (item.getGoodsWeight()!=0) {
-            info += "/"+item.getGoodsWeight()+"吨";
+            info += "/"+item.getGoodsWeight()+"千克";
         }
         helper.setText(R.id.waybill_order_no, "订单编号：" + item.getOrderNo())
                 .setText(R.id.waybill_state, item.getStateNameConsignor())

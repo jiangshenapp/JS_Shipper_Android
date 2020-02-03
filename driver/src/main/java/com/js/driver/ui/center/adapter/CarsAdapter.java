@@ -28,7 +28,7 @@ public class CarsAdapter extends BaseQuickAdapter<CarBean, BaseViewHolder> {
                 .setText(R.id.item_car_state,item.getStateName())
                 .setText(R.id.item_car_type,item.getCarModelName()+item.getCarLengthName()+"米/"
                         +item.getCapacityVolume()+"方/"
-                        +item.getCapacityTonnage()+"吨");
+                        +item.getCapacityTonnage()+"千克");
 
         helper.setTextColor(R.id.item_car_state,Color.parseColor(com.js.driver.global.Const.CarStateColor[item.getState()]));
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL()  + item.getImage2()

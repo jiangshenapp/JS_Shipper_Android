@@ -42,7 +42,7 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
             info += "/" + item.getGoodsVolume() + "方";
         }
         if (item.getGoodsWeight() != 0) {
-            info += "/" + item.getGoodsWeight() + "吨";
+            info += "/" + item.getGoodsWeight() + "千克";
         }
         helper.setText(R.id.item_order_no, "订单编号：" + item.getOrderNo())
                 .setText(R.id.item_order_type, item.getUseCarTypeName())
@@ -53,7 +53,7 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
                         + item.getCarLengthName() + "/" +
                         item.getGoodsVolume() + "方" +
                         "/" +
-                        item.getGoodsWeight() + "吨");
+                        item.getGoodsWeight() + "千克");
         if (item.getFeeType() == 1) {
             helper.setText(R.id.item_order_money, "￥" + item.getFee());
         } else {

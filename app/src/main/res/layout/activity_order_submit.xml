@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="6dp"
-                        android:text="吨"
+                        android:text="千克"
                         android:textColor="@color/_000000"
                         android:textSize="14sp" />
 

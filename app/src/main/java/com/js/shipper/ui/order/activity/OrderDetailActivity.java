@@ -204,7 +204,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             info += "/" + orderBean.getGoodsVolume() + "方";
         }
         if (orderBean.getGoodsWeight() != 0) {
-            info += "/" + orderBean.getGoodsWeight() + "吨";
+            info += "/" + orderBean.getGoodsWeight() + "千克";
         }
         mCarInfo.setText(info);
         mGoodName.setText(orderBean.getGoodsName());

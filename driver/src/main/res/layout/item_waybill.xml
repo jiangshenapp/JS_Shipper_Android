@@ -113,7 +113,7 @@
                 android:id="@+id/item_waybill_car_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="普货 高栏货车4.2米/1.3方/1.0吨"
+                android:text="普货 高栏货车4.2米/1.3方/1.0千克"
                 android:textColor="#FF6E6E6E"
                 android:textSize="12sp"
                 android:layout_marginTop="12dp"
