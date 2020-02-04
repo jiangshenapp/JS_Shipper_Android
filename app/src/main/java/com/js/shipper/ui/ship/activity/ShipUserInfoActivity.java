@@ -50,16 +50,20 @@ public class ShipUserInfoActivity extends SimpleActivity {
     LinearLayout llStreet;
 
     private int type;//0。发货；1.收货
+    private boolean reSelectStreet;//true 重新选择街道
     private String address;
     private String addressName;
     private ShipBean mShipBean;
+    private String streetCode;
+    private String streetName;
     private List<AddressBean.CityChildsBean.CountyChildsBean.StreetChildsBean> mStreetChildsBeans = new ArrayList<>();
     private List<AddressBean> mAddressBeans;
     private AddressBean.CityChildsBean.CountyChildsBean.StreetChildsBean mStreetChildsBean;
 
-    public static void action(Activity context, int type, String address, String addressName, ShipBean shipBean) {
+    public static void action(Activity context, int type, boolean reSelectStreet, String address, String addressName, ShipBean shipBean) {
         Intent intent = new Intent(context, ShipUserInfoActivity.class);
         intent.putExtra("type", type);
+        intent.putExtra("reSelectStreet",reSelectStreet);
         intent.putExtra("address", address);
         intent.putExtra("addressName", addressName);
         intent.putExtra("ship", shipBean);
@@ -80,6 +84,7 @@ public class ShipUserInfoActivity extends SimpleActivity {
 
     private void initIntent() {
         type = getIntent().getIntExtra("type", 0);
+        reSelectStreet = getIntent().getBooleanExtra("reSelectStreet",false);
         address = getIntent().getStringExtra("address");
         addressName = getIntent().getStringExtra("addressName");
         mShipBean = getIntent().getParcelableExtra("ship");
@@ -112,8 +117,12 @@ public class ShipUserInfoActivity extends SimpleActivity {
     private void initView() {
         mAddress.setText(address);
         mAddressName.setText(addressName);
-        mStreet.setText(mShipBean.getStreetName());
         if (mShipBean != null) {
+            if (reSelectStreet == false) {
+                streetCode = mShipBean.getStreetCode();
+                streetName = mShipBean.getStreetName();
+                mStreet.setText(streetName);
+            }
             mAddressDetail.setText(mShipBean.getAddressDetail());
             mName.setText(mShipBean.getName());
             mPhone.setText(mShipBean.getPhone());
@@ -171,7 +180,7 @@ public class ShipUserInfoActivity extends SimpleActivity {
         }
 
         Intent intent = new Intent();
-        ShipBean shipBean = new ShipBean(phone, name, address, mStreetChildsBean.getName(), mStreetChildsBean.getCode());
+        ShipBean shipBean = new ShipBean(phone, name, address, streetName, streetCode);
         intent.putExtra("ship", shipBean);
         setResult(999, intent);
         finish();
@@ -197,7 +206,9 @@ public class ShipUserInfoActivity extends SimpleActivity {
             public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
                 //返回的分别是三个级别的选中位置
                 mStreetChildsBean = mStreetChildsBeans.get(options1);
-                mStreet.setText(mStreetChildsBean.getName());
+                streetCode = mStreetChildsBean.getCode();
+                streetName = mStreetChildsBean.getName();
+                mStreet.setText(streetName);
             }
         }).build();
         List<String> streetNames = new ArrayList<String>();

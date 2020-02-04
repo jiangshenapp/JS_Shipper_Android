@@ -92,6 +92,8 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     LinearLayout mSearchLayout;
 
     private int type;//0。发货；1.收货
+    private boolean reSelectStreet;//true 重新选择街道
+    private String addressName;
     private BaiduMap mBaiduMap;
     private GeoCoder mCoder;
     private String city;
@@ -167,7 +169,8 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mAddress.setText(mShip.getAddress());
             }
             if (!TextUtils.isEmpty(mShip.getAddressName())) {
-                mAddress.setText(mShip.getAddressName());
+                mAddressName.setText(mShip.getAddressName());
+                addressName = mShip.getAddressName();
             }
         }
 
@@ -269,7 +272,7 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.receiver_info:
-                ShipUserInfoActivity.action(mContext, type, mAddress.getText().toString(), mAddressName.getText().toString(), mShip);
+                ShipUserInfoActivity.action(mContext, type, reSelectStreet, mAddress.getText().toString(), mAddressName.getText().toString(), mShip);
                 break;
             case R.id.confirm:
                 if (TextUtils.isEmpty(mShip.getName())
@@ -284,7 +287,11 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                             break;
                     }
                     return;
-
+                }
+                if (!TextUtils.isEmpty(mShip.getStreetCode()) && !addressName.equals(mShip.getAddressName())) {
+                    toast("请重新选择街道");
+                    reSelectStreet = true;
+                    return;
                 }
                 Intent shipIntent = new Intent();
                 shipIntent.putExtra("ship", mShip);
@@ -324,7 +331,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
         }
     };
 
-
     /**
      * 设置中心点
      */
@@ -342,7 +348,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 // POI召回半径，允许设置区间为0-1000米，超过1000米按1000米召回。默认值为1000
                 .radius(500));
     }
-
 
     BaiduMap.OnMapStatusChangeListener listener = new BaiduMap.OnMapStatusChangeListener() {
         /**
@@ -422,6 +427,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mShip.setAddress(poiInfo.address);
                 mShip.setAddressName(poiInfo.name);
                 mShip.setPosition(new Gson().toJson(new LatLngBean(poiInfo.location.latitude, poiInfo.location.longitude)));
+                if (!TextUtils.isEmpty(mShip.getStreetCode()) && !addressName.equals(mShip.getAddressName())) {
+                    reSelectStreet = true;
+                }
             }
             if (address != null) {
                 mShip.setAddressCode(address.adcode);
@@ -448,6 +456,8 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                     mShip.setPhone(shipBean.getPhone());
                     mShip.setStreetName(shipBean.getStreetName());
                     mShip.setStreetCode(shipBean.getStreetCode());
+                    addressName = mShip.getAddressName();
+                    reSelectStreet = false;
                 }
                 break;
         }
@@ -474,7 +484,6 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                 mShip.setAddress(poiDetailInfo.getAddress());
                 mShip.setAddressName(poiDetailInfo.getName());
                 mShip.setPosition(new Gson().toJson(new LatLngBean(poiDetailInfo.getLocation().latitude, poiDetailInfo.getLocation().longitude)));
-
                 mAddressName.setText(poiDetailInfo.getName());
                 mAddress.setText(poiDetailInfo.getAddress());
                 setUserMapCenter(poiDetailInfo.getLocation().latitude, poiDetailInfo.getLocation().longitude);
@@ -482,6 +491,9 @@ public class SelectAddressActivity extends BaseActivity<SelectAddressPresenter> 
                     if (getCurrentFocus() != null)
                         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                if (!TextUtils.isEmpty(mShip.getStreetCode()) && !addressName.equals(mShip.getAddressName())) {
+                    reSelectStreet = true;
                 }
             }
         }
