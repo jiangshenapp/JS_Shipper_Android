@@ -558,9 +558,11 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
             return;
         }
 
-        if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
-            toast("请输入价格");
-            return;
+        if (useCarType.equals("整车")) {
+            if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
+                toast("请输入价格");
+                return;
+            }
         }
 
         AddStepTwo addStepTwo = new AddStepTwo();
