@@ -133,7 +133,7 @@ public class OrderSubmitActivity extends BaseActivity<OrderSubmitPresenter> impl
     String arriveCode = "";
     private List<String> list;
     private List<DictBean> mUseCarTypeBeans;
-    private String mUseCarType;
+    private String mUseCarType = "";
     private String calculateNo = "";
     private double totalFee = 0.0f;
     private long orderId;

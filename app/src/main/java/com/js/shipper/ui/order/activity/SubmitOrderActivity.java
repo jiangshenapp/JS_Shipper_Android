@@ -148,7 +148,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
     private List<String> list;
     private List<DictBean> mUseCarTypeBeans;
-    private String mUseCarType;
+    private String mUseCarType = "";
     private String calculateNo = "";
     private double totalFee = 0.0f;
     private long matchId;

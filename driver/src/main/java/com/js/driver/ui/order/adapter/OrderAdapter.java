@@ -49,7 +49,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 .setText(R.id.item_waybill_order_status, item.getStateName())
                 .setText(R.id.item_waybill_car_info, info);
         if (item.getUseCarType().equals("2")) { //2零担
-            helper.setText(R.id.item_order_money, "￥" + item.getFee());
+            helper.setText(R.id.item_waybill_money, "￥" + item.getFee());
         } else { //1整车
             if (item.getFeeType() == 1) {
                 helper.setText(R.id.item_waybill_money, "￥" + item.getFee());

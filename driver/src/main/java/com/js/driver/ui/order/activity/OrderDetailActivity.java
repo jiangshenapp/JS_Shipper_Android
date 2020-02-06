@@ -335,7 +335,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             }
             mCarInfo.setText(info);
             mGoodsName.setText(orderBean.getGoodsName());
-            mCarUseType.setText(orderBean.getUseCarType());
+            mCarUseType.setText(orderBean.getUseCarTypeName());
             mBail.setText(String.valueOf(orderBean.getDeposit()));
             mPackType.setText(orderBean.getPackType());
             switch (orderBean.getPayWay()) {
