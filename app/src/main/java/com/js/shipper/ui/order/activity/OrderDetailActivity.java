@@ -229,14 +229,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
         }
 
-        switch (orderBean.getFeeType()) {
-            case 1:
+        if (orderBean.getUseCarType().equals("2")) { //2零担
+            mFee.setText(String.valueOf(orderBean.getFee()));
+        } else { //1整车
+            if (orderBean.getFeeType() == 1) {
                 mFee.setText(String.valueOf(orderBean.getFee()));
-                break;
-            case 2:
+            } else {
                 mFee.setText("电议");
-                break;
+            }
         }
+
         if (!TextUtils.isEmpty(orderBean.getRemark())) {
             mRemark.setVisibility(View.VISIBLE);
             mRemark.setText(orderBean.getRemark());

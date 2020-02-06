@@ -82,7 +82,7 @@ public class OrderBean implements Parcelable {
     private String sendPosition;//发货地坐标
     private int state;
     private String transferTime;//配送时间
-    private String useCarType;//用车类型，字典
+    private String useCarType;//用车类型，整车1、零担2
     /**
      * id : 57
      * receiveName : null

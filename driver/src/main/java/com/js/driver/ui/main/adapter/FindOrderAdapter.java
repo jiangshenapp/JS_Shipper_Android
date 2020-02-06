@@ -54,10 +54,14 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
                         item.getGoodsVolume() + "方" +
                         "/" +
                         item.getGoodsWeight() + "千克");
-        if (item.getFeeType() == 1) {
+        if (item.getUseCarType().equals("2")) { //2零担
             helper.setText(R.id.item_order_money, "￥" + item.getFee());
-        } else {
-            helper.setText(R.id.item_order_money, "电议");
+        } else { //1整车
+            if (item.getFeeType() == 1) {
+                helper.setText(R.id.item_order_money, "￥" + item.getFee());
+            } else {
+                helper.setText(R.id.item_order_money, "电议");
+            }
         }
         helper.setText(R.id.item_order_create_time, TimeUtils.format(item.getCreateTime()) + "发布");
         if (App.getInstance().mLocation == null) {

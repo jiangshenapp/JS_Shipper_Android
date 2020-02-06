@@ -92,7 +92,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     @BindView(R.id.ship_time)
     TextView mShipTime;
     @BindView(R.id.car_type)
-    TextView mUseCarType;
+    TextView mUseCarTypeName;
     @BindView(R.id.remark)
     EditText mRemark;
     @BindView(R.id.fee)
@@ -146,7 +146,11 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     @BindView(R.id.ll_line_fee)
     LinearLayout llLineFee;
 
+    private List<String> list;
+    private List<DictBean> mUseCarTypeBeans;
+    private String mUseCarType;
     private String calculateNo = "";
+    private double totalFee = 0.0f;
     private long matchId;
     private String img1Url;
     private String img2Url;
@@ -171,7 +175,6 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
     private OrderBean mOrderBean;
     private boolean isBail;//是否需要保证金
     private String[] items = {"拍摄", "从相册选择"};
-    private List<String> list;
     private OptionsPickerView pvOptions;
 
     @Inject
@@ -474,12 +477,13 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                mUseCarType.setText(list.get(options1));
-                if (mUseCarType.getText().toString().trim().equals("零担")) {
+                mUseCarType = mUseCarTypeBeans.get(options1).getValue();
+                mUseCarTypeName.setText(list.get(options1));
+                if (mUseCarType.equals("2")) { //2零担
                     llLineFee.setVisibility(View.VISIBLE);
                     llWholeFee.setVisibility(View.GONE);
                     getOrderFee();
-                } else { //整车
+                } else { //1整车
                     llLineFee.setVisibility(View.GONE);
                     llWholeFee.setVisibility(View.VISIBLE);
                 }
@@ -497,7 +501,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             mShipTime.setText(mOrderBean.getLoadingTime());
             mGoodVolume.setText(String.valueOf(mOrderBean.getGoodsVolume()));
             mGoodName.setText(mOrderBean.getGoodsName());
-            mUseCarType.setText(mOrderBean.getUseCarType());
+            mUseCarType = mOrderBean.getUseCarType();
+            mUseCarTypeName.setText(mOrderBean.getUseCarTypeName());
             mPackType.setText(mOrderBean.getPackType());
             switch (mOrderBean.getPayWay()) {
                 case 1:
@@ -521,12 +526,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                     break;
             }
 
-            if (!TextUtils.isEmpty(mOrderBean.getUseCarType())) {
-                if (mOrderBean.getUseCarType().equals("零担")) {
+            if (!TextUtils.isEmpty(mUseCarType)) {
+                if (mUseCarType.equals("2")) { //2零担
                     llLineFee.setVisibility(View.VISIBLE);
                     llWholeFee.setVisibility(View.GONE);
                     getOrderFee();
-                } else { //整车
+                } else { //1整车
                     llLineFee.setVisibility(View.GONE);
                     llWholeFee.setVisibility(View.VISIBLE);
                     switch (mOrderBean.getFeeType()) {
@@ -683,7 +688,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         String goodName = mGoodName.getText().toString().trim();
         String remark = mRemark.getText().toString().trim();
         String time = mShipTime.getText().toString().trim();
-        String useCarType = mUseCarType.getText().toString().trim();
+        String useCarTypeName = mUseCarTypeName.getText().toString().trim();
         String pickType = mPackType.getText().toString().trim();
         String startCode = mSendShip.getStreetCode();
         String arriveCode = mEndShip.getStreetCode();
@@ -713,14 +718,14 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
             return;
         }
 
-        if (TextUtils.isEmpty(useCarType)) {
+        if (TextUtils.isEmpty(useCarTypeName)) {
             toast("请选择用车类型");
             return;
         }
 
         AddOrder addOrder = new AddOrder();
 
-        if (useCarType.equals("零担")) {
+        if (mUseCarType.equals("2")) { //2零担
             if (TextUtils.isEmpty(startCode)) {
                 toast("请完善发货地址信息");
                 return;
@@ -734,7 +739,8 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 return;
             }
             addOrder.setCalculateNo(calculateNo);
-        } else { //整车
+            addOrder.setFee(totalFee);
+        } else { //1整车
             if (feeWay == 1 && TextUtils.isEmpty(mFee.getText().toString().trim())) {
                 toast("请输入价格");
                 return;
@@ -753,7 +759,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
         addOrder.setGoodsWeight(Double.parseDouble(weight));
         addOrder.setGoodsVolume(Double.parseDouble(volume));
         addOrder.setGoodsName(goodName);
-        addOrder.setUseCarType(useCarType);
+        addOrder.setUseCarType(mUseCarType);
         addOrder.setLoadingTime(time);
         addOrder.setPackType(pickType);
         addOrder.setImage1(img1Url);
@@ -956,6 +962,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
                 mLengthWindow.setData(dictBeans);
                 break;
             case Const.DICT_USE_CAR_TYPE_NAME:
+                mUseCarTypeBeans = dictBeans;
                 list = new ArrayList<>();
                 for (DictBean dictBean : dictBeans) {
                     list.add(dictBean.getLabel());
@@ -984,13 +991,12 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
      * 获取专线费用
      */
     private void getOrderFee() {
-        String useCarType = mUseCarType.getText().toString().trim();
         String startCode = mSendShip.getStreetCode();
         String arriveCode = mEndShip.getStreetCode();
         String weight = mGoodWeight.getText().toString().trim();
         String volume = mGoodVolume.getText().toString().trim();
 
-        if (!useCarType.equals("零担")) {
+        if (!mUseCarType.equals("2")) { //2零担
             return;
         }
         if (TextUtils.isEmpty(startCode)
@@ -1004,6 +1010,7 @@ public class SubmitOrderActivity extends BaseActivity<SubmitOrderPresenter> impl
 
     @Override
     public void onOrderFee(FeeBean feeBean) {
+        totalFee = feeBean.getTotalFee();
         calculateNo = feeBean.getCalculateNo();
         lineFee.setText(String.format("%.2f", feeBean.getTotalFee())+"元");
     }
