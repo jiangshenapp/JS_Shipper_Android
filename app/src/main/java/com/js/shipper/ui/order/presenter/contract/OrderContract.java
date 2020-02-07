@@ -16,6 +16,6 @@ public interface OrderContract {
     }
 
     interface Presenter extends IPresenter<View>{
-        void getOrderList(int state,int current,int size);
+        void getOrderList(String state,int current,int size);
     }
 }

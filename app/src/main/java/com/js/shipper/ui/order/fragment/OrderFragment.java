@@ -34,7 +34,6 @@ import butterknife.BindView;
  */
 public class OrderFragment extends BaseFragment<OrderPresenter> implements OrderContract.View, BaseQuickAdapter.OnItemClickListener {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -43,16 +42,15 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
     private OrderAdapter mOrderAdapter;
     private List<OrderBean> mData;
     private int type;
-    private int status;
+    private String status;
 
-    public static OrderFragment newInstance(int status) {
+    public static OrderFragment newInstance(String status) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("status", status);
+        bundle.putString("status", status);
         orderFragment.setArguments(bundle);
         return orderFragment;
     }
-
 
     @Override
     protected void initInject() {
@@ -77,7 +75,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
 
     private void initIntent() {
         Bundle bundle = getArguments();
-        status = bundle.getInt("status",0);
+        status = bundle.getString("status");
     }
 
     private void initData() {

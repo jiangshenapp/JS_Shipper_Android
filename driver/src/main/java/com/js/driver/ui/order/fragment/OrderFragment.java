@@ -34,7 +34,6 @@ import butterknife.BindView;
  */
 public class OrderFragment extends BaseFragment<OrderPresenter> implements OrderContract.View, BaseQuickAdapter.OnItemClickListener {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -42,13 +41,13 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
 
     private OrderAdapter mAdapter;
     private List<OrderBean> mOrders;
-    private int status;
+    private String status;
     private int type;
 
-    public static OrderFragment newInstance(int status) {
+    public static OrderFragment newInstance(String status) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("status", status);
+        bundle.putString("status", status);
         orderFragment.setArguments(bundle);
         return orderFragment;
     }
@@ -75,9 +74,8 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
 
     private void initBundle() {
         Bundle bundle = getArguments();
-        status = bundle.getInt("status");
+        status = bundle.getString("status");
     }
-
 
     private void initView() {
         initRecycler();
@@ -111,7 +109,6 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
     }
 
-
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         List<OrderBean> orderBeans = adapter.getData();
@@ -120,7 +117,6 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
             OrderDetailActivity.action(mContext, orderBean.getId());
         }
     }
-
 
     @Override
     public void onOrderList(ListResponse<OrderBean> response) {

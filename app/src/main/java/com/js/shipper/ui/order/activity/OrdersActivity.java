@@ -64,11 +64,11 @@ public class OrdersActivity extends SimpleActivity {
     private void initFragment() {
         //1发布中，2待司机接单，3待司机确认，4待支付，5待司机接货, 6待收货，7待评价，8已完成，9已取消，10已关闭
         mFragments = new ArrayList<>();
-        mFragments.add(OrderFragment.newInstance(0));
-        mFragments.add(OrderFragment.newInstance(2));
-        mFragments.add(OrderFragment.newInstance(4));
-        mFragments.add(OrderFragment.newInstance(5));
-        mFragments.add(OrderFragment.newInstance(6));
+        mFragments.add(OrderFragment.newInstance(""));
+        mFragments.add(OrderFragment.newInstance("2"));
+        mFragments.add(OrderFragment.newInstance("4"));
+        mFragments.add(OrderFragment.newInstance("5"));
+        mFragments.add(OrderFragment.newInstance("6,7"));
     }
 
     private void initViewPager() {

@@ -63,11 +63,11 @@ public class OrdersActivity extends SimpleActivity {
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(OrderFragment.newInstance(0));
-        mFragments.add(OrderFragment.newInstance(2));
-        mFragments.add(OrderFragment.newInstance(3));
-        mFragments.add(OrderFragment.newInstance(5));
-        mFragments.add(OrderFragment.newInstance(6));
+        mFragments.add(OrderFragment.newInstance(""));
+        mFragments.add(OrderFragment.newInstance("2"));
+        mFragments.add(OrderFragment.newInstance("3"));
+        mFragments.add(OrderFragment.newInstance("5"));
+        mFragments.add(OrderFragment.newInstance("6"));
     }
 
     private void initViewPager() {

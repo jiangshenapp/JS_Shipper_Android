@@ -5,22 +5,21 @@ package com.js.driver.model.request;
  */
 public class OrderStatus {
 
-
     /**
-     * state : 0
+     * state : "6,7"
      */
 
-    private int state;
+    private String stateList;
 
-    public OrderStatus(int state) {
-        this.state = state;
+    public OrderStatus(String stateList) {
+        this.stateList = stateList;
     }
 
-    public int getState() {
-        return state;
+    public String getStateList() {
+        return stateList;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setStateList(String stateList) {
+        this.stateList = stateList;
     }
 }
