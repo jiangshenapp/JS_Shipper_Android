@@ -148,6 +148,7 @@ public class CarFragment extends BaseFragment<CarPresenter> implements CarContra
                 orderBean.setCarLengthName(carBean.getCarLengthName());
                 orderBean.setCarModel(carBean.getCarModelId());
                 orderBean.setCarModelName(carBean.getCarModelName());
+                orderBean.setUseCarType("");
                 SubmitOrderActivity.action(mContext, carBean.getSubscriberId(), orderBean);
                 break;
             case R.id.item_car_delete:
